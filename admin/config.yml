@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: projects
+    label: Projects
+    folder: _projects
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Cover Image, name: cover, widget: image, required: false }
+      - { label: Description, name: description, widget: text }
+      - label: Materials & Specs
+        name: specs
+        widget: list
+        required: false
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Value, name: value, widget: string }
+      - label: Tags
+        name: tags
+        widget: list
+        allow_add: true
+        field: { label: Tag, name: tag, widget: string }
+      - label: Gallery
+        name: gallery
+        widget: list
+        required: false
+        field: { label: Image, name: image, widget: image }
+      - { label: Year, name: year, widget: string }
+      - { label: Body, name: body, widget: markdown, required: false }
+
+  - name: pages
+    label: Pages
+    files:
+      - label: About
+        name: about
+        file: _data/about.yml
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - { label: Bio paragraph 1, name: bio1, widget: text }
+          - { label: Bio paragraph 2, name: bio2, widget: text }
+          - { label: Based in, name: location, widget: string }
+          - { label: Experience, name: experience, widget: string }
+          - { label: Focus, name: focus, widget: string }
+          - { label: Education, name: education, widget: string }
+          - { label: Languages, name: languages, widget: string }
+      - label: Contact
+        name: contact
+        file: _data/contact.yml
+        fields:
+          - { label: Email, name: email, widget: string }
+          - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+          - { label: Behance URL, name: behance, widget: string, required: false }
+          - { label: Instagram URL, name: instagram, widget: string, required: false }
+          - { label: Contact text, name: text, widget: text }
