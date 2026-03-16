@@ -1,0 +1,498 @@
+---
+layout: default
+---
+<style>
+  /* ── Per-project accent color ── */
+  :root {
+    --accent: {{ page.accent | default: '#2BADB8' }};
+    --accent-d: {{ page.accent_dark | default: '#1E8A94' }};
+    --accent-xl: {{ page.accent | default: '#2BADB8' }}18;
+  }
+
+  .page-label, .proj-gallery-label { color: var(--accent) !important; }
+  .proj-gallery-label::before { background: var(--accent) !important; }
+  .tag { color: var(--accent) !important; background: var(--accent-xl) !important; }
+  .btn-primary { background: var(--accent) !important; }
+  .btn-primary:hover { background: var(--accent-d) !important; }
+  .btn-secondary:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+  .proj-meta-label { color: var(--accent) !important; }
+
+  /* ── Layout ── */
+  html, body { height: 100%; }
+
+  .proj-wrap {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    min-height: 100vh;
+    padding-left: 48px;
+    align-items: start;
+  }
+
+  /* ── Left: scrollable ── */
+  .proj-left {
+    padding: 48px 36px 80px 72px
+  }
+
+  /* Cover */
+  .proj-cover {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--teal-xl);
+    margin-bottom: 40px;
+    border: 1px solid var(--line);
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .proj-cover img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .proj-cover-placeholder {
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: .2;
+  }
+
+  /* Description */
+  .proj-description {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--ink-m);
+    margin-bottom: 56px;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+  .proj-description p + p { margin-top: 1.2em; }
+  .proj-description h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin: 2em 0 .6em;
+    color: var(--ink);
+  }
+  .proj-description h3 {
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 1.8em 0 .5em;
+  }
+
+  /* Gallery */
+  .proj-gallery { margin-bottom: 80px; }
+  .proj-gallery-label {
+    font-family: var(--mono);
+    font-size: .6rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .proj-gallery-label::before { content:''; display:block; width:24px; height:2px; background:var(--accent); }
+
+  .proj-gallery-grid {
+    display: grid;
+    gap: 3px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .proj-gallery-grid[data-cols="1"] { grid-template-columns: 1fr; }
+  .proj-gallery-grid[data-cols="2"] { grid-template-columns: 1fr 1fr; }
+  .proj-gallery-grid[data-cols="3"] { grid-template-columns: repeat(3,1fr); }
+  .proj-gallery-grid[data-cols="auto"] { grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+
+  .gallery-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    background: var(--teal-xl);
+    cursor: zoom-in;
+    transition: transform .4s var(--ease);
+  }
+  .gallery-img:hover { transform: scale(1.015); }
+  .gallery-img.wide { grid-column: 1/-1; aspect-ratio: 21/9; }
+  .gallery-img.tall { aspect-ratio: 4/5; }
+  .gallery-img.square { aspect-ratio: 1; }
+
+  /* ── Right: sticky sidebar ── */
+ .proj-right {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 40px;
+    border-left: 1px solid var(--line);
+  }
+
+  .proj-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .proj-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.proj-meta-block {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--white);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.proj-meta-block::-webkit-scrollbar { display: none; }
+
+  .proj-meta-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .proj-meta-row:last-child { border-bottom: none; }
+  .proj-meta-label {
+    font-family: var(--mono);
+    font-size: .56rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .proj-meta-value {
+    font-family: var(--mono);
+    font-size: .65rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+  }
+  .proj-meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: flex-end;
+  }
+
+  /* Next / Prev — just arrows, no names */
+  .proj-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+  .proj-nav-btn {
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    transition: color .2s, border-color .2s;
+  }
+  .proj-nav-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .proj-nav-btn.disabled { opacity: .2; pointer-events: none; }
+
+  /* Fixed go-back on left rail */
+  .proj-back-rail {
+    position: fixed;
+    left: 72px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    font-family: var(--mono);
+    font-size: .54rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+    transition: color .2s;
+  }
+  .proj-back-rail:hover { color: var(--accent); }
+  .proj-back-rail::after {
+    content: '↓';
+    font-size: .7rem;
+  }
+
+  /* ── Lightbox ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(13,31,34,.94);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+    backdrop-filter: blur(8px);
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 32px 80px rgba(0,0,0,.5);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: var(--mono);
+    font-size: .6rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    cursor: none;
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 8px 16px;
+    border-radius: 3px;
+    background: none;
+    transition: color .2s, border-color .2s;
+  }
+  .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
+  
+.proj-back-mobile { display: none; }
+  /* ── Responsive ── */
+  @media(max-width:900px) {
+  .proj-wrap {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
+  .proj-back-mobile {
+    display: block;
+    font-family: var(--mono);
+    font-size: .58rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: color .2s;
+  }
+.proj-back-mobile:hover { color: var(--accent); }
+
+  /* Right comes FIRST on mobile — title + meta at top */
+  .proj-right {
+    position: static;
+    height: auto;
+    border-left: none;
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px 32px;
+    order: -1;
+  }
+
+  .proj-bottom {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .proj-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: 0;
+  }
+
+  .proj-nav {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .proj-left {
+    padding: 24px 24px 80px;
+  }
+
+  .proj-description {
+    max-width: 100%;
+    margin: 0 0 40px;
+  }
+
+  .proj-back-rail { display: none; }
+
+  .proj-gallery-grid[data-cols="3"] { grid-template-columns: 1fr 1fr; }
+}
+
+@media(max-width:600px) {
+  .proj-gallery-grid { grid-template-columns: 1fr !important; }
+}
+  @media(max-width:600px) {
+    .proj-gallery-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+{% assign all_projects = site.projects | sort: 'order' %}
+{% assign proj_size = all_projects | size %}
+
+{% for p in all_projects %}
+  {% if p.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% if current_index > 0 %}
+  {% assign prev_index = current_index | minus: 1 %}
+  {% assign prev_proj = all_projects[prev_index] %}
+{% endif %}
+{% assign next_index = current_index | plus: 1 %}
+{% if next_index < proj_size %}
+  {% assign next_proj = all_projects[next_index] %}
+{% endif %}
+
+<!-- Fixed go-back -->
+<a href="/projects.html" class="proj-back-rail">Go back</a>
+
+<main class="page-main" style="padding:0;">
+  <div class="proj-wrap">
+
+    <!-- ── Left ── -->
+    <div class="proj-left">
+
+      <div class="proj-cover">
+        {% if page.cover %}
+          <img src="{{ page.cover }}" alt="{{ page.title }}"/>
+        {% else %}
+          <div class="proj-cover-placeholder">◈</div>
+        {% endif %}
+      </div>
+
+      <div class="proj-description">
+        {{ content }}
+      </div>
+
+      {% if page.gallery %}
+      <div class="proj-gallery">
+        <div class="proj-gallery-label">Process &amp; images</div>
+        <div class="proj-gallery-grid" data-cols="{{ page.gallery_cols | default: '2' }}">
+          {% for img in page.gallery %}
+          <img
+            src="{{ img.src }}"
+            alt="{{ img.alt | default: page.title }}"
+            class="gallery-img {% if img.layout %}{{ img.layout }}{% endif %}"
+            loading="lazy"
+          />
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+    <!-- ── Right ── -->
+    <div class="proj-right">
+      <a href="/projects.html" class="proj-back-mobile">← All projects</a>
+
+      <div class="proj-bottom">
+        <h1 class="proj-title">{{ page.title }}</h1>
+        <div class="proj-meta-block">
+        {% if page.year %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">Year</span>
+          <span class="proj-meta-value">{{ page.year }}</span>
+        </div>
+        {% endif %}
+        {% if page.client %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">Client</span>
+          <span class="proj-meta-value">{{ page.client }}</span>
+        </div>
+        {% endif %}
+        {% if page.role %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">Role</span>
+          <span class="proj-meta-value">{{ page.role }}</span>
+        </div>
+        {% endif %}
+        {% if page.materials %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">Materials</span>
+          <span class="proj-meta-value">{{ page.materials }}</span>
+        </div>
+        {% endif %}
+        {% if page.duration %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">Duration</span>
+          <span class="proj-meta-value">{{ page.duration }}</span>
+        </div>
+        {% endif %}
+        {% if page.tags %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">Tags</span>
+          <div class="proj-meta-tags">
+            {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        {% if page.custom_meta %}
+        {% for item in page.custom_meta %}
+        <div class="proj-meta-row">
+          <span class="proj-meta-label">{{ item.label }}</span>
+          <span class="proj-meta-value">{{ item.value }}</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+      </div>
+      <div class="proj-nav">
+        {% if prev_proj %}
+        <a href="{{ prev_proj.url }}" class="proj-nav-btn">←</a>
+        {% else %}
+        <span class="proj-nav-btn disabled">←</span>
+        {% endif %}
+
+        {% if next_proj %}
+        <a href="{{ next_proj.url }}" class="proj-nav-btn">→</a>
+        {% else %}
+        <span class="proj-nav-btn disabled">→</span>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">Close ✕</button>
+  <img src="" alt="" id="lb-img"/>
+</div>
+
+<script>
+  const lb    = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  document.querySelectorAll('.gallery-img').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('open');
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+</script>
