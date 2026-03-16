@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — olo-works</title>
+  <link rel="stylesheet" href="/style.css"/>
+  
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="rail">
+  <div class="r-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:28px;height:28px;">
+      <defs><style>.cls-1{fill:currentColor}</style></defs>
+      <g><g>
+        <path class="cls-1" d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+        <path class="cls-1" d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+        <path class="cls-1" d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+        <path class="cls-1" d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+      </g></g>
+    </svg>
+  </div>
+  <div class="r-group">
+    <a href="/index.html" class="r-item "><div class="r-icon">H</div><span class="r-text">Home</span></a>
+    <a href="/projects.html" class="r-item active"><div class="r-icon">W</div><span class="r-text">Work</span></a>
+    <a href="/about.html" class="r-item "><div class="r-icon">A</div><span class="r-text">About</span></a>
+  </div>
+  <div class="r-group bottom">
+    <a href="/contact.html" class="r-item "><div class="r-icon">C</div><span class="r-text">Contact</span></a>
+  </div>
+</nav>
+
+<div id="mob">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
+    <defs><style>.cls-mob{fill:currentColor}</style></defs>
+    <g><g>
+      <path class="cls-mob" d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+      <path class="cls-mob" d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+      <path class="cls-mob" d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+      <path class="cls-mob" d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+    </g></g>
+  </svg>
+  <a href="/index.html" class="mob-item "><span class="mob-letter">H</span><span class="mob-word">Home</span></a>
+  <a href="/projects.html" class="mob-item active"><span class="mob-letter">W</span><span class="mob-word">Work</span></a>
+  <a href="/about.html" class="mob-item "><span class="mob-letter">A</span><span class="mob-word">About</span></a>
+  <a href="/contact.html" class="mob-item "><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
+</div>
+
+<style>
+.page-main {
+    padding-top: -15px;
+}
+/* ── Grid page ──────────────────────────── */
+.projects-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.tag-filter {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+.filter-btn {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  padding: 12px 14px;
+  cursor: none;
+  transition: all .25s var(--ease);
+  text-align: center;
+  width: 100px
+}
+.filter-btn:hover {
+  color: var(--ink);
+}
+.filter-btn.active[data-tag="all"] {
+  background: #5A7A80;
+  color: var(--white);
+  border-radius: 4px;
+}
+.filter-btn.active[data-tag="Product"] {
+  background: var(--teal);
+  color: var(--white);
+  border-radius: 4px;
+}
+.filter-btn.active[data-tag="Visual"] {
+  background: #B85A2B;
+  color: var(--white);
+  border-radius: 4px;
+}
+
+/* ── Grid ───────────────────────────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: transparent;
+  border: none;
+  margin: 0 auto;
+  max-width: 1500px;
+}
+
+/* ── Card ───────────────────────────────── */
+.project-card {
+  background: var(--white);
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: background .25s;
+  border-radius: 10px;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--teal);
+  transition: height .3s var(--ease);
+  z-index: 2;
+  border-radius: 0 0 0 10px;
+}
+.project-card:hover::before { height: 100%; }
+
+/* ── Image area ─────────────────────────── */
+.project-card-img {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--teal-xl);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+/* placeholder glyph when no image */
+.project-card-img::after {
+  content: '◈';
+  font-size: 2rem;
+  color: var(--teal);
+  opacity: .3;
+  transition: opacity .25s;
+}
+.project-card-img[style*="background-image"]::after { display: none; }
+
+/* ── Hover overlay ──────────────────────── */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,31,34,.85) 0%, rgba(13,31,34,.25) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 18px;
+  z-index: 1;
+}
+.project-card:hover .card-overlay { opacity: 1; }
+
+.overlay-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 6px;
+  transform: translateY(6px);
+  transition: transform .3s var(--ease);
+}
+.project-card:hover .overlay-title { transform: translateY(0); }
+
+.overlay-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(6px);
+  transition: transform .3s var(--ease) .04s;
+}
+.project-card:hover .overlay-meta { transform: translateY(0); }
+
+.overlay-year {
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+.overlay-tag {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: rgba(43,173,184,.22);
+  border: 1px solid rgba(43,173,184,.35);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.overlay-arrow {
+  margin-left: auto;
+  font-size: .8rem;
+  color: rgba(255,255,255,.5);
+  transition: transform .25s var(--ease), color .2s;
+}
+.project-card:hover .overlay-arrow { transform: translate(2px,-2px); color: var(--white); }
+
+/* ── Card body (below image) ────────────── */
+.project-card-body {
+  padding: 22px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.project-num {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.project-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.project-card-excerpt {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* ── Responsive ─────────────────────────── */
+@media(max-width:1100px) {
+  .projects-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+}
+@media(max-width:900px) {
+  .projects-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+}
+@media(max-width:500px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .card-overlay { opacity: 1; background: linear-gradient(to top, rgba(13,31,34,.7) 0%, transparent 55%); }
+}
+</style>
+<main class="page-main">
+  <div class="page-inner">
+
+    <div class="tag-filter">
+      <button class="filter-btn active" data-tag="all">All</button>
+      <button class="filter-btn" data-tag="Product">Product</button>
+      <button class="filter-btn" data-tag="Visual">Visual</button>
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+      
+      
+      <a href="/projects/chair-01/" class="project-card" data-tags="Product Metal">
+        <div class="project-card-img" style="background-image:url('/images/photoprojects/ciao1.png')">
+          <div class="card-overlay">
+            <div class="overlay-title">Folded Steel Chair</div>
+            <div class="overlay-meta">
+              <span class="overlay-year">2024</span>
+              <span class="overlay-tag">Product</span>
+              <span class="overlay-arrow">↗</span>
+            </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="/projects/ciaone/" class="project-card" data-tags="Visual">
+        <div class="project-card-img" style="background-image:url('/images/photoprojects/ace-combat-3-electrosphere-logo.png')">
+          <div class="card-overlay">
+            <div class="overlay-title">Transit System Identity</div>
+            <div class="overlay-meta">
+              <span class="overlay-year">2023</span>
+              <span class="overlay-tag">Visual</span>
+              <span class="overlay-arrow">↗</span>
+            </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="/projects/transit-identity/" class="project-card" data-tags="Visual">
+        <div class="project-card-img" style="background-image:url('/images/photoprojects/maxresdefault.jpg')">
+          <div class="card-overlay">
+            <div class="overlay-title">Transit System Identity</div>
+            <div class="overlay-meta">
+              <span class="overlay-year">2023</span>
+              <span class="overlay-tag">Visual</span>
+              <span class="overlay-arrow">↗</span>
+            </div>
+          </div>
+        </div>
+      </a>
+      
+    </div>
+
+  </div>
+</main>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      document.querySelectorAll('.project-card').forEach(card => {
+        const show = tag === 'all' || card.dataset.tags.includes(tag);
+        card.style.display = show ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
+
+<footer class="site-footer">
+  <span>olo-works</span>
+  <span>Product &amp; industrial designer.</span>
+  <span>2026</span>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

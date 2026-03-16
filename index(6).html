@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>olo-works</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+
+    /* ── Two-panel layout ── */
+    .home-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100vh;
+      padding-left: 48px;
+    }
+
+    /* ── Left: identity (fixed, centered) ── */
+    .home-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 56px;
+      border-right: 1px solid var(--line);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .home-label {
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp .7s var(--ease) .1s forwards;
+    }
+    .home-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
+
+    .home-name {
+      font-size: clamp(2.6rem, 4vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: .92;
+      color: var(--ink);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .8s var(--ease) .2s forwards;
+    }
+    .home-name span { color: var(--teal); display: block; }
+
+    .home-desc {
+      font-family: var(--mono);
+      font-size: .75rem;
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 320px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp .8s var(--ease) .35s forwards;
+    }
+
+    .home-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp .8s var(--ease) .45s forwards;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74,222,128,.5); }
+      70%  { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
+
+    .home-actions {
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp .8s var(--ease) .55s forwards;
+    }
+
+    /* ── Right: auto-scroll column ── */
+    .home-right {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* fade edges top and bottom */
+    .home-right::before,
+    .home-right::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .home-right::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--bg), transparent);
+    }
+    .home-right::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--bg), transparent);
+    }
+
+    .scroll-track {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 32px 32px 32px 28px;
+      will-change: transform;
+    }
+
+    /* ── Image cards ── */
+    .img-item {
+      display: block;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      position: relative;
+      background: var(--teal-xl);
+      flex-shrink: 0;
+    }
+    .img-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s var(--ease);
+    }
+    .img-item:hover img { transform: scale(1.04); }
+
+    .img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--teal);
+      opacity: .3;
+    }
+
+    .img-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 16px 16px;
+      background: linear-gradient(to top, rgba(13,31,34,.75), transparent);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .img-item:hover .img-caption { opacity: 1; }
+    .img-caption-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+    }
+    .img-caption-meta {
+      font-family: var(--mono);
+      font-size: .55rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    /* ── Responsive ── */
+    @media(max-width:900px) {
+      html, body { overflow: auto; }
+      .home-wrap {
+        grid-template-columns: 1fr;
+        height: auto;
+        padding-left: 0;
+      }
+      .home-left {
+        height: auto;
+        overflow: visible;
+        padding: 48px 24px 40px;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .home-right {
+        height: auto;
+        overflow: visible;
+      }
+      .home-right::before,
+      .home-right::after { display: none; }
+      .scroll-track {
+        padding: 24px 24px 80px;
+      }
+      /* disable JS autoscroll on mobile via class */
+      .scroll-track { transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="rail">
+  <a href="/index.html" class="r-logo">
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:28px;height:28px;">
+      <g><g>
+        <path d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+        <path d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+        <path d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+        <path d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+      </g></g>
+    </svg>
+  </a>
+  <div class="r-group">
+    <a href="/index.html" class="r-item active"><div class="r-icon">H</div><span class="r-text">Home</span></a>
+    <a href="/projects.html" class="r-item"><div class="r-icon">W</div><span class="r-text">Work</span></a>
+    <a href="/about.html" class="r-item"><div class="r-icon">A</div><span class="r-text">About</span></a>
+    <a href="/contact.html" class="r-item"><div class="r-icon">C</div><span class="r-text">Contact</span></a>
+  </div>
+</nav>
+
+<div id="mob">
+  <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
+    <g><g>
+      <path d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+      <path d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+      <path d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+      <path d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+    </g></g>
+  </svg>
+  <a href="/index.html" class="mob-item active"><span class="mob-letter">H</span><span class="mob-word">Home</span></a>
+  <a href="/projects.html" class="mob-item"><span class="mob-letter">W</span><span class="mob-word">Work</span></a>
+  <a href="/about.html" class="mob-item"><span class="mob-letter">A</span><span class="mob-word">About</span></a>
+  <a href="/contact.html" class="mob-item"><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
+</div>
+
+<div class="home-wrap">
+
+  <!-- ── Left ── -->
+  <div class="home-left">
+    <div class="home-label">Portfolio</div>
+    <h1 class="home-name">olo<span>works.</span></h1>
+    <p class="home-desc">Independent product and industrial designer. Objects built to last, forms that earn their place.</p>
+    <div class="home-status">
+      <span class="status-dot"></span>
+      Available for projects
+    </div>
+    <div class="home-actions">
+      <a href="/projects.html" class="btn-primary">View Work</a>
+      <a href="/about.html" class="btn-secondary">About</a>
+    </div>
+  </div>
+
+  <!-- ── Right ── -->
+  <div class="home-right" id="home-right">
+    <div class="scroll-track" id="scroll-track">
+
+      <!--
+        ADD YOUR IMAGES HERE — one .img-item per image.
+        Vary the height values to create rhythm.
+        Update src, href, title and meta per project.
+      -->
+      <a href="/projects/chair-01/" class="img-item" style="height:320px">
+        <img src="/images/chair-cover.jpg" alt="Folded Steel Chair"/>
+        <div class="img-placeholder">◈</div>
+        <div class="img-caption">
+          <div class="img-caption-title">Folded Steel Chair</div>
+          <div class="img-caption-meta">Product · 2024</div>
+        </div>
+      </a>
+
+      <a href="/projects/transit-identity/" class="img-item" style="height:240px">
+        <img src="/images/transit-cover.jpg" alt="Transit System Identity"/>
+        <div class="img-placeholder">◈</div>
+        <div class="img-caption">
+          <div class="img-caption-title">Transit System Identity</div>
+          <div class="img-caption-meta">Visual · 2023</div>
+        </div>
+      </a>
+
+      <a href="/projects/enclosure-system/" class="img-item" style="height:280px">
+        <img src="/images/enclosure-cover.jpg" alt="Polymer Enclosure System"/>
+        <div class="img-placeholder">◈</div>
+        <div class="img-caption">
+          <div class="img-caption-title">Polymer Enclosure System</div>
+          <div class="img-caption-meta">Industrial · 2024</div>
+        </div>
+      </a>
+
+      <a href="/projects/chair-01/" class="img-item" style="height:200px">
+        <img src="/images/chair-cover.jpg" alt="Folded Steel Chair"/>
+        <div class="img-placeholder">◈</div>
+        <div class="img-caption">
+          <div class="img-caption-title">Folded Steel Chair</div>
+          <div class="img-caption-meta">Product · 2024</div>
+        </div>
+      </a>
+
+      <a href="/projects/transit-identity/" class="img-item" style="height:300px">
+        <img src="/images/transit-cover.jpg" alt="Transit System Identity"/>
+        <div class="img-placeholder">◈</div>
+        <div class="img-caption">
+          <div class="img-caption-title">Transit System Identity</div>
+          <div class="img-caption-meta">Visual · 2023</div>
+        </div>
+      </a>
+
+      <a href="/projects/enclosure-system/" class="img-item" style="height:260px">
+        <img src="/images/enclosure-cover.jpg" alt="Polymer Enclosure System"/>
+        <div class="img-placeholder">◈</div>
+        <div class="img-caption">
+          <div class="img-caption-title">Polymer Enclosure System</div>
+          <div class="img-caption-meta">Industrial · 2024</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="/main.js"></script>
+<script>
+  const track     = document.getElementById('scroll-track');
+  const rightPanel = document.getElementById('home-right');
+  const isMobile  = () => window.innerWidth <= 900;
+
+  let offset    = 0;
+  let paused    = false;
+  const speed   = 0.5; // px per frame — adjust for faster/slower
+
+  // Clone items for seamless infinite loop
+  function setupLoop() {
+    if (isMobile()) return;
+    const originals = Array.from(track.children);
+    originals.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+  }
+  setupLoop();
+
+  // Pause on hover
+  rightPanel.addEventListener('mouseenter', () => paused = true);
+  rightPanel.addEventListener('mouseleave', () => paused = false);
+
+  // Animation loop
+  function animate() {
+    if (!isMobile() && !paused) {
+      offset += speed;
+      const half = track.scrollHeight / 2;
+      if (offset >= half) offset = 0;
+      track.style.transform = `translateY(-${offset}px)`;
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Hide placeholder if real image loads
+  document.querySelectorAll('.img-item img').forEach(img => {
+    const placeholder = img.nextElementSibling;
+    const hide = () => { if (placeholder) placeholder.style.display = 'none'; };
+    if (img.complete && img.naturalWidth > 0) hide();
+    else {
+      img.addEventListener('load', hide);
+      img.addEventListener('error', () => { img.style.display = 'none'; });
+    }
+  });
+</script>
+</body>
+</html>
