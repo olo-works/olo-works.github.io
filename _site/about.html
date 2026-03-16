@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — olo-works</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <style>
+    body { overflow-x: hidden; }
+
+    /* ── Shared ── */
+    .about-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 80px 80px 120px;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .s-label {
+      font-family: var(--mono);
+      font-size: .56rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .s-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
+
+    /* ════════════════ 01 INTRO ════════════════ */
+    .s-intro { flex-direction: column; justify-content: space-between; padding-bottom: 64px; }
+    .intro-tagline { font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; color: var(--muted); }
+    .s-intro-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); }
+    .s-intro-title .teal { color: var(--teal); }
+    .intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; }
+    .intro-left-cluster { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+    .intro-stats { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .intro-dot { color: var(--teal); }
+    .intro-scroll-hint { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+    .scroll-line { width: 28px; height: 1px; background: var(--teal); opacity: .4; position: relative; overflow: hidden; }
+    .scroll-line::after { content:''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--teal); animation: scan 1.6s ease-in-out infinite; }
+    @keyframes scan { 0%{left:-100%} 100%{left:100%} }
+    .intro-right-cluster { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .intro-clock { font-family: var(--mono); font-size: 1.1rem; font-weight: 500; letter-spacing: .08em; color: var(--ink); }
+    .intro-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .54rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(74,222,128,.5)} 70%{box-shadow:0 0 0 7px rgba(74,222,128,0)} 100%{box-shadow:0 0 0 0 rgba(74,222,128,0)} }
+
+    /* Geometric decorative lines */
+    .intro-desc { display: flex; flex-direction: column; gap: 10px; margin-top: 36px; max-width: 420px; }
+    .intro-geo-line { display: flex; align-items: center; gap: 8px; }
+    .igl-full  { flex: 1;    height: 1px; background: var(--line); }
+    .igl-mid   { flex: 0.45; height: 1px; background: var(--line); }
+    .igl-short { flex: 0.18; height: 1px; background: var(--line); }
+    .igl-dot   { width: 4px; height: 4px; border-radius: 1px; background: var(--teal); flex-shrink: 0; }
+
+    /* ── Entrance animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .intro-tagline    { animation: fadeUp .6s ease both; animation-delay: .05s; }
+    .s-intro-title    { animation: fadeUp .7s ease both; animation-delay: .18s; }
+    .intro-desc       { animation: fadeUp .6s ease both; animation-delay: .45s; }
+    .intro-bottom     { animation: fadeIn .7s ease both; animation-delay: .7s; }
+
+    /* ════════════════ 02 DISCIPLINES ════════════════ */
+    .s-work { flex-direction: column; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
+    .s-work-intro { font-family: var(--mono); font-size: .75rem; line-height: 1.8; color: var(--muted); max-width: 560px; }
+    .disciplines-wrap { width: 100%; margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .discipline-col { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 28px; border-right: 1px solid var(--line); cursor: none; transition: background .25s; }
+    .discipline-col:last-child { border-right: none; }
+    .discipline-col:hover { background: var(--teal-xl); }
+    .discipline-title { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 20px; transition: color .2s; }
+    .discipline-col:hover .discipline-title { color: var(--teal); }
+    .discipline-subs { display: flex; flex-direction: column; gap: 6px; align-items: center; opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease); }
+    .discipline-col:hover .discipline-subs { opacity: 1; transform: translateY(0); }
+    .discipline-sub { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; color: var(--muted); line-height: 1.6; }
+
+    /* ════════════════ 03 MAP ════════════════ */
+    .s-map {
+      gap: 48px;
+      align-items: center;          /* vertically center text with map */
+      min-height: auto;
+      padding-top: 48px;
+      padding-bottom: 48px;
+      flex-wrap: nowrap;
+    }
+
+    /* ── Left: text panel ── */
+    .s-map-left {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;      /* center text vertically against map */
+    }
+
+    /* Default state — big typographic block, sits at the bottom */
+    .map-default-text {
+      transition: opacity .4s, transform .4s;
+      transform: translateY(0);
+    }
+    .map-default-text.faded {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+    }
+
+    /* Big headline */
+    .s-map-eyebrow {
+      font-family: var(--mono);
+      font-size: .54rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .s-map-eyebrow::before { content:''; display:block; width:18px; height:1.5px; background:var(--teal); }
+
+    .s-map-statement {
+      font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -.05em;
+      line-height: .95;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+    .s-map-statement .teal { color: var(--teal); }
+
+    .s-map-hint {
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .s-map-hint-line {
+      width: 20px; height: 1px;
+      background: var(--teal);
+      opacity: .5;
+    }
+
+    /* City info cards — absolutely overlaid, slide up when active */
+    .map-city-info {
+      position: absolute;
+      top: 50%; left: 0;
+      transform: translateY(calc(-50% + 12px));
+      width: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s var(--ease), transform .4s var(--ease);
+    }
+    .map-city-info.visible {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(-50%);
+    }
+
+    /* City card inner layout */
+    .map-city-tag {
+      font-family: var(--mono);
+      font-size: .52rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .map-city-tag::before { content:''; display:block; width:18px; height:1.5px; background:var(--teal); }
+
+    .map-city-name {
+      font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -.05em;
+      line-height: .95;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .map-city-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .map-city-year {
+      font-family: var(--mono);
+      font-size: .56rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--teal-xl);
+      padding: 4px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+    }
+    .map-city-role {
+      font-family: var(--mono);
+      font-size: .56rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .map-city-desc {
+      font-family: var(--mono);
+      font-size: .68rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 380px;
+      border-left: 2px solid var(--teal);
+      padding-left: 16px;
+    }
+
+    /* ── Right: the map ── */
+    .s-map-right {
+      /* triple the original 260px */
+      width: 780px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .map-wrap { position: relative; display: inline-block; }
+
+    /* Triple size */
+    .italy-dotmap { width: 780px; height: auto; display: block; }
+
+    /* Dots: rounded squares, teal fill */
+    .italy-dotmap rect {
+      fill: var(--teal);
+      opacity: .25;
+      /* rx/ry and w/h set via JS for cross-browser reliability */
+    }
+
+    /* ── Interactive pins ── */
+    .map-pin-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .map-city-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      pointer-events: all;
+      cursor: none;
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+    }
+    .map-city-pin.pin-visible { opacity: 1; }
+
+    /* Pin dot — identical style to map dots, just larger */
+    .map-city-pin-dot {
+      width: 18px; height: 18px;
+      border-radius: 5px;
+      background: var(--teal);
+      opacity: .9;
+      transition: transform .22s;
+    }
+    .map-city-pin:hover .map-city-pin-dot,
+    .map-city-pin.active .map-city-pin-dot {
+      transform: scale(1.55);
+    }
+
+    /* ════════════════ 04 INTERESTS ════════════════ */
+    .s-interests { flex-direction: column; align-items: flex-start; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
+    .interests-header { display: flex; align-items: baseline; justify-content: space-between; width: 100%; margin-bottom: 32px; }
+    .interests-drag-hint { font-family: var(--mono); font-size: .52rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .interests-drag-hint::before { content: '←'; color: var(--teal); }
+    .interests-drag-hint::after { content: '→'; color: var(--teal); }
+    .interests-scroll { width: 100%; overflow-x: auto; scrollbar-width: none; cursor: grab; }
+    .interests-scroll::-webkit-scrollbar { display: none; }
+    .interests-scroll:active { cursor: grabbing; }
+    .interests-track { display: flex; gap: 2px; width: max-content; }
+    .interest-card { display: flex; align-items: center; height: 280px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex-shrink: 0; cursor: none; transition: border-color .25s; }
+    .interest-card:hover { border-color: var(--teal); }
+    .interest-card-text { padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; width: 280px; flex-shrink: 0; }
+    .interest-card-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
+    .interest-card-desc { font-family: var(--mono); font-size: .58rem; line-height: 1.65; color: var(--muted); }
+    .interest-card-img { width: 280px; height: 100%; flex-shrink: 0; background: var(--teal-xl); border-left: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: background .25s; }
+    .interest-card:hover .interest-card-img { background: rgba(43,173,184,.15); }
+    .interest-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .interest-card-img-placeholder { font-family: var(--mono); font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); opacity: .5; text-align: center; padding: 16px; }
+
+    /* ════════════════ 05 LANGUAGES ════════════════ */
+    .s-lang { flex-direction: column; align-items: center; text-align: center; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
+    .hello-word { font-size: clamp(5rem, 14vw, 11rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); margin-bottom: 56px; transition: color .4s; cursor: default; user-select: none; }
+    .hello-word.teal { color: var(--teal); }
+    .lang-row { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .lang-item { padding: 40px 32px; border-right: 1px solid var(--line); cursor: none; transition: background .5s; text-align: left; display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; }
+    .lang-item:last-child { border-right: none; }
+    .lang-item:hover { background: var(--teal-xl); }
+    .lang-item-code { font-family: var(--mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+    .lang-item-name { font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 4px; }
+    .lang-item-level { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .lang-item-desc { font-family: var(--mono); font-size: .62rem; line-height: 1.65; color: var(--muted); }
+
+    /* ════════════════ 06 TOOLS ════════════════ */
+    .s-tools { flex-direction: column; }
+    .tools-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -.04em; line-height: .9; color: var(--ink); margin-bottom: 16px; }
+    .tools-title .teal { color: var(--teal); }
+    .tools-sub { font-family: var(--mono); font-size: .72rem; line-height: 1.8; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
+    .tools-info-bar { width: 100%; min-height: 48px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 16px; transition: opacity .2s; }
+    .tools-info-name { font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
+    .tools-info-level { font-family: var(--mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
+    .tools-info-bar.empty .tools-info-name { color: var(--muted); font-weight: 400; font-size: .72rem; font-family: var(--mono); letter-spacing: .06em; }
+    /* Full-width grid — cells stretch evenly across the section */
+    .tools-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px; width: 100%; }
+    .tool-logo {
+      aspect-ratio: 1;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, transform .15s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .tool-logo:hover,
+    .tool-logo.active { border-color: var(--teal); background: var(--teal-xl); transform: scale(1.06); }
+    .tool-logo img { width: 55%; height: 55%; object-fit: contain; pointer-events: none; }
+    .tool-logo-letter { font-family: var(--mono); font-size: clamp(.7rem, 1.2vw, .9rem); font-weight: 700; letter-spacing: .04em; color: var(--teal); text-align: center; pointer-events: none; }
+
+    /* ════════════════ 07 CTA ════════════════ */
+    .s-cta { flex-direction: column; border-bottom: none; }
+    .s-cta-title { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 800; letter-spacing: -.05em; line-height: .85; color: var(--ink); margin-bottom: 48px; }
+    .s-cta-title .teal { color: var(--teal); }
+    .s-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Responsive ── */
+    @media(max-width:900px) {
+      .about-section { padding: 64px 24px; }
+      .s-intro { padding-bottom: 48px; }
+      .intro-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+
+      .disciplines-wrap { display: flex; flex-direction: column; }
+      .discipline-col { border-right: none; border-bottom: 1px solid var(--line); padding: 20px 16px; cursor: pointer; align-items: flex-start; text-align: left; }
+      .discipline-col:last-child { border-bottom: none; }
+      .discipline-title { margin-bottom: 0; }
+      .discipline-subs { opacity: 0; max-height: 0; overflow: hidden; transform: none; transition: opacity .3s, max-height .4s var(--ease), margin-top .3s; margin-top: 0; align-items: flex-start; }
+      .discipline-col.open .discipline-subs { opacity: 1; max-height: 300px; margin-top: 14px; }
+      .discipline-col.open .discipline-title { color: var(--teal); }
+
+      .s-map {
+        flex-direction: column;
+        gap: 24px;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      .s-map-left {
+        order: 1;
+        width: 100%;
+        min-height: auto;
+        justify-content: flex-start;
+      }
+      .s-map-right {
+        order: 2;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow-x: auto;
+      }
+      .italy-dotmap { width: min(92vw, 520px); }
+
+      .map-city-info {
+        position: relative;
+        top: auto; left: auto;
+        transform: none !important;
+        width: 100%;
+        order: 3;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        pointer-events: none;
+        transition: opacity .35s, max-height .4s var(--ease);
+      }
+      .map-city-info.visible {
+        opacity: 1;
+        max-height: 500px;
+        pointer-events: all;
+      }
+      .map-default-text { position: relative; transition: opacity .3s, max-height .3s; }
+      .map-default-text.faded { opacity: 0; max-height: 0; overflow: hidden; margin: 0; pointer-events: none; }
+
+      .interest-card { height: auto; flex-direction: column; width: 85vw; max-width: 340px; }
+      .interest-card-text { width: 100%; padding: 20px; order: 1; }
+      .interest-card-img { width: 100%; height: 140px; border-left: none; border-top: 1px solid var(--line); order: 2; flex-shrink: 0; margin-top: auto; }
+
+      .s-lang { align-items: flex-start; text-align: left; }
+      .hello-word { margin-bottom: 32px; }
+      .lang-row { display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; width: 100%; }
+      .lang-item { border-right: none; border-bottom: 1px solid var(--line); min-height: auto; padding: 28px 24px; justify-content: flex-start; }
+      .lang-item:last-child { border-bottom: none; }
+      .lang-item.lang-active { background: var(--teal-xl); }
+
+      /* Tools: 4 columns full width on mobile */
+      .tools-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="rail">
+  <a href="/index.html" class="r-logo">
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:28px;height:28px;">
+      <g><g>
+        <path d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+        <path d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+        <path d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+        <path d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+      </g></g>
+    </svg>
+  </a>
+  <div class="r-group">
+    <a href="/index.html" class="r-item"><div class="r-icon">H</div><span class="r-text">Home</span></a>
+    <a href="/projects.html" class="r-item"><div class="r-icon">W</div><span class="r-text">Work</span></a>
+    <a href="/about.html" class="r-item active"><div class="r-icon">A</div><span class="r-text">About</span></a>
+    <a href="/contact.html" class="r-item"><div class="r-icon">C</div><span class="r-text">Contact</span></a>
+  </div>
+</nav>
+
+<div id="mob">
+  <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
+    <g><g>
+      <path d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+      <path d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+      <path d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+      <path d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+    </g></g>
+  </svg>
+  <a href="/index.html" class="mob-item"><span class="mob-letter">H</span><span class="mob-word">Home</span></a>
+  <a href="/projects.html" class="mob-item"><span class="mob-letter">W</span><span class="mob-word">Work</span></a>
+  <a href="/about.html" class="mob-item active"><span class="mob-letter">A</span><span class="mob-word">About</span></a>
+  <a href="/contact.html" class="mob-item"><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
+</div>
+
+<main class="page-main" style="padding:0;">
+
+  <!-- ══ 01 INTRO ══ -->
+  <section class="about-section s-intro">
+    <div class="intro-tagline">One object. Every constraint. Always the right fit.</div>
+    <h1 class="s-intro-title">There's<br>always<br>one <span class="teal">for all.</span></h1>
+    <div class="intro-desc">
+      <div class="intro-geo-line"><span class="igl-full"></span><span class="igl-dot"></span><span class="igl-short"></span></div>
+      <div class="intro-geo-line"><span class="igl-short"></span><span class="igl-dot"></span><span class="igl-full"></span></div>
+      <div class="intro-geo-line"><span class="igl-mid"></span><span class="igl-dot"></span><span class="igl-mid"></span></div>
+    </div>
+    <div class="intro-bottom">
+      <div class="intro-left-cluster">
+        <div class="intro-stats">
+          <span>5+ years</span><span class="intro-dot">·</span>
+          <span>3 disciplines</span><span class="intro-dot">·</span>
+          <span>Italy-based</span>
+        </div>
+        <div class="intro-scroll-hint">
+          <div class="scroll-line"></div>
+          <span>Scroll to explore</span>
+        </div>
+      </div>
+      <div class="intro-right-cluster">
+        <div class="intro-clock" id="intro-clock">00:00:00</div>
+        <div class="intro-status">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-text">Online</span> · Italy
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 DISCIPLINES ══ -->
+  <section class="about-section s-work" style="flex-direction:column;">
+    <div class="s-label">What I do</div>
+    <p class="s-work-intro">Three macro areas. Hover to explore what lives inside each one.</p>
+    <div class="disciplines-wrap">
+      <div class="discipline-col">
+        <div class="discipline-title">Product</div>
+        <div class="discipline-subs">
+          <span class="discipline-sub">Object design</span>
+          <span class="discipline-sub">Furniture</span>
+          <span class="discipline-sub">Packaging</span>
+          <span class="discipline-sub">Consumer goods</span>
+          <span class="discipline-sub">Prototyping</span>
+        </div>
+      </div>
+      <div class="discipline-col">
+        <div class="discipline-title">Industrial</div>
+        <div class="discipline-subs">
+          <span class="discipline-sub">Enclosures & systems</span>
+          <span class="discipline-sub">DFM & tooling</span>
+          <span class="discipline-sub">Materials research</span>
+          <span class="discipline-sub">Mechanical design</span>
+          <span class="discipline-sub">Wayfinding</span>
+        </div>
+      </div>
+      <div class="discipline-col">
+        <div class="discipline-title">Visual</div>
+        <div class="discipline-subs">
+          <span class="discipline-sub">Identity systems</span>
+          <span class="discipline-sub">Print & editorial</span>
+          <span class="discipline-sub">Signage</span>
+          <span class="discipline-sub">Typography</span>
+          <span class="discipline-sub">Art direction</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 MAP ══ -->
+  <section class="about-section s-map" id="map-section">
+
+    <!-- LEFT: text panel -->
+    <div class="s-map-left">
+
+      <!-- Default state: big headline -->
+      <div class="map-default-text" id="map-default">
+        <div class="s-map-eyebrow">Where I'm from</div>
+        <h2 class="s-map-statement">Born<br>south.<br>Grown<br><span class="teal">everywhere.</span></h2>
+        <p class="s-map-hint">
+          <span class="s-map-hint-line"></span>
+          hover the pins
+        </p>
+      </div>
+
+      <!-- City 1: Reggio Calabria -->
+      <div class="map-city-info" id="map-info-1">
+        <div class="map-city-tag">2000 — birthplace</div>
+        <h2 class="map-city-name">Reggio<br>Calabria</h2>
+        <div class="map-city-meta">
+          <span class="map-city-year">Calabria, IT</span>
+          <span class="map-city-role">Born &amp; raised</span>
+        </div>
+        <p class="map-city-desc">Tip of the boot. Grew up surrounded by craft, sea, and sun-bleached concrete. The south taught me that beauty and function are never separate.</p>
+      </div>
+
+      <!-- City 2: Florence -->
+      <div class="map-city-info" id="map-info-2">
+        <div class="map-city-tag">2019 — formation</div>
+        <h2 class="map-city-name">Florence</h2>
+        <div class="map-city-meta">
+          <span class="map-city-year">Tuscany, IT</span>
+          <span class="map-city-role">Design school</span>
+        </div>
+        <p class="map-city-desc">Renaissance city, design school. Where I learned to look at objects differently — form, proportion, history. Still the city that changed how I see.</p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: the map -->
+    <div class="s-map-right">
+      <div class="map-wrap" id="map-wrap">
+        <svg id="italy-dotmap" class="italy-dotmap" viewBox="-4.5 -4.320508075688774 39 44.64101615137754" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0, -0.18653347947321208)">
+            <rect x="11.84" y="0.7060254037844386" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="0.7060254037844386" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="0.7060254037844386" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="0.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="0.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="0.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="0.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="0.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="3.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="1.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="8.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="2.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="9.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="10.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="11.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="12.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="13.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="26.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="27.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="26.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="27.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="28.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="28.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="29.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="22.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="7.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="6.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="4.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="5.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="26.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.84" y="28.418838324886472" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.84" y="28.418838324886472" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="25.84" y="28.418838324886472" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="29.284863728670913" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="24.34" y="29.284863728670913" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.84" y="30.15088913245535" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.34" y="31.01691453623979" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="31.01691453623979" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="23.34" y="31.01691453623979" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="14.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="15.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="16.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="17.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="18.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="19.34" y="34.481016151377545" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.34" y="34.481016151377545" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="21.34" y="34.481016151377545" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+            <rect x="20.84" y="35.34704155516199" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
+          </g>
+        </svg>
+
+        <div class="map-pin-overlay">
+          <div class="map-city-pin" id="pin-1" style="left:71.4%;top:79.2%;" data-target="map-info-1">
+            <div class="map-city-pin-dot"></div>
+          </div>
+          <div class="map-city-pin" id="pin-2" style="left:40.6%;top:36.5%;" data-target="map-info-2">
+            <div class="map-city-pin-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ 04 INTERESTS ══ -->
+  <section class="about-section s-interests">
+    <div class="interests-header">
+      <div class="s-label" style="margin-bottom:0;">Interests</div>
+      <div class="interests-drag-hint">drag to explore</div>
+    </div>
+    <div class="interests-scroll" id="interests-scroll">
+      <div class="interests-track">
+        <div class="interest-card">
+          <div class="interest-card-text"><div class="interest-card-title">Design</div><div class="interest-card-desc">Objects, systems, the space between function and form. The art of building things.</div></div>
+          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-card-text"><div class="interest-card-title">Automotive</div><div class="interest-card-desc">Motorsport, car culture, car styling. Gran Turismo 4. The car as the most culturally loaded object ever made.</div></div>
+          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-card-text"><div class="interest-card-title">Mobility</div><div class="interest-card-desc">How people move, how a train is used, how a plane works, how a cockpit talks back. The interface between body and vehicle.</div></div>
+          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-card-text"><div class="interest-card-title">Photography</div><div class="interest-card-desc">On a Nikon D7000, nothing fancy. Composition, light, timing. Photographs everything. Amateur by title but always filming.</div></div>
+          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-card-text"><div class="interest-card-title">Music Production</div><div class="interest-card-desc">Ableton, mixing, sampling, late nights. Making music the same way I make objects — by feel first, then figure out why it works.</div></div>
+          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-card-text"><div class="interest-card-title">Tech</div><div class="interest-card-desc">Consumer tech, mostly. The kind that ends up in your pocket or on your desk. Interested in how it's designed before how it works.</div></div>
+          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 05 LANGUAGES ══ -->
+  <section class="about-section s-lang">
+    <div class="s-label" style="margin:0 auto 32px;">Languages</div>
+    <div class="hello-word" id="hello-word">Ciao.</div>
+    <div class="lang-row">
+      <div class="lang-item" data-hello="Ciao.">
+        <div class="lang-item-code">IT</div>
+        <div class="lang-item-name">Italiano</div>
+        <div class="lang-item-level">Madrelingua</div>
+        <div class="lang-item-desc">La lingua con cui penso, progetto e discuto. Nessun filtro.</div>
+      </div>
+      <div class="lang-item" data-hello="Hello.">
+        <div class="lang-item-code">EN</div>
+        <div class="lang-item-name">English</div>
+        <div class="lang-item-level">B2 — Cambridge First</div>
+        <div class="lang-item-desc">Used daily. Clients, briefs, research. Comfortable enough to argue in it.</div>
+      </div>
+      <div class="lang-item" data-hello="Bonjour.">
+        <div class="lang-item-code">FR</div>
+        <div class="lang-item-name">Français</div>
+        <div class="lang-item-level">B2 — ESABAC</div>
+        <div class="lang-item-desc">Certified but rarely practiced. Gets the job done when needed.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 TOOLS ══ -->
+  <section class="about-section s-tools">
+    <div class="s-label">Tools</div>
+    <h2 class="tools-title">The right tool<br>for the right <span class="teal">problem.</span></h2>
+    <p class="tools-sub">Software is a means, not an end. Tap any tool to see where I stand.</p>
+    <div class="tools-info-bar empty" id="tools-info-bar">
+      <span class="tools-info-name">Select a tool</span>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-logo" data-name="Blender"        data-level="Advanced">    <span class="tool-logo-letter">Bl</span></div>
+      <div class="tool-logo" data-name="Rhino 8"        data-level="Advanced">    <span class="tool-logo-letter">Rh</span></div>
+      <div class="tool-logo" data-name="Photoshop"      data-level="Proficient">  <span class="tool-logo-letter">Ps</span></div>
+      <div class="tool-logo" data-name="Illustrator"    data-level="Proficient">  <span class="tool-logo-letter">Ai</span></div>
+      <div class="tool-logo" data-name="InDesign"       data-level="Proficient">  <span class="tool-logo-letter">Id</span></div>
+      <div class="tool-logo" data-name="Lightroom"      data-level="Intermediate"><span class="tool-logo-letter">Lr</span></div>
+      <div class="tool-logo" data-name="Premiere"       data-level="Intermediate"><span class="tool-logo-letter">Pr</span></div>
+      <div class="tool-logo" data-name="DaVinci Resolve" data-level="Intermediate"><span class="tool-logo-letter">Dv</span></div>
+      <div class="tool-logo" data-name="After Effects"  data-level="Intermediate"><span class="tool-logo-letter">Ae</span></div>
+      <div class="tool-logo" data-name="Affinity v3"    data-level="Proficient">  <span class="tool-logo-letter">Af</span></div>
+      <div class="tool-logo" data-name="Ableton Live"   data-level="Intermediate"><span class="tool-logo-letter">Ab</span></div>
+      <div class="tool-logo" data-name="Godot Engine"   data-level="Beginner">    <span class="tool-logo-letter">Go</span></div>
+      <div class="tool-logo" data-name="WordPress"      data-level="Proficient">  <span class="tool-logo-letter">Wp</span></div>
+    </div>
+  </section>
+
+  <!-- ══ 07 CTA ══ -->
+  <section class="about-section s-cta">
+    <div class="s-label">Let's build</div>
+    <h2 class="s-cta-title">Got something<br>worth <span class="teal">making?</span></h2>
+    <div class="s-cta-actions">
+      <a href="/contact.html" class="btn-primary">Get in touch →</a>
+      <a href="/projects.html" class="btn-secondary">View work</a>
+    </div>
+  </section>
+
+</main>
+
+<script src="/main.js"></script>
+<script>
+  // ── Live clock ──
+  function updateClock() {
+    const el = document.getElementById('intro-clock');
+    const statusText = document.getElementById('status-text');
+    const statusDot = document.getElementById('status-dot');
+    if (!el) return;
+    const now = new Date();
+    const italy = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Rome' }));
+    const h = italy.getHours();
+    const m = String(italy.getMinutes()).padStart(2,'0');
+    const s = String(italy.getSeconds()).padStart(2,'0');
+    el.textContent = `${String(h).padStart(2,'0')}:${m}:${s}`;
+    const online = h >= 8 && h < 23;
+    statusDot.style.background = online ? '#4ade80' : '#94a3b8';
+    statusText.textContent = online ? 'Online' : 'Offline';
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // ── Map ──
+  const mapDefaultEl = document.getElementById('map-default');
+  const pins = document.querySelectorAll('.map-city-pin');
+  let activePin = null;
+  let mobileResetTimer = null;
+
+  function activatePin(pin) {
+    // Deactivate any previously active pin
+    if (activePin && activePin !== pin) {
+      document.getElementById(activePin.dataset.target).classList.remove('visible');
+      activePin.classList.remove('active');
+    }
+    // Toggle off if clicking the same pin again
+    if (activePin === pin) {
+      pin.classList.remove('active');
+      document.getElementById(pin.dataset.target).classList.remove('visible');
+      mapDefaultEl.classList.remove('faded');
+      activePin = null;
+      return;
+    }
+    // Activate new pin
+    pin.classList.add('active');
+    document.getElementById(pin.dataset.target).classList.add('visible');
+    mapDefaultEl.classList.add('faded');
+    activePin = pin;
+  }
+
+  function resetMap() {
+    if (activePin) {
+      document.getElementById(activePin.dataset.target).classList.remove('visible');
+      activePin.classList.remove('active');
+      activePin = null;
+    }
+    mapDefaultEl.classList.remove('faded');
+  }
+
+  pins.forEach(pin => {
+    pin.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 900) activatePin(pin);
+    });
+    pin.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 900) resetMap();
+    });
+    pin.addEventListener('click', (e) => {
+      e.stopPropagation();
+      clearTimeout(mobileResetTimer);
+      activatePin(pin);
+      if (activePin && window.innerWidth <= 900) {
+        mobileResetTimer = setTimeout(resetMap, 30000);
+      }
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (window.innerWidth <= 900) { clearTimeout(mobileResetTimer); resetMap(); }
+  });
+
+  const mapSection = document.getElementById('map-section');
+  new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) { clearTimeout(mobileResetTimer); resetMap(); }
+  }, { threshold: 0 }).observe(mapSection);
+
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => {
+        pins.forEach((pin, i) => setTimeout(() => pin.classList.add('pin-visible'), i * 300));
+      }, 200);
+    }
+  }, { threshold: 0.3 }).observe(mapSection);
+
+  // ── Languages ──
+  const helloWord = document.getElementById('hello-word');
+  const langItems = Array.from(document.querySelectorAll('.lang-item'));
+  let langIndex = 0;
+  let langTimer = null;
+
+  langItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 900) { helloWord.textContent = item.dataset.hello; helloWord.classList.add('teal'); }
+    });
+    item.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 900) helloWord.classList.remove('teal');
+    });
+  });
+
+  function cycleLang() {
+    langIndex = (langIndex + 1) % langItems.length;
+    langItems.forEach((item, i) => item.classList.toggle('lang-active', i === langIndex));
+    helloWord.textContent = langItems[langIndex].dataset.hello;
+    helloWord.classList.add('teal');
+    setTimeout(() => helloWord.classList.remove('teal'), 600);
+  }
+
+  if (window.innerWidth <= 900) { langItems[0].classList.add('lang-active'); langTimer = setInterval(cycleLang, 2800); }
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 900 && !langTimer) { langItems[langIndex].classList.add('lang-active'); langTimer = setInterval(cycleLang, 2800); }
+    if (window.innerWidth > 900 && langTimer) { clearInterval(langTimer); langTimer = null; langItems.forEach(i => i.classList.remove('lang-active')); }
+  });
+
+  // ── Tools: click / tap to select ──
+  const infoBar = document.getElementById('tools-info-bar');
+  let activeTool = null;
+
+  function selectTool(logo) {
+    // Deselect if tapping the same one again
+    if (activeTool === logo) {
+      logo.classList.remove('active');
+      infoBar.classList.add('empty');
+      infoBar.innerHTML = `<span class="tools-info-name">Select a tool</span>`;
+      activeTool = null;
+      return;
+    }
+    if (activeTool) activeTool.classList.remove('active');
+    logo.classList.add('active');
+    infoBar.classList.remove('empty');
+    infoBar.innerHTML = `<span class="tools-info-name">${logo.dataset.name}</span><span class="tools-info-level">${logo.dataset.level}</span>`;
+    activeTool = logo;
+  }
+
+  document.querySelectorAll('.tool-logo').forEach(logo => {
+    logo.addEventListener('click', () => selectTool(logo));
+    // Desktop: also show on hover for discoverability, but don't require it
+    logo.addEventListener('mouseenter', () => {
+      if (activeTool) return; // don't override an active selection
+      infoBar.classList.remove('empty');
+      infoBar.innerHTML = `<span class="tools-info-name">${logo.dataset.name}</span><span class="tools-info-level">${logo.dataset.level}</span>`;
+    });
+    logo.addEventListener('mouseleave', () => {
+      if (activeTool) return;
+      infoBar.classList.add('empty');
+      infoBar.innerHTML = `<span class="tools-info-name">Select a tool</span>`;
+    });
+  });
+
+  // ── Interests drag ──
+  const scroll = document.getElementById('interests-scroll');
+  let isDown = false, startX, scrollLeft;
+  scroll.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - scroll.offsetLeft; scrollLeft = scroll.scrollLeft; });
+  scroll.addEventListener('mouseleave', () => isDown = false);
+  scroll.addEventListener('mouseup', () => isDown = false);
+  scroll.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    scroll.scrollLeft = scrollLeft - (e.pageX - scroll.offsetLeft - startX);
+  });
+
+  // ── Mobile accordion ──
+  document.querySelectorAll('.discipline-col').forEach(col => {
+    col.addEventListener('click', () => { if (window.innerWidth <= 900) col.classList.toggle('open'); });
+  });
+
+  // ── Map dot wave scroll effect ──
+  // viewBox: x from -4.5 to 34.5 (~39 units), y from ~-4.5 to ~40 (~44.6 units)
+  // SVG center in viewBox coords:
+  const SVG_CX = (-4.5 + 34.5) / 2;          // ~15
+  const SVG_CY = (-4.32 + 40.32) / 2;         // ~18
+
+  const DOT_BASE = 0.44;   // max size (section perfectly centered in viewport)
+  const DOT_MIN  = 0.20;   // min size (section near viewport edge)
+  const DOT_RX   = 0.11;   // corner radius — fixed, never changes
+
+  const mapDots = Array.from(document.querySelectorAll('#italy-dotmap rect'));
+
+  // Pre-compute each dot's normalized distance from SVG center (0 = center, 1 = furthest)
+  // We use this to phase the wave: center dots react first, edge dots later
+  const dotData = mapDots.map(r => {
+    const cx = parseFloat(r.getAttribute('x')) + 0.16;  // dot center x
+    const cy = parseFloat(r.getAttribute('y')) + 0.16;  // dot center y
+    const dx = cx - SVG_CX;
+    const dy = cy - SVG_CY;
+    return { r, dist: Math.sqrt(dx * dx + dy * dy) };
+  });
+
+  // Normalize distances 0..1
+  const maxDist = Math.max(...dotData.map(d => d.dist));
+  dotData.forEach(d => { d.normDist = d.dist / maxDist; });
+
+  // Set all dots to base size immediately (applies rx too)
+  mapDots.forEach(r => {
+    r.setAttribute('width',  String(DOT_BASE));
+    r.setAttribute('height', String(DOT_BASE));
+    r.setAttribute('rx', String(DOT_RX));
+    r.setAttribute('ry', String(DOT_RX));
+  });
+
+  // Scroll handler: wave — center dots track scroll progress first,
+  // outer dots lag behind proportionally to their distance from center
+  function updateDotWave() {
+    if (window.innerWidth <= 900) return;
+    const sec = document.getElementById('map-section');
+    if (!sec) return;
+    const rect   = sec.getBoundingClientRect();
+    const vh     = window.innerHeight;
+    const secCY  = rect.top + rect.height / 2;
+    // t = 0 when section center is at viewport center, 1 when fully off-screen
+    const raw    = Math.abs(secCY - vh / 2) / (vh / 2);
+    const global = Math.min(raw, 1);
+
+    dotData.forEach(({ r, normDist }) => {
+      // Wave phase: center dots (normDist≈0) get full global value,
+      // outer dots (normDist≈1) are delayed — they only start shrinking
+      // once global has already moved past their threshold.
+      // Result: shrink/grow ripples outward from center as you scroll.
+      const wave  = Math.max(0, global - normDist * 0.45) / (1 - normDist * 0.45);
+      const clamped = Math.min(wave, 1);
+      const size  = DOT_BASE - clamped * (DOT_BASE - DOT_MIN);
+      const s     = Math.round(size * 1000) / 1000;
+      r.setAttribute('width',  s);
+      r.setAttribute('height', s);
+    });
+  }
+
+  window.addEventListener('scroll', updateDotWave, { passive: true });
+  window.addEventListener('resize', updateDotWave, { passive: true });
+  updateDotWave();
+</script>
+</body>
+</html>
