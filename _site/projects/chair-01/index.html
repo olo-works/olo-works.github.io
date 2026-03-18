@@ -52,20 +52,54 @@
 </div>
 
 <style>
-  /* ── Per-project accent color ── */
+  /* ── Per-project accent color ──────────────────────────────────────────────────
+     Set these in any project .md front matter to fully retheme the page:
+       accent: "#E8490F"         — main color (borders, labels, icons, tags)
+       accent_dark: "#C93A08"    — hover/active variant
+       accent_bg: "#F5E0D8"      — page background
+       accent_white: "#FDF0EB"   — card/surface color
+     Leave all out to default to the site teal palette.
+  ────────────────────────────────────────────────────────────────────────────── */
   :root {
-    --accent: #2BADB8;
+    --accent:   #2BADB8;
     --accent-d: #1E8A94;
-    --accent-xl: #2BADB818;
+    --accent-xl:#2BADB818;
+
+    /* Remap every site color variable so the whole page shifts */
+    --teal:    var(--accent);
+    --teal-d:  var(--accent-d);
+    --teal-xl: var(--accent-xl);
+    --bg:      #D0E0E5;
+    --white:   #E8F2F4;
+    --line:    rgba(43,173,184,.8);
   }
 
-  .page-label, .proj-gallery-label { color: var(--accent) !important; }
-  .proj-gallery-label::before { background: var(--accent) !important; }
-  .tag { color: var(--accent) !important; background: var(--accent-xl) !important; }
-  .btn-primary { background: var(--accent) !important; }
-  .btn-primary:hover { background: var(--accent-d) !important; }
-  .btn-secondary:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
-  .proj-meta-label { color: var(--accent) !important; }
+  /* Force elements that use hardcoded bg to respect --bg */
+  body, #rail, #mob { background: var(--bg) !important; }
+
+  /* Force every border and surface to use the remapped variables */
+  #rail, #rail * { border-color: var(--line) !important; }
+  .r-icon { border-color: var(--line) !important; }
+  .proj-right, .proj-meta-block, .proj-meta-row, .proj-nav,
+  .proj-cover, .proj-gallery-grid { border-color: var(--line) !important; }
+  .proj-meta-block { background: var(--white) !important; }
+
+  /* ── Entrance animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .proj-cover       { animation: fadeUp .6s var(--ease) .05s both; }
+  .proj-description { animation: fadeUp .7s var(--ease) .18s both; }
+  .proj-gallery     { animation: fadeUp .6s var(--ease) .3s both; }
+  .proj-title       { animation: fadeUp .6s var(--ease) .08s both; }
+  .proj-meta-block  { animation: fadeUp .6s var(--ease) .2s both; }
+  .proj-nav         { animation: fadeIn .5s var(--ease) .35s both; }
 
   /* ── Layout ── */
   html, body { height: 100%; }
@@ -78,9 +112,9 @@
     align-items: start;
   }
 
-  /* ── Left: scrollable ── */
+  /* ── Left ── */
   .proj-left {
-    padding: 48px 36px 80px 72px
+    padding: 48px 36px 80px 72px;
   }
 
   /* Cover */
@@ -113,24 +147,41 @@
     line-height: 1.85;
     color: var(--ink-m);
     margin-bottom: 56px;
-    max-width: 720px;
+    max-width: 860px;
     margin: 0 auto 56px;
   }
   .proj-description p + p { margin-top: 1.2em; }
+
+  /* Section headings */
   .proj-description h2 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -.02em;
-    margin: 2em 0 .6em;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1;
     color: var(--ink);
+    margin: 2.4em 0 .7em;
+    padding-bottom: .6em;
+    border-bottom: 1px solid var(--line);
   }
+
   .proj-description h3 {
     font-family: var(--mono);
-    font-size: .7rem;
-    letter-spacing: .18em;
+    font-size: .62rem;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--teal);
     margin: 1.8em 0 .5em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .proj-description h3::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--teal);
+    flex-shrink: 0;
   }
 
   /* Gallery */
@@ -140,13 +191,13 @@
     font-size: .6rem;
     letter-spacing: .2em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--teal);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .proj-gallery-label::before { content:''; display:block; width:24px; height:2px; background:var(--accent); }
+  .proj-gallery-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
 
   .proj-gallery-grid {
     display: grid;
@@ -175,7 +226,7 @@
   .gallery-img.square { aspect-ratio: 1; }
 
   /* ── Right: sticky sidebar ── */
- .proj-right {
+  .proj-right {
     position: sticky;
     top: 0;
     height: 100vh;
@@ -194,22 +245,22 @@
   }
 
   .proj-title {
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -.03em;
-  line-height: 1;
-  color: var(--ink);
-}
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1;
+    color: var(--ink);
+  }
 
-.proj-meta-block {
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  overflow: hidden;
-  background: var(--white);
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-.proj-meta-block::-webkit-scrollbar { display: none; }
+  .proj-meta-block {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--white);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .proj-meta-block::-webkit-scrollbar { display: none; }
 
   .proj-meta-row {
     display: flex;
@@ -225,7 +276,7 @@
     font-size: .56rem;
     letter-spacing: .15em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--teal);
     white-space: nowrap;
   }
   .proj-meta-value {
@@ -242,14 +293,14 @@
     justify-content: flex-end;
   }
 
-  /* Next / Prev — just arrows, no names */
+  /* Nav arrows */
   .proj-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
   .proj-nav-btn {
     font-family: var(--mono);
     font-size: .7rem;
@@ -261,10 +312,10 @@
     border-radius: 4px;
     transition: color .2s, border-color .2s;
   }
-  .proj-nav-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .proj-nav-btn:hover { color: var(--teal); border-color: var(--teal); }
   .proj-nav-btn.disabled { opacity: .2; pointer-events: none; }
 
-  /* Fixed go-back on left rail */
+  /* Back rail */
   .proj-back-rail {
     position: fixed;
     left: 72px;
@@ -283,11 +334,8 @@
     z-index: 5;
     transition: color .2s;
   }
-  .proj-back-rail:hover { color: var(--accent); }
-  .proj-back-rail::after {
-    content: '↓';
-    font-size: .7rem;
-  }
+  .proj-back-rail:hover { color: var(--teal); }
+  .proj-back-rail::after { content: '↑'; font-size: .7rem; }
 
   /* ── Lightbox ── */
   .lightbox {
@@ -327,69 +375,44 @@
     transition: color .2s, border-color .2s;
   }
   .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
-  
-.proj-back-mobile { display: none; }
+
+  .proj-back-mobile { display: none; }
+
   /* ── Responsive ── */
   @media(max-width:900px) {
-  .proj-wrap {
-    grid-template-columns: 1fr;
-    padding-left: 0;
-  }
-  .proj-back-mobile {
-    display: block;
-    font-family: var(--mono);
-    font-size: .58rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    margin-bottom: 20px;
-    transition: color .2s;
-  }
-.proj-back-mobile:hover { color: var(--accent); }
-
-  /* Right comes FIRST on mobile — title + meta at top */
-  .proj-right {
-    position: static;
-    height: auto;
-    border-left: none;
-    border-bottom: 1px solid var(--line);
-    padding: 32px 24px 32px;
-    order: -1;
-  }
-
-  .proj-bottom {
-    margin-top: 0;
-    margin-bottom: 16px;
-  }
-
-  .proj-title {
-    font-size: clamp(2rem, 8vw, 3rem);
-    margin-bottom: 0;
+    .proj-wrap {
+      grid-template-columns: 1fr;
+      padding-left: 0;
+    }
+    .proj-back-mobile {
+      display: block;
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: color .2s;
+    }
+    .proj-back-mobile:hover { color: var(--teal); }
+    .proj-right {
+      position: static;
+      height: auto;
+      border-left: none;
+      border-bottom: 1px solid var(--line);
+      padding: 32px 24px 32px;
+      order: -1;
+    }
+    .proj-bottom { margin-top: 0; margin-bottom: 16px; }
+    .proj-title { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0; }
+    .proj-nav { margin-top: 16px; padding-top: 16px; }
+    .proj-left { padding: 24px 24px 80px; }
+    .proj-description { max-width: 100%; margin: 0 0 40px; }
+    .proj-back-rail { display: none; }
+    .proj-gallery-grid[data-cols="3"] { grid-template-columns: 1fr 1fr; }
   }
 
-  .proj-nav {
-    margin-top: 16px;
-    padding-top: 16px;
-  }
-
-  .proj-left {
-    padding: 24px 24px 80px;
-  }
-
-  .proj-description {
-    max-width: 100%;
-    margin: 0 0 40px;
-  }
-
-  .proj-back-rail { display: none; }
-
-  .proj-gallery-grid[data-cols="3"] { grid-template-columns: 1fr 1fr; }
-}
-
-@media(max-width:600px) {
-  .proj-gallery-grid { grid-template-columns: 1fr !important; }
-}
   @media(max-width:600px) {
     .proj-gallery-grid { grid-template-columns: 1fr !important; }
   }
@@ -404,15 +427,12 @@
 
 
 
-<!-- Fixed go-back -->
 <a href="/projects.html" class="proj-back-rail">Go back</a>
 
 <main class="page-main" style="padding:0;">
   <div class="proj-wrap">
 
-    <!-- ── Left ── -->
     <div class="proj-left">
-
       <div class="proj-cover">
         
           <img src="/images/photoprojects/ciao1.png" alt="Folded Steel Chair"/>
@@ -472,84 +492,82 @@
         </div>
       </div>
       
-
     </div>
 
-    <!-- ── Right ── -->
     <div class="proj-right">
       <a href="/projects.html" class="proj-back-mobile">← All projects</a>
 
       <div class="proj-bottom">
         <h1 class="proj-title">Folded Steel Chair</h1>
         <div class="proj-meta-block">
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Year</span>
-          <span class="proj-meta-value">2024</span>
-        </div>
-        
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Client</span>
-          <span class="proj-meta-value">Self-initiated</span>
-        </div>
-        
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Role</span>
-          <span class="proj-meta-value">Product Designer</span>
-        </div>
-        
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Materials</span>
-          <span class="proj-meta-value">Cold-rolled steel, oak veneer</span>
-        </div>
-        
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Duration</span>
-          <span class="proj-meta-value">4 months</span>
-        </div>
-        
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Tags</span>
-          <div class="proj-meta-tags">
-            
-            <span class="tag">Product</span>
-            
-            <span class="tag">Metal</span>
-            
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Year</span>
+            <span class="proj-meta-value">2024</span>
           </div>
+          
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Client</span>
+            <span class="proj-meta-value">Self-initiated</span>
+          </div>
+          
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Role</span>
+            <span class="proj-meta-value">Product Designer</span>
+          </div>
+          
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Materials</span>
+            <span class="proj-meta-value">Cold-rolled steel, oak veneer</span>
+          </div>
+          
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Duration</span>
+            <span class="proj-meta-value">4 months</span>
+          </div>
+          
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Tags</span>
+            <div class="proj-meta-tags">
+              
+              <span class="tag">Product</span>
+              
+              <span class="tag">Metal</span>
+              
+            </div>
+          </div>
+          
+          
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Finish</span>
+            <span class="proj-meta-value">Powder coat + oil</span>
+          </div>
+          
+          <div class="proj-meta-row">
+            <span class="proj-meta-label">Weight</span>
+            <span class="proj-meta-value">4.2 kg</span>
+          </div>
+          
+          
         </div>
-        
-        
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Finish</span>
-          <span class="proj-meta-value">Powder coat + oil</span>
-        </div>
-        
-        <div class="proj-meta-row">
-          <span class="proj-meta-label">Weight</span>
-          <span class="proj-meta-value">4.2 kg</span>
-        </div>
-        
-        
       </div>
-      </div>
+
       <div class="proj-nav">
         
         <span class="proj-nav-btn disabled">←</span>
         
-
         
-        <a href="/projects/ciaone/" class="proj-nav-btn">→</a>
+        <a href="/projects/olo-works-identity/" class="proj-nav-btn">→</a>
         
       </div>
-
     </div>
+
   </div>
 </main>
 
@@ -572,7 +590,6 @@
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 </script>
-
 
 <footer class="site-footer">
   <span>olo-works</span>
