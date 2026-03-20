@@ -7,7 +7,7 @@ client: "Self-initiated"
 role: "Visual Designer"
 materials: "Typography, Signage, Motion"
 duration: "3 months"
-tags: [Visual, Identity]
+tags: [Visual]
 cover: /images/photoprojects/ciao1.png
 accent: "#E8490F"         # strong color — borders, labels, icons
 accent_dark: "#C93A08"    # button hover
