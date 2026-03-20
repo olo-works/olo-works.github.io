@@ -2,8 +2,8 @@
 layout: project
 title: "My Personal Identity"
 order: 1
-year: 2024
-client: "Myself"
+year: 2025
+client: "Self-initiated"
 role: "Brand Designer"
 materials: "Typography, Color, Print, Digital"
 duration: "6 weeks"
@@ -32,10 +32,11 @@ There's a specific kind of design from the early 2000s that I never really got o
 
 It wasn't just games. The Designers Republic were doing it. Early Wipeout. Consumer electronics packaging that looked like it came from somewhere ten years ahead. The thing those all had in common was that they managed to feel flat and alive at the same time. Not "minimal in the current sense" but minimal in the sense that nothing was wasted, but everything was still allowed to have personality. That combination stuck with me more than almost anything else I encountered growing up, and I've been trying to understand why ever since.
 
+This identity is the closest I've gotten to an answer.
 
 ## The mark
 
-The symbol started somewhere else entirely. My family runs a small business, and at some point there were attempts at rebranding it. Sketches, directions, things that got developed and then shelved. Most of it went nowhere. But one form kept coming back, kept getting reworked, and at some point during that process it stopped feeling like it belonged to the brief and started feeling like it belonged to me.
+The symbol started somewhere else entirely. My family runs a company, and at some point there were attempts at rebranding it. Sketches, directions, things that got developed and then shelved. Most of it went nowhere. But one form kept coming back, kept getting reworked, and at some point during that process it stopped feeling like it belonged to the brief and started feeling like it belonged to me.
 
 <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:48px 28px;margin:28px 0;display:flex;align-items:center;justify-content:center;">
   <img src="/images/logosquare.svg" alt="Mark" style="width:140px;height:140px;display:block;"/>
@@ -118,24 +119,83 @@ Every border is the primary teal at reduced opacity. No grey in the system, no s
 Two typefaces, hard split by role.
 
 <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-  <div style="padding:32px 28px;border-bottom:1px solid var(--line);">
-    <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;">Display — Syne 800</div>
-    <div style="font-family:var(--sans);font-size:2.4rem;font-weight:800;letter-spacing:-.05em;line-height:.95;color:var(--ink);margin-bottom:16px;">The object<br>earns its place.</div>
-    <div style="font-family:var(--sans);font-size:1.2rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:12px;">Section heading at 1.2rem</div>
-    <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);">Used for: titles, headings, hero text, logotype</div>
+
+  <div style="padding:20px 24px;border-bottom:1px solid var(--line);background:var(--teal-xl);">
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);">Syne 800 — Display</div>
   </div>
-  <div style="padding:32px 28px;">
-    <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;">Interface — IBM Plex Mono 400</div>
-    <div style="font-family:var(--mono);font-size:.75rem;line-height:1.85;color:var(--muted);margin-bottom:12px;">Year · 2025 &nbsp;&nbsp;&nbsp; Role · Brand Designer &nbsp;&nbsp;&nbsp; Duration · 6 weeks</div>
-    <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">Section label — uppercase tracked</div>
-    <div style="font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--ink);margin-bottom:12px;">Meta value — mono medium</div>
-    <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);">Used for: labels, tags, metadata, navigation, stats, captions</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Hero / Page title</div>
+      <div style="font-family:var(--sans);font-size:clamp(3rem,7vw,5.5rem);font-weight:800;letter-spacing:-.05em;line-height:.9;color:var(--ink);">olo<br>works.</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:10px;">clamp(3rem, 7vw, 5.5rem) · tracking -.05em</div>
+    </div>
+    <div style="padding:28px 24px;">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Section title</div>
+      <div style="font-family:var(--sans);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.04em;line-height:.95;color:var(--ink);">The object<br>earns its place.</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:10px;">clamp(1.8rem, 3vw, 2.8rem) · tracking -.04em</div>
+    </div>
   </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:24px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Project title</div>
+      <div style="font-family:var(--sans);font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink);">Transit<br>Identity</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">clamp(2rem, 3.5vw, 3rem) · tracking -.03em</div>
+    </div>
+    <div style="padding:24px;">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Subheading</div>
+      <div style="font-family:var(--sans);font-size:1.4rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink);">Where it comes from</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">1.4rem · tracking -.03em</div>
+    </div>
+  </div>
+
+  <div style="padding:20px 24px;border-bottom:1px solid var(--line);background:var(--teal-xl);">
+    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);">IBM Plex Mono — Interface</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:24px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Section label</div>
+      <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:8px;"><span style="display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;"></span>Typography</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.56rem · tracking .22em · uppercase</div>
+    </div>
+    <div style="padding:24px;">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Navigation label</div>
+      <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);">About</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.6rem · tracking .16em · uppercase</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:24px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Meta row</div>
+      <div style="font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--ink);">Year · 2025</div>
+      <div style="font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--ink);">Role · Brand Designer</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.65rem · weight 500</div>
+    </div>
+    <div style="padding:24px;">
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Body / Description</div>
+      <div style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--muted);">Software is a means,<br>not an end.</div>
+      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.72rem · weight 400 · line-height 1.8</div>
+    </div>
+  </div>
+
+  <div style="padding:20px 24px;">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--teal-xl);color:var(--teal);padding:4px 10px;border-radius:2px;">Visual</span>
+      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--teal-xl);color:var(--teal);padding:4px 10px;border-radius:2px;">Identity</span>
+      <span style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);">.58rem · tracking .1em · tag pill</span>
+    </div>
+  </div>
+
 </div>
 
-Syne is the display face. Heavy, geometric, tracking pulled tight. It's the part that has a voice. IBM Plex Mono handles everything else: labels, stats, nav items, anything that's communicating information rather than making a statement. They never share the same level of hierarchy. When one is big the other is small. The contrast between them does all the work a third typeface would need to.
+Syne was chosen because it had "that early 2000s" confidence already baked in. At heavy weight with tight tracking it gets close to the kind of display lettering you'd see on a loading screen or a Wipeout title card. Not just because it's copying anything, but because it takes what I valued the most from that period, with readability taken to its most.
 
-Both are free fonts. The right choice doesn't have to be the expensive one.
+IBM Plex Mono is the readout layer. Monospaced type was everywhere in that era's interfaces because it came from actual hardware displays, terminal outputs, instrument panels. Using it for labels and metadata here isn't nostalgic, it's just the right call for the same reason it was the right call then. Fixed-width characters align cleanly, they scan fast, they feel like information rather than decoration.
+
+Both are free. That's not a compromise, it's part of the logic. The right tool doesn't have to cost anything.
 
 ### Buttons
 
@@ -146,28 +206,79 @@ Both are free fonts. The right choice doesn't have to be the expensive one.
 
 Two states. The primary is the only element where the teal runs at full opacity as a fill. The secondary has no fill, just the border and a muted label that picks up the accent on hover. The 4px corner keeps it in the same shape family as everything else without going soft.
 
-### Cursor
+<h3>Cursor</h3>
 
 The default cursor is gone. In its place, a 10px teal dot and a 36px ring at 45% opacity that lags slightly behind the dot. The dot marks exactly where you are. The ring makes every hover state feel physical without needing a separate visual indicator. Moving across the page leaves a teal trace.
 
-<div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:48px 28px;margin:28px 0;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <div style="position:relative;width:60px;height:60px;display:flex;align-items:center;justify-content:center;">
-      <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--teal);opacity:.45;"></div>
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--teal);"></div>
+<div style="background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;border-right:1px solid var(--line);">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--teal);opacity:.5;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Default</span>
     </div>
-    <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Default</span>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <div style="position:relative;width:60px;height:60px;display:flex;align-items:center;justify-content:center;">
-      <div style="position:absolute;width:52px;height:52px;border-radius:50%;border:1.5px solid var(--teal);opacity:.45;"></div>
-      <div style="width:14px;height:14px;border-radius:50%;background:var(--teal);"></div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;border-right:1px solid var(--line);">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:40px;height:40px;border-radius:12px;border:1.5px solid var(--teal);opacity:.5;"></div>
+        <div style="width:16px;height:16px;border-radius:4px;background:var(--teal);flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Hover</span>
     </div>
-    <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Hover</span>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;border-right:1px solid var(--line);">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:52px;height:52px;border-radius:12px;border:1.5px solid var(--teal);opacity:.5;"></div>
+        <div style="width:22px;height:22px;border-radius:4px;background:var(--teal);flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Click</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;background:var(--teal);">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--white);opacity:.6;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--white);flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);">On teal</span>
+    </div>
+
   </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);">
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;border-right:1px solid var(--line);">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--teal);opacity:.5;transform:translate(10px,10px);"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Ring lag</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;border-right:1px solid var(--line);background:var(--ink);">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:1.5px solid #E8F2F4;opacity:.6;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#E8F2F4;flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);">On dark</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:36px 16px;">
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;width:40px;height:40px;border-radius:12px;border:1.5px solid var(--teal);opacity:.5;transform:translate(8px,8px);"></div>
+        <div style="width:16px;height:16px;border-radius:4px;background:var(--teal);flex-shrink:0;"></div>
+      </div>
+      <span style="font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Hover lag</span>
+    </div>
+
+  </div>
+
 </div>
 
-The reference is the targeting reticle, a shape that was everywhere in that era's games and interfaces. On mobile the whole thing disappears because touch has no pointer state to communicate.
+On hover the circle becomes a rounded square. Both the dot and the ring morph shape together. The reference is the targeting reticle, a shape that was everywhere in that era's games and interfaces. On mobile the whole thing disappears because touch has no pointer state to communicate.
 
 ### Navigation
 
@@ -178,4 +289,5 @@ On mobile it becomes a bottom pill. Same squares, but the active item stretches 
 ## What it's trying to do
 
 Everything is flat. No gradients, no shadows. But nothing sits still either. Hover something and it reacts. Scroll past the map and the dots move. The cursor follows you around the page. The nav opens when you get close.
+
 That's what I liked about that era. It wasn't just how things looked. It was that they felt like they knew you were there.

@@ -563,7 +563,7 @@
         <a href="/projects/ciaone/" class="proj-nav-btn">←</a>
         
         
-        <span class="proj-nav-btn disabled">→</span>
+        <a href="/projects/ahok/" class="proj-nav-btn">→</a>
         
       </div>
     </div>
@@ -589,6 +589,84 @@
   document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+  // ── Color transition between project pages ──────────────────────────────
+  // Current page's target colors (set by Jekyll from front matter)
+  const TARGET = {
+    teal:  '#E8490F',
+    bg:    '#f3c3b0',
+    white: '#eeb9a4',
+    line:  '#E8490F',
+  };
+
+  // Parse a hex color into [r,g,b]
+  function hexToRgb(hex) {
+    const h = hex.replace('#','');
+    return [
+      parseInt(h.slice(0,2),16),
+      parseInt(h.slice(2,4),16),
+      parseInt(h.slice(4,6),16)
+    ];
+  }
+
+  // Lerp between two [r,g,b] arrays
+  function lerpColor(a, b, t) {
+    return [
+      Math.round(a[0] + (b[0]-a[0]) * t),
+      Math.round(a[1] + (b[1]-a[1]) * t),
+      Math.round(a[2] + (b[2]-a[2]) * t)
+    ];
+  }
+
+  function rgbToHex(c) {
+    return '#' + c.map(v => v.toString(16).padStart(2,'0')).join('');
+  }
+
+  // Load previous colors from sessionStorage (or default to current if first visit)
+  const prev = JSON.parse(sessionStorage.getItem('projectColors') || 'null') || TARGET;
+
+  // Save current colors so the next page can transition from them
+  sessionStorage.setItem('projectColors', JSON.stringify(TARGET));
+
+  // If colors are the same, skip animation
+  if (prev.bg !== TARGET.bg || prev.teal !== TARGET.teal) {
+    const DURATION = 600; // ms
+    const start = performance.now();
+
+    const from = {
+      teal:  hexToRgb(prev.teal),
+      bg:    hexToRgb(prev.bg),
+      white: hexToRgb(prev.white),
+      line:  hexToRgb(prev.line),
+    };
+    const to = {
+      teal:  hexToRgb(TARGET.teal),
+      bg:    hexToRgb(TARGET.bg),
+      white: hexToRgb(TARGET.white),
+      line:  hexToRgb(TARGET.line),
+    };
+
+    // Ease in-out
+    function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
+
+    function tick(now) {
+      const t = ease(Math.min((now - start) / DURATION, 1));
+      const r = document.documentElement;
+      r.style.setProperty('--teal',  rgbToHex(lerpColor(from.teal,  to.teal,  t)));
+      r.style.setProperty('--bg',    rgbToHex(lerpColor(from.bg,    to.bg,    t)));
+      r.style.setProperty('--white', rgbToHex(lerpColor(from.white, to.white, t)));
+      r.style.setProperty('--line',  rgbToHex(lerpColor(from.line,  to.line,  t)));
+      // Also update body and rail background directly
+      document.body.style.background = rgbToHex(lerpColor(from.bg, to.bg, t));
+      const rail = document.getElementById('rail');
+      const mob  = document.getElementById('mob');
+      if (rail) rail.style.background = rgbToHex(lerpColor(from.bg, to.bg, t));
+      if (mob)  mob.style.background  = rgbToHex(lerpColor(from.bg, to.bg, t));
+      if (t < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
 </script>
 
 <footer class="site-footer">
