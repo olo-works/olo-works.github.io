@@ -8,7 +8,7 @@ role: "Product Design, Font Design"
 materials: "Wood, Aluminium, Glass"
 duration: "6 months"
 tags: [Product]
-cover: /images/projects/ahok/cover.png
+cover: /images/projects/ahok/POSTER.png
 accent: "#c21714"
 accent_dark: "#9a0b09"
 accent_bg: "#dcc7c7"
