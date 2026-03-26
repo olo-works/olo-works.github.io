@@ -8,7 +8,7 @@ role: "Product Design, UX Design, Graphic Design"
 materials: "Steel, Composite Panels, Electronics"
 duration: "Thesis project"
 tags: [Product, Industrial, Visual]
-cover: images\photoprojects\me-moe\setting7.png
+cover: /images/photoprojects/me-moe/setting7.png
 accent: "#E8196E"
 accent_dark: "#B80F53"
 accent_bg: "#F2D0DC"
@@ -200,11 +200,11 @@ Existing shipping labels were designed entirely for machine reading. Dense, visu
 </div>
 
 <div class="proj-gallery-grid" data-cols="3" style="margin:80px 0;">
-  <img src="images\photoprojects\me-moe\etichetta (1).png" alt="Regular parcel" class="gallery-img"/>
-  <img src="images\photoprojects\me-moe\etichetta (2).png" alt="Fragile parcel" class="gallery-img"/>
-  <img src="images\photoprojects\me-moe\etichetta (3).png" alt="Urgent parcel" class="gallery-img"/>  
-  <img src="images\photoprojects\me-moe\etichetta (4).png" alt="Regular parcel" class="gallery-img"/>
-  <img src="images\photoprojects\me-moe\etichetta (5).png" alt="Fragile parcel" class="gallery-img"/>
+  <img src="/images/photoprojects/me-moe/etichetta (1).png" alt="Regular parcel" class="gallery-img"/>
+  <img src="/images/photoprojects/me-moe/etichetta (2).png" alt="Fragile parcel" class="gallery-img"/>
+  <img src="/images/photoprojects/me-moe/etichetta (3).png" alt="Urgent parcel" class="gallery-img"/>  
+  <img src="/images/photoprojects/me-moe/etichetta (4).png" alt="Regular parcel" class="gallery-img"/>
+  <img src="/images/photoprojects/me-moe/etichetta (5).png " alt="Fragile parcel" class="gallery-img"/>
 </div>
 
 <h2>The app</h2>

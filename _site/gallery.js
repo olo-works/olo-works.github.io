@@ -40,7 +40,7 @@ const allImages = [
     
   
     
-      { src: "images\photoprojects\me-moe\setting7.png", title: "Me-Moe", tag: "Product", href: "/projects/me-moe/" },
+      { src: "/images/photoprojects/me-moe/setting7.png", title: "Me-Moe", tag: "Product", href: "/projects/me-moe/" },
     
     
       

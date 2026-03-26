@@ -52,20 +52,10 @@
 </div>
 
 <style>
-  /* ── Per-project accent color ──────────────────────────────────────────────────
-     Set these in any project .md front matter to fully retheme the page:
-       accent: "#E8490F"         — main color (borders, labels, icons, tags)
-       accent_dark: "#C93A08"    — hover/active variant
-       accent_bg: "#F5E0D8"      — page background
-       accent_white: "#FDF0EB"   — card/surface color
-     Leave all out to default to the site teal palette.
-  ────────────────────────────────────────────────────────────────────────────── */
   :root {
     --accent:   #2BADB8;
     --accent-d: #1E8A94;
     --accent-xl:#2BADB818;
-
-    /* Remap every site color variable so the whole page shifts */
     --teal:    var(--accent);
     --teal-d:  var(--accent-d);
     --teal-xl: var(--accent-xl);
@@ -74,17 +64,11 @@
     --line:    rgba(43,173,184,.8);
   }
 
-  /* Force elements that use hardcoded bg to respect --bg */
   body, #rail, #mob { background: var(--bg) !important; }
-
-  /* Force every border and surface to use the remapped variables */
   #rail, #rail * { border-color: var(--line) !important; }
   .r-icon { border-color: var(--line) !important; }
-  .proj-right, .proj-meta-block, .proj-meta-row, .proj-nav,
-  .proj-cover, .proj-gallery-grid { border-color: var(--line) !important; }
-  .proj-meta-block { background: var(--white) !important; }
+  .proj-right, .proj-cover, .proj-gallery-grid { border-color: var(--line) !important; }
 
-  /* ── Entrance animations ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -97,27 +81,22 @@
   .proj-cover       { animation: fadeUp .6s var(--ease) .05s both; }
   .proj-description { animation: fadeUp .7s var(--ease) .18s both; }
   .proj-gallery     { animation: fadeUp .6s var(--ease) .3s both; }
-  .proj-title       { animation: fadeUp .6s var(--ease) .08s both; }
-  .proj-meta-block  { animation: fadeUp .6s var(--ease) .2s both; }
-  .proj-nav         { animation: fadeIn .5s var(--ease) .35s both; }
+  .proj-right       { animation: fadeIn .6s var(--ease) .1s both; }
 
-  /* ── Layout ── */
   html, body { height: 100%; }
 
+  /* ── Main grid ── */
   .proj-wrap {
     display: grid;
-    grid-template-columns: 1fr 500px;
+    grid-template-columns: 1fr 280px;
     min-height: 100vh;
     padding-left: 48px;
     align-items: start;
   }
 
-  /* ── Left ── */
-  .proj-left {
-    padding: 48px 36px 80px 72px;
-  }
+  /* ── Left column ── */
+  .proj-left { padding: 48px 36px 80px 72px; }
 
-  /* Cover */
   .proj-cover {
     width: 100%;
     border-radius: 10px;
@@ -130,29 +109,17 @@
     align-items: center;
     justify-content: center;
   }
-  .proj-cover img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-  }
-  .proj-cover-placeholder {
-    font-size: 3rem;
-    color: var(--accent);
-    opacity: .2;
-  }
+  .proj-cover img { width: 100%; display: block; object-fit: cover; }
+  .proj-cover-placeholder { font-size: 3rem; color: var(--accent); opacity: .2; }
 
-  /* Description */
   .proj-description {
     font-size: 1rem;
     line-height: 1.85;
     color: var(--ink-m);
-    margin-bottom: 56px;
     max-width: 860px;
     margin: 0 auto 56px;
   }
   .proj-description p + p { margin-top: 1.2em; }
-
-  /* Section headings */
   .proj-description h2 {
     font-size: clamp(1.4rem, 2vw, 1.8rem);
     font-weight: 800;
@@ -163,7 +130,6 @@
     padding-bottom: .6em;
     border-bottom: 1px solid var(--line);
   }
-
   .proj-description h3 {
     font-family: var(--mono);
     font-size: .62rem;
@@ -184,7 +150,7 @@
     flex-shrink: 0;
   }
 
-  /* Gallery */
+  /* ── Gallery ── */
   .proj-gallery { margin-bottom: 80px; }
   .proj-gallery-label {
     font-family: var(--mono);
@@ -221,101 +187,196 @@
     transition: transform .4s var(--ease);
   }
   .gallery-img:hover { transform: scale(1.015); }
-  .gallery-img.wide { grid-column: 1/-1; aspect-ratio: 21/9; }
-  .gallery-img.tall { aspect-ratio: 4/5; }
+  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: 21/9; }
+  .gallery-img.tall   { aspect-ratio: 4/5; }
   .gallery-img.square { aspect-ratio: 1; }
 
-  /* ── Right: sticky sidebar ── */
+  /* ════════════════════════════════════════════════════════
+     RIGHT SIDEBAR — three sub-columns (flex row):
+       [col-info: rotated "info:" label  — bottom→top]
+       [col-meta: labeled fields + tag pills + year]
+       [col-title: ↑  big rotated title  ↓  — top→bottom]
+  ════════════════════════════════════════════════════════ */
   .proj-right {
     position: sticky;
     top: 0;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    padding: 48px 40px;
+    flex-direction: row;
     border-left: 1px solid var(--line);
-  }
-
-  .proj-bottom {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-
-  .proj-title {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -.03em;
-    line-height: 1;
-    color: var(--ink);
-  }
-
-  .proj-meta-block {
-    border: 1px solid var(--line);
-    border-radius: 6px;
     overflow: hidden;
-    background: var(--white);
-    overflow-y: auto;
-    scrollbar-width: none;
   }
-  .proj-meta-block::-webkit-scrollbar { display: none; }
 
-  .proj-meta-row {
+  /* ── Sub-column 1: rotated "info:" label (bottom → top) ── */
+  .proj-col-info {
+    width: 28px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--line);
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 13px 16px;
-    border-bottom: 1px solid var(--line);
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
-  .proj-meta-row:last-child { border-bottom: none; }
-  .proj-meta-label {
+  /* writing-mode: vertical-rl with NO extra rotation = bottom→top (opposite of title) */
+  .proj-col-info-label {
+    writing-mode: vertical-rl;
+    transform: rotate(0deg);
     font-family: var(--mono);
-    font-size: .56rem;
-    letter-spacing: .15em;
+    font-size: .5rem;
+    letter-spacing: .22em;
     text-transform: uppercase;
     color: var(--teal);
+    opacity: .75;
     white-space: nowrap;
   }
-  .proj-meta-value {
-    font-family: var(--mono);
-    font-size: .65rem;
-    font-weight: 500;
-    color: var(--ink);
-    text-align: right;
-  }
-  .proj-meta-tags {
+
+  /* ── Sub-column 2: labeled meta fields + tag pills ── */
+  .proj-col-meta {
+    flex: 1;
+    border-right: 1px solid var(--line);
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
   }
 
-  /* Nav arrows */
-  .proj-nav {
+  .proj-col-meta-inner {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding: 16px 12px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
+    flex-direction: column;
+    gap: 12px;
   }
-  .proj-nav-btn {
+  .proj-col-meta-inner::-webkit-scrollbar { display: none; }
+
+  /* Labeled field: small muted label + value below */
+  .proj-meta-field {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .proj-meta-field-label {
     font-family: var(--mono);
-    font-size: .7rem;
+    font-size: .42rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    opacity: .65;
+  }
+  .proj-meta-field-value {
+    font-family: var(--mono);
+    font-size: .58rem;
+    letter-spacing: .03em;
+    color: var(--ink);
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  /* Thin divider between fields and tag pills */
+  .proj-meta-divider {
+    height: 1px;
+    background: var(--line);
+    opacity: .4;
+    margin: 2px 0;
+  }
+
+  /* Tag pills */
+  .proj-col-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+  .proj-col-tags .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: .5rem;
     letter-spacing: .1em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    padding: 3px 7px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink);
+    background: transparent;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  /* Year pinned to bottom */
+  .proj-col-year {
+    border-top: 1px solid var(--line);
+    padding: 10px 12px;
+    flex-shrink: 0;
+  }
+  .proj-col-year-label {
+    font-family: var(--mono);
+    font-size: .42rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    opacity: .65;
+    margin-bottom: 3px;
+  }
+  .proj-col-year-value {
+    font-family: var(--mono);
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── Sub-column 3: ↑  BIG rotated title (top → bottom)  ↓ ── */
+  .proj-col-title {
+    width: 88px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+
+  .proj-nav-arrow {
+    font-size: 1rem;
     color: var(--muted);
     text-decoration: none;
-    padding: 8px 14px;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    transition: color .2s, border-color .2s;
+    transition: color .2s;
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 4px 8px;
   }
-  .proj-nav-btn:hover { color: var(--teal); border-color: var(--teal); }
-  .proj-nav-btn.disabled { opacity: .2; pointer-events: none; }
+  .proj-nav-arrow:hover { color: var(--teal); }
+  .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
 
-  /* Back rail */
+  /*
+    Title direction: top → bottom.
+    writing-mode: vertical-rl + rotate(180deg) = reads top-to-bottom.
+    "info:" uses vertical-rl + no rotation = reads bottom-to-top. Opposite. ✓
+  */
+  .proj-title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: clamp(2rem, 3.5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1;
+    color: var(--ink);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    max-height: 100%;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  /* ── Back rail ── */
   .proj-back-rail {
     position: fixed;
     left: 72px;
@@ -336,6 +397,8 @@
   }
   .proj-back-rail:hover { color: var(--teal); }
   .proj-back-rail::after { content: '↑'; font-size: .7rem; }
+
+  .proj-back-mobile { display: none; }
 
   /* ── Lightbox ── */
   .lightbox {
@@ -367,7 +430,7 @@
     letter-spacing: .18em;
     text-transform: uppercase;
     color: rgba(255,255,255,.6);
-    cursor: none;
+    cursor: pointer;
     border: 1px solid rgba(255,255,255,.15);
     padding: 8px 16px;
     border-radius: 3px;
@@ -376,14 +439,33 @@
   }
   .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
 
-  .proj-back-mobile { display: none; }
-
-  /* ── Responsive ── */
-  @media(max-width:900px) {
+  /* ════════════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════════════ */
+  @media (max-width: 900px) {
     .proj-wrap {
       grid-template-columns: 1fr;
       padding-left: 0;
     }
+    .proj-right {
+      position: static;
+      height: auto;
+      min-height: 120px;
+      border-left: none;
+      border-bottom: 1px solid var(--line);
+      order: -1;
+    }
+    /* Hide the narrow info label on mobile — not enough height */
+    .proj-col-info { display: none; }
+
+    .proj-col-title { width: 72px; }
+    /* Long titles: stretch first via clamp, scale down via JS if still overflowing */
+    .proj-title { font-size: clamp(1rem, 12vw, 2.6rem); }
+
+    .proj-left { padding: 24px 20px 80px; }
+    .proj-description { max-width: 100%; margin: 0 0 40px; }
+    .proj-back-rail { display: none; }
+
     .proj-back-mobile {
       display: block;
       font-family: var(--mono);
@@ -392,29 +474,18 @@
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
-      margin-bottom: 20px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
       transition: color .2s;
     }
     .proj-back-mobile:hover { color: var(--teal); }
-    .proj-right {
-      position: static;
-      height: auto;
-      border-left: none;
-      border-bottom: 1px solid var(--line);
-      padding: 32px 24px 32px;
-      order: -1;
-    }
-    .proj-bottom { margin-top: 0; margin-bottom: 16px; }
-    .proj-title { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0; }
-    .proj-nav { margin-top: 16px; padding-top: 16px; }
-    .proj-left { padding: 24px 24px 80px; }
-    .proj-description { max-width: 100%; margin: 0 0 40px; }
-    .proj-back-rail { display: none; }
     .proj-gallery-grid[data-cols="3"] { grid-template-columns: 1fr 1fr; }
   }
 
-  @media(max-width:600px) {
+  @media (max-width: 600px) {
     .proj-gallery-grid { grid-template-columns: 1fr !important; }
+    .proj-col-title { width: 58px; }
+    .proj-title { font-size: clamp(0.9rem, 10vw, 2rem); }
   }
 </style>
 
@@ -429,9 +500,13 @@
 
 <a href="/projects.html" class="proj-back-rail">Go back</a>
 
+<!-- FIX: outside .proj-right so it never disrupts the flex-row layout -->
+<a href="/projects.html" class="proj-back-mobile">← All projects</a>
+
 <main class="page-main" style="padding:0;">
   <div class="proj-wrap">
 
+    <!-- ── LEFT ── -->
     <div class="proj-left">
       <div class="proj-cover">
         
@@ -748,66 +823,81 @@
       
     </div>
 
+    <!-- ── RIGHT SIDEBAR ── -->
     <div class="proj-right">
-      <a href="/projects.html" class="proj-back-mobile">← All projects</a>
 
-      <div class="proj-bottom">
-        <h1 class="proj-title">My Personal Identity</h1>
-        <div class="proj-meta-block">
+      <!-- Sub-column 1: rotated "info:" label — reads bottom→top -->
+      <div class="proj-col-info">
+        <span class="proj-col-info-label">info:</span>
+      </div>
+
+      <!-- Sub-column 2: labeled fields + tags + year -->
+      <div class="proj-col-meta">
+        <div class="proj-col-meta-inner">
+
           
-          <div class="proj-meta-row">
-            <span class="proj-meta-label">Year</span>
-            <span class="proj-meta-value">2025</span>
+          <div class="proj-meta-field">
+            <span class="proj-meta-field-label">client:</span>
+            <span class="proj-meta-field-value">Self-initiated</span>
           </div>
           
+
           
-          <div class="proj-meta-row">
-            <span class="proj-meta-label">Client</span>
-            <span class="proj-meta-value">Self-initiated</span>
+          <div class="proj-meta-field">
+            <span class="proj-meta-field-label">role:</span>
+            <span class="proj-meta-field-value">Brand Designer</span>
           </div>
           
+
           
-          <div class="proj-meta-row">
-            <span class="proj-meta-label">Role</span>
-            <span class="proj-meta-value">Brand Designer</span>
+          <div class="proj-meta-field">
+            <span class="proj-meta-field-label">materials:</span>
+            <span class="proj-meta-field-value">Typography, Color, Print, Digital</span>
           </div>
           
+
           
-          <div class="proj-meta-row">
-            <span class="proj-meta-label">Materials</span>
-            <span class="proj-meta-value">Typography, Color, Print, Digital</span>
+          <div class="proj-meta-field">
+            <span class="proj-meta-field-label">duration:</span>
+            <span class="proj-meta-field-value">6 weeks</span>
           </div>
           
+
           
-          <div class="proj-meta-row">
-            <span class="proj-meta-label">Duration</span>
-            <span class="proj-meta-value">6 weeks</span>
+
+          
+          <div class="proj-meta-divider"></div>
+          <div class="proj-col-tags">
+            
+            <span class="tag">Visual</span>
+            
           </div>
           
-          
-          <div class="proj-meta-row">
-            <span class="proj-meta-label">Tags</span>
-            <div class="proj-meta-tags">
-              
-              <span class="tag">Visual</span>
-              
-            </div>
-          </div>
-          
-          
+
         </div>
+
+        
+        <div class="proj-col-year">
+          <div class="proj-col-year-label">year:</div>
+          <div class="proj-col-year-value">2025</div>
+        </div>
+        
       </div>
 
-      <div class="proj-nav">
+      <!-- Sub-column 3: ↑  big rotated title (top→bottom)  ↓ -->
+      <div class="proj-col-title">
         
-        <a href="/projects/chair-01/" class="proj-nav-btn">←</a>
+        <a href="/projects/chair-01/" class="proj-nav-arrow">↑</a>
         
+
+        <h1 class="proj-title">My Personal Identity</h1>
+
         
-        <a href="/projects/ciaone/" class="proj-nav-btn">→</a>
+        <a href="/projects/ciaone/" class="proj-nav-arrow">↓</a>
         
       </div>
+
     </div>
-
   </div>
 </main>
 
@@ -817,6 +907,7 @@
 </div>
 
 <script>
+  /* ── Lightbox ── */
   const lb    = document.getElementById('lightbox');
   const lbImg = document.getElementById('lb-img');
   document.querySelectorAll('.gallery-img').forEach(img => {
@@ -830,81 +921,62 @@
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
-  // ── Color transition between project pages ──────────────────────────────
-  // Current page's target colors (set by Jekyll from front matter)
+  /* ── Scale long titles to fit their column ──
+     Strategy: use clamp() for normal titles; for very long ones,
+     measure overflow and shrink proportionally, never below 12px. */
+  function fitTitle() {
+    const el = document.querySelector('.proj-title');
+    if (!el) return;
+    el.style.fontSize = ''; // reset to CSS clamp value
+    const colHeight = el.parentElement.clientHeight - 80; // subtract arrow space
+    if (colHeight <= 0) return;
+    // scrollHeight on a vertical-rl element = rendered text length in px
+    if (el.scrollHeight > colHeight) {
+      const ratio = colHeight / el.scrollHeight;
+      const base  = parseFloat(getComputedStyle(el).fontSize);
+      el.style.fontSize = Math.max(base * ratio, 12) + 'px';
+    }
+  }
+  fitTitle();
+  window.addEventListener('resize', fitTitle);
+
+  /* ── Accent colour cross-page transition ── */
   const TARGET = {
     teal:  '#2BADB8',
     bg:    '#D0E0E5',
     white: '#E8F2F4',
     line:  '#2BADB8',
   };
-
-  // Parse a hex color into [r,g,b]
   function hexToRgb(hex) {
     const h = hex.replace('#','');
-    return [
-      parseInt(h.slice(0,2),16),
-      parseInt(h.slice(2,4),16),
-      parseInt(h.slice(4,6),16)
-    ];
+    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
   }
-
-  // Lerp between two [r,g,b] arrays
   function lerpColor(a, b, t) {
-    return [
-      Math.round(a[0] + (b[0]-a[0]) * t),
-      Math.round(a[1] + (b[1]-a[1]) * t),
-      Math.round(a[2] + (b[2]-a[2]) * t)
-    ];
+    return [Math.round(a[0]+(b[0]-a[0])*t), Math.round(a[1]+(b[1]-a[1])*t), Math.round(a[2]+(b[2]-a[2])*t)];
   }
+  function rgbToHex(c) { return '#' + c.map(v => v.toString(16).padStart(2,'0')).join(''); }
 
-  function rgbToHex(c) {
-    return '#' + c.map(v => v.toString(16).padStart(2,'0')).join('');
-  }
-
-  // Load previous colors from sessionStorage (or default to current if first visit)
   const prev = JSON.parse(sessionStorage.getItem('projectColors') || 'null') || TARGET;
-
-  // Save current colors so the next page can transition from them
   sessionStorage.setItem('projectColors', JSON.stringify(TARGET));
 
-  // If colors are the same, skip animation
   if (prev.bg !== TARGET.bg || prev.teal !== TARGET.teal) {
-    const DURATION = 600; // ms
-    const start = performance.now();
-
-    const from = {
-      teal:  hexToRgb(prev.teal),
-      bg:    hexToRgb(prev.bg),
-      white: hexToRgb(prev.white),
-      line:  hexToRgb(prev.line),
-    };
-    const to = {
-      teal:  hexToRgb(TARGET.teal),
-      bg:    hexToRgb(TARGET.bg),
-      white: hexToRgb(TARGET.white),
-      line:  hexToRgb(TARGET.line),
-    };
-
-    // Ease in-out
-    function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
-
+    const DURATION = 600, start = performance.now();
+    const from = { teal: hexToRgb(prev.teal), bg: hexToRgb(prev.bg), white: hexToRgb(prev.white), line: hexToRgb(prev.line) };
+    const to   = { teal: hexToRgb(TARGET.teal), bg: hexToRgb(TARGET.bg), white: hexToRgb(TARGET.white), line: hexToRgb(TARGET.line) };
+    const ease = t => t < .5 ? 2*t*t : -1+(4-2*t)*t;
     function tick(now) {
-      const t = ease(Math.min((now - start) / DURATION, 1));
+      const t = ease(Math.min((now-start)/DURATION, 1));
       const r = document.documentElement;
       r.style.setProperty('--teal',  rgbToHex(lerpColor(from.teal,  to.teal,  t)));
       r.style.setProperty('--bg',    rgbToHex(lerpColor(from.bg,    to.bg,    t)));
       r.style.setProperty('--white', rgbToHex(lerpColor(from.white, to.white, t)));
       r.style.setProperty('--line',  rgbToHex(lerpColor(from.line,  to.line,  t)));
-      // Also update body and rail background directly
       document.body.style.background = rgbToHex(lerpColor(from.bg, to.bg, t));
-      const rail = document.getElementById('rail');
-      const mob  = document.getElementById('mob');
+      const rail = document.getElementById('rail'), mob = document.getElementById('mob');
       if (rail) rail.style.background = rgbToHex(lerpColor(from.bg, to.bg, t));
       if (mob)  mob.style.background  = rgbToHex(lerpColor(from.bg, to.bg, t));
       if (t < 1) requestAnimationFrame(tick);
     }
-
     requestAnimationFrame(tick);
   }
 </script>
