@@ -1,7 +1,7 @@
 const allImages = [
   
     
-      { src: "/images/projects/ahok/POSTER.png", title: "ah ok Collection", tag: "Product", href: "/projects/ah-ok/" },
+      { src: "/images/photoprojects/ahok/POSTER.png", title: "ah ok Collection", tag: "Product", href: "/projects/ah-ok/" },
     
     
       
@@ -40,7 +40,7 @@ const allImages = [
     
   
     
-      { src: "/images/projects/memoe/cover.png", title: "Me-Moe", tag: "Product", href: "/projects/me-moe/" },
+      { src: "images\photoprojects\me-moe\setting7.png", title: "Me-Moe", tag: "Product", href: "/projects/me-moe/" },
     
     
       
