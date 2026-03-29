@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Transit System Identity — olo-works</title>
+  <title>Regal 3.0 — olo-works</title>
   <link rel="stylesheet" href="/style.css"/>
   
 </head>
@@ -53,15 +53,15 @@
 
 <style>
   :root {
-    --accent:   #2BADB8;
-    --accent-d: #1E8A94;
-    --accent-xl:#2BADB8;
+    --accent:   #C8920A;
+    --accent-d: #9E7008;
+    --accent-xl:#C8920A;
     --teal:    var(--accent);
     --teal-d:  var(--accent-d);
     --teal-xl: var(--accent-xl);
-    --bg:      #D0E0E5;
-    --white:   #E8F2F4;
-    --line:    rgba(43,173,184,.8);
+    --bg:      #EDE4CC;
+    --white:   #F6F2E6;
+    --line:    #C8920A;
   }
 
   body, #rail, #mob { background: var(--bg) !important; }
@@ -716,32 +716,268 @@
     <div class="proj-left">
       <div class="proj-cover">
         
-          <img src="/images/photoprojects/ace-combat-3-electrosphere-logo.png" alt="Transit System Identity"/>
+          <img src="/images/projects/regal/cover.png" alt="Regal 3.0"/>
         
       </div>
 
       <div class="proj-description">
-        <p>A full-system identity developed for a regional transit authority serving 12 lines and over 200 stations. The project covered signage hierarchy, typography, color allocation, and digital screen standards.</p>
+        <p>A shelving system that reconfigures between three distinct states: upright bookcase, horizontal desk surface with integrated storage, and open shelving wall. The same set of panels, the same connectors, three completely different pieces of furniture. The project ran from system design through component engineering and into physical prototyping.</p>
 
-<h2 id="the-problem">The problem</h2>
+<h2>The system</h2>
 
-<p>The existing system had accumulated signage from three different eras, each with its own typeface and color logic. Passengers relied on context and memory more than the signs themselves.</p>
+<p>Regal 3.0 is built from a standardised panel grid. Each panel carries the same slot and tab geometry on all four edges, so any panel can connect to any other in any orientation. The module dimensions were derived from an ergonomic analysis of reach zones: the tallest configuration puts its top shelf at the upper limit of comfortable standing reach; the lowest puts its working surface at seated desk height.</p>
 
-<h3 id="solution">Solution</h3>
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
 
-<p>A single typographic voice — a modified grotesque set at generous sizes — paired with a strict 12-color line palette. Every element was tested at 1:1 scale in a mock station before final approval.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/abaco-panels.png" alt="Panel abaco" style="width:100%;display:block;border-radius:4px;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">Two panel types: the primary body panel with integrated slot rails, and the narrower side panel that sets the depth. Every drawer, shelf, and partition is a combination of these two. No unique components except the locking bracket.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Body panel</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">965 × 893 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Side panel</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">372 × 1499 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">System height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1499 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Full width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">2419 mm</div>
+    </div>
+  </div>
+
+</div>
+
+<h2>The variants</h2>
+
+<p>Three configurations were developed and drawn to full dimensions, each verified against ergonomic reach data for both standing and seated postures.</p>
+
+<h3>Posizione A — Libreria</h3>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/variante-a.png" alt="Variante A" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The upright bookcase. Panels stacked vertically with drawers in the lower section and open shelves above. Full height of 1499 mm keeps the top shelf within comfortable standing reach. Footprint stays narrow at 372 mm deep.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Footprint</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1499 × 372 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1317 mm</div>
+    </div>
+  </div>
+</div>
+
+<h3>Posizione B — Tavolo + Mensola</h3>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line);">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The desk configuration. The same panels rotate 90 degrees: the body becomes the working surface, drawer units sit beneath, and a narrow shelf rises behind. Seated ergonomic analysis confirmed the surface sits at correct typing height. This is the configuration the D1 locking bracket was designed to stabilise.</p>
+    </div>
+    <div>
+      <img src="/images/projects/regal/variante-b.png" alt="Variante B" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1190 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Desk height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">471 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Shelf height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1317 mm</div>
+    </div>
+  </div>
+</div>
+
+<h3>Posizione C — Parete</h3>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/variante-c.png" alt="Variante C" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The full wall configuration. Panels arranged horizontally across a 1674 mm span with mixed drawer and open-shelf sections. The widest of the three variants, suited to a living room or studio as a room-defining element.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1674 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1499 mm</div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-gallery-grid" data-cols="2" style="margin:20px 0;">
+  <img src="/images/projects/regal/ergonomia-standing.png" alt="Ergonomic analysis, standing" class="gallery-img" />
+  <img src="/images/projects/regal/ergonomia-seated.png" alt="Ergonomic analysis, seated" class="gallery-img" />
+</div>
+
+<h2>The locking component</h2>
+
+<p>Posizione B introduces a structural problem the slot-and-tab system alone cannot solve: when the main body tilts to become a desk surface, it needs a rigid bracket to hold the angle under load. The D1 component was designed specifically for this.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/d1-render.png" alt="D1 component render" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The D1 is a Y-shaped bracket that slides through the panel slot, rotates 90 degrees, and locks against the interior face. Two arms distribute the load across the panel thickness; the central stem acts as the pivot. No tools, no fasteners to install or remove.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">38.2 cm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">30.2 cm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Stem depth</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">26 cm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Material</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">PLA · 3D printed</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="proj-gallery-grid" data-cols="3" style="margin:20px 0;">
+  <img src="/images/projects/regal/d1-technical-front.png" alt="D1 front view" class="gallery-img" />
+  <img src="/images/projects/regal/d1-technical-section.png" alt="D1 section" class="gallery-img" />
+  <img src="/images/projects/regal/d1-technical-3d.png" alt="D1 three-quarter" class="gallery-img" />
+</div>
+
+<h2>From design to prototype</h2>
+
+<p>The D1 was taken through to a physical prototype via FDM 3D printing. Before printing, the component was analysed in slicer software to verify wall thickness, infill density, support requirements, and print orientation. The cross-section visualisation confirmed the curved arms would print cleanly without supports if oriented vertically.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/slicer-section.png" alt="Slicer cross-section" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div>
+      <img src="/images/projects/regal/slicer-support.png" alt="Slicer support analysis" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Print time</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">12 min</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Weight</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">3 g · 1.1 m filament</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Layer height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">0.2 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Wall lines</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">3 · 1.2 mm total</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/print-process.png" alt="Print in progress" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div>
+      <img src="/images/projects/regal/print-result.png" alt="Printed prototype" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+  </div>
+
+  <div style="padding:18px 20px;">
+    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Slicer legend</div>
+    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Outer wall · Inner wall · Top/Bottom · Infill · Printed component. The colour-coded cross-section confirmed that the arm curvature would print without internal voids at the junction between stem and arms.</div>
+  </div>
+
+</div>
+
+<h2>The process</h2>
+
+<p>The project ran across three deliverable steps: the functional component abaco and panel layout, the full technical drawing of the D1 locking bracket, and the slicer analysis and physical print. Each step fed directly into the next; the dimensions on the abaco set the slot tolerances the D1 technical drawing had to match, and the technical drawing set the geometry the slicer had to validate.</p>
+
+<p>Course: Sustainable Advanced Design, Corso Interdisciplinare di Product Design. Supervised by Prof. Consuelo Nava with Arch. Domenico Lucanto and PhD St. Eliana Catalano. Coordinatore Carmine Ludovico Quistelli. Università degli Studi Mediterranea di Reggio Calabria, Design per il Prodotto Industriale e Artigianale, a.a. 2023/24.</p>
 
       </div>
 
       
       <div class="proj-gallery">
         <div class="proj-gallery-label">Process &amp; images</div>
-        <div class="proj-gallery-grid" data-cols="3">
+        <div class="proj-gallery-grid" data-cols="2">
           
           <img
-            src="/images/photoprojects/maxresdefault.jpg"
-            alt="Cover"
+            src="/images/projects/regal/render-context-1.png"
+            alt="Regal as desk and bookcase"
+            class="gallery-img wide"
+            loading="lazy"
+          />
+          
+          <img
+            src="/images/projects/regal/render-context-2.png"
+            alt="Detail, drawer access"
             class="gallery-img "
+            loading="lazy"
+          />
+          
+          <img
+            src="/images/projects/regal/render-context-3.png"
+            alt="Working position"
+            class="gallery-img "
+            loading="lazy"
+          />
+          
+          <img
+            src="/images/projects/regal/render-shelving.png"
+            alt="Open shelving configuration"
+            class="gallery-img "
+            loading="lazy"
+          />
+          
+          <img
+            src="/images/projects/regal/render-living.png"
+            alt="Living room context"
+            class="gallery-img wide"
             loading="lazy"
           />
           
@@ -756,16 +992,31 @@
       <div class="proj-col-meta">
         <div class="proj-meta-line">
           
-
-          
           <span class="proj-meta-item">
-            <span class="proj-meta-item-label">role</span>
-            <span class="proj-meta-item-value">Graphic Designer</span>
+            <span class="proj-meta-item-label">client</span>
+            <span class="proj-meta-item-value">Università degli studi Mediterranea di Reggio Calabria</span>
           </span>
           
 
           
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">role</span>
+            <span class="proj-meta-item-value">Product Design, Prototyping</span>
+          </span>
+          
 
+          
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">materials</span>
+            <span class="proj-meta-item-value">Plywood, 3D Printed PLA</span>
+          </span>
+          
+
+          
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">duration</span>
+            <span class="proj-meta-item-value">12 Months Course</span>
+          </span>
           
 
           
@@ -773,7 +1024,7 @@
           
           <span class="proj-meta-item">
             <span class="proj-meta-item-label">year</span>
-            <span class="proj-meta-item-value">2023</span>
+            <span class="proj-meta-item-value">2024</span>
           </span>
           
         </div>
@@ -781,24 +1032,24 @@
 
       <div class="proj-col-title">
         
-        <a href="/projects/personal-identity/" class="proj-nav-arrow">↑</a>
+        <a href="/projects/phasmos/" class="proj-nav-arrow">↑</a>
         
 
         <div class="proj-title-wrapper">
           <div class="proj-title-scroll desktop-only">
-            <h1 class="proj-title">Transit System Identity</h1>
-            <h1 class="proj-title">Transit System Identity</h1>
-            <h1 class="proj-title">Transit System Identity</h1>
-            <h1 class="proj-title">Transit System Identity</h1>
-            <h1 class="proj-title">Transit System Identity</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
           </div>
           <div class="proj-title-scroll mobile-only">
-            <h1 class="proj-title">Transit System Identity</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
           </div>
         </div>
 
         
-        <a href="/projects/transit-identity/" class="proj-nav-arrow">↓</a>
+        <span class="proj-nav-arrow disabled">↓</span>
         
       </div>
 
@@ -807,11 +1058,11 @@
 </main>
 
 
-<a href="/projects/personal-identity/" class="proj-mob-prev">←</a>
+<a href="/projects/phasmos/" class="proj-mob-prev">←</a>
 
 
 
-<a href="/projects/transit-identity/" class="proj-mob-next">→</a>
+<span class="proj-mob-next disabled">→</span>
 
 
 <div class="lightbox" id="lightbox">
@@ -834,10 +1085,10 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
   const TARGET = {
-    teal:  '#2BADB8',
-    bg:    '#D0E0E5',
-    white: '#E8F2F4',
-    line:  '#2BADB8',
+    teal:  '#C8920A',
+    bg:    '#EDE4CC',
+    white: '#F6F2E6',
+    line:  '#C8920A',
   };
   function hexToRgb(hex) {
     const h = hex.replace('#','');

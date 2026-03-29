@@ -9,10 +9,10 @@ materials: "Steel, Composite Panels, Electronics"
 duration: "Thesis project"
 tags: [Product, Industrial, Visual]
 cover: /images/photoprojects/me-moe/setting7.png
-accent: "#E8196E"
-accent_dark: "#B80F53"
-accent_bg: "#F2D0DC"
-accent_white: "#FAF0F4"
+accent: "#245db2"
+accent_dark: "#15468e"
+accent_bg: "#c9cfd9"
+accent_white: "#e8eaed"
 excerpt_text: "A modular last-mile delivery system: a compact urban vehicle, an onboard cobot, an exoskeleton, a new parcel language, and an app that treats shipping like ride-hailing."
 gallery_cols: 3
 gallery:
@@ -199,12 +199,21 @@ Existing shipping labels were designed entirely for machine reading. Dense, visu
 
 </div>
 
-<div class="proj-gallery-grid" data-cols="3" style="margin:80px 0;">
-  <img src="/images/photoprojects/me-moe/etichetta (1).png" alt="Regular parcel" class="gallery-img"/>
-  <img src="/images/photoprojects/me-moe/etichetta (2).png" alt="Fragile parcel" class="gallery-img"/>
-  <img src="/images/photoprojects/me-moe/etichetta (3).png" alt="Urgent parcel" class="gallery-img"/>  
-  <img src="/images/photoprojects/me-moe/etichetta (4).png" alt="Regular parcel" class="gallery-img"/>
-  <img src="/images/photoprojects/me-moe/etichetta (5).png " alt="Fragile parcel" class="gallery-img"/>
+<style>
+  .label-gallery { display:flex; flex-wrap:nowrap; gap:16px; margin:80px 0; justify-content:center; align-items:flex-start; }
+  .label-gallery img { height:clamp(120px, 25vw, 250px); width:auto; object-fit:contain; flex-shrink:0; }
+  @media (max-width: 700px) {
+    .label-gallery { flex-wrap:wrap; }
+    .label-gallery img { height:clamp(120px, 28vw, 250px); flex-basis:30%; }
+  }
+</style>
+
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin:80px 0;align-items:flex-start;justify-content:center;">
+  <img src="/images/photoprojects/me-moe/etichetta (1).png" alt="Regular parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;"/>
+  <img src="/images/photoprojects/me-moe/etichetta (2).png" alt="Fragile parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;"/>
+  <img src="/images/photoprojects/me-moe/etichetta (3).png" alt="Urgent parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;"/>
+  <img src="/images/photoprojects/me-moe/etichetta (4).png" alt="Regular parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;"/>
+  <img src="/images/photoprojects/me-moe/etichetta (5).png" alt="Fragile parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;"/>
 </div>
 
 <h2>The app</h2>
