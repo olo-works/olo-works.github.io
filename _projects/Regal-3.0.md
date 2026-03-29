@@ -6,7 +6,7 @@ year: 2024
 client: "Università degli studi Mediterranea di Reggio Calabria"
 role: "Product Design, Prototyping"
 materials: "Plywood, 3D Printed PLA"
-duration: "Corso Interdisciplinare di Product Design"
+duration: "12 Months Course"
 tags: [Product, Furniture]
 cover: /images/projects/regal/cover.png
 accent: "#C8920A"

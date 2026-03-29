@@ -6,7 +6,7 @@ year: 2024
 client: "Università degli studi Mediterranea di Reggio Calabria"
 role: "Product Design"
 materials: "Wood, Steel, Glass"
-duration: "Corso di Forme e Soluzioni Biologiche e Design"
+duration: "6 Months Course"
 tags: [Product]
 cover: /images/projects/phasmos/cover.png
 accent: "#B8860B"

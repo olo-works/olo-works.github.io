@@ -1,6 +1,23 @@
 const allImages = [
   
     
+      { src: "/images/projects/regal/cover.png", title: "Regal 3.0", tag: "Product", href: "/projects/regal-3-0/" },
+    
+    
+      
+        { src: "/images/projects/regal/render-context-1.png", title: "Regal 3.0", tag: "Product", href: "/projects/regal-3-0/" },
+      
+        { src: "/images/projects/regal/render-context-2.png", title: "Regal 3.0", tag: "Product", href: "/projects/regal-3-0/" },
+      
+        { src: "/images/projects/regal/render-context-3.png", title: "Regal 3.0", tag: "Product", href: "/projects/regal-3-0/" },
+      
+        { src: "/images/projects/regal/render-shelving.png", title: "Regal 3.0", tag: "Product", href: "/projects/regal-3-0/" },
+      
+        { src: "/images/projects/regal/render-living.png", title: "Regal 3.0", tag: "Product", href: "/projects/regal-3-0/" },
+      
+    
+  
+    
       { src: "/images/photoprojects/ahok/POSTER.png", title: "ah ok Collection", tag: "Product", href: "/projects/ah-ok/" },
     
     
@@ -70,6 +87,21 @@ const allImages = [
         { src: "/images/photoprojects/type-specimen.png", title: "My Personal Identity", tag: "Visual", href: "/projects/personal-identity/" },
       
         { src: "/images/photoprojects/stationery.png", title: "My Personal Identity", tag: "Visual", href: "/projects/personal-identity/" },
+      
+    
+  
+    
+      { src: "/images/projects/phasmos/cover.png", title: "Phasmos", tag: "Product", href: "/projects/phasmos/" },
+    
+    
+      
+        { src: "/images/projects/phasmos/render-riposo.png", title: "Phasmos", tag: "Product", href: "/projects/phasmos/" },
+      
+        { src: "/images/projects/phasmos/render-estesa.png", title: "Phasmos", tag: "Product", href: "/projects/phasmos/" },
+      
+        { src: "/images/projects/phasmos/render-mimesi.png", title: "Phasmos", tag: "Product", href: "/projects/phasmos/" },
+      
+        { src: "/images/projects/phasmos/tecnici.png", title: "Phasmos", tag: "Product", href: "/projects/phasmos/" },
       
     
   

@@ -55,7 +55,7 @@
   :root {
     --accent:   #E8490F;
     --accent-d: #C93A08;
-    --accent-xl:#E8490F18;
+    --accent-xl:#E8490F;
     --teal:    var(--accent);
     --teal-d:  var(--accent-d);
     --teal-xl: var(--accent-xl);
@@ -88,77 +88,113 @@
   /* ── Main grid ── */
   .proj-wrap {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: 1fr 180px;
     min-height: 100vh;
     padding-left: 48px;
     align-items: start;
   }
 
   /* ── Left column ── */
-  .proj-left { padding: 48px 36px 80px 72px; }
+  .proj-left {
+    padding: 56px 48px 100px 72px;
+    overflow-x: hidden;
+  }
 
+  /* ── Cover image ── */
   .proj-cover {
-    width: 100%;
-    border-radius: 10px;
+    width: calc(100% + 120px);
+    margin-left: -72px;
+    margin-right: 0;
+    margin-top: -56px;
+    margin-bottom: 56px;
+    border-radius: 0;
+    border: none;
+    min-height: clamp(280px, 45vw, 560px);
     overflow: hidden;
     background: var(--teal-xl);
-    margin-bottom: 40px;
-    border: 1px solid var(--line);
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
   }
-  .proj-cover img { width: 100%; display: block; object-fit: cover; }
-  .proj-cover-placeholder { font-size: 3rem; color: var(--accent); opacity: .2; }
 
-  .proj-description {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--ink-m);
-    max-width: 860px;
-    margin: 0 auto 56px;
+  .proj-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .proj-description p + p { margin-top: 1.2em; }
+
+  .proj-cover-placeholder {
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: .2;
+    z-index: 1;
+  }
+
+  /* ── Description ── */
+  .proj-description {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--ink-m);
+    max-width: 1200px;
+    margin: 0 auto 72px auto;
+    padding: 0 24px;
+  }
+
+  .proj-description p { margin: 0 0 1.5em; }
+  .proj-description p:last-child { margin-bottom: 0; }
+
   .proj-description h2 {
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-size: clamp(1.8rem, 2.8vw, 2.6rem);
     font-weight: 800;
-    letter-spacing: -.04em;
-    line-height: 1;
+    letter-spacing: -.05em;
+    line-height: 1.05;
     color: var(--ink);
-    margin: 2.4em 0 .7em;
-    padding-bottom: .6em;
+    margin: 3.2em 0 .8em;
+    padding-bottom: .5em;
     border-bottom: 1px solid var(--line);
   }
+  .proj-description h2:first-child { margin-top: 0; }
+
   .proj-description h3 {
     font-family: var(--mono);
-    font-size: .62rem;
-    letter-spacing: .22em;
+    font-size: .68rem;
+    letter-spacing: .24em;
     text-transform: uppercase;
     color: var(--teal);
-    margin: 1.8em 0 .5em;
+    margin: 2.4em 0 .6em;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
   .proj-description h3::before {
     content: '';
     display: block;
-    width: 16px;
+    width: 20px;
     height: 1.5px;
     background: var(--teal);
     flex-shrink: 0;
   }
 
+  .proj-description ul,
+  .proj-description ol {
+    margin: 0 0 1.5em 1.2em;
+    padding: 0;
+  }
+  .proj-description li {
+    margin-bottom: .5em;
+    line-height: 1.8;
+  }
+
   /* ── Gallery ── */
-  .proj-gallery { margin-bottom: 80px; }
+  .proj-gallery { margin-bottom: 100px; }
+
   .proj-gallery-label {
     font-family: var(--mono);
-    font-size: .6rem;
+    font-size: .62rem;
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -167,11 +203,12 @@
 
   .proj-gallery-grid {
     display: grid;
-    gap: 3px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--line);
+    gap: 16px;
+    border-radius: 0;
+    overflow: visible;
+    border: none;
   }
+
   .proj-gallery-grid[data-cols="1"] { grid-template-columns: 1fr; }
   .proj-gallery-grid[data-cols="2"] { grid-template-columns: 1fr 1fr; }
   .proj-gallery-grid[data-cols="3"] { grid-template-columns: repeat(3,1fr); }
@@ -179,24 +216,24 @@
 
   .gallery-img {
     width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
+    aspect-ratio: unset;
+    object-fit: contain;
+    height: auto;
     display: block;
-    background: var(--teal-xl);
+    background: transparent;
     cursor: zoom-in;
+    border-radius: 8px;
+    border: 1px solid var(--line);
     transition: transform .4s var(--ease);
-  }
+}
   .gallery-img:hover { transform: scale(1.015); }
   .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: 21/9; }
   .gallery-img.tall   { aspect-ratio: 4/5; }
   .gallery-img.square { aspect-ratio: 1; }
 
-  /* ════════════════════════════════════════════════════════
-     RIGHT SIDEBAR — three sub-columns (flex row):
-       [col-info: rotated "info:" label  — bottom→top]
-       [col-meta: labeled fields + tag pills + year]
-       [col-title: ↑  big rotated title  ↓  — top→bottom]
-  ════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════
+     RIGHT SIDEBAR - DESKTOP
+  ══════════════════════════════════════════════════════════ */
   .proj-right {
     position: sticky;
     top: 0;
@@ -207,128 +244,105 @@
     overflow: hidden;
   }
 
-  /* ── Sub-column 1: rotated "info:" label (bottom → top) ── */
-  .proj-col-info {
-    width: 28px;
-    flex-shrink: 0;
+  /* Extend sidebar border infinitely upward for overscroll */
+  .proj-right::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -9999px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .proj-col-meta {
+    flex: 1;
     border-right: 1px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    min-width: 0;
+    position: relative;
   }
-  /* writing-mode: vertical-rl with NO extra rotation = bottom→top (opposite of title) */
-  .proj-col-info-label {
+
+  /* Extend inner meta border infinitely upward for overscroll */
+  .proj-col-meta::before {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -9999px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .proj-meta-line {
     writing-mode: vertical-rl;
     transform: rotate(0deg);
-    font-family: var(--mono);
-    font-size: .5rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--teal);
-    opacity: .75;
-    white-space: nowrap;
-  }
-
-  /* ── Sub-column 2: labeled meta fields + tag pills ── */
-  .proj-col-meta {
-    flex: 1;
-    border-right: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    min-width: 0;
-  }
-
-  .proj-col-meta-inner {
-    flex: 1;
-    overflow-y: auto;
-    scrollbar-width: none;
-    padding: 16px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .proj-col-meta-inner::-webkit-scrollbar { display: none; }
-
-  /* Labeled field: small muted label + value below */
-  .proj-meta-field {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-  .proj-meta-field-label {
-    font-family: var(--mono);
-    font-size: .42rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--teal);
-    opacity: .65;
-  }
-  .proj-meta-field-value {
+    white-space: normal;
+    overflow: visible;
     font-family: var(--mono);
     font-size: .58rem;
-    letter-spacing: .03em;
-    color: var(--ink);
-    line-height: 1.45;
-    word-break: break-word;
-  }
-
-  /* Thin divider between fields and tag pills */
-  .proj-meta-divider {
-    height: 1px;
-    background: var(--line);
-    opacity: .4;
-    margin: 2px 0;
-  }
-
-  /* Tag pills */
-  .proj-col-tags {
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-m);
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: flex-start;
-  }
-  .proj-col-tags .tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: .5rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    line-height: 1.35;
-    padding: 3px 7px;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    color: var(--ink);
-    background: transparent;
-    word-break: break-word;
-    white-space: normal;
-    max-width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    max-height: calc(100vh - 80px);
+    padding: 20px 0;
   }
 
-  /* Year pinned to bottom */
-  .proj-col-year {
-    border-top: 1px solid var(--line);
-    padding: 10px 12px;
-    flex-shrink: 0;
+  .proj-meta-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    max-width: 140px;
+    
+    word-break: keep-all;
+    white-space: normal;
+    justify-content: flex-start;
+    width: auto; 
   }
-  .proj-col-year-label {
-    font-family: var(--mono);
-    font-size: .42rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
+
+  .proj-meta-item-label {
     color: var(--teal);
     opacity: .65;
-    margin-bottom: 3px;
-  }
-  .proj-col-year-value {
-    font-family: var(--mono);
-    font-size: .9rem;
-    font-weight: 700;
-    color: var(--ink);
+    font-size: .46rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    white-space: nowrap; 
+    width: 100%;
+    text-align: center;
+    display: inline-block;  /* aggiungi */
+    width: auto;  /* aggiungi */
+    margin: 0 auto;  /* aggiungi */
   }
 
-  /* ── Sub-column 3: ↑  BIG rotated title (top → bottom)  ↓ ── */
+  .proj-meta-item-value {
+    color: var(--ink);
+    font-size: .58rem;
+    letter-spacing: .14em;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.3;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    display: inline-block;  /* aggiungi */
+    width: auto;  /* aggiungi */
+    margin: 0 auto; 
+  }
+
+  /* ── Title column ── */
   .proj-col-title {
     width: 88px;
     flex-shrink: 0;
@@ -338,43 +352,89 @@
     justify-content: space-between;
     padding: 20px 0;
     overflow: hidden;
+    position: relative;
   }
 
   .proj-nav-arrow {
-    font-size: 1rem;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color .2s;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-m);
+    text-decoration: none;
+    font-size: .9rem;
     line-height: 1;
-    padding: 4px 8px;
+    transition: color .2s, border-color .2s, background .2s;
+    z-index: 3;
   }
-  .proj-nav-arrow:hover { color: var(--teal); }
+  .proj-nav-arrow:hover {
+    color: var(--teal);
+    border-color: var(--teal);
+    background: rgba(43,173,184,.06);
+  }
   .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
 
-  /*
-    Title direction: top → bottom.
-    writing-mode: vertical-rl + rotate(180deg) = reads top-to-bottom.
-    "info:" uses vertical-rl + no rotation = reads bottom-to-top. Opposite. ✓
-  */
+  .proj-title-wrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .proj-title-scroll {
+    animation: scrollTitle 8s linear infinite;
+    display: flex;
+    flex-direction: column;
+  }
+
   .proj-title {
     writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    transform: rotate(0deg);
     font-size: clamp(2rem, 3.5vw, 3.4rem);
     font-weight: 800;
     letter-spacing: -.04em;
     line-height: 1;
     color: var(--ink);
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    white-space: nowrap;
-    max-height: 100%;
-    padding: 10px 0;
     margin: 0;
+    white-space: nowrap;
+    padding: 10px 0;
+    margin-bottom: 100px;
   }
+
+  .proj-title-wrapper::before,
+  .proj-title-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .proj-title-wrapper::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+  }
+  .proj-title-wrapper::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg), transparent);
+  }
+
+  @keyframes scrollTitle {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-20%); }
+  }
+
+  .desktop-only { display: flex; }
+  .mobile-only  { display: none; }
 
   /* ── Back rail ── */
   .proj-back-rail {
@@ -387,18 +447,22 @@
     font-size: .54rem;
     letter-spacing: .2em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--ink);
+    opacity: 0.45;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
     z-index: 5;
-    transition: color .2s;
+    transition: color .2s, opacity .2s;
   }
-  .proj-back-rail:hover { color: var(--teal); }
+  .proj-back-rail:hover { color: var(--teal); opacity: 1; }
   .proj-back-rail::after { content: '↑'; font-size: .7rem; }
 
   .proj-back-mobile { display: none; }
+
+  .proj-mob-prev,
+  .proj-mob-next { display: none; }
 
   /* ── Lightbox ── */
   .lightbox {
@@ -440,30 +504,147 @@
   .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
 
   /* ════════════════════════════════════════
-     RESPONSIVE
+     MOBILE
   ════════════════════════════════════════ */
   @media (max-width: 900px) {
+
     .proj-wrap {
       grid-template-columns: 1fr;
       padding-left: 0;
     }
+
     .proj-right {
       position: static;
       height: auto;
-      min-height: 120px;
       border-left: none;
       border-bottom: 1px solid var(--line);
       order: -1;
+      flex-direction: column;
+      padding: 20px 24px;
+      gap: 20px;
+      overflow: visible;
     }
-    /* Hide the narrow info label on mobile — not enough height */
-    .proj-col-info { display: none; }
 
-    .proj-col-title { width: 72px; }
-    /* Long titles: stretch first via clamp, scale down via JS if still overflowing */
-    .proj-title { font-size: clamp(1rem, 12vw, 2.6rem); }
+    .proj-right::before,
+    .proj-col-meta::before { display: none; }
 
-    .proj-left { padding: 24px 20px 80px; }
-    .proj-description { max-width: 100%; margin: 0 0 40px; }
+    .proj-col-title .proj-nav-arrow { display: none; }
+
+    .proj-col-title {
+      width: auto;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      height: auto;
+      gap: 16px;
+      order: 1;
+      overflow: hidden;
+    }
+
+    .proj-title-wrapper {
+      overflow: visible;
+      height: auto;
+    }
+
+    .proj-title-wrapper::before,
+    .proj-title-wrapper::after { display: none; }
+
+    .desktop-only {
+      display: none !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
+    .mobile-only { display: flex; }
+
+    .proj-title-scroll {
+      animation: none;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .proj-title {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: clamp(2rem, 10vw, 3rem);
+      white-space: normal;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .proj-col-meta {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+      border-right: none;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      min-height: auto;
+      position: static;
+      order: 2;
+    }
+
+    .proj-meta-line {
+      writing-mode: horizontal-tb;
+      transform: none;
+      white-space: normal;
+      overflow: visible;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+      max-height: none;
+    }
+
+    .proj-meta-item {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      max-width: none;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .proj-meta-item-label { font-size: .58rem; letter-spacing: .14em; }
+    .proj-meta-item-value { font-size: .85rem; letter-spacing: normal; text-align: left; }
+
+    .proj-left {
+      padding: 32px 0 100px;
+      overflow-x: visible;
+    }
+
+    .proj-cover {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 0;
+      margin-bottom: 40px;
+      border-radius: 0;
+      min-height: clamp(200px, 55vw, 380px);
+    }
+
+    .proj-description {
+      font-size: 1rem;
+      max-width: 100%;
+      margin: 0 0 48px;
+      padding: 0 24px;
+    }
+
+    .proj-description h2 {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      margin-top: 2.4em;
+    }
+
     .proj-back-rail { display: none; }
 
     .proj-back-mobile {
@@ -479,13 +660,42 @@
       transition: color .2s;
     }
     .proj-back-mobile:hover { color: var(--teal); }
+
     .proj-gallery-grid[data-cols="3"] { grid-template-columns: 1fr 1fr; }
+
+    .proj-mob-prev,
+    .proj-mob-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 16px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--bg);
+      color: var(--ink-m);
+      text-decoration: none;
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: color .2s, border-color .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      z-index: 200;
+    }
+    .proj-mob-prev { left: 12px; }
+    .proj-mob-next { right: 12px; }
+    .proj-mob-prev:hover,
+    .proj-mob-next:hover { color: var(--teal); border-color: var(--teal); }
+    .proj-mob-prev.disabled,
+    .proj-mob-next.disabled { opacity: .2; pointer-events: none; }
   }
 
   @media (max-width: 600px) {
     .proj-gallery-grid { grid-template-columns: 1fr !important; }
-    .proj-col-title { width: 58px; }
-    .proj-title { font-size: clamp(0.9rem, 10vw, 2rem); }
+    .proj-col-meta { gap: 16px; }
+    .proj-meta-item-value { font-size: .8rem; }
+    .proj-cover { min-height: 250px; }
   }
 </style>
 
@@ -497,16 +707,12 @@
 
 
 
-
-<a href="/projects.html" class="proj-back-rail">Go back</a>
-
-<!-- FIX: outside .proj-right so it never disrupts the flex-row layout -->
 <a href="/projects.html" class="proj-back-mobile">← All projects</a>
 
 <main class="page-main" style="padding:0;">
   <div class="proj-wrap">
 
-    <!-- ── LEFT ── -->
+    <!-- LEFT COLUMN -->
     <div class="proj-left">
       <div class="proj-cover">
         
@@ -581,74 +787,67 @@
       
     </div>
 
-    <!-- ── RIGHT SIDEBAR ── -->
+    <!-- RIGHT SIDEBAR -->
     <div class="proj-right">
 
-      <!-- Sub-column 1: rotated "info:" label — reads bottom→top -->
-      <div class="proj-col-info">
-        <span class="proj-col-info-label">info:</span>
-      </div>
-
-      <!-- Sub-column 2: labeled fields + tags + year -->
       <div class="proj-col-meta">
-        <div class="proj-col-meta-inner">
-
+        <div class="proj-meta-line">
           
-          <div class="proj-meta-field">
-            <span class="proj-meta-field-label">client:</span>
-            <span class="proj-meta-field-value">Self-initiated</span>
-          </div>
-          
-
-          
-          <div class="proj-meta-field">
-            <span class="proj-meta-field-label">role:</span>
-            <span class="proj-meta-field-value">Visual Designer</span>
-          </div>
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">client</span>
+            <span class="proj-meta-item-value">Self-initiated</span>
+          </span>
           
 
           
-          <div class="proj-meta-field">
-            <span class="proj-meta-field-label">materials:</span>
-            <span class="proj-meta-field-value">Typography, Signage, Motion</span>
-          </div>
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">role</span>
+            <span class="proj-meta-item-value">Visual Designer</span>
+          </span>
           
 
           
-          <div class="proj-meta-field">
-            <span class="proj-meta-field-label">duration:</span>
-            <span class="proj-meta-field-value">3 months</span>
-          </div>
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">materials</span>
+            <span class="proj-meta-item-value">Typography, Signage, Motion</span>
+          </span>
+          
+
+          
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">duration</span>
+            <span class="proj-meta-item-value">3 months</span>
+          </span>
           
 
           
 
           
-          <div class="proj-meta-divider"></div>
-          <div class="proj-col-tags">
-            
-            <span class="tag">Visual</span>
-            
-          </div>
+          <span class="proj-meta-item">
+            <span class="proj-meta-item-label">year</span>
+            <span class="proj-meta-item-value">2023</span>
+          </span>
           
-
         </div>
-
-        
-        <div class="proj-col-year">
-          <div class="proj-col-year-label">year:</div>
-          <div class="proj-col-year-value">2023</div>
-        </div>
-        
       </div>
 
-      <!-- Sub-column 3: ↑  big rotated title (top→bottom)  ↓ -->
       <div class="proj-col-title">
         
         <a href="/projects/ciaone/" class="proj-nav-arrow">↑</a>
         
 
-        <h1 class="proj-title">Transit Identity</h1>
+        <div class="proj-title-wrapper">
+          <div class="proj-title-scroll desktop-only">
+            <h1 class="proj-title">Transit Identity</h1>
+            <h1 class="proj-title">Transit Identity</h1>
+            <h1 class="proj-title">Transit Identity</h1>
+            <h1 class="proj-title">Transit Identity</h1>
+            <h1 class="proj-title">Transit Identity</h1>
+          </div>
+          <div class="proj-title-scroll mobile-only">
+            <h1 class="proj-title">Transit Identity</h1>
+          </div>
+        </div>
 
         
         <a href="/projects/ah-ok/" class="proj-nav-arrow">↓</a>
@@ -659,13 +858,20 @@
   </div>
 </main>
 
+
+<a href="/projects/ciaone/" class="proj-mob-prev">←</a>
+
+
+
+<a href="/projects/ah-ok/" class="proj-mob-next">→</a>
+
+
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lb-close">Close ✕</button>
   <img src="" alt="" id="lb-img"/>
 </div>
 
 <script>
-  /* ── Lightbox ── */
   const lb    = document.getElementById('lightbox');
   const lbImg = document.getElementById('lb-img');
   document.querySelectorAll('.gallery-img').forEach(img => {
@@ -679,26 +885,6 @@
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
-  /* ── Scale long titles to fit their column ──
-     Strategy: use clamp() for normal titles; for very long ones,
-     measure overflow and shrink proportionally, never below 12px. */
-  function fitTitle() {
-    const el = document.querySelector('.proj-title');
-    if (!el) return;
-    el.style.fontSize = ''; // reset to CSS clamp value
-    const colHeight = el.parentElement.clientHeight - 80; // subtract arrow space
-    if (colHeight <= 0) return;
-    // scrollHeight on a vertical-rl element = rendered text length in px
-    if (el.scrollHeight > colHeight) {
-      const ratio = colHeight / el.scrollHeight;
-      const base  = parseFloat(getComputedStyle(el).fontSize);
-      el.style.fontSize = Math.max(base * ratio, 12) + 'px';
-    }
-  }
-  fitTitle();
-  window.addEventListener('resize', fitTitle);
-
-  /* ── Accent colour cross-page transition ── */
   const TARGET = {
     teal:  '#E8490F',
     bg:    '#f3c3b0',
