@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "Me-Moe"
-order: 4
+order: 3
 year: 2024
 client: "Università degli studi Mediterranea di Reggio Calabria"
 role: "Product Design, UX Design, Graphic Design"

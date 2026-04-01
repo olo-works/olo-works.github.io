@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "Regal 3.0"
-order: 6
+order: 2
 year: 2024
 client: "Università degli studi Mediterranea di Reggio Calabria"
 role: "Product Design, Prototyping"

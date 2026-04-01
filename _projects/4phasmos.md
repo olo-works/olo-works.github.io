@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "Phasmos"
-order: 5
+order: 4
 year: 2024
 client: "Università degli studi Mediterranea di Reggio Calabria"
 role: "Product Design"
