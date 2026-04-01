@@ -6,6 +6,17 @@
   <title>About — olo-works</title>
   <link rel="stylesheet" href="/style.css"/>
   <style>
+    /* ── Small text scale (3 tiers only) ──────────────────────────────────
+       --fs-micro  : .52rem  → labels, eyebrows, codes, status, hints
+       --fs-caption: .62rem  → descriptions, body mono, sub-items
+       --fs-prose  : .72rem  → longer mono prose blocks
+    ──────────────────────────────────────────────────────────────────────── */
+    :root {
+      --fs-micro:   .62rem;
+      --fs-caption: .72rem;
+      --fs-prose:   .82rem;
+    }
+
     body { overflow-x: hidden; }
 
     /* ── Shared ── */
@@ -20,7 +31,7 @@
     }
     .s-label {
       font-family: var(--mono);
-      font-size: .56rem;
+      font-size: var(--fs-micro);
       letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--teal);
@@ -33,20 +44,20 @@
 
     /* ════════════════ 01 INTRO ════════════════ */
     .s-intro { flex-direction: column; justify-content: space-between; padding-bottom: 64px; }
-    .intro-tagline { font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; color: var(--muted); }
+    .intro-tagline { font-family: var(--mono); font-size: var(--fs-caption); letter-spacing: .14em; color: var(--muted); }
     .s-intro-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); }
     .s-intro-title .teal { color: var(--teal); }
     .intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; }
     .intro-left-cluster { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-    .intro-stats { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .intro-stats { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
     .intro-dot { color: var(--teal); }
-    .intro-scroll-hint { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+    .intro-scroll-hint { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
     .scroll-line { width: 28px; height: 1px; background: var(--teal); opacity: .4; position: relative; overflow: hidden; }
     .scroll-line::after { content:''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--teal); animation: scan 1.6s ease-in-out infinite; }
     @keyframes scan { 0%{left:-100%} 100%{left:100%} }
     .intro-right-cluster { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
     .intro-clock { font-family: var(--mono); font-size: 1.1rem; font-weight: 500; letter-spacing: .08em; color: var(--ink); }
-    .intro-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .54rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .intro-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: pulse 2s infinite; }
     @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(74,222,128,.5)} 70%{box-shadow:0 0 0 7px rgba(74,222,128,0)} 100%{box-shadow:0 0 0 0 rgba(74,222,128,0)} }
 
@@ -75,7 +86,7 @@
 
     /* ════════════════ 02 DISCIPLINES ════════════════ */
     .s-work { flex-direction: column; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
-    .s-work-intro { font-family: var(--mono); font-size: .75rem; line-height: 1.8; color: var(--muted); max-width: 560px; }
+    .s-work-intro { font-family: var(--mono); font-size: var(--fs-prose); line-height: 1.8; color: var(--muted); max-width: 560px; }
     .disciplines-wrap { width: 100%; margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
     .discipline-col { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 28px; border-right: 1px solid var(--line); cursor: none; transition: background .25s; }
     .discipline-col:last-child { border-right: none; }
@@ -84,12 +95,12 @@
     .discipline-col:hover .discipline-title { color: var(--teal); }
     .discipline-subs { display: flex; flex-direction: column; gap: 6px; align-items: center; opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease); }
     .discipline-col:hover .discipline-subs { opacity: 1; transform: translateY(0); }
-    .discipline-sub { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; color: var(--muted); line-height: 1.6; }
+    .discipline-sub { font-family: var(--mono); font-size: var(--fs-caption); letter-spacing: .06em; color: var(--muted); line-height: 1.6; }
 
     /* ════════════════ 03 MAP ════════════════ */
     .s-map {
       gap: 48px;
-      align-items: center;          /* vertically center text with map */
+      align-items: center;
       min-height: auto;
       padding-top: 48px;
       padding-bottom: 48px;
@@ -104,10 +115,9 @@
       min-height: 360px;
       display: flex;
       flex-direction: column;
-      justify-content: center;      /* center text vertically against map */
+      justify-content: center;
     }
 
-    /* Default state — big typographic block, sits at the bottom */
     .map-default-text {
       transition: opacity .4s, transform .4s;
       transform: translateY(0);
@@ -118,10 +128,9 @@
       transform: translateY(8px);
     }
 
-    /* Big headline */
     .s-map-eyebrow {
       font-family: var(--mono);
-      font-size: .54rem;
+      font-size: var(--fs-micro);
       letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--teal);
@@ -144,7 +153,7 @@
 
     .s-map-hint {
       font-family: var(--mono);
-      font-size: .6rem;
+      font-size: var(--fs-caption);
       letter-spacing: .1em;
       color: var(--muted);
       display: flex;
@@ -157,7 +166,7 @@
       opacity: .5;
     }
 
-    /* City info cards — absolutely overlaid, slide up when active */
+    /* City info cards */
     .map-city-info {
       position: absolute;
       top: 50%; left: 0;
@@ -173,10 +182,9 @@
       transform: translateY(-50%);
     }
 
-    /* City card inner layout */
     .map-city-tag {
       font-family: var(--mono);
-      font-size: .52rem;
+      font-size: var(--fs-micro);
       letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--teal);
@@ -204,7 +212,7 @@
     }
     .map-city-year {
       font-family: var(--mono);
-      font-size: .56rem;
+      font-size: var(--fs-micro);
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--muted);
@@ -215,7 +223,7 @@
     }
     .map-city-role {
       font-family: var(--mono);
-      font-size: .56rem;
+      font-size: var(--fs-micro);
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--teal);
@@ -223,7 +231,7 @@
 
     .map-city-desc {
       font-family: var(--mono);
-      font-size: .68rem;
+      font-size: var(--fs-caption);
       line-height: 1.8;
       color: var(--muted);
       max-width: 380px;
@@ -233,7 +241,6 @@
 
     /* ── Right: the map ── */
     .s-map-right {
-      /* triple the original 260px */
       width: 780px;
       flex-shrink: 0;
       display: flex;
@@ -242,15 +249,11 @@
     }
 
     .map-wrap { position: relative; display: inline-block; }
-
-    /* Triple size */
     .italy-dotmap { width: 780px; height: auto; display: block; }
 
-    /* Dots: rounded squares, teal fill */
     .italy-dotmap rect {
       fill: var(--teal);
       opacity: .25;
-      /* rx/ry and w/h set via JS for cross-browser reliability */
     }
 
     /* ── Interactive pins ── */
@@ -271,7 +274,6 @@
     }
     .map-city-pin.pin-visible { opacity: 1; }
 
-    /* Pin dot — identical style to map dots, just larger */
     .map-city-pin-dot {
       width: 18px; height: 18px;
       border-radius: 5px;
@@ -287,7 +289,7 @@
     /* ════════════════ 04 INTERESTS ════════════════ */
     .s-interests { flex-direction: column; align-items: flex-start; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
     .interests-header { display: flex; align-items: baseline; justify-content: space-between; width: 100%; margin-bottom: 32px; }
-    .interests-drag-hint { font-family: var(--mono); font-size: .52rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .interests-drag-hint { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
     .interests-drag-hint::before { content: '←'; color: var(--teal); }
     .interests-drag-hint::after { content: '→'; color: var(--teal); }
     .interests-scroll { width: 100%; overflow-x: auto; scrollbar-width: none; cursor: grab; }
@@ -298,11 +300,11 @@
     .interest-card:hover { border-color: var(--teal); }
     .interest-card-text { padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; width: 280px; flex-shrink: 0; }
     .interest-card-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
-    .interest-card-desc { font-family: var(--mono); font-size: .58rem; line-height: 1.65; color: var(--muted); }
+    .interest-card-desc { font-family: var(--mono); font-size: var(--fs-caption); line-height: 1.65; color: var(--muted); }
     .interest-card-img { width: 280px; height: 100%; flex-shrink: 0; background: var(--teal-xl); border-left: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: background .25s; }
     .interest-card:hover .interest-card-img { background: rgba(43,173,184,.15); }
     .interest-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .interest-card-img-placeholder { font-family: var(--mono); font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); opacity: .5; text-align: center; padding: 16px; }
+    .interest-card-img-placeholder { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--teal); opacity: .5; text-align: center; padding: 16px; }
 
     /* ════════════════ 05 LANGUAGES ════════════════ */
     .s-lang { flex-direction: column; align-items: center; text-align: center; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
@@ -312,21 +314,20 @@
     .lang-item { padding: 40px 32px; border-right: 1px solid var(--line); cursor: none; transition: background .5s; text-align: left; display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; }
     .lang-item:last-child { border-right: none; }
     .lang-item:hover { background: var(--teal-xl); }
-    .lang-item-code { font-family: var(--mono); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+    .lang-item-code { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
     .lang-item-name { font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 4px; }
-    .lang-item-level { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .lang-item-desc { font-family: var(--mono); font-size: .62rem; line-height: 1.65; color: var(--muted); }
+    .lang-item-level { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .lang-item-desc { font-family: var(--mono); font-size: var(--fs-caption); line-height: 1.65; color: var(--muted); }
 
     /* ════════════════ 06 TOOLS ════════════════ */
     .s-tools { flex-direction: column; }
     .tools-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -.04em; line-height: .9; color: var(--ink); margin-bottom: 16px; }
     .tools-title .teal { color: var(--teal); }
-    .tools-sub { font-family: var(--mono); font-size: .72rem; line-height: 1.8; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
+    .tools-sub { font-family: var(--mono); font-size: var(--fs-prose); line-height: 1.8; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
     .tools-info-bar { width: 100%; min-height: 48px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 16px; transition: opacity .2s; }
     .tools-info-name { font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
-    .tools-info-level { font-family: var(--mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
-    .tools-info-bar.empty .tools-info-name { color: var(--muted); font-weight: 400; font-size: .72rem; font-family: var(--mono); letter-spacing: .06em; }
-    /* Full-width grid — cells stretch evenly across the section */
+    .tools-info-level { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
+    .tools-info-bar.empty .tools-info-name { color: var(--muted); font-weight: 400; font-size: var(--fs-prose); font-family: var(--mono); letter-spacing: .06em; }
     .tools-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px; width: 100%; }
     .tool-logo {
       aspect-ratio: 1;
@@ -350,7 +351,9 @@
     .s-cta-title { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 800; letter-spacing: -.05em; line-height: .85; color: var(--ink); margin-bottom: 48px; }
     .s-cta-title .teal { color: var(--teal); }
     .s-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
+    .s-cta .s-intro-title {
+      margin-bottom: 48px;
+    }
     /* ── Responsive ── */
     @media(max-width:900px) {
       .about-section { padding: 64px 24px; }
@@ -418,7 +421,6 @@
       .lang-item:last-child { border-bottom: none; }
       .lang-item.lang-active { background: var(--teal-xl); }
 
-      /* Tools: 4 columns full width on mobile */
       .tools-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
     }
   </style>
@@ -1031,7 +1033,7 @@
   <!-- ══ 07 CTA ══ -->
   <section class="about-section s-cta">
     <div class="s-label">Let's build</div>
-    <h2 class="s-cta-title">Got something<br>worth <span class="teal">making?</span></h2>
+    <h2 class="s-intro-title">There's always<br>one <span class="teal">for all.</span></h2><br> 
     <div class="s-cta-actions">
       <a href="/contact.html" class="btn-primary">Get in touch →</a>
       <a href="/projects.html" class="btn-secondary">View work</a>
@@ -1068,12 +1070,10 @@
   let mobileResetTimer = null;
 
   function activatePin(pin) {
-    // Deactivate any previously active pin
     if (activePin && activePin !== pin) {
       document.getElementById(activePin.dataset.target).classList.remove('visible');
       activePin.classList.remove('active');
     }
-    // Toggle off if clicking the same pin again
     if (activePin === pin) {
       pin.classList.remove('active');
       document.getElementById(pin.dataset.target).classList.remove('visible');
@@ -1081,7 +1081,6 @@
       activePin = null;
       return;
     }
-    // Activate new pin
     pin.classList.add('active');
     document.getElementById(pin.dataset.target).classList.add('visible');
     mapDefaultEl.classList.add('faded');
@@ -1160,12 +1159,11 @@
     if (window.innerWidth > 900 && langTimer) { clearInterval(langTimer); langTimer = null; langItems.forEach(i => i.classList.remove('lang-active')); }
   });
 
-  // ── Tools: click / tap to select ──
+  // ── Tools ──
   const infoBar = document.getElementById('tools-info-bar');
   let activeTool = null;
 
   function selectTool(logo) {
-    // Deselect if tapping the same one again
     if (activeTool === logo) {
       logo.classList.remove('active');
       infoBar.classList.add('empty');
@@ -1182,9 +1180,8 @@
 
   document.querySelectorAll('.tool-logo').forEach(logo => {
     logo.addEventListener('click', () => selectTool(logo));
-    // Desktop: also show on hover for discoverability, but don't require it
     logo.addEventListener('mouseenter', () => {
-      if (activeTool) return; // don't override an active selection
+      if (activeTool) return;
       infoBar.classList.remove('empty');
       infoBar.innerHTML = `<span class="tools-info-name">${logo.dataset.name}</span><span class="tools-info-level">${logo.dataset.level}</span>`;
     });
@@ -1213,32 +1210,26 @@
   });
 
   // ── Map dot wave scroll effect ──
-  // viewBox: x from -4.5 to 34.5 (~39 units), y from ~-4.5 to ~40 (~44.6 units)
-  // SVG center in viewBox coords:
-  const SVG_CX = (-4.5 + 34.5) / 2;          // ~15
-  const SVG_CY = (-4.32 + 40.32) / 2;         // ~18
+  const SVG_CX = (-4.5 + 34.5) / 2;
+  const SVG_CY = (-4.32 + 40.32) / 2;
 
-  const DOT_BASE = 0.44;   // max size (section perfectly centered in viewport)
-  const DOT_MIN  = 0.20;   // min size (section near viewport edge)
-  const DOT_RX   = 0.11;   // corner radius — fixed, never changes
+  const DOT_BASE = 0.44;
+  const DOT_MIN  = 0.20;
+  const DOT_RX   = 0.11;
 
   const mapDots = Array.from(document.querySelectorAll('#italy-dotmap rect'));
 
-  // Pre-compute each dot's normalized distance from SVG center (0 = center, 1 = furthest)
-  // We use this to phase the wave: center dots react first, edge dots later
   const dotData = mapDots.map(r => {
-    const cx = parseFloat(r.getAttribute('x')) + 0.16;  // dot center x
-    const cy = parseFloat(r.getAttribute('y')) + 0.16;  // dot center y
+    const cx = parseFloat(r.getAttribute('x')) + 0.16;
+    const cy = parseFloat(r.getAttribute('y')) + 0.16;
     const dx = cx - SVG_CX;
     const dy = cy - SVG_CY;
     return { r, dist: Math.sqrt(dx * dx + dy * dy) };
   });
 
-  // Normalize distances 0..1
   const maxDist = Math.max(...dotData.map(d => d.dist));
   dotData.forEach(d => { d.normDist = d.dist / maxDist; });
 
-  // Set all dots to base size immediately (applies rx too)
   mapDots.forEach(r => {
     r.setAttribute('width',  String(DOT_BASE));
     r.setAttribute('height', String(DOT_BASE));
@@ -1246,8 +1237,6 @@
     r.setAttribute('ry', String(DOT_RX));
   });
 
-  // Scroll handler: wave — center dots track scroll progress first,
-  // outer dots lag behind proportionally to their distance from center
   function updateDotWave() {
     if (window.innerWidth <= 900) return;
     const sec = document.getElementById('map-section');
@@ -1255,15 +1244,10 @@
     const rect   = sec.getBoundingClientRect();
     const vh     = window.innerHeight;
     const secCY  = rect.top + rect.height / 2;
-    // t = 0 when section center is at viewport center, 1 when fully off-screen
     const raw    = Math.abs(secCY - vh / 2) / (vh / 2);
     const global = Math.min(raw, 1);
 
     dotData.forEach(({ r, normDist }) => {
-      // Wave phase: center dots (normDist≈0) get full global value,
-      // outer dots (normDist≈1) are delayed — they only start shrinking
-      // once global has already moved past their threshold.
-      // Result: shrink/grow ripples outward from center as you scroll.
       const wave  = Math.max(0, global - normDist * 0.45) / (1 - normDist * 0.45);
       const clamped = Math.min(wave, 1);
       const size  = DOT_BASE - clamped * (DOT_BASE - DOT_MIN);

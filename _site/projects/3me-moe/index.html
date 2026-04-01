@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Transit Identity — olo-works</title>
+  <title>Me-Moe — olo-works</title>
   <link rel="stylesheet" href="/style.css"/>
   
 </head>
@@ -53,15 +53,15 @@
 
 <style>
   :root {
-    --accent:   #E8490F;
-    --accent-d: #C93A08;
-    --accent-xl:#E8490F;
+    --accent:   #245db2;
+    --accent-d: #15468e;
+    --accent-xl:#245db2;
     --teal:    var(--accent);
     --teal-d:  var(--accent-d);
     --teal-xl: var(--accent-xl);
-    --bg:      #f3c3b0;
-    --white:   #eeb9a4;
-    --line:    #E8490F;
+    --bg:      #c9cfd9;
+    --white:   #e8eaed;
+    --line:    #245db2;
   }
 
   body, #rail, #mob { background: var(--bg) !important; }
@@ -157,7 +157,7 @@
 
   .proj-description h3 {
     font-family: var(--mono);
-    font-size: .68rem;
+    font-size: var(--fs-caption);
     letter-spacing: .24em;
     text-transform: uppercase;
     color: var(--teal);
@@ -190,7 +190,7 @@
 
   .proj-gallery-label {
     font-family: var(--mono);
-    font-size: .62rem;
+    font-size: var(--fs-caption);
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--teal);
@@ -287,7 +287,7 @@
     white-space: normal;
     overflow: visible;
     font-family: var(--mono);
-    font-size: .58rem;
+    font-size: var(--fs-caption);
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--ink-m);
@@ -315,7 +315,7 @@
   .proj-meta-item-label {
     color: var(--teal);
     opacity: .65;
-    font-size: .46rem;
+    font-size: var(--fs-micro);
     letter-spacing: .22em;
     text-transform: uppercase;
     white-space: nowrap; 
@@ -328,7 +328,7 @@
 
   .proj-meta-item-value {
     color: var(--ink);
-    font-size: .58rem;
+    font-size: var(--fs-caption);
     letter-spacing: .14em;
     font-weight: 500;
     text-align: center;
@@ -444,7 +444,7 @@
     transform: translateY(-50%) rotate(180deg);
     writing-mode: vertical-rl;
     font-family: var(--mono);
-    font-size: .54rem;
+    font-size: var(--fs-micro);
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--ink);
@@ -490,7 +490,7 @@
     position: absolute;
     top: 24px; right: 28px;
     font-family: var(--mono);
-    font-size: .6rem;
+    font-size: var(--fs-micro);
     letter-spacing: .18em;
     text-transform: uppercase;
     color: rgba(255,255,255,.6);
@@ -634,14 +634,14 @@
     }
 
     .proj-description {
-      font-size: 1rem;
+      font-size: 1.2rem;
       max-width: 100%;
       margin: 0 0 48px;
       padding: 0 24px;
     }
 
     .proj-description h2 {
-      font-size: clamp(1.4rem, 5vw, 2rem);
+      font-size: clamp(2rem, 3vw, 2.8rem);
       margin-top: 2.4em;
     }
 
@@ -716,68 +716,290 @@
     <div class="proj-left">
       <div class="proj-cover">
         
-          <img src="/images/photoprojects/ciao1.png" alt="Transit Identity"/>
+          <img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe"/>
         
       </div>
 
       <div class="proj-description">
-        <p>A transit identity system built around one constraint: it has to work at 80km/h. Passengers reading a sign from a moving vehicle don’t have time for nuance — every element has to land in under a second.</p>
+        <p>A complete system for urban last-mile delivery. Not a single object but a set of things designed to work together: a compact vehicle, a modular cargo bay, an onboard collaborative robot, a wearable exoskeleton, a new parcel label language, and an app. The whole is called <em>Me-Moe</em>: <em>Mezzo Express Multifunzione Operativa Essenziale</em>.</p>
 
-<h2 id="concept">Concept</h2>
+<h2>The brief</h2>
 
-<p>The brief started as a wayfinding exercise and became something more involved. Once you start designing for legibility at speed, every decision gets stress-tested in a way that most identity work doesn’t. Type size, contrast ratio, spacing, icon weight — nothing is decorative, everything is load-bearing.</p>
+<p>Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. The project addresses all three without reinventing the vehicle from scratch, working instead at the level of the cargo module, the tools inside it, and the service wrapped around it.</p>
 
-<h3 id="color">Color</h3>
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Oversized vehicles</div>
+    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Standard vans obstruct urban mobility. The right format sits between a scooter and a light van: compact enough for restricted zones, large enough to carry a meaningful load.</div>
+  </div>
+  <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
+    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Local restrictions</div>
+    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">ZTL zones, narrow delivery windows, and environmental regulations require a vehicle that complies by default, not by workaround.</div>
+  </div>
+  <div style="padding:18px 20px;">
+    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Recipient availability</div>
+    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Every failed delivery multiplies cost and emissions. The system needs to decouple the delivery from the moment the recipient happens to be home.</div>
+  </div>
+</div>
 
-<p>The orange was chosen for contrast against the concrete and steel environments transit infrastructure lives in. Not warm for warmth’s sake — warm because it reads at distance, in low light, against a grey platform wall at 6am.</p>
+<h2>The cargo module</h2>
 
-<h3 id="typography">Typography</h3>
+<p>The cargo bay is the structural core of the project. Designed as a standardised unit independent from any specific chassis, it can be retrofitted onto existing vehicles through a simple attachment system. Every component can be positioned in any order and repeated across a mixed fleet. The module is also stackable; a second unit can sit on top of the first where ceiling clearance allows.</p>
 
-<p>Syne for station names and primary wayfinding. IBM Plex Mono for line numbers, platform codes, and time displays — the data layer that needs to be scannable rather than readable.</p>
+<p>Access points were completely reorganised. Two rear doors open the full width of the bay. A lateral sliding door gives access mid-route without repositioning. A motorised floor rail moves packages toward the opening automatically. The result is a loading and unloading sequence that no longer requires the driver to climb inside.</p>
 
-<h2 id="process">Process</h2>
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
 
-<p>The system was developed through a series of simulated viewing conditions: printed at various sizes, photographed from distance, tested in low-contrast environments. What looked good on screen often failed in the field. The orange was darkened twice before it held reliably against a white background in direct sunlight.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;border-right:1px solid var(--line);">
+      <img src="/images/projects/memoe/struttura-exploded.png" alt="Exploded structure" style="width:100%;display:block;border-radius:4px;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The bay is built on a tubular steel frame with composite panel cladding. The base houses the battery pack in the electric configuration. Interior shelving runs on standardised rails shared with the cobot cart, making the robot and shelf units interchangeable in position.</p>
+    </div>
+  </div>
 
-<h3 id="signage-hierarchy">Signage hierarchy</h3>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Bay width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1530 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Bay height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1371 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Total length</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">2035 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Track width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">931 mm</div>
+    </div>
+  </div>
 
-<p>Three levels: primary (station name, line color), secondary (platform, direction), tertiary (service info, connections). Each level has a fixed type size and contrast ratio — nothing overrides the hierarchy for aesthetic reasons.</p>
+</div>
 
-<h3 id="motion">Motion</h3>
+<div class="proj-gallery-grid" data-cols="3" style="margin:20px 0;">
+  <img src="/images/projects/memoe/riadattabilita-modules.png" alt="Module components" class="gallery-img" />
+  <img src="/images/projects/memoe/riadattabilita-retrofit-1.png" alt="Retrofit variant A" class="gallery-img" />
+  <img src="/images/projects/memoe/riadattabilita-retrofit-2.png" alt="Retrofit variant B" class="gallery-img" />
+  <img src="/images/projects/memoe/riadattabilita-modules.png" alt="Module components" class="gallery-img" />
+  <img src="/images/projects/memoe/riadattabilita-retrofit-1.png" alt="Retrofit variant A" class="gallery-img" />
+  <img src="/images/projects/memoe/riadattabilita-retrofit-2.png" alt="Retrofit variant B" class="gallery-img" />
+</div>
 
-<p>Applied to digital displays on platforms and in carriages. The motion system uses the same timing as the identity — fast in, hold, fast out. Nothing lingers. The interface assumes the passenger is always about to leave.</p>
+<h2>AGADEXO</h2>
+
+<p>Repetitive heavy lifting is the leading cause of long-term injury in delivery work. AGADEXO is a wearable exoskeleton designed as a structural component of the vehicle rather than a stored accessory. It replaces the passenger seat entirely.</p>
+
+<p>A single hydraulic arm activates the moment the cab door opens. The exoskeleton pivots outward and descends to standing height. The driver steps into it without bending down or reaching inside. Door closes. Mechanism resets. Under ten seconds.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/memoe/agadexo-deploy-1.png" alt="Door closed" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+      <div style="padding:12px 16px;font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Door closed</div>
+    </div>
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/memoe/agadexo-deploy-2.png" alt="Hydraulic extends" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+      <div style="padding:12px 16px;font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Hydraulic extends</div>
+    </div>
+    <div>
+      <img src="/images/projects/memoe/agadexo-deploy-3.png" alt="Driver steps in" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+      <div style="padding:12px 16px;font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Driver steps in</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Assisted load</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">&gt; 30 kg</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Quick releases</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Shoulder · Torso · Arm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Deploy time</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">under 10 sec</div>
+    </div>
+  </div>
+
+</div>
+
+<p>Three quick-release buckles at the shoulder, torso and arm allow emergency removal at any point. The safety system is redundant by design; any single buckle is sufficient to disengage the unit completely. Integration was studied against the AGADEXO shoulder unit by Agade and the ABB SWIFTI CRB 1100 cobot.</p>
+
+<h2>The parcel label</h2>
+
+<p>Existing shipping labels were designed entirely for machine reading. Dense, visually undifferentiated, and difficult to parse at a glance; they work for sensors but not for people. A new label system was designed from scratch around a chromatic coding logic compliant with ISO 3864 and OSHA 1910.145.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--line);">
+    <div style="background:#89C273;padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Regular</div>
+      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#89C273</div>
+    </div>
+    <div style="background:#FCC046;padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Fragile</div>
+      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#FCC046</div>
+    </div>
+    <div style="background:#006FB9;padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Temp.</div>
+      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#006FB9</div>
+    </div>
+    <div style="background:#D70911;padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Urgent</div>
+      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#D70911</div>
+    </div>
+    <div style="background:#2D2926;padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Hazard</div>
+      <div style="font-family:var(--mono);font-size:.6rem;color:#FCC046;font-weight:500;">#2D2926</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;border-right:1px solid var(--line);">
+      <img src="/images/projects/memoe/label-anatomy.png" alt="Label anatomy" style="width:100%;display:block;border-radius:4px;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;gap:16px;justify-content:center;">
+      <div>
+        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Top</div>
+        <div style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-m);">Delivery type in large format. Readable from across the bay.</div>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:16px;">
+        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Middle</div>
+        <div style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-m);">Company logo, order code, sender and recipient addresses.</div>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:16px;">
+        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Bottom</div>
+        <div style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-m);">ISO-compliant condition icons and barcode for automated reading.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:18px 20px;">
+    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Coordinated tape</div>
+    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">A matching adhesive tape repeats the order code across all seams in the same colour. The parcel is identifiable even when stacked or partially covered.</div>
+  </div>
+
+</div>
+
+<style>
+  .label-gallery { display:flex; flex-wrap:nowrap; gap:16px; margin:80px 0; justify-content:center; align-items:flex-start; }
+  .label-gallery img { height:clamp(120px, 25vw, 250px); width:auto; object-fit:contain; flex-shrink:0; }
+  @media (max-width: 700px) {
+    .label-gallery { flex-wrap:wrap; }
+    .label-gallery img { height:clamp(120px, 28vw, 250px); flex-basis:30%; }
+  }
+</style>
+
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin:80px 0;align-items:flex-start;justify-content:center;">
+  <img src="/images/photoprojects/me-moe/etichetta (1).png" alt="Regular parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
+  <img src="/images/photoprojects/me-moe/etichetta (2).png" alt="Fragile parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
+  <img src="/images/photoprojects/me-moe/etichetta (3).png" alt="Urgent parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
+  <img src="/images/photoprojects/me-moe/etichetta (4).png" alt="Regular parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
+  <img src="/images/photoprojects/me-moe/etichetta (5).png" alt="Fragile parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
+</div>
+
+<h2>The app</h2>
+
+<p>The service around Me-Moe was designed as a complete UX flow: booking, confirmation and tracking. The mental model is ride-hailing applied to parcels. The user does not fill a shipping form; they book a vehicle.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/memoe/app-login.png" alt="Login screen" style="width:100%;display:block;aspect-ratio:9/16;object-fit:cover;" />
+    </div>
+    <div>
+      <img src="/images/projects/memoe/app-home.png" alt="Home screen" style="width:100%;display:block;aspect-ratio:9/16;object-fit:cover;" />
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Booking</div>
+      <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Destination, parcel type, weight and dimensions go in first. The app shows available Me-Moe units filtered by proximity and time slot. One tap confirms.</div>
+    </div>
+    <div style="padding:28px 24px;">
+      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Tracking</div>
+      <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Live vehicle position on a map with current route and estimated arrival. Standard hub-to-hub tracking tells you where the parcel has been. This tells you where it is right now.</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Flows</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Book · Track · Return</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Login</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Google · Microsoft · Meta</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Palette</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Hot pink · Lime · Teal</div>
+    </div>
+  </div>
+
+</div>
+
+<h2>The process</h2>
+
+<p>The project moved from a SWOT analysis of the proximity logistics sector through vehicle sizing, cargo bay structure, technology integration, label design and digital service design. Each layer was built in response to a specific failure identified in the research phase.</p>
+
+<p>Modelling and rendering in Blender. Graphic and label design in Adobe Illustrator. Layout in Adobe InDesign. FLUX.1 for contextual reference imagery.</p>
+
+<p>Supervised by Consuelo Nava with co-supervisors Carmine L. Quistelli and Domenico Lucanto.</p>
 
       </div>
 
       
       <div class="proj-gallery">
         <div class="proj-gallery-label">Process &amp; images</div>
-        <div class="proj-gallery-grid" data-cols="2">
+        <div class="proj-gallery-grid" data-cols="3">
           
           <img
-            src="/images/photoprojects/ciao1.png"
-            alt="System overview"
+            src="/images/projects/memoe/render-street.png"
+            alt="Me-Moe in context"
             class="gallery-img wide"
             loading="lazy"
           />
           
           <img
-            src="/images/photoprojects/ciao2.png"
-            alt="Signage detail"
+            src="/images/projects/memoe/render-front.png"
+            alt="Front three-quarter"
             class="gallery-img "
             loading="lazy"
           />
           
           <img
-            src="/images/photoprojects/maxresdefault.jpg"
-            alt="Motion application"
+            src="/images/projects/memoe/render-rear-open.png"
+            alt="Rear open"
             class="gallery-img "
             loading="lazy"
           />
           
           <img
-            src="/images/photoprojects/ciao2.png"
-            alt="Color system"
+            src="/images/projects/memoe/render-night.png"
+            alt="Night render"
+            class="gallery-img "
+            loading="lazy"
+          />
+          
+          <img
+            src="/images/projects/memoe/render-colors.png"
+            alt="Fleet variants: SDA, UPS, DHL"
+            class="gallery-img wide"
+            loading="lazy"
+          />
+          
+          <img
+            src="/images/projects/memoe/tecnici.png"
+            alt="Technical drawings"
             class="gallery-img wide"
             loading="lazy"
           />
@@ -795,28 +1017,28 @@
           
           <span class="proj-meta-item">
             <span class="proj-meta-item-label">client</span>
-            <span class="proj-meta-item-value">Self-initiated</span>
+            <span class="proj-meta-item-value">Università degli studi Mediterranea di Reggio Calabria</span>
           </span>
           
 
           
           <span class="proj-meta-item">
             <span class="proj-meta-item-label">role</span>
-            <span class="proj-meta-item-value">Visual Designer</span>
+            <span class="proj-meta-item-value">Product Design, UX Design, Graphic Design</span>
           </span>
           
 
           
           <span class="proj-meta-item">
             <span class="proj-meta-item-label">materials</span>
-            <span class="proj-meta-item-value">Typography, Signage, Motion</span>
+            <span class="proj-meta-item-value">Steel, Composite Panels, Electronics</span>
           </span>
           
 
           
           <span class="proj-meta-item">
             <span class="proj-meta-item-label">duration</span>
-            <span class="proj-meta-item-value">3 months</span>
+            <span class="proj-meta-item-value">Thesis project</span>
           </span>
           
 
@@ -825,7 +1047,7 @@
           
           <span class="proj-meta-item">
             <span class="proj-meta-item-label">year</span>
-            <span class="proj-meta-item-value">2023</span>
+            <span class="proj-meta-item-value">2024</span>
           </span>
           
         </div>
@@ -833,24 +1055,24 @@
 
       <div class="proj-col-title">
         
-        <a href="/projects/ciaone/" class="proj-nav-arrow">↑</a>
+        <a href="/projects/2regal-3-0/" class="proj-nav-arrow">↑</a>
         
 
         <div class="proj-title-wrapper">
           <div class="proj-title-scroll desktop-only">
-            <h1 class="proj-title">Transit Identity</h1>
-            <h1 class="proj-title">Transit Identity</h1>
-            <h1 class="proj-title">Transit Identity</h1>
-            <h1 class="proj-title">Transit Identity</h1>
-            <h1 class="proj-title">Transit Identity</h1>
+            <h1 class="proj-title">Me-Moe</h1>
+            <h1 class="proj-title">Me-Moe</h1>
+            <h1 class="proj-title">Me-Moe</h1>
+            <h1 class="proj-title">Me-Moe</h1>
+            <h1 class="proj-title">Me-Moe</h1>
           </div>
           <div class="proj-title-scroll mobile-only">
-            <h1 class="proj-title">Transit Identity</h1>
+            <h1 class="proj-title">Me-Moe</h1>
           </div>
         </div>
 
         
-        <a href="/projects/ah-ok/" class="proj-nav-arrow">↓</a>
+        <a href="/projects/4phasmos/" class="proj-nav-arrow">↓</a>
         
       </div>
 
@@ -859,11 +1081,11 @@
 </main>
 
 
-<a href="/projects/ciaone/" class="proj-mob-prev">←</a>
+<a href="/projects/2regal-3-0/" class="proj-mob-prev">←</a>
 
 
 
-<a href="/projects/ah-ok/" class="proj-mob-next">→</a>
+<a href="/projects/4phasmos/" class="proj-mob-next">→</a>
 
 
 <div class="lightbox" id="lightbox">
@@ -886,10 +1108,10 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
   const TARGET = {
-    teal:  '#E8490F',
-    bg:    '#f3c3b0',
-    white: '#eeb9a4',
-    line:  '#E8490F',
+    teal:  '#245db2',
+    bg:    '#c9cfd9',
+    white: '#e8eaed',
+    line:  '#245db2',
   };
   function hexToRgb(hex) {
     const h = hex.replace('#','');

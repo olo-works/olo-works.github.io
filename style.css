@@ -7,11 +7,14 @@
   --sans:'Syne',sans-serif; --mono:'IBM Plex Mono',monospace;
   --ease:cubic-bezier(.4,0,.2,1);
   --rail-w: 48px;
+  --fs-micro:   .58rem;
+  --fs-caption: .68rem;
+  --fs-prose:   .78rem;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;cursor:none;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;cursor:none;}
 
 /* ── Cursor ───────────────────────────────── */
 #cursor{position:fixed;width:10px;height:10px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
@@ -104,7 +107,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
 
 .r-text {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 10.5px;
   letter-spacing: .13em;
   text-transform: uppercase;
   color: #AAAAAA;
@@ -170,20 +173,20 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
 /* ── Layout ───────────────────────────────── */
 .page-main { padding: 0 48px 0 80px; position: relative; z-index: 1; min-height: 100vh; }
 .page-inner { max-width: 1500px; margin: 0 auto; padding: 24px 0; }
-.page-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.page-label { font-family: var(--mono); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .page-label::before { content: ''; display: block; width: 24px; height: 2px; background: var(--teal); }
 .page-title { font-size: clamp(2.2rem,4vw,3.2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
 .page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
 
 /* ── Buttons ──────────────────────────────── */
-.btn-primary { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; background: var(--teal); color: var(--white); padding: 14px 28px; border-radius: 4px; transition: background .2s; display: inline-block; }
+.btn-primary { font-family: var(--mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; background: var(--teal); color: var(--white); padding: 14px 28px; border-radius: 4px; transition: background .2s; display: inline-block; }
 .btn-primary:hover { background: var(--teal-d); }
-.btn-secondary { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--line); color: var(--muted); padding: 14px 28px; border-radius: 4px; transition: border-color .2s, color .2s; display: inline-block; }
+.btn-secondary { font-family: var(--mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--line); color: var(--muted); padding: 14px 28px; border-radius: 4px; transition: border-color .2s, color .2s; display: inline-block; }
 .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
 
 /* ── Tags ─────────────────────────────────── */
 .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tag { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); background: rgba(43,173,184,.1); padding: 4px 10px; border-radius: 2px; text-decoration: none; }
+.tag { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); background: rgba(43,173,184,.1); padding: 4px 10px; border-radius: 2px; text-decoration: none; }
 
 /* ── Footer ───────────────────────────────── */
 .site-footer { position: relative; z-index: 1; border-top: 1px solid var(--line); padding: 28px 48px 28px 80px; display: none; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); background: var(--white); }
@@ -298,5 +301,4 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16p
   background: var(--teal);
   color: var(--white);
   border-color: var(--teal);
-
-}
+  }

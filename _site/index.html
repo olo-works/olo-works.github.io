@@ -24,10 +24,11 @@
       border-right: 1px solid var(--line);
       height: 100vh;
       overflow: hidden;
+      font-size: 1rem;
     }
     .home-label {
       font-family: var(--mono);
-      font-size: .58rem;
+      font-size: .58em;
       letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--teal);
@@ -40,7 +41,7 @@
     }
     .home-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
     .home-name {
-      font-size: clamp(2.6rem, 4vw, 4rem);
+      font-size: clamp(2.6em, 4vw, 4em);
       font-weight: 800;
       letter-spacing: -.04em;
       line-height: .92;
@@ -52,7 +53,7 @@
     .home-name span { color: var(--teal); display: block; }
     .home-desc {
       font-family: var(--mono);
-      font-size: .75rem;
+      font-size: .75em;
       line-height: 1.85;
       color: var(--muted);
       max-width: 320px;
@@ -65,7 +66,7 @@
       align-items: center;
       gap: 8px;
       font-family: var(--mono);
-      font-size: .58rem;
+      font-size: .58em;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--muted);
@@ -104,38 +105,43 @@
       flex-direction: column;
       gap: 12px;
       padding: 32px 0 32px 28px;
-      max-width: 280px;
+      width: fit-content;
+      will-change: transform;
     }
+
     /* ── Image card ── */
     .img-item {
       display: block;
-      width: 100%;
+      width: fit-content;
       text-decoration: none;
       position: relative;
       flex-shrink: 0;
     }
 
     .img-item-photo {
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-    border: 1.5px solid var(--line);
-    transition: border-color .25s;
-    position: relative;
-    min-height: 160px;
-  }
+      border-radius: 8px;
+      overflow: hidden;
+      width: 100%;
+      border: 1.5px solid var(--line);
+      transition: border-color .25s;
+      position: relative;
+      display: inline-block;
+      /* No fixed height — images dictate their own height */
+    }
     .img-item:hover .img-item-photo {
       border-color: var(--teal);
     }
-    .img-item-photo img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
-      transition: transform .5s var(--ease);
-      position: relative;
-      z-index: 1;
-}
+      .img-item-photo img {
+        width: auto;
+        height: auto;
+        max-width: 360px;
+        max-height: 420px;
+        display: block;
+        object-fit: contain;
+        transition: transform .5s var(--ease);
+        position: relative;
+        z-index: 1;
+    }
     
     .img-item:hover .img-item-photo img { transform: scale(1.04); }
 
@@ -145,11 +151,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 2em;
       color: var(--teal);
       opacity: .3;
       background: var(--teal-xl);
       z-index: 0;
+      min-height: 120px;
     }
 
     /* ── Side info panel ── */
@@ -162,6 +169,7 @@
       transform: translateX(-8px);
       transition: opacity .25s var(--ease), transform .25s var(--ease);
       pointer-events: none;
+      font-size: 1rem;
     }
     .img-item:hover .img-side-info {
       opacity: 1;
@@ -169,14 +177,14 @@
     }
     .img-side-num {
       font-family: var(--mono);
-      font-size: .52rem;
+      font-size: .52em;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--teal);
       margin-bottom: 6px;
     }
     .img-side-title {
-      font-size: .95rem;
+      font-size: .95em;
       font-weight: 700;
       letter-spacing: -.02em;
       color: var(--ink);
@@ -185,7 +193,7 @@
     }
     .img-side-meta {
       font-family: var(--mono);
-      font-size: .55rem;
+      font-size: .55em;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -193,7 +201,7 @@
     }
     .img-side-link {
       font-family: var(--mono);
-      font-size: .55rem;
+      font-size: .55em;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--teal);
@@ -263,8 +271,7 @@
 
   <div class="home-left">
     <div class="home-label">Simone Nicolò</div>
-    <h1 class="home-name">Welcome!</span></h1>
-    <p class="home-desc">Independent product and industrial designer. Objects built to last, forms that earn their place.</p>
+    <h1 class="home-name">W<span style="color:var(--teal);display:inline">elc</span>ome!</span></h1>
     <div class="home-status">
       <span class="status-dot"></span>
       Available for projects
@@ -276,149 +283,165 @@
   </div>
 
   <div class="home-right" id="home-right">
-    <div class="scroll-track" id="scroll-track">
-
-      
-      
-      <a href="/projects/chair-01/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/photoprojects/ciao1.png" alt="Folded Steel Chair" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">01</div>
-          <div class="img-side-title">Folded Steel Chair</div>
-          <div class="img-side-meta">Product · 2024</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/personal-identity/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/photoprojects/logosquare.svg" alt="My Personal Identity" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">02</div>
-          <div class="img-side-title">My Personal Identity</div>
-          <div class="img-side-meta">Visual · 2025</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/ciaone/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/photoprojects/ace-combat-3-electrosphere-logo.png" alt="Transit System Identity" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">03</div>
-          <div class="img-side-title">Transit System Identity</div>
-          <div class="img-side-meta">Visual · 2023</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/transit-identity/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/photoprojects/ciao1.png" alt="Transit Identity" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">04</div>
-          <div class="img-side-title">Transit Identity</div>
-          <div class="img-side-meta">Visual · 2023</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/ah-ok/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">05</div>
-          <div class="img-side-title">ah ok Collection</div>
-          <div class="img-side-meta">Product · 2023</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/me-moe/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">06</div>
-          <div class="img-side-title">Me-Moe</div>
-          <div class="img-side-meta">Product · 2024</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/phasmos/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/projects/phasmos/cover.png" alt="Phasmos" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">07</div>
-          <div class="img-side-title">Phasmos</div>
-          <div class="img-side-meta">Product · 2024</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-      <a href="/projects/regal-3-0/" class="img-item">
-        <div class="img-item-photo">
-          
-          <img src="/images/projects/regal/cover.png" alt="Regal 3.0" loading="lazy"/>
-          
-          <div class="img-placeholder">◈</div>
-        </div>
-        <div class="img-side-info">
-          <div class="img-side-num">08</div>
-          <div class="img-side-title">Regal 3.0</div>
-          <div class="img-side-meta">Product · 2024</div>
-          <div class="img-side-link">View →</div>
-        </div>
-      </a>
-      
-
-    </div>
+    <div class="scroll-track" id="scroll-track"></div>
   </div>
 
 </div>
+
+<!-- Collect ALL images from every project (cover + gallery) -->
+<script>
+  // Build a flat array of { src, title, tag, year, url } from all projects
+  const ALL_IMAGES = [
+    
+    
+      
+      { src: "/images/photoprojects/ahok/POSTER.png", title: "ah ok Collection", tag: "Product", year: "2023", url: "/projects/1ah-ok/" },
+      
+      
+        
+      { src: "/images/projects/ahok/render-full.png", title: "ah ok Collection", tag: "Product", year: "2023", url: "/projects/1ah-ok/" },
+        
+      { src: "/images/projects/ahok/context-day.png", title: "ah ok Collection", tag: "Product", year: "2023", url: "/projects/1ah-ok/" },
+        
+      { src: "/images/projects/ahok/context-night.png", title: "ah ok Collection", tag: "Product", year: "2023", url: "/projects/1ah-ok/" },
+        
+      { src: "/images/projects/ahok/tecnici.png", title: "ah ok Collection", tag: "Product", year: "2023", url: "/projects/1ah-ok/" },
+        
+      
+    
+      
+      { src: "/images/projects/regal/cover.png", title: "Regal 3.0", tag: "Product", year: "2024", url: "/projects/2regal-3-0/" },
+      
+      
+        
+      { src: "/images/projects/regal/render-context-1.png", title: "Regal 3.0", tag: "Product", year: "2024", url: "/projects/2regal-3-0/" },
+        
+      { src: "/images/projects/regal/render-context-2.png", title: "Regal 3.0", tag: "Product", year: "2024", url: "/projects/2regal-3-0/" },
+        
+      { src: "/images/projects/regal/render-context-3.png", title: "Regal 3.0", tag: "Product", year: "2024", url: "/projects/2regal-3-0/" },
+        
+      { src: "/images/projects/regal/render-shelving.png", title: "Regal 3.0", tag: "Product", year: "2024", url: "/projects/2regal-3-0/" },
+        
+      { src: "/images/projects/regal/render-living.png", title: "Regal 3.0", tag: "Product", year: "2024", url: "/projects/2regal-3-0/" },
+        
+      
+    
+      
+      { src: "/images/photoprojects/me-moe/setting7.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+      
+      
+        
+      { src: "/images/projects/memoe/render-street.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+        
+      { src: "/images/projects/memoe/render-front.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+        
+      { src: "/images/projects/memoe/render-rear-open.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+        
+      { src: "/images/projects/memoe/render-night.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+        
+      { src: "/images/projects/memoe/render-colors.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+        
+      { src: "/images/projects/memoe/tecnici.png", title: "Me-Moe", tag: "Product", year: "2024", url: "/projects/3me-moe/" },
+        
+      
+    
+      
+      { src: "/images/projects/phasmos/cover.png", title: "Phasmos", tag: "Product", year: "2024", url: "/projects/4phasmos/" },
+      
+      
+        
+      { src: "/images/projects/phasmos/render-riposo.png", title: "Phasmos", tag: "Product", year: "2024", url: "/projects/4phasmos/" },
+        
+      { src: "/images/projects/phasmos/render-estesa.png", title: "Phasmos", tag: "Product", year: "2024", url: "/projects/4phasmos/" },
+        
+      { src: "/images/projects/phasmos/render-mimesi.png", title: "Phasmos", tag: "Product", year: "2024", url: "/projects/4phasmos/" },
+        
+      { src: "/images/projects/phasmos/tecnici.png", title: "Phasmos", tag: "Product", year: "2024", url: "/projects/4phasmos/" },
+        
+      
+    
+      
+      { src: "/images/projects/metis/cover.png", title: "Metis", tag: "Product", year: "2025", url: "/projects/5metis/" },
+      
+      
+        
+      { src: "/images/projects/metis/render-lounge.png", title: "Metis", tag: "Product", year: "2025", url: "/projects/5metis/" },
+        
+      { src: "/images/projects/metis/render-table.png", title: "Metis", tag: "Product", year: "2025", url: "/projects/5metis/" },
+        
+      { src: "/images/projects/metis/render-footrest.png", title: "Metis", tag: "Product", year: "2025", url: "/projects/5metis/" },
+        
+      { src: "/images/projects/metis/dimensioni.png", title: "Metis", tag: "Product", year: "2025", url: "/projects/5metis/" },
+        
+      
+    
+      
+      { src: "/images/projects/sun-dial/cover.png", title: "Sun Dial", tag: "Product", year: "2025", url: "/projects/6sun-dial/" },
+      
+      
+        
+      { src: "/images/projects/sun-dial/render-collection.png", title: "Sun Dial", tag: "Product", year: "2025", url: "/projects/6sun-dial/" },
+        
+      { src: "/images/projects/sun-dial/render-whisky.png", title: "Sun Dial", tag: "Product", year: "2025", url: "/projects/6sun-dial/" },
+        
+      { src: "/images/projects/sun-dial/render-globe.png", title: "Sun Dial", tag: "Product", year: "2025", url: "/projects/6sun-dial/" },
+        
+      { src: "/images/projects/sun-dial/render-detail.png", title: "Sun Dial", tag: "Product", year: "2025", url: "/projects/6sun-dial/" },
+        
+      
+    
+      
+      { src: "/images/photoprojects/logosquare.svg", title: "No°1 Concept Car", tag: "Visual", year: "2025", url: "/projects/9no1-conceptcar/" },
+      
+      
+        
+      { src: "/images/photoprojects/logo-primary.png", title: "No°1 Concept Car", tag: "Visual", year: "2025", url: "/projects/9no1-conceptcar/" },
+        
+      { src: "/images/photoprojects/color-system.png", title: "No°1 Concept Car", tag: "Visual", year: "2025", url: "/projects/9no1-conceptcar/" },
+        
+      { src: "/images/photoprojects/type-specimen.png", title: "No°1 Concept Car", tag: "Visual", year: "2025", url: "/projects/9no1-conceptcar/" },
+        
+      { src: "/images/photoprojects/stationery.png", title: "No°1 Concept Car", tag: "Visual", year: "2025", url: "/projects/9no1-conceptcar/" },
+        
+      
+    
+      
+      { src: "/images/photoprojects/logosquare.svg", title: "My Personal Identity", tag: "Visual", year: "2026", url: "/projects/10personal-identity-copy/" },
+      
+      
+        
+      { src: "/images/photoprojects/logo-primary.png", title: "My Personal Identity", tag: "Visual", year: "2026", url: "/projects/10personal-identity-copy/" },
+        
+      { src: "/images/photoprojects/color-system.png", title: "My Personal Identity", tag: "Visual", year: "2026", url: "/projects/10personal-identity-copy/" },
+        
+      { src: "/images/photoprojects/type-specimen.png", title: "My Personal Identity", tag: "Visual", year: "2026", url: "/projects/10personal-identity-copy/" },
+        
+      { src: "/images/photoprojects/stationery.png", title: "My Personal Identity", tag: "Visual", year: "2026", url: "/projects/10personal-identity-copy/" },
+        
+      
+    
+  ];
+</script>
 
 <script src="/main.js"></script>
 <script>
   const track      = document.getElementById('scroll-track');
   const rightPanel = document.getElementById('home-right');
   const isMobile   = () => window.innerWidth <= 900;
-  const allItems   = Array.from(track.children);
-  const viewH      = window.innerHeight;
 
-  let offset   = 0;
-  let speed    = 0;
-  let paused   = false;
-  let phase    = 'waiting'; // waiting → scrolling → clearing
+  // ── Animation state ──────────────────────────────────────────────────────
+  let offset    = 0;       // current translateY in px
+  let speed     = 0;       // current speed (px/frame), eases toward targetSpeed
+  let targetSpeed = 0;     // what speed we want to be at
+  const AUTO_SPEED = 1.4;  // normal scrolling speed
 
+  // ── Hover state ───────────────────────────────────────────────────────────
+  let hovered = false;
+
+  // ── Wheel manual scroll ───────────────────────────────────────────────────
+  let wheelTarget = null;
+
+  // ── Shuffle helper ────────────────────────────────────────────────────────
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -428,63 +451,94 @@
     return a;
   }
 
+  // ── Build a card from an image object ─────────────────────────────────────
+  function makeCard(img, index) {
+    const a = document.createElement('a');
+    a.href = img.url;
+    a.className = 'img-item';
+    a.innerHTML = `
+      <div class="img-item-photo">
+        <img src="${img.src}" alt="${img.title}" loading="lazy"/>
+        <div class="img-placeholder">◈</div>
+      </div>
+      <div class="img-side-info">
+        <div class="img-side-num">0${index + 1}</div>
+        <div class="img-side-title">${img.title}</div>
+        <div class="img-side-meta">${img.tag} · ${img.year}</div>
+        <div class="img-side-link">View →</div>
+      </div>`;
+    return a;
+  }
+
+  // ── Load a fresh batch of cards ───────────────────────────────────────────
   function loadBatch() {
     track.innerHTML = '';
-    offset = viewH; // start below viewport
+
+    const batch = shuffle(ALL_IMAGES).slice(0, 5);
+    batch.forEach((img, i) => track.appendChild(makeCard(img, i)));
+
+    // Start below viewport, then ease into scrolling
+    offset = window.innerHeight;
     track.style.transform = `translateY(${offset}px)`;
     speed = 0;
+    wheelTarget = null;
 
-    shuffle(allItems).slice(0, 4).forEach(item => {
-      track.appendChild(item.cloneNode(true));
-    });
-
-    // short pause then start scrolling up
-    phase = 'waiting';
-    setTimeout(() => {
-      speed = 1.4;
-      phase = 'scrolling';
-    }, 600);
+    // Small delay before starting to scroll
+    setTimeout(() => { targetSpeed = AUTO_SPEED; }, 600);
   }
+
+  // ── Main animation loop ───────────────────────────────────────────────────
+  let reloading = false;
 
   function animate() {
-  if (!isMobile()) {
-    if (paused) {
-      if (manualTarget !== null) {
-        offset += (manualTarget - offset) * 0.08;
-        track.style.transform = `translateY(${offset}px)`;
-      }
-    } else {
-      manualTarget = null;
-      if (phase === 'scrolling') {
+    if (!isMobile()) {
+
+      if (hovered) {
+        // Ease speed toward 0 — smooth stop
+        speed += (0 - speed) * 0.08;
+
+        if (wheelTarget !== null) {
+          offset += (wheelTarget - offset) * 0.1;
+          if (Math.abs(wheelTarget - offset) < 0.5) wheelTarget = null;
+        } else {
+          offset -= speed;
+        }
+
+      } else {
+        // Ease speed back to AUTO_SPEED — smooth resume
+        speed += (AUTO_SPEED - speed) * 0.06;
+        wheelTarget = null;
         offset -= speed;
-        track.style.transform = `translateY(${offset}px)`;
-        if (offset <= -(track.scrollHeight)) {
-          phase = 'clearing';
-          setTimeout(loadBatch, 400);
+
+        // Reload when fully past viewport — never break the rAF loop
+        if (!reloading && offset <= -(track.scrollHeight)) {
+          reloading = true;
+          speed = 0;
+          setTimeout(() => { loadBatch(); reloading = false; }, 400);
         }
       }
+
+      track.style.transform = `translateY(${offset}px)`;
     }
+
+    requestAnimationFrame(animate); // always keep the loop alive
   }
-  requestAnimationFrame(animate);
-}
 
-  rightPanel.addEventListener('mouseenter', () => paused = true);
-  rightPanel.addEventListener('mouseleave', () => paused = false);
+  // ── Events ────────────────────────────────────────────────────────────────
+  rightPanel.addEventListener('mouseenter', () => { hovered = true; });
+  rightPanel.addEventListener('mouseleave', () => { hovered = false; wheelTarget = null; });
 
-  let manualTarget = null;
+  rightPanel.addEventListener('wheel', (e) => {
+    if (!hovered) return;
+    e.preventDefault();
+    if (wheelTarget === null) wheelTarget = offset;
+    wheelTarget -= e.deltaY * 0.5;
+  }, { passive: false });
 
-rightPanel.addEventListener('wheel', (e) => {
-  if (!paused) return;
-  e.preventDefault();
-  if (manualTarget === null) manualTarget = offset;
-  manualTarget -= e.deltaY * 0.5;
-}, { passive: false });
-
+  // ── Init ──────────────────────────────────────────────────────────────────
   if (!isMobile()) {
     loadBatch();
     animate();
-  } else {
-    allItems.forEach(el => track.appendChild(el.cloneNode(true)));
   }
 </script>
 </body>
