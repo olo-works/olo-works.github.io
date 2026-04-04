@@ -112,6 +112,21 @@ const allImages = [
     
   
     
+      { src: "/images/photoprojects/logosquare.svg", title: "Pattern", tag: "Visual", href: "/projects/7pattern/" },
+    
+    
+      
+        { src: "/images/photoprojects/logo-primary.png", title: "Pattern", tag: "Visual", href: "/projects/7pattern/" },
+      
+        { src: "/images/photoprojects/color-system.png", title: "Pattern", tag: "Visual", href: "/projects/7pattern/" },
+      
+        { src: "/images/photoprojects/type-specimen.png", title: "Pattern", tag: "Visual", href: "/projects/7pattern/" },
+      
+        { src: "/images/photoprojects/stationery.png", title: "Pattern", tag: "Visual", href: "/projects/7pattern/" },
+      
+    
+  
+    
       { src: "/images/photoprojects/logosquare.svg", title: "No°1 Concept Car", tag: "Visual", href: "/projects/9no1-conceptcar/" },
     
     
