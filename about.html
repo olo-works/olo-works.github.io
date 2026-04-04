@@ -47,11 +47,11 @@
     .intro-tagline { font-family: var(--mono); font-size: var(--fs-caption); letter-spacing: .14em; color: var(--muted); }
     .s-intro-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); }
     .s-intro-title .teal { color: var(--teal); }
-    .intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; }
+    .intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; padding: 0 80px 0 120px; }
     .intro-left-cluster { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
     .intro-stats { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
     .intro-dot { color: var(--teal); }
-    .intro-scroll-hint { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+    .intro-scroll-hint { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 500; font-size: 1.1rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
     .scroll-line { width: 28px; height: 1px; background: var(--teal); opacity: .4; position: relative; overflow: hidden; }
     .scroll-line::after { content:''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--teal); animation: scan 1.6s ease-in-out infinite; }
     @keyframes scan { 0%{left:-100%} 100%{left:100%} }
@@ -83,7 +83,46 @@
     .s-intro-title    { animation: fadeUp .7s ease both; animation-delay: .18s; }
     .intro-desc       { animation: fadeUp .6s ease both; animation-delay: .45s; }
     .intro-bottom     { animation: fadeIn .7s ease both; animation-delay: .7s; }
+    /* ════ 01 INTRO — marquee rows ════ */
+  .marquee-row {
+    display: flex;
+    align-items: baseline;
+    overflow: hidden;
+    padding: 10px 0;
+    cursor: default;
+  }
 
+  .marquee-track {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    will-change: transform;
+  }
+  .phrase-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .3em;
+    padding: 0 36px;
+    border-right: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .phrase-main {
+    font-size: clamp(3.5rem, 5.5vw, 5rem);   
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .phrase-main.teal { color: var(--teal); }
+  .phrase-sub {
+    font-family: var(--mono);
+    font-size: clamp(2.2rem, 4.5vw, 4.8rem);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    align-self: center;
+    margin-left: 6px;
+}
     /* ════════════════ 02 DISCIPLINES ════════════════ */
     .s-work { flex-direction: column; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
     .s-work-intro { font-family: var(--mono); font-size: var(--fs-prose); line-height: 1.8; color: var(--muted); max-width: 560px; }
@@ -358,8 +397,11 @@
     @media(max-width:900px) {
       .about-section { padding: 64px 24px; }
       .s-intro { padding-bottom: 48px; }
-      .intro-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
-
+      .intro-bottom { flex-direction: column; gap: 36px; align-items: center; padding: 0; }
+      .intro-left-cluster, 
+      .intro-right-cluster { 
+        align-items: center;
+      }
       .disciplines-wrap { display: flex; flex-direction: column; }
       .discipline-col { border-right: none; border-bottom: 1px solid var(--line); padding: 20px 16px; cursor: pointer; align-items: flex-start; text-align: left; }
       .discipline-col:last-child { border-bottom: none; }
@@ -466,32 +508,29 @@
 
 <main class="page-main" style="padding:0;">
 
-  <!-- ══ 01 INTRO ══ -->
-  <section class="about-section s-intro">
-    <div class="intro-tagline">One object. Every constraint. Always the right fit.</div>
-    <h1 class="s-intro-title">There's<br>always<br>one <span class="teal">for all.</span></h1>
-   
-    <div class="intro-bottom">
-      <div class="intro-left-cluster">
-        <div class="intro-stats">
-          <span>5+ years</span><span class="intro-dot">·</span>
-          <span>3 disciplines</span><span class="intro-dot">·</span>
-          <span>Italy-based</span>
-        </div>
-        <div class="intro-scroll-hint">
-          <div class="scroll-line"></div>
-          <span>Scroll to explore</span>
-        </div>
+<!-- ══ 01 INTRO ══ -->
+
+<div id="intro-rows-area" style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;overflow:hidden;margin:24px 0;"></div>
+
+  <div class="intro-bottom">
+    <div class="intro-left-cluster">
+      <div class="intro-stats">
+        <span>5+ years</span><span class="intro-dot">·</span>
+        <span>3 disciplines</span><span class="intro-dot">·</span>
+        <span>Italy-based</span>
       </div>
-      <div class="intro-right-cluster">
-        <div class="intro-clock" id="intro-clock">00:00:00</div>
-        <div class="intro-status">
-          <span class="status-dot" id="status-dot"></span>
-          <span id="status-text">Online</span> · Italy
-        </div>
+      <div class="intro-scroll-hint">
+        <span>Scroll to explore</span>
       </div>
     </div>
-  </section>
+    <div class="intro-right-cluster">
+      <div class="intro-clock" id="intro-clock">00:00:00</div>
+      <div class="intro-status">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text">Online</span> · Italy
+      </div>
+    </div>
+  </div>
 
   <!-- ══ 02 DISCIPLINES ══ -->
   <section class="about-section s-work" style="flex-direction:column;">
@@ -1045,24 +1084,177 @@
 <script src="/main.js"></script>
 <script>
   // ── Live clock ──
-  function updateClock() {
-    const el = document.getElementById('intro-clock');
-    const statusText = document.getElementById('status-text');
-    const statusDot = document.getElementById('status-dot');
-    if (!el) return;
-    const now = new Date();
-    const italy = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Rome' }));
-    const h = italy.getHours();
-    const m = String(italy.getMinutes()).padStart(2,'0');
-    const s = String(italy.getSeconds()).padStart(2,'0');
-    el.textContent = `${String(h).padStart(2,'0')}:${m}:${s}`;
-    const online = h >= 8 && h < 23;
-    statusDot.style.background = online ? '#4ade80' : '#94a3b8';
-    statusText.textContent = online ? 'Online' : 'Offline';
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
+  function updateClock(){
+  const el = document.getElementById('intro-clock');
+  const st = document.getElementById('status-text');
+  const sd = document.getElementById('status-dot');
+  if (!el) return;
+  const italy = new Date(new Date().toLocaleString('en-US', {timeZone:'Europe/Rome'}));
+  const h = italy.getHours();
+  el.textContent = `${String(h).padStart(2,'0')}:${String(italy.getMinutes()).padStart(2,'0')}:${String(italy.getSeconds()).padStart(2,'0')}`;
+  const online = h >= 8 && h < 23;
+  sd.style.background = online ? '#4ade80' : '#94a3b8';
+  st.textContent = online ? 'Online' : 'Offline';
+}
+updateClock();
+setInterval(updateClock, 1000);
+// ══════════════════════════════════════════
+//  INTRO MARQUEE : edit PHRASES to customise
+// ══════════════════════════════════════════
+// ══════════════════════════════════════════
+//  INTRO MARQUEE : edit PHRASES to customise
+// ══════════════════════════════════════════
+const PHRASES = [
+  "One object.",
+  "Every constraint.",
+  "Always the right fit.",
+  "Born south.",
+  "Grown everywhere.",
+  "Delivering a solution that stays out of its own way",
+  "Recording light and timing with a Nikon D7000",
+  "Prototyping furniture and consumer goods",
+  "Exploring the cultural impact of car styling",
+  "Documenting more than five years of work across three disciplines",
+  "Studying the interface between the body and the vehicle",
+  "Physically in Tuscany, but mentally in a 2005 Fiat Panda Japanese brochure",
+  "Il Gelato di Cesare",
+  "Current favorite HEX code: #2BADB8",
+  "Steam ID: ceramicsmelter",
+  "Objects that solve more than one problem at a time.",
+  "High heat in August is the ultimate stress test for any functional object.",
+  "\"Arrangiarsi\" mindset into a clean CAD workspace.",
+  "Some say im born in the most beautiful km of Italy",
+  "Using a Nikon D7000 to document a world that is moving too fast",
+  "A career built on the intersection of a rocky coastline and a computer screen",
+  "Designing objects that look like they belong in a high budget sci-fi from 2001",
+  "A future where every surface is chrome and every button is a physical click",
+  "I spend my weekends looking at car parts I cannot afford to install yet",
+  "Operating with tools like Rhino 8 and Blender",
+  "Communicating in Italian, English and French",
+  "Mid-century Italian modernism",
+  "Specializing in the development of enclosures for consumer electronics",
+  "Mixing audio and samples within Ableton Live",
+  "I need scissors! 61!",
+  "Eliminating the non-essential",
+  "rcaronn was such a cool era",
+  "Blender Render",
+  "Man i love cars",
+  "Man i love vehicles",
+  "Quella volta che",
+  "Every design decision must defend its existence",
+  "Gran Turismo 4 still has my favourite UI of all time"
+];
 
+const NUM_ROWS        = 8;
+const SLOW_FACTOR     = 0.08;
+const BASE_SEQ_LENGTH = 12; // How many phrases before the loop repeats
+
+// ── COLOR PALETTE ──
+// The script will alternate through these colors sequentially
+const PALETTE = [
+  'var(--ink)',    // Default dark text
+  'var(--teal)',   // Your primary accent
+  'var(--muted)',  // Subtle grey
+];
+
+(function initMarquee(){
+  const area = document.getElementById('intro-rows-area');
+  if (!area) return;
+
+  const buckets = Array.from({length: NUM_ROWS}, () => {
+    const seq = [];
+    for (let i = 0; i < BASE_SEQ_LENGTH; i++) {
+      // 1. Grab a random phrase
+      const text = PHRASES[Math.floor(Math.random() * PHRASES.length)];
+      // 2. Assign a color from the palette in a strict alternating cycle
+      const color = PALETTE[i % PALETTE.length]; 
+      seq.push({ text, color });
+    }
+    return seq;
+  });
+  
+  const rows = [];
+
+  buckets.forEach((phrases, ri) => {
+    const baseSpeed = 28 + Math.random() * 62;
+    const dir       = ri % 2 === 0 ? 1 : -1;
+
+    const rowEl = document.createElement('div');
+    rowEl.className = 'marquee-row';
+    const track = document.createElement('div');
+    track.className = 'marquee-track';
+
+    function makeItems() {
+      const frag = document.createDocumentFragment();
+      phrases.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'phrase-item';
+      
+        const main = document.createElement('span');
+        main.className = 'phrase-main';
+        main.style.color = p.color; // Apply the alternating color here
+        main.textContent = p.text;
+        
+        item.appendChild(main);
+        frag.appendChild(item);
+      });
+      return frag;
+    }
+
+    for (let k = 0; k < 30; k++) {
+      track.appendChild(makeItems());
+    }
+    
+    rowEl.appendChild(track);
+    area.appendChild(rowEl);
+
+    rows.push({ rowEl, track, baseSpeed, dir, pos: 0, hovered: false, currentSpeed: baseSpeed, singleW: 0 });
+    rowEl.addEventListener('mouseenter', () => rows[ri].hovered = true);
+    rowEl.addEventListener('mouseleave', () => rows[ri].hovered = false);
+  });
+
+  function updateWidths() {
+    rows.forEach(row => {
+      const children = Array.from(row.track.children);
+      row.singleW = children.slice(0, BASE_SEQ_LENGTH).reduce((s, c) => s + c.getBoundingClientRect().width, 0);
+      if (row.pos >= row.singleW) {
+        row.pos = row.pos % row.singleW || 0; 
+      }
+    });
+  }
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    updateWidths();
+    
+    rows.forEach(row => { row.pos = Math.random() * row.singleW; });
+    window.addEventListener('resize', updateWidths);
+
+    let last = null;
+    function tick(ts) {
+      if (!last) last = ts;
+      const dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+
+      rows.forEach(row => {
+        const target = row.hovered ? row.baseSpeed * SLOW_FACTOR : row.baseSpeed;
+        row.currentSpeed += (target - row.currentSpeed) * 0.06;
+        row.pos += row.dir * row.currentSpeed * dt;
+        
+        if (row.pos >= row.singleW) row.pos -= row.singleW;
+        if (row.pos < 0) row.pos += row.singleW;
+        
+        row.track.style.transform = `translateX(${-row.pos}px)`;
+      });
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }));
+})();
+</script> 
+</script>
+
+<script>
   // ── Map ──
   const mapDefaultEl = document.getElementById('map-default');
   const pins = document.querySelectorAll('.map-city-pin');
@@ -1097,25 +1289,17 @@
   }
 
   pins.forEach(pin => {
-    pin.addEventListener('mouseenter', () => {
-      if (window.innerWidth > 900) activatePin(pin);
-    });
-    pin.addEventListener('mouseleave', () => {
-      if (window.innerWidth > 900) resetMap();
-    });
+    pin.addEventListener('mouseenter', () => { if (window.innerWidth > 900) activatePin(pin); });
+    pin.addEventListener('mouseleave', () => { if (window.innerWidth > 900) resetMap(); });
     pin.addEventListener('click', (e) => {
       e.stopPropagation();
       clearTimeout(mobileResetTimer);
       activatePin(pin);
-      if (activePin && window.innerWidth <= 900) {
-        mobileResetTimer = setTimeout(resetMap, 30000);
-      }
+      if (activePin && window.innerWidth <= 900) mobileResetTimer = setTimeout(resetMap, 30000);
     });
   });
 
-  document.addEventListener('click', () => {
-    if (window.innerWidth <= 900) { clearTimeout(mobileResetTimer); resetMap(); }
-  });
+  document.addEventListener('click', () => { if (window.innerWidth <= 900) { clearTimeout(mobileResetTimer); resetMap(); } });
 
   const mapSection = document.getElementById('map-section');
   new IntersectionObserver((entries) => {
@@ -1137,12 +1321,8 @@
   let langTimer = null;
 
   langItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      if (window.innerWidth > 900) { helloWord.textContent = item.dataset.hello; helloWord.classList.add('teal'); }
-    });
-    item.addEventListener('mouseleave', () => {
-      if (window.innerWidth > 900) helloWord.classList.remove('teal');
-    });
+    item.addEventListener('mouseenter', () => { if (window.innerWidth > 900) { helloWord.textContent = item.dataset.hello; helloWord.classList.add('teal'); } });
+    item.addEventListener('mouseleave', () => { if (window.innerWidth > 900) helloWord.classList.remove('teal'); });
   });
 
   function cycleLang() {
@@ -1209,14 +1389,11 @@
     col.addEventListener('click', () => { if (window.innerWidth <= 900) col.classList.toggle('open'); });
   });
 
-  // ── Map dot wave scroll effect ──
+  // ── Map dot wave ──
   const SVG_CX = (-4.5 + 34.5) / 2;
   const SVG_CY = (-4.32 + 40.32) / 2;
-
   const DOT_BASE = 0.44;
   const DOT_MIN  = 0.20;
-  const DOT_RX   = 0.11;
-
   const mapDots = Array.from(document.querySelectorAll('#italy-dotmap rect'));
 
   const dotData = mapDots.map(r => {
@@ -1231,28 +1408,26 @@
   dotData.forEach(d => { d.normDist = d.dist / maxDist; });
 
   mapDots.forEach(r => {
-    r.setAttribute('width',  String(DOT_BASE));
+    r.setAttribute('width', String(DOT_BASE));
     r.setAttribute('height', String(DOT_BASE));
-    r.setAttribute('rx', String(DOT_RX));
-    r.setAttribute('ry', String(DOT_RX));
+    r.setAttribute('rx', '0.11');
+    r.setAttribute('ry', '0.11');
   });
 
   function updateDotWave() {
     if (window.innerWidth <= 900) return;
     const sec = document.getElementById('map-section');
     if (!sec) return;
-    const rect   = sec.getBoundingClientRect();
-    const vh     = window.innerHeight;
-    const secCY  = rect.top + rect.height / 2;
-    const raw    = Math.abs(secCY - vh / 2) / (vh / 2);
+    const rect = sec.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const secCY = rect.top + rect.height / 2;
+    const raw = Math.abs(secCY - vh / 2) / (vh / 2);
     const global = Math.min(raw, 1);
-
     dotData.forEach(({ r, normDist }) => {
-      const wave  = Math.max(0, global - normDist * 0.45) / (1 - normDist * 0.45);
-      const clamped = Math.min(wave, 1);
-      const size  = DOT_BASE - clamped * (DOT_BASE - DOT_MIN);
-      const s     = Math.round(size * 1000) / 1000;
-      r.setAttribute('width',  s);
+      const wave = Math.max(0, global - normDist * 0.45) / (1 - normDist * 0.45);
+      const size = DOT_BASE - Math.min(wave, 1) * (DOT_BASE - DOT_MIN);
+      const s = Math.round(size * 1000) / 1000;
+      r.setAttribute('width', s);
       r.setAttribute('height', s);
     });
   }
