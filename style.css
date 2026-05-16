@@ -139,6 +139,37 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18p
   letter-spacing: .18em;
 }
 
+.r-lang {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 8px;
+}
+.lang-btn {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid rgba(43,173,184,.5);
+  color: var(--muted);
+  border-radius: 4px;
+  padding: 6px 0;
+  cursor: none;
+  transition: all .2s;
+  width: 28px;
+  text-align: center;
+}
+.lang-btn.active {
+  background: var(--teal);
+  color: var(--white);
+  border-color: var(--teal);
+}
+[data-lang="it"] .lang.en { display: none; }
+[data-lang="en"] .lang.it { display: none; }
+
 /* ── Mobile pill ──────────────────────────── */
 #mob {
   display: none;
@@ -183,6 +214,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18p
 .btn-primary:hover { background: var(--teal-d); }
 .btn-secondary { font-family: var(--mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--line); color: var(--muted); padding: 14px 28px; border-radius: 4px; transition: border-color .2s, color .2s; display: inline-block; }
 .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+
 
 /* ── Tags ─────────────────────────────────── */
 .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -273,34 +306,4 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18p
 }
 
 .mob-item.active::before { content: none; }
-
-.r-lang {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding-bottom: 8px;
-}
-.lang-btn {
-  font-family: var(--mono);
-  font-size: .58rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  background: none;
-  border: 1px solid rgba(43,173,184,.5);
-  color: var(--muted);
-  border-radius: 4px;
-  padding: 6px 0;
-  cursor: none;
-  transition: all .2s;
-  width: 28px;
-  text-align: center;
-}
-.lang-btn.active {
-  background: var(--teal);
-  color: var(--white);
-  border-color: var(--teal);
-  }
-
-
+} 
