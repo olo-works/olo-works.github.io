@@ -306,3 +306,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18p
 
 .mob-item.active::before { content: none; }
 } 
+
+@media(min-width:901px) {
+  #lang-bar-btn { display: none; }
+}
