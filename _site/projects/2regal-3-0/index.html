@@ -36,7 +36,21 @@
   <div class="r-group bottom">
     <a href="/contact.html" class="r-item "><div class="r-icon">C</div><span class="r-text">Contact</span></a>
   </div>
-  
+  <div class="r-lang">
+  <button class="lang-btn" id="btn-it" onclick="setLang('it')">IT</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<script>
+  function setLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('data-lang', lang);
+    document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  }
+  const saved = localStorage.getItem('lang') || 'it';
+  setLang(saved);
+</script>
 </nav>
 
 <div id="mob">
