@@ -83,7 +83,7 @@
   .proj-gallery     { animation: fadeUp .6s var(--ease) .3s both; }
   .proj-right       { animation: fadeIn .6s var(--ease) .1s both; }
 
-  html, body { height: 100%; }
+  html, body { height: 100%; overflow-x: hidden; }
 
   /* ── Main grid ── */
   .proj-wrap {
@@ -227,7 +227,7 @@
     transition: transform .4s var(--ease);
 }
   .gallery-img:hover { transform: scale(1.015); }
-  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: 21/9; }
+  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: unset; }
   .gallery-img.tall   { aspect-ratio: 4/5; }
   .gallery-img.square { aspect-ratio: 1; }
 
@@ -511,6 +511,8 @@
     .proj-wrap {
       grid-template-columns: 1fr;
       padding-left: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     .proj-right {
@@ -615,12 +617,13 @@
       white-space: normal;
     }
 
-    .proj-meta-item-label { font-size: .58rem; letter-spacing: .14em; }
-    .proj-meta-item-value { font-size: .85rem; letter-spacing: normal; text-align: left; }
+    .proj-meta-item-label { font-size: var(--fs-micro); letter-spacing: .14em; }
+    .proj-meta-item-value { font-size: var(--fs-caption); letter-spacing: normal; text-align: left; }
 
     .proj-left {
       padding: 32px 0 100px;
-      overflow-x: visible;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     .proj-cover {
@@ -650,7 +653,7 @@
     .proj-back-mobile {
       display: block;
       font-family: var(--mono);
-      font-size: .58rem;
+      font-size: var(--fs-micro);
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--muted);
@@ -896,16 +899,16 @@
           />
           
           <img
-            src="/images/projects/ahok/context-night.png"
+            src="/images/photoprojects/ahok/091813192702515.65dfb743a6836.png"
             alt="Setting, night light"
-            class="gallery-img wide"
+            class="gallery-img "
             loading="lazy"
           />
           
           <img
-            src="/images/projects/ahok/tecnici.png"
-            alt="Technical drawings"
-            class="gallery-img wide"
+            src="/images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png"
+            alt="Detail K"
+            class="gallery-img "
             loading="lazy"
           />
           
@@ -960,7 +963,7 @@
 
       <div class="proj-col-title">
         
-        <span class="proj-nav-arrow disabled">↑</span>
+        <a href="/projects/2regal-3-0/" class="proj-nav-arrow">↑</a>
         
 
         <div class="proj-title-wrapper">
@@ -977,7 +980,7 @@
         </div>
 
         
-        <a href="/projects/2regal-3-0/" class="proj-nav-arrow">↓</a>
+        <span class="proj-nav-arrow disabled">↓</span>
         
       </div>
 
@@ -986,11 +989,11 @@
 </main>
 
 
-<span class="proj-mob-prev disabled">←</span>
+<a href="/projects/2regal-3-0/" class="proj-mob-prev">←</a>
 
 
 
-<a href="/projects/2regal-3-0/" class="proj-mob-next">→</a>
+<span class="proj-mob-next disabled">→</span>
 
 
 <div class="lightbox" id="lightbox">

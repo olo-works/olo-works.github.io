@@ -3,10 +3,10 @@ layout: project
 title: "My Personal Identity"
 order: 10
 year: 2026
-client: "Self-initiated"
+client: "Myself"
 role: "Brand Designer"
 materials: "Typography, Color, Print, Digital"
-duration: "6 weeks"
+duration: "Indefinite"
 tags: [Visual]
 cover: /images/photoprojects/logosquare.svg
 excerpt_text: "A personal brand built from a name fragment and the lightweight, playful futurism of Y2K interface design."
@@ -120,72 +120,72 @@ Two typefaces, hard split by role.
 
 <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
 
-  <div style="padding:20px 24px;border-bottom:1px solid var(--line);background:var(--teal-xl);">
-    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);">Syne 800 — Display</div>
+  <div style="padding:20px 24px;border-bottom:1px solid var(--line);">
+    <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);">Syne 800 — Display</div>
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
     <div style="padding:28px 24px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Hero / Page title</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Hero / Page title</div>
       <div style="font-family:var(--sans);font-size:clamp(3rem,7vw,5.5rem);font-weight:800;letter-spacing:-.05em;line-height:.9;color:var(--ink);">olo<br>works.</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:10px;">clamp(3rem, 7vw, 5.5rem) · tracking -.05em</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:10px;">clamp(3rem, 7vw, 5.5rem) · tracking -.05em</div>
     </div>
     <div style="padding:28px 24px;">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Section title</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Section title</div>
       <div style="font-family:var(--sans);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.04em;line-height:.95;color:var(--ink);">The object<br>earns its place.</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:10px;">clamp(1.8rem, 3vw, 2.8rem) · tracking -.04em</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:10px;">clamp(1.8rem, 3vw, 2.8rem) · tracking -.04em</div>
     </div>
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
     <div style="padding:24px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Project title</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Project title</div>
       <div style="font-family:var(--sans);font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink);">Transit<br>Identity</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">clamp(2rem, 3.5vw, 3rem) · tracking -.03em</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:8px;">clamp(2rem, 3.5vw, 3rem) · tracking -.03em</div>
     </div>
     <div style="padding:24px;">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Subheading</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Subheading</div>
       <div style="font-family:var(--sans);font-size:1.4rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink);">Where it comes from</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">1.4rem · tracking -.03em</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:8px;">1.4rem · tracking -.03em</div>
     </div>
   </div>
 
-  <div style="padding:20px 24px;border-bottom:1px solid var(--line);background:var(--teal-xl);">
-    <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);">IBM Plex Mono — Interface</div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="padding:24px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Section label</div>
-      <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:8px;"><span style="display:block;width:20px;height:1.5px;background:var(--teal);flex-shrink:0;"></span>Typography</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.56rem · tracking .22em · uppercase</div>
-    </div>
-    <div style="padding:24px;">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Navigation label</div>
-      <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);">About</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.6rem · tracking .16em · uppercase</div>
-    </div>
+  <div style="padding:20px 24px;border-bottom:1px solid var(--line);">
+    <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);">IBM Plex Mono — Interface</div>
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
     <div style="padding:24px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Meta row</div>
-      <div style="font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--ink);">Year · 2025</div>
-      <div style="font-family:var(--mono);font-size:.65rem;font-weight:500;color:var(--ink);">Role · Brand Designer</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.65rem · weight 500</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Section label</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.22em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:8px;"><span style="display:block;width:20px;height:1.5px;background:var(--ink);flex-shrink:0;"></span>Typography</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:8px;">.68rem · tracking .22em · uppercase</div>
     </div>
     <div style="padding:24px;">
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Body / Description</div>
-      <div style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--muted);">Software is a means,<br>not an end.</div>
-      <div style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);margin-top:8px;">.72rem · weight 400 · line-height 1.8</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Navigation label</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-prose);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);">About</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:8px;">.78rem · tracking .16em · uppercase</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:24px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Meta row</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-prose);font-weight:500;color:var(--ink);">Year · 2025</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-prose);font-weight:500;color:var(--ink);">Role · Brand Designer</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:8px;">.78rem · weight 500</div>
+    </div>
+    <div style="padding:24px;">
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Body / Description</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-prose);line-height:1.8;color:var(--ink);">Software is a means,<br>not an end.</div>
+      <div style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);margin-top:8px;">.78rem · weight 400 · line-height 1.8</div>
     </div>
   </div>
 
   <div style="padding:20px 24px;">
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--teal-xl);color:var(--teal);padding:4px 10px;border-radius:2px;">Visual</span>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--teal-xl);color:var(--teal);padding:4px 10px;border-radius:2px;">Identity</span>
-      <span style="font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;color:var(--muted);">.58rem · tracking .1em · tag pill</span>
+      <span style="font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ink);padding:4px 10px;border-radius:2px;border:1px solid var(--line);">Visual</span>
+      <span style="font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--ink);padding:4px 10px;border-radius:2px;border:1px solid var(--line);">Identity</span>
+      <span style="font-family:var(--mono);font-size:var(--fs-caption);letter-spacing:.1em;color:var(--muted);">.58rem · tracking .1em · tag pill</span>
     </div>
   </div>
 

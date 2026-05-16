@@ -33,7 +33,7 @@ layout: default
   .proj-gallery     { animation: fadeUp .6s var(--ease) .3s both; }
   .proj-right       { animation: fadeIn .6s var(--ease) .1s both; }
 
-  html, body { height: 100%; }
+  html, body { height: 100%; overflow-x: hidden; }
 
   /* ── Main grid ── */
   .proj-wrap {
@@ -177,7 +177,7 @@ layout: default
     transition: transform .4s var(--ease);
 }
   .gallery-img:hover { transform: scale(1.015); }
-  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: 21/9; }
+  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: unset; }
   .gallery-img.tall   { aspect-ratio: 4/5; }
   .gallery-img.square { aspect-ratio: 1; }
 
@@ -461,6 +461,8 @@ layout: default
     .proj-wrap {
       grid-template-columns: 1fr;
       padding-left: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     .proj-right {
@@ -565,12 +567,13 @@ layout: default
       white-space: normal;
     }
 
-    .proj-meta-item-label { font-size: .58rem; letter-spacing: .14em; }
-    .proj-meta-item-value { font-size: .85rem; letter-spacing: normal; text-align: left; }
+    .proj-meta-item-label { font-size: var(--fs-micro); letter-spacing: .14em; }
+    .proj-meta-item-value { font-size: var(--fs-caption); letter-spacing: normal; text-align: left; }
 
     .proj-left {
       padding: 32px 0 100px;
-      overflow-x: visible;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     .proj-cover {
@@ -600,7 +603,7 @@ layout: default
     .proj-back-mobile {
       display: block;
       font-family: var(--mono);
-      font-size: .58rem;
+      font-size: var(--fs-micro);
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--muted);
@@ -754,8 +757,8 @@ layout: default
       </div>
 
       <div class="proj-col-title">
-        {% if prev_proj %}
-        <a href="{{ prev_proj.url }}" class="proj-nav-arrow">↑</a>
+        {% if next_proj %}
+        <a href="{{ next_proj.url }}" class="proj-nav-arrow">↑</a>
         {% else %}
         <span class="proj-nav-arrow disabled">↑</span>
         {% endif %}
@@ -773,8 +776,8 @@ layout: default
           </div>
         </div>
 
-        {% if next_proj %}
-        <a href="{{ next_proj.url }}" class="proj-nav-arrow">↓</a>
+        {% if prev_proj %}
+        <a href="{{ prev_proj.url }}" class="proj-nav-arrow">↓</a>
         {% else %}
         <span class="proj-nav-arrow disabled">↓</span>
         {% endif %}
@@ -784,14 +787,14 @@ layout: default
   </div>
 </main>
 
-{% if prev_proj %}
-<a href="{{ prev_proj.url }}" class="proj-mob-prev">←</a>
+{% if next_proj %}
+<a href="{{ next_proj.url }}" class="proj-mob-prev">←</a>
 {% else %}
 <span class="proj-mob-prev disabled">←</span>
 {% endif %}
 
-{% if next_proj %}
-<a href="{{ next_proj.url }}" class="proj-mob-next">→</a>
+{% if prev_proj %}
+<a href="{{ prev_proj.url }}" class="proj-mob-next">→</a>
 {% else %}
 <span class="proj-mob-next disabled">→</span>
 {% endif %}

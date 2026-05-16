@@ -83,7 +83,7 @@
   .proj-gallery     { animation: fadeUp .6s var(--ease) .3s both; }
   .proj-right       { animation: fadeIn .6s var(--ease) .1s both; }
 
-  html, body { height: 100%; }
+  html, body { height: 100%; overflow-x: hidden; }
 
   /* ── Main grid ── */
   .proj-wrap {
@@ -227,7 +227,7 @@
     transition: transform .4s var(--ease);
 }
   .gallery-img:hover { transform: scale(1.015); }
-  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: 21/9; }
+  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: unset; }
   .gallery-img.tall   { aspect-ratio: 4/5; }
   .gallery-img.square { aspect-ratio: 1; }
 
@@ -511,6 +511,8 @@
     .proj-wrap {
       grid-template-columns: 1fr;
       padding-left: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     .proj-right {
@@ -615,12 +617,13 @@
       white-space: normal;
     }
 
-    .proj-meta-item-label { font-size: .58rem; letter-spacing: .14em; }
-    .proj-meta-item-value { font-size: .85rem; letter-spacing: normal; text-align: left; }
+    .proj-meta-item-label { font-size: var(--fs-micro); letter-spacing: .14em; }
+    .proj-meta-item-value { font-size: var(--fs-caption); letter-spacing: normal; text-align: left; }
 
     .proj-left {
       padding: 32px 0 100px;
-      overflow-x: visible;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     .proj-cover {
@@ -650,7 +653,7 @@
     .proj-back-mobile {
       display: block;
       font-family: var(--mono);
-      font-size: .58rem;
+      font-size: var(--fs-micro);
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--muted);
@@ -716,7 +719,7 @@
     <div class="proj-left">
       <div class="proj-cover">
         
-          <img src="/images/projects/regal/cover.png" alt="Regal 3.0"/>
+          <img src="/images/photoprojects/Regal/POSTER 3.png" alt="Regal 3.0"/>
         
       </div>
 
@@ -947,35 +950,28 @@
         <div class="proj-gallery-grid" data-cols="2">
           
           <img
-            src="/images/projects/regal/render-context-1.png"
+            src="/images/photoprojects/Regal/render 1.png"
             alt="Regal as desk and bookcase"
             class="gallery-img wide"
             loading="lazy"
           />
           
           <img
-            src="/images/projects/regal/render-context-2.png"
-            alt="Detail, drawer access"
-            class="gallery-img "
-            loading="lazy"
-          />
-          
-          <img
-            src="/images/projects/regal/render-context-3.png"
+            src="/images/photoprojects/Regal/RENDER 2.png"
             alt="Working position"
             class="gallery-img "
             loading="lazy"
           />
           
           <img
-            src="/images/projects/regal/render-shelving.png"
-            alt="Open shelving configuration"
+            src="/images/photoprojects/Regal/RENDER 3.png"
+            alt="Deep shelving configuration"
             class="gallery-img "
             loading="lazy"
           />
           
           <img
-            src="/images/projects/regal/render-living.png"
+            src="/images/photoprojects/Regal/RENDER 4.png"
             alt="Living room context"
             class="gallery-img wide"
             loading="lazy"
@@ -1032,7 +1028,7 @@
 
       <div class="proj-col-title">
         
-        <a href="/projects/1ah-ok/" class="proj-nav-arrow">↑</a>
+        <a href="/projects/3phasmos/" class="proj-nav-arrow">↑</a>
         
 
         <div class="proj-title-wrapper">
@@ -1049,7 +1045,7 @@
         </div>
 
         
-        <a href="/projects/3me-moe/" class="proj-nav-arrow">↓</a>
+        <a href="/projects/1ah-ok/" class="proj-nav-arrow">↓</a>
         
       </div>
 
@@ -1058,11 +1054,11 @@
 </main>
 
 
-<a href="/projects/1ah-ok/" class="proj-mob-prev">←</a>
+<a href="/projects/3phasmos/" class="proj-mob-prev">←</a>
 
 
 
-<a href="/projects/3me-moe/" class="proj-mob-next">→</a>
+<a href="/projects/1ah-ok/" class="proj-mob-next">→</a>
 
 
 <div class="lightbox" id="lightbox">

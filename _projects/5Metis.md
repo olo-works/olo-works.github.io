@@ -8,7 +8,7 @@ role: "Product Design"
 materials: "Wood, Aluminium, Microfibre/Cotton"
 duration: "12 Months"
 tags: [Product]
-cover: /images/projects/metis/cover.png
+cover: /images/photoprojects/metis/cover.png
 accent: "#E8522A"
 accent_dark: "#B83D18"
 accent_bg: "#F2EBE8"
@@ -16,15 +16,15 @@ accent_white: "#FAF5F3"
 excerpt_text: "A modular furniture system whose lounge chair, footrest, and table configurations — along with a sculptural room divider — reshape themselves around the rhythms of any space."
 gallery_cols: 2
 gallery:
-  - src: /images/projects/metis/render-lounge.png
-    alt: "Lounge chair configuration"
+  - src: /images/photoprojects/metis/CONTESTO 1.png
+    alt: "Context render"
     layout: wide
-  - src: /images/projects/metis/render-table.png
-    alt: "Table configuration"
-  - src: /images/projects/metis/render-footrest.png
+  - src: /images/photoprojects/metis/CONTESTO 2.png
+    alt: "Table"
+  - src: /images/photoprojects/metis/CONTESTO 3.png
     alt: "Footrest configuration"
-  - src: /images/projects/metis/dimensioni.png
-    alt: "Technical drawings"
+  - src: /images/photoprojects/metis/COLORI1.png
+    alt: "Multicolor Renders"
     layout: wide
 ---
 

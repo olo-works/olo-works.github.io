@@ -8,7 +8,7 @@ role: "Brand Designer"
 materials: "Typography, Color, Print, Digital"
 duration: "6 weeks"
 tags: [Visual]
-cover: /images/photoprojects/logosquare.svg
+cover: /images/photoprojects/no1concept/amb2.png
 excerpt_text: "A personal brand built from a name fragment and the lightweight, playful futurism of Y2K interface design."
 gallery_cols: 2
 gallery:

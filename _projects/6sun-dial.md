@@ -8,7 +8,7 @@ role: "Product Design"
 materials: "Crystal Glass"
 duration: "Design Project"
 tags: [Product]
-cover: /images/projects/sun-dial/cover.png
+cover: /images/photoprojects/sun dial/RENDER 5.png
 accent: "#00B4D8"
 accent_dark: "#0077A8"
 accent_bg: "#E0F4FA"
@@ -130,7 +130,7 @@ The collection is articulated across six pieces in two macro-categories: a more 
 <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
     <div style="border-right:1px solid var(--line);">
-      <img src="/images/projects/sun-dial/no1-daylight1.png" alt="No.1 Daylight 1" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
+      <img src="/images/photoprojects/sun dial/1.png" alt="No.1 Daylight 1" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
     </div>
     <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
       <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The founding piece. A classic whisky tumbler with a circular cross-section and the solar-arc engraving pattern distributed symmetrically across both sides of the glass wall. The sandblasted zones occupy the flanks; the engraved, transparent zone crests at the centre top.</p>
@@ -264,5 +264,5 @@ The collection is articulated across six pieces in two macro-categories: a more 
 </div>
 
 <div class="proj-gallery-grid" data-cols="2" style="margin:20px 0;">
-  <img src="/images/projects/sun-dial/render-lineup.png" alt="Full collection lineup" class="gallery-img wide"/>
+  <img src="/images/photoprojects/sun dial/RENDER 4.png" alt="Full collection lineup" class="gallery-img wide"/>
 </div>

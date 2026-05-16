@@ -8,7 +8,7 @@ role: "Product Design, Prototyping"
 materials: "Plywood, 3D Printed PLA"
 duration: "12 Months Course"
 tags: [Product, Furniture]
-cover: /images/projects/regal/cover.png
+cover: /images/photoprojects/Regal/POSTER 3.png
 accent: "#C8920A"
 accent_dark: "#9E7008"
 accent_bg: "#EDE4CC"
@@ -16,16 +16,14 @@ accent_white: "#F6F2E6"
 excerpt_text: "A modular shelving system that reconfigures between bookcase, desk, and open shelving wall. Designed, detailed, and taken through to a 3D-printed prototype of its locking component."
 gallery_cols: 2
 gallery:
-  - src: /images/projects/regal/render-context-1.png
+  - src: /images/photoprojects/Regal/render 1.png
     alt: "Regal as desk and bookcase"
     layout: wide
-  - src: /images/projects/regal/render-context-2.png
-    alt: "Detail, drawer access"
-  - src: /images/projects/regal/render-context-3.png
+  - src: /images/photoprojects/Regal/RENDER 2.png
     alt: "Working position"
-  - src: /images/projects/regal/render-shelving.png
-    alt: "Open shelving configuration"
-  - src: /images/projects/regal/render-living.png
+  - src: /images/photoprojects/Regal/RENDER 3.png
+    alt: "Deep shelving configuration"
+  - src: /images/photoprojects/Regal/RENDER 4.png
     alt: "Living room context"
     layout: wide
 ---

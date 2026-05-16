@@ -4,9 +4,9 @@ console.log('main.js loaded, rail:', document.getElementById('rail'));
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
-if (cur && ring) {
-  // Wrap cursor elements in a teal difference-blend container
-  // The wrapper inverts the page colors, the cursor elements are teal inside it
+const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+if (cur && ring && !isTouchDevice) {
   const cursorStyle = document.createElement('style');
   cursorStyle.textContent = `
     *, *::before, *::after { cursor: none !important; }
@@ -23,16 +23,12 @@ if (cur && ring) {
   `;
   document.head.appendChild(cursorStyle);
 
-  // Move cursor elements into the wrapper
   const wrap = document.createElement('div');
   wrap.id = 'cursor-wrap';
   document.body.appendChild(wrap);
   wrap.appendChild(cur);
   wrap.appendChild(ring);
 
-  // Correct inverses so difference blend outputs teal on light bg, white on dark:
-  // dot base  = #D0E0E5 - #2BADB8 = #A5332D  → produces #2BADB8 on site bg
-  // ring base = #D0E0E5 - #E8F2F4 = #E8EEF1  → produces #E8F2F4 on site bg
   cur.style.background    = '#A5332D';
   cur.style.width         = '10px';
   cur.style.height        = '10px';
@@ -61,7 +57,6 @@ if (cur && ring) {
   let clicking    = false;
   let onClickable = false;
 
-  // Zoom on actual click (mousedown/up), not on hover
   document.addEventListener('mousedown', () => {
     clicking = true;
     cur.style.transform  = 'translate(-50%,-50%) scale(1.8)';
@@ -73,14 +68,11 @@ if (cur && ring) {
     ring.style.transform = 'translate(-50%,-50%) scale(1)';
   });
 
-  // Morph to rounded square on clickable elements
   function onEnter() {
     onClickable = true;
-    // Dot: rounded square
     cur.style.borderRadius = '4px';
     cur.style.width        = '16px';
     cur.style.height       = '16px';
-    // Ring: rounded square, slightly larger
     ring.style.borderRadius = '12px';
     ring.style.width        = '40px';
     ring.style.height       = '40px';
@@ -88,17 +80,14 @@ if (cur && ring) {
 
   function onLeave() {
     onClickable = false;
-    // Dot: back to circle
     cur.style.borderRadius = '50%';
     cur.style.width        = '10px';
     cur.style.height       = '10px';
-    // Ring: back to circle
     ring.style.borderRadius = '50%';
     ring.style.width        = '36px';
     ring.style.height       = '36px';
   }
 
-  // Attach to all current and future clickable elements via delegation
   document.addEventListener('mouseover', e => {
     if (e.target.closest('a, button, [role="button"], .tool-logo, .map-city-pin, .discipline-col, .interest-card, .lang-item, .img-item')) {
       onEnter();
@@ -110,11 +99,9 @@ if (cur && ring) {
     }
   });
 
-  // Add transition to cursor and ring for smooth morphing
   cur.style.transition  = 'width .18s, height .18s, border-radius .18s, transform .12s';
   ring.style.transition = 'width .22s, height .22s, border-radius .22s, left .0s, top .0s, transform .14s';
 
-  // Animation loop — dot snaps, ring lags
   (function anim() {
     cur.style.left  = mx + 'px';
     cur.style.top   = my + 'px';
@@ -124,6 +111,11 @@ if (cur && ring) {
     ring.style.top  = ry + 'px';
     requestAnimationFrame(anim);
   })();
+
+} else if (cur && ring) {
+  // Touch device — hide custom cursor and restore default
+  cur.style.display  = 'none';
+  ring.style.display = 'none';
 }
 
 // ── Rail ───────────────────────────────────────────────────────────────────

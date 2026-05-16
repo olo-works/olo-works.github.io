@@ -22,12 +22,12 @@ gallery:
   - src: /images/projects/ahok/context-day.png
     alt: "Setting, daylight"
     layout: wide
-  - src: /images/projects/ahok/context-night.png
+  - src: /images/photoprojects/ahok/091813192702515.65dfb743a6836.png
     alt: "Setting, night light"
-    layout: wide
-  - src: /images/projects/ahok/tecnici.png
-    alt: "Technical drawings"
-    layout: wide
+  
+  - src: /images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png
+    alt: "Detail K"
+
 ---
 
 A system of four objects for the living room. Not conceived individually but as parts of a whole, and the whole is called *ah ok* because that's what you say when something works without needing an explanation.
