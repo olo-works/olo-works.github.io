@@ -1,4 +1,4 @@
----x
+---
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>olo-works</title>
   <link rel="stylesheet" href="/style.css"/>
+  <script>document.documentElement.setAttribute('data-lang', localStorage.getItem('lang') || 'it');</script>
   <style>
     html, body { height: 100%; overflow: hidden; }
 
@@ -236,16 +237,24 @@
 </div>
 
 <div class="home-wrap">
-
-  <div class="home-left">
-    <div class="home-label">Simone Nicolò</div>
-    <h1 class="home-name">W<span style="color:var(--teal);display:inline">elc</span>ome!</span></h1>
-    <div class="home-status">
-
-    </div>
-    <div class="home-actions">
-      <a href="/projects.html" class="btn-primary">View Work</a>
-      <a href="/about.html" class="btn-secondary">About</a>
+    <div class="home-left">
+      <div class="home-label">Simone Nicolò</div>
+      <div class="lang it">
+        <h1 class="home-name">B<span style="color:var(--teal);display:inline">env</span>enuto!</h1>
+      </div>
+      <div class="lang en">
+        <h1 class="home-name">W<span style="color:var(--teal);display:inline">elc</span>ome!</h1>
+      </div>
+      <div class="home-actions">
+        <div class="lang it">
+          <a href="/projects.html" class="btn-primary">Lavori</a>
+          <a href="/about.html" class="btn-secondary">Chi sono</a>
+        </div>
+        <div class="lang en">
+          <a href="/projects.html" class="btn-primary">View Work</a>
+          <a href="/about.html" class="btn-secondary">About</a>
+        </div>
+      </div>
     </div>
   </div>
 

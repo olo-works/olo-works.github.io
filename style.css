@@ -167,9 +167,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18p
   color: var(--white);
   border-color: var(--teal);
 }
-[data-lang="it"] .lang.en { display: none; }
-[data-lang="en"] .lang.it { display: none; }
-
+[data-lang="it"] .lang.en { display: none !important; }
+[data-lang="en"] .lang.it { display: none !important; }
 /* ── Mobile pill ──────────────────────────── */
 #mob {
   display: none;

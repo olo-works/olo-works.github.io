@@ -36,26 +36,42 @@
   <div class="r-group bottom">
     <a href="/contact.html" class="r-item "><div class="r-icon">C</div><span class="r-text">Contact</span></a>
   </div>
-  <div class="r-lang">
-  <a class="r-item" id="btn-it" onclick="setLang('it')">
-    <div class="r-icon">IT</div>
-    <span class="r-text">Italiano</span>
-  </a>
-  <a class="r-item" id="btn-en" onclick="setLang('en')">
-    <div class="r-icon">EN</div>
-    <span class="r-text">English</span>
-  </a>
-</div>
+  <a class="r-item" id="btn-lang" onclick="toggleLang()" style="margin-top: auto;">
+  <div id="lang-flag" style="display:flex; flex-direction:column; gap:4px; align-items:center;">
+    <div style="width:10px; height:10px; border-radius:3px;"></div>
+    <div style="width:10px; height:10px; border-radius:3px;"></div>
+    <div style="width:10px; height:10px; border-radius:3px;"></div>
+  </div>
+  <span class="r-text" id="lang-text">IT</span>
+</a>
 
 <script>
+  const FLAGS = {
+    it: ['#009246', '#ffffff', '#ce2b37'],
+    en: ['#012169', '#c8102e', '#012169'],
+  };
+
+  function toggleLang() {
+    const current = localStorage.getItem('lang') || 'it';
+    setLang(current === 'it' ? 'en' : 'it');
+  }
+
   function setLang(lang) {
     localStorage.setItem('lang', lang);
     document.documentElement.setAttribute('data-lang', lang);
-    document.getElementById('btn-it').classList.toggle('active', lang === 'it');
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-text').textContent = lang.toUpperCase();
+    const colors = FLAGS[lang];
+    const squares = document.querySelectorAll('#lang-flag div');
+    squares.forEach((sq, i) => {
+      sq.style.background = colors[i];
+      sq.style.border = colors[i] === '#ffffff' ? '1px solid rgba(0,0,0,.15)' : 'none';
+    });
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('lang') || 'it';
   setLang(saved);
+});
 </script>
 </nav>
 
