@@ -72,6 +72,8 @@
       sq.style.background = colors[i];
       sq.style.border = colors[i] === '#ffffff' ? '1px solid rgba(0,0,0,.15)' : 'none';
     });
+    const bar = document.getElementById('lang-bar-btn');
+    if (bar) bar.textContent = lang.toUpperCase();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
