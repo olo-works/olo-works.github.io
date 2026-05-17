@@ -36,4 +36,6 @@
   const saved = localStorage.getItem('lang') || 'it';
   setLang(saved);
 });
+
+if (typeof initMarquee === 'function') location.reload();
 </script>

@@ -527,6 +527,8 @@
   const saved = localStorage.getItem('lang') || 'it';
   setLang(saved);
 });
+
+if (typeof initMarquee === 'function') location.reload();
 </script>
   </nav>
 <div id="lang-bar-btn" onclick="toggleLang()" style="position:fixed;top:12px;right:16px;z-index:200;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:4px 10px;background:var(--bg);">IT</div>
@@ -1049,35 +1051,53 @@
     <div class="interests-scroll" id="interests-scroll">
       <div class="interests-track">
         <div class="interest-card">
+        <div class="interest-card-text">
         <div class="interest-card-title">Design</div>
-        <div class="interest-card-desc"><span class="lang it">Oggetti, sistemi, lo spazio tra funzione e forma. L'arte di costruire le cose.</span><span class="lang en">Objects, systems, the space between function and form. The art of building things.</span></div>        <div class="interest-card-img">
+        <div class="interest-card-desc"><span class="lang it">Oggetti, sistemi, lo spazio tra funzione e forma. L'arte di costruire le cose.</span><span class="lang en">Objects, systems, the space between function and form. The art of building things.</span></div>
+        </div>
+        <div class="interest-card-img">
   <img src="images/photoprojects/metis/COLORI.pngz" alt="Description of interest" class="interest-image">
 </div>
         </div>
         <div class="interest-card">
-          <div class="interest-card-text"><div class="interest-card-title">Automotive</div><div class="interest-card-desc">Motorsport, car culture, car styling. Gran Turismo 4. The car as the most culturally loaded object ever made.</div></div>
-         <div class="interest-card-img">
+        <div class="interest-card-text">
+        <div class="interest-card-title">Automotive</div>
+        <div class="interest-card-desc"><span class="lang it">Motorsport, cultura dell'auto, car styling. Gran Turismo 4. L'auto come l'oggetto culturalmente più carico mai prodotto.</span><span class="lang en">Motorsport, car culture, car styling. Gran Turismo 4. The car as the most culturally loaded object ever made.</span></div>
+        </div>
+        <div class="interest-card-img">
   <img src="images/About/ABOUT-1.jpg" alt="Description of interest" class="interest-image">
 </div>
         </div>
         <div class="interest-card">
-          <div class="interest-card-text"><div class="interest-card-title">Mobility</div><div class="interest-card-desc">How people move, how a train is used, how a plane works, how a cockpit talks back. The interface between body and vehicle.</div></div>
-            <div class="interest-card-img">
+        <div class="interest-card-text">
+        <div class="interest-card-title">Mobilità</div>
+        <div class="interest-card-desc"><span class="lang it">Come si muovono le persone, come si usa un treno, come funziona un aereo, come parla una cabina di pilotaggio. L'interfaccia tra corpo e veicolo.</span><span class="lang en">How people move, how a train is used, how a plane works, how a cockpit talks back. The interface between body and vehicle.</span></div>
+        </div>
+        <div class="interest-card-img">
   <img src="images/About/ABOUT-2.jpg" alt="Description of interest" class="interest-image">
 </div>
         </div>
         <div class="interest-card">
-          <div class="interest-card-text"><div class="interest-card-title">Photography</div><div class="interest-card-desc">On a Nikon D7000, nothing fancy. Composition, light, timing. Photographs everything. Amateur by title but always filming.</div></div>
-          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        <div class="interest-card-text">
+        <div class="interest-card-title"><span class="lang it">Fotografia</span><span class="lang en">Photography</span></div>
+        <div class="interest-card-desc"><span class="lang it">Con una Nikon D7000, niente di sofisticato. Composizione, luce, tempismo. Fotografa tutto. Amatoriale di titolo ma sempre con l'occhio aperto.</span><span class="lang en">On a Nikon D7000, nothing fancy. Composition, light, timing. Photographs everything. Amateur by title but always filming.</span></div>
+        </div>
+        <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
         </div>
         <div class="interest-card">
-          <div class="interest-card-text"><div class="interest-card-title">Music Production</div><div class="interest-card-desc">Ableton, mixing, sampling, late nights. Making music the same way I make objects — by feel first, then figure out why it works.</div></div>
-          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        <div class="interest-card-text">
+        <div class="interest-card-title"><span class="lang it">Produzione Musicale</span><span class="lang en">Music Production</span></div>
+        <div class="interest-card-desc"><span class="lang it">Ableton, mixing, sampling, notti tarde. Fare musica come faccio gli oggetti — prima di istinto, poi capire perché funziona.</span><span class="lang en">Ableton, mixing, sampling, late nights. Making music the same way I make objects — by feel first, then figure out why it works.</span></div>
+        </div>
+        <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
         </div>
         <div class="interest-card">
-          <div class="interest-card-text"><div class="interest-card-title">Tech</div><div class="interest-card-desc">Consumer tech, mostly. The kind that ends up in your pocket or on your desk. Interested in how it's designed before how it works.</div></div>
-          <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        <div class="interest-card-text">
+        <div class="interest-card-title">Tech</div>
+        <div class="interest-card-desc"><span class="lang it">Tech di consumo, principalmente. Il tipo che finisce in tasca o sulla scrivania. Più interessato a come è progettato che a come funziona.</span><span class="lang en">Consumer tech, mostly. The kind that ends up in your pocket or on your desk. Interested in how it's designed before how it works.</span></div>
         </div>
+        <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+        </div>X
       </div>
     </div>
   </section>
@@ -1111,10 +1131,10 @@
   <!-- ══ 06 TOOLS ══ -->
   <section class="about-section s-tools">
     <div class="s-label">Tools</div>
-    <h2 class="tools-title">The right tool<br>for the right <span class="teal">problem.</span></h2>
-    <p class="tools-sub">Software is a means, not an end. Tap any tool to see where I stand.</p>
+    <h2 class="tools-title"><span class="lang it">Lo strumento giusto<br>per il problema <span class="teal">giusto.</span></span><span class="lang en">The right tool<br>for the right <span class="teal">problem.</span></span></h2>
+    <p class="tools-sub"><span class="lang it">Il software è un mezzo, non un fine. Clicca su uno strumento per vedere dove mi trovo.</span><span class="lang en">Software is a means, not an end. Tap any tool to see where I stand.</span></p>
     <div class="tools-info-bar empty" id="tools-info-bar">
-      <span class="tools-info-name">Select a tool</span>
+      <span class="tools-info-name"><span class="lang it">Seleziona uno strumento</span><span class="lang en">Select a tool</span></span>
     </div>
     <div class="tools-grid">
       <div class="tool-logo" data-name="Blender"        data-level="Advanced">    <span class="tool-logo-letter">Bl</span></div>
@@ -1135,11 +1155,11 @@
 
   <!-- ══ 07 CTA ══ -->
   <section class="about-section s-cta">
-    <div class="s-label">Let's build</div>
-    <h2 class="s-intro-title">There's always<br>one <span class="teal">for all.</span></h2><br> 
+    <div class="s-label"><span class="lang it">Costruiamo</span><span class="lang en">Let's build</span></div>
+    <h2 class="s-intro-title"><span class="lang it">C'è sempre<br>uno <span class="teal">per tutti.</span></span><span class="lang en">There's always<br>one <span class="teal">for all.</span></span></h2>
     <div class="s-cta-actions">
-      <a href="/contact.html" class="btn-primary">Get in touch →</a>
-      <a href="/projects.html" class="btn-secondary">View work</a>
+      <a href="/contact.html" class="btn-primary"><span class="lang it">Contattami →</span><span class="lang en">Get in touch →</span></a>
+      <a href="/projects.html" class="btn-secondary"><span class="lang it">Vedi i lavori</span><span class="lang en">View work</span></a>
     </div>
   </section>
 
@@ -1168,7 +1188,48 @@ setInterval(updateClock, 1000);
 // ══════════════════════════════════════════
 //  INTRO MARQUEE : edit PHRASES to customise
 // ══════════════════════════════════════════
-const PHRASES = [
+const PHRASES_IT = [
+  "Un oggetto.",
+  "Ogni vincolo.",
+  "Sempre la soluzione giusta.",
+  "Nato al sud.",
+  "Cresciuto ovunque.",
+  "Una soluzione che non si mette in mezzo",
+  "Fotografo luce e tempismo con una Nikon D7000",
+  "Prototipo mobili e beni di consumo",
+  "Esploro l'impatto culturale del car styling",
+  "Oltre cinque anni di lavoro documentati in tre discipline",
+  "Studio l'interfaccia tra il corpo e il veicolo",
+  "Fisicamente in Toscana, mentalmente in un brochure giapponese di una Fiat Panda del 2005",
+  "Il Gelato di Cesare",
+  "Il mio HEX preferito del momento: #2BADB8",
+  "Steam ID: ceramicsmelter",
+  "Oggetti che risolvono più di un problema alla volta.",
+  "Il caldo di agosto è il test definitivo per qualsiasi oggetto funzionale.",
+  "Mentalità dell'arrangiarsi in uno spazio CAD pulito.",
+  "Dicono che sono nato nel km più bello d'Italia",
+  "Una Nikon D7000 per documentare un mondo che va troppo veloce",
+  "Una carriera costruita all'intersezione tra una costa rocciosa e uno schermo",
+  "Oggetti che sembrano usciti da un film di fantascienza ad alto budget del 2001",
+  "Un futuro dove ogni superficie è cromata e ogni pulsante è fisico",
+  "Passo i weekend a guardare pezzi di macchine che non posso ancora permettermi",
+  "Lavoro con strumenti come Rhino 8 e Blender",
+  "Comunico in italiano, inglese e francese",
+  "Modernismo italiano del dopoguerra",
+  "Specializzato nello sviluppo di scocche per elettronica di consumo",
+  "Mixo audio e campioni in Ableton Live",
+  "Ho bisogno delle forbici! 61!",
+  "Eliminare il non essenziale",
+  "rcaronn era un'era bellissima",
+  "Blender Render",
+  "Quanto mi piacciono le macchine",
+  "Quanto mi piacciono i veicoli",
+  "Quella volta che",
+  "Ogni scelta di design deve difendere la propria esistenza",
+  "Gran Turismo 4 ha ancora la mia UI preferita di sempre"
+];
+
+const PHRASES_EN = [
   "One object.",
   "Every constraint.",
   "Always the right fit.",
@@ -1208,6 +1269,8 @@ const PHRASES = [
   "Every design decision must defend its existence",
   "Gran Turismo 4 still has my favourite UI of all time"
 ];
+
+const PHRASES = document.documentElement.getAttribute('data-lang') === 'en' ? PHRASES_EN : PHRASES_IT;
 
 const NUM_ROWS        = 8;
 const SLOW_FACTOR     = 0.08;
@@ -1411,7 +1474,7 @@ const PALETTE = [
     if (activeTool === logo) {
       logo.classList.remove('active');
       infoBar.classList.add('empty');
-      infoBar.innerHTML = `<span class="tools-info-name">Select a tool</span>`;
+      infoBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Seleziona uno strumento</span><span class="lang en">Select a tool</span></span>`;;
       activeTool = null;
       return;
     }
