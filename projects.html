@@ -477,13 +477,13 @@ permalink: /projects.html
 
 <div class="proj-controls">
   <div class="ctrl-group">
-    <button class="ctrl-btn active" data-tag="all">All</button>
-    <button class="ctrl-btn" data-tag="Product">Product</button>
-    <button class="ctrl-btn" data-tag="Visual">Visual</button>
+    <button class="ctrl-btn active" data-tag="all"><span class="lang it">Tutti</span><span class="lang en">All</span></button>
+    <button class="ctrl-btn" data-tag="Product"><span class="lang it">Prodotto</span><span class="lang en">Product</span></button>
+    <button class="ctrl-btn" data-tag="Visual"><span class="lang it">Visivo</span><span class="lang en">Visual</span></button>
   </div>
   <div class="ctrl-group">
     <button class="ctrl-btn active" data-view="timeline">Timeline</button>
-    <button class="ctrl-btn" data-view="index">Index</button>
+    <button class="ctrl-btn" data-view="index"><span class="lang it">Indice</span><span class="lang en">Index</span></button>
   </div>
 </div>
 
@@ -534,7 +534,7 @@ permalink: /projects.html
         <div class="info-tags" id="itags"></div>
       </div>
       <div class="info-title" id="ititle"></div>
-      <div class="info-hint">← drag to explore →</div>
+      <div class="info-hint"><span class="lang it">← trascina per esplorare →</span><span class="lang en">← drag to explore →</span></div>
       <a href="#" class="info-link" id="ilink">↗</a>
     </div>
   </div>
@@ -542,11 +542,13 @@ permalink: /projects.html
   <!-- INDEX -->
   <div id="view-index">
     <div class="index-header">
+      <div class="index-header">
       <div class="idx-hcell">No.</div>
-      <div class="idx-hcell">Project</div>
+      <div class="idx-hcell"><span class="lang it">Progetto</span><span class="lang en">Project</span></div>
       <div class="idx-hcell sortable" data-sort="year">Year <span class="sort-ic">↕</span></div>
-      <div class="idx-hcell sortable" data-sort="tags">Category <span class="sort-ic">↕</span></div>
+      <div class="idx-hcell sortable" data-sort="tags"><span class="lang it">Categoria</span><span class="lang en">Category</span> <span class="sort-ic">↕</span></div>
       <div class="idx-hcell"></div>
+</div>
     </div>
     <div id="index-body">
       {% assign sorted = site.projects | sort: 'year' | reverse %}
