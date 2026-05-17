@@ -68,14 +68,13 @@
     });
     const bar = document.getElementById('lang-bar-btn');
     if (bar) bar.textContent = lang.toUpperCase();
+    if (typeof initMarquee === 'function') location.reload();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('lang') || 'it';
   setLang(saved);
 });
-
-if (typeof initMarquee === 'function') location.reload();
 </script>
 </nav>
 
