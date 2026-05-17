@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About — olo-works</title>
   <link rel="stylesheet" href="/style.css"/>
+  <script>document.documentElement.setAttribute('data-lang', localStorage.getItem('lang') || 'it');</script>
   <style>
     /* ── Small text scale (3 tiers only) ──────────────────────────────────
        --fs-micro  : .52rem  → labels, eyebrows, codes, status, hints
@@ -531,7 +532,6 @@
   </nav>
 <div id="lang-bar-btn" onclick="toggleLang()" style="position:fixed;top:12px;right:16px;z-index:200;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:4px 10px;background:var(--bg);">IT</div>
 
-</nav>
 
 <div id="mob">
   <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
@@ -1095,7 +1095,7 @@
         <div class="interest-card-desc"><span class="lang it">Tech di consumo, principalmente. Il tipo che finisce in tasca o sulla scrivania. Più interessato a come è progettato che a come funziona.</span><span class="lang en">Consumer tech, mostly. The kind that ends up in your pocket or on your desk. Interested in how it's designed before how it works.</span></div>
         </div>
         <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
-        </div>X
+        </div>
       </div>
     </div>
   </section>
@@ -1186,89 +1186,46 @@ setInterval(updateClock, 1000);
 // ══════════════════════════════════════════
 //  INTRO MARQUEE : edit PHRASES to customise
 // ══════════════════════════════════════════
-const PHRASES_IT = [
-  "Un oggetto.",
-  "Ogni vincolo.",
-  "Sempre la soluzione giusta.",
-  "Nato al sud.",
-  "Cresciuto ovunque.",
-  "Una soluzione che non si mette in mezzo",
-  "Fotografo luce e tempismo con una Nikon D7000",
-  "Prototipo mobili e beni di consumo",
-  "Esploro l'impatto culturale del car styling",
-  "Oltre cinque anni di lavoro documentati in tre discipline",
-  "Studio l'interfaccia tra il corpo e il veicolo",
-  "Fisicamente in Toscana, mentalmente in un brochure giapponese di una Fiat Panda del 2005",
-  "Il Gelato di Cesare",
-  "Il mio HEX preferito del momento: #2BADB8",
-  "Steam ID: ceramicsmelter",
-  "Oggetti che risolvono più di un problema alla volta.",
-  "Il caldo di agosto è il test definitivo per qualsiasi oggetto funzionale.",
-  "Mentalità dell'arrangiarsi in uno spazio CAD pulito.",
-  "Dicono che sono nato nel km più bello d'Italia",
-  "Una Nikon D7000 per documentare un mondo che va troppo veloce",
-  "Una carriera costruita all'intersezione tra una costa rocciosa e uno schermo",
-  "Oggetti che sembrano usciti da un film di fantascienza ad alto budget del 2001",
-  "Un futuro dove ogni superficie è cromata e ogni pulsante è fisico",
-  "Passo i weekend a guardare pezzi di macchine che non posso ancora permettermi",
-  "Lavoro con strumenti come Rhino 8 e Blender",
-  "Comunico in italiano, inglese e francese",
-  "Modernismo italiano del dopoguerra",
-  "Specializzato nello sviluppo di scocche per elettronica di consumo",
-  "Mixo audio e campioni in Ableton Live",
-  "Ho bisogno delle forbici! 61!",
-  "Eliminare il non essenziale",
-  "rcaronn era un'era bellissima",
-  "Blender Render",
-  "Quanto mi piacciono le macchine",
-  "Quanto mi piacciono i veicoli",
-  "Quella volta che",
-  "Ogni scelta di design deve difendere la propria esistenza",
-  "Gran Turismo 4 ha ancora la mia UI preferita di sempre"
+const PHRASES = [
+  { it: "Un oggetto.", en: "One object." },
+  { it: "Ogni vincolo.", en: "Every constraint." },
+  { it: "Sempre la soluzione giusta.", en: "Always the right fit." },
+  { it: "Nato al sud.", en: "Born south." },
+  { it: "Cresciuto ovunque.", en: "Grown everywhere." },
+  { it: "Una soluzione che non si mette in mezzo", en: "Delivering a solution that stays out of its own way" },
+  { it: "Fotografo luce e tempismo con una Nikon D7000", en: "Recording light and timing with a Nikon D7000" },
+  { it: "Prototipo mobili e beni di consumo", en: "Prototyping furniture and consumer goods" },
+  { it: "Esploro l'impatto culturale del car styling", en: "Exploring the cultural impact of car styling" },
+  { it: "Oltre cinque anni di lavoro documentati in tre discipline", en: "Documenting more than five years of work across three disciplines" },
+  { it: "Studio l'interfaccia tra il corpo e il veicolo", en: "Studying the interface between the body and the vehicle" },
+  { it: "Fisicamente in Toscana, mentalmente in un brochure giapponese di una Fiat Panda del 2005", en: "Physically in Tuscany, but mentally in a 2005 Fiat Panda Japanese brochure" },
+  { it: "Il Gelato di Cesare", en: "Il Gelato di Cesare" },
+  { it: "Il mio HEX preferito del momento: #2BADB8", en: "Current favorite HEX code: #2BADB8" },
+  { it: "Steam ID: ceramicsmelter", en: "Steam ID: ceramicsmelter" },
+  { it: "Oggetti che risolvono più di un problema alla volta.", en: "Objects that solve more than one problem at a time." },
+  { it: "Il caldo di agosto è il test definitivo per qualsiasi oggetto funzionale.", en: "High heat in August is the ultimate stress test for any functional object." },
+  { it: "Mentalità dell'arrangiarsi in uno spazio CAD pulito.", en: "\"Arrangiarsi\" mindset into a clean CAD workspace." },
+  { it: "Dicono che sono nato nel km più bello d'Italia", en: "Some say im born in the most beautiful km of Italy" },
+  { it: "Una Nikon D7000 per documentare un mondo che va troppo veloce", en: "Using a Nikon D7000 to document a world that is moving too fast" },
+  { it: "Una carriera costruita all'intersezione tra una costa rocciosa e uno schermo", en: "A career built on the intersection of a rocky coastline and a computer screen" },
+  { it: "Oggetti che sembrano usciti da un film di fantascienza ad alto budget del 2001", en: "Designing objects that look like they belong in a high budget sci-fi from 2001" },
+  { it: "Un futuro dove ogni superficie è cromata e ogni pulsante è fisico", en: "A future where every surface is chrome and every button is a physical click" },
+  { it: "Passo i weekend a guardare pezzi di macchine che non posso ancora permettermi", en: "I spend my weekends looking at car parts I cannot afford to install yet" },
+  { it: "Lavoro con strumenti come Rhino 8 e Blender", en: "Operating with tools like Rhino 8 and Blender" },
+  { it: "Comunico in italiano, inglese e francese", en: "Communicating in Italian, English and French" },
+  { it: "Modernismo italiano del dopoguerra", en: "Mid-century Italian modernism" },
+  { it: "Specializzato nello sviluppo di scocche per elettronica di consumo", en: "Specializing in the development of enclosures for consumer electronics" },
+  { it: "Mixo audio e campioni in Ableton Live", en: "Mixing audio and samples within Ableton Live" },
+  { it: "Ho bisogno delle forbici! 61!", en: "I need scissors! 61!" },
+  { it: "Eliminare il non essenziale", en: "Eliminating the non-essential" },
+  { it: "rcaronn era un'era bellissima", en: "rcaronn was such a cool era" },
+  { it: "Blender Render", en: "Blender Render" },
+  { it: "Quanto mi piacciono le macchine", en: "Man i love cars" },
+  { it: "Quanto mi piacciono i veicoli", en: "Man i love vehicles" },
+  { it: "Quella volta che", en: "Quella volta che" },
+  { it: "Ogni scelta di design deve difendere la propria esistenza", en: "Every design decision must defend its existence" },
+  { it: "Gran Turismo 4 ha ancora la mia UI preferita di sempre", en: "Gran Turismo 4 still has my favourite UI of all time" },
 ];
-
-const PHRASES_EN = [
-  "One object.",
-  "Every constraint.",
-  "Always the right fit.",
-  "Born south.",
-  "Grown everywhere.",
-  "Delivering a solution that stays out of its own way",
-  "Recording light and timing with a Nikon D7000",
-  "Prototyping furniture and consumer goods",
-  "Exploring the cultural impact of car styling",
-  "Documenting more than five years of work across three disciplines",
-  "Studying the interface between the body and the vehicle",
-  "Physically in Tuscany, but mentally in a 2005 Fiat Panda Japanese brochure",
-  "Il Gelato di Cesare",
-  "Current favorite HEX code: #2BADB8",
-  "Steam ID: ceramicsmelter",
-  "Objects that solve more than one problem at a time.",
-  "High heat in August is the ultimate stress test for any functional object.",
-  "\"Arrangiarsi\" mindset into a clean CAD workspace.",
-  "Some say im born in the most beautiful km of Italy",
-  "Using a Nikon D7000 to document a world that is moving too fast",
-  "A career built on the intersection of a rocky coastline and a computer screen",
-  "Designing objects that look like they belong in a high budget sci-fi from 2001",
-  "A future where every surface is chrome and every button is a physical click",
-  "I spend my weekends looking at car parts I cannot afford to install yet",
-  "Operating with tools like Rhino 8 and Blender",
-  "Communicating in Italian, English and French",
-  "Mid-century Italian modernism",
-  "Specializing in the development of enclosures for consumer electronics",
-  "Mixing audio and samples within Ableton Live",
-  "I need scissors! 61!",
-  "Eliminating the non-essential",
-  "rcaronn was such a cool era",
-  "Blender Render",
-  "Man i love cars",
-  "Man i love vehicles",
-  "Quella volta che",
-  "Every design decision must defend its existence",
-  "Gran Turismo 4 still has my favourite UI of all time"
-];
-
-
 const NUM_ROWS        = 8;
 const SLOW_FACTOR     = 0.08;
 const BASE_SEQ_LENGTH = 12; // How many phrases before the loop repeats
@@ -1289,11 +1246,9 @@ const PALETTE = [
     const seq = [];
     for (let i = 0; i < BASE_SEQ_LENGTH; i++) {
       // 1. Grab a random phrase
-      const lang = document.documentElement.getAttribute('data-lang') || 'it';
-      const pool = lang === 'en' ? PHRASES_EN : PHRASES_IT;
-      const text = pool[Math.floor(Math.random() * pool.length)];      // 2. Assign a color from the palette in a strict alternating cycle
+      const phrase = PHRASES[Math.floor(Math.random() * PHRASES.length)];      // 2. Assign a color from the palette in a strict alternating cycle
       const color = PALETTE[i % PALETTE.length]; 
-      seq.push({ text, color });
+      seq.push({ phrase, color });
     }
     return seq;
   });
@@ -1318,8 +1273,7 @@ const PALETTE = [
         const main = document.createElement('span');
         main.className = 'phrase-main';
         main.style.color = p.color; // Apply the alternating color here
-        main.textContent = p.text;
-        
+        main.innerHTML = `<span class="lang it">${p.phrase.it}</span><span class="lang en">${p.phrase.en}</span>`;        
         item.appendChild(main);
         frag.appendChild(item);
       });
@@ -1376,7 +1330,6 @@ const PALETTE = [
     requestAnimationFrame(tick);
   }));
 })();
-</script> 
 </script>
 
 <script>
@@ -1493,8 +1446,7 @@ const PALETTE = [
     logo.addEventListener('mouseleave', () => {
       if (activeTool) return;
       infoBar.classList.add('empty');
-      infoBar.innerHTML = `<span class="tools-info-name">Select a tool</span>`;
-    });
+      infoBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Seleziona uno strumento</span><span class="lang en">Select a tool</span></span>`;    });
   });
 
   // ── Interests drag ──
