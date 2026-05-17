@@ -74,7 +74,7 @@
     });
     const bar = document.getElementById('lang-bar-btn');
     if (bar) bar.textContent = lang.toUpperCase();
-    if (typeof initMarquee === 'function') location.reload();
+    if (document.getElementById('intro-rows-area')) location.reload();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -131,7 +131,7 @@
     });
     const bar = document.getElementById('lang-bar-btn');
     if (bar) bar.textContent = lang.toUpperCase();
-    if (typeof initMarquee === 'function') location.reload();
+    if (document.getElementById('intro-rows-area')) location.reload();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
