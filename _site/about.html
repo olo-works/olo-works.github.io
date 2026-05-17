@@ -521,7 +521,6 @@
     });
     const bar = document.getElementById('lang-bar-btn');
     if (bar) bar.textContent = lang.toUpperCase();
-    if (document.getElementById('intro-rows-area')) location.reload();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -1269,7 +1268,6 @@ const PHRASES_EN = [
   "Gran Turismo 4 still has my favourite UI of all time"
 ];
 
-const PHRASES = document.documentElement.getAttribute('data-lang') === 'en' ? PHRASES_EN : PHRASES_IT;
 
 const NUM_ROWS        = 8;
 const SLOW_FACTOR     = 0.08;
@@ -1291,8 +1289,9 @@ const PALETTE = [
     const seq = [];
     for (let i = 0; i < BASE_SEQ_LENGTH; i++) {
       // 1. Grab a random phrase
-      const text = PHRASES[Math.floor(Math.random() * PHRASES.length)];
-      // 2. Assign a color from the palette in a strict alternating cycle
+      const lang = document.documentElement.getAttribute('data-lang') || 'it';
+      const pool = lang === 'en' ? PHRASES_EN : PHRASES_IT;
+      const text = pool[Math.floor(Math.random() * pool.length)];      // 2. Assign a color from the palette in a strict alternating cycle
       const color = PALETTE[i % PALETTE.length]; 
       seq.push({ text, color });
     }
