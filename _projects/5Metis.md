@@ -28,11 +28,10 @@ gallery:
     layout: wide
 ---
 
-A furniture system that transforms. *Metis* takes its name from the Greek goddess of wisdom and adaptability: an entity whose defining quality is the capacity to change form without losing identity. The system does the same.
+Contemporary spaces demand furniture that can keep up with how people actually live avoiding fixed objects for fixed behaviours, using instead elements that shift with the moment. Metis is a modular seating system designed to adapt naturally to any need, transform over time, and remain coherent across every context and style.
 
 <h2>The idea</h2>
 
-Contemporary spaces demand furniture that can keep up with how people actually live — not fixed objects for fixed behaviours, but elements that shift with the moment. Metis is a modular seating system designed to adapt naturally to any need, transform over time, and remain coherent across every context and style.
 
 Essential in form. Born to transform.
 

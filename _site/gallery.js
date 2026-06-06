@@ -144,17 +144,17 @@ const allImages = [
     
   
     
-      { src: "/images/photoprojects/no1concept/amb2.png", title: "No°1 Concept Car", tag: "Visual", href: "/projects/9no1-conceptcar/" },
+      { src: "/images/photoprojects/no1concept/Untitled10.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
     
     
       
-        { src: "/images/photoprojects/logo-primary.png", title: "No°1 Concept Car", tag: "Visual", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/amb2.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/color-system.png", title: "No°1 Concept Car", tag: "Visual", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled4.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/type-specimen.png", title: "No°1 Concept Car", tag: "Visual", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled7.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/stationery.png", title: "No°1 Concept Car", tag: "Visual", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled3.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
     
   
