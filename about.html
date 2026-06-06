@@ -126,19 +126,7 @@
     align-self: center;
     margin-left: 6px;
 }
-    /* ════════════════ 02 DISCIPLINES ════════════════ */
-    .s-work { flex-direction: column; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
-    .s-work-intro { font-family: var(--mono); font-size: var(--fs-prose); line-height: 1.8; color: var(--muted); max-width: 560px; }
-    .disciplines-wrap { width: 100%; margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-    .discipline-col { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 28px; border-right: 1px solid var(--line); cursor: none; transition: background .25s; }
-    .discipline-col:last-child { border-right: none; }
-    .discipline-col:hover { background: var(--teal-xl); }
-    .discipline-title { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 20px; transition: color .2s; }
-    .discipline-col:hover .discipline-title { color: var(--teal); }
-    .discipline-subs { display: flex; flex-direction: column; gap: 6px; align-items: center; opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease); }
-    .discipline-col:hover .discipline-subs { opacity: 1; transform: translateY(0); }
-    .discipline-sub { font-family: var(--mono); font-size: var(--fs-caption); letter-spacing: .06em; color: var(--muted); line-height: 1.6; }
-
+    
     /* ════════════════ 03 MAP ════════════════ */
     .s-map {
       gap: 48px;
@@ -468,7 +456,53 @@
 
       .tools-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
     }
-  </style>
+
+    /* ══ TOOLS CAROUSEL ══ */
+  .tools-carousel-wrap {
+    width: 100%;
+    position: relative;
+    margin-top: 24px;
+    overflow: visible;
+   }
+      .tools-carousel {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      cursor: grab;
+      padding-bottom: 8px;
+    }
+    .tools-carousel::-webkit-scrollbar { display: none; }
+    .tools-carousel:active { cursor: grabbing; }
+
+    .tools-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      transition: transform 0.1s linear;
+    }
+
+    .tool-slide {
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .2s, opacity .2s;
+    }
+    .tool-slide:hover,
+    .tool-slide.active {
+      transform: scale(1.06);
+      opacity: 0.7;
+    }
+    .tool-slide img {
+      width: 58%;
+      height: 58%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    </style>
 </head>
 <body>
 
@@ -540,44 +574,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ══ 02 DISCIPLINES ══ -->
-  <section class="about-section s-work" style="flex-direction:column;">
-    <div class="s-label"><span class="lang it">Cosa faccio</span><span class="lang en">What I do</span></div>
-    <p class="s-work-intro"><span class="lang it">Esplora i miei tre settori</span><span class="lang en">Explore my three sectors.</span></p>
-    <div class="disciplines-wrap">
-      <div class="discipline-col">
-        <div class="discipline-title">Product</div>
-        <div class="discipline-subs">
-          <span class="discipline-sub"><span class="lang it">Design di oggetti</span><span class="lang en">Object design</span></span>
-          <span class="discipline-sub"><span class="lang it">Arredamento</span><span class="lang en">Furniture</span></span>
-          <span class="discipline-sub">Packaging</span>
-          <span class="discipline-sub"><span class="lang it">Beni di consumo</span><span class="lang en">Consumer goods</span></span>
-          <span class="discipline-sub"><span class="lang it">Prototipazione</span><span class="lang en">Prototyping</span></span>
-        </div>
-      </div>
-      <div class="discipline-col">
-        <div class="discipline-title">Industrial</div>
-        <div class="discipline-subs">
-          <span class="discipline-sub"><span class="lang it">Veicoli</span><span class="lang en">Vehicles</span></span>
-          <span class="discipline-sub">Car Design</span>
-          <span class="discipline-sub"><span class="lang it">Ricerca materiali</span><span class="lang en">Materials research</span></span>
-          <span class="discipline-sub"><span class="lang it">Design meccanico</span><span class="lang en">Mechanical design</span></span>
-          <span class="discipline-sub">Wayfinding</span>
-        </div>
-      </div>
-      <div class="discipline-col">
-        <div class="discipline-title">Visual</div>
-        <div class="discipline-subs">
-          <span class="discipline-sub">Identity systems</span>
-          <span class="discipline-sub">Print & editorial</span>
-          <span class="discipline-sub">Signage</span>
-          <span class="discipline-sub">Typography</span>
-          <span class="discipline-sub">Art direction</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ══ 03 MAP ══ -->
   <section class="about-section s-map" id="map-section">
@@ -1018,7 +1014,7 @@
         <div class="interest-card-desc"><span class="lang it">Oggetti, sistemi, lo spazio tra funzione e forma. L'arte di costruire le cose.</span><span class="lang en">Objects, systems, the space between function and form. The art of building things.</span></div>
         </div>
         <div class="interest-card-img">
-  <img src="images/photoprojects/metis/COLORI.pngz" alt="Description of interest" class="interest-image">
+  <img src="/images/About/ABOUT-0.png" alt="Description of interest" class="interest-image">
 </div>
         </div>
         <div class="interest-card">
@@ -1091,34 +1087,44 @@
   </section>
 
   <!-- ══ 06 TOOLS ══ -->
-  <section class="about-section s-tools">
-    <div class="s-label">Tools</div>
-    <h2 class="tools-title"><span class="lang it">Lo strumento giusto<br>per il problema <span class="teal">giusto.</span></span><span class="lang en">The right tool<br>for the right <span class="teal">problem.</span></span></h2>
-    <p class="tools-sub"><span class="lang it">Il software è un mezzo, non un fine. Clicca su uno strumento per vedere dove mi trovo.</span><span class="lang en">Software is a means, not an end. Tap any tool to see where I stand.</span></p>
+<section class="about-section s-tools">
+  <div class="s-label">Tools</div>
+  <h2 class="tools-title">
+    <span class="lang it">Lo strumento giusto<br>per il problema <span class="teal">giusto.</span></span>
+    <span class="lang en">The right tool<br>for the right <span class="teal">problem.</span></span>
+  </h2>
+  <p class="tools-sub">
+    <span class="lang it">Il software è un mezzo, non un fine.</span>
+    <span class="lang en">Software is a means, not an end.</span>
+  </p>
+
+  <div class="tools-carousel-wrap">
+    <div class="tools-carousel" id="tools-carousel">
+      <div class="tools-track" id="tools-track">
+        <div class="tool-slide" data-name="Blender" data-level="Advanced"><img src="/images/About/softwares/blender.svg" alt="Blender"></div>
+        <div class="tool-slide" data-name="Rhino 8" data-level="Advanced"><img src="/images/About/softwares/rhinoceros.svg" alt="Rhino 8"></div>
+        <div class="tool-slide" data-name="Photoshop" data-level="Proficient"><img src="/images/About/softwares/adobe-photoshop-svgrepo-com.svg" alt="Photoshop"></div>
+        <div class="tool-slide" data-name="Illustrator" data-level="Proficient"><img src="/images/About/softwares/adobe-illustrator-svgrepo-com.svg" alt="Illustrator"></div>
+        <div class="tool-slide" data-name="InDesign" data-level="Proficient"><img src="/images/About/softwares/adobe-indesign-svgrepo-com.svg" alt="InDesign"></div>
+        <div class="tool-slide" data-name="Lightroom" data-level="Intermediate"><img src="/images/About/softwares/adobe-lightroom-svgrepo-com.svg" alt="Lightroom"></div>
+        <div class="tool-slide" data-name="Premiere" data-level="Intermediate"><img src="/images/About/softwares/adobe-premierpro-svgrepo-com.svg" alt="Premiere"></div>
+        <div class="tool-slide" data-name="DaVinci Resolve" data-level="Intermediate"><img src="/images/About/softwares/davinciresolve.svg" alt="DaVinci Resolve"></div>
+        <div class="tool-slide" data-name="After Effects" data-level="Intermediate"><img src="/images/About/softwares/adobe-aftereffects-svgrepo-com.svg" alt="After Effects"></div>
+        <div class="tool-slide" data-name="Ableton Live" data-level="Intermediate"><img src="/images/tools/ableton.png" alt="Ableton Live"></div>
+        <div class="tool-slide" data-name="Godot Engine" data-level="Beginner"><img src="/images/About/softwares/godotengine.svg" alt="Godot Engine"></div>
+        <div class="tool-slide" data-name="WordPress" data-level="Proficient"><img src="/images/About/softwares/wordpress.svg" alt="WordPress"></div>
+      </div>
+    </div>
     <div class="tools-info-bar empty" id="tools-info-bar">
-      <span class="tools-info-name"><span class="lang it">Seleziona uno strumento</span><span class="lang en">Select a tool</span></span>
+      <span class="tools-info-name"><span class="lang it">Passa il mouse su un tool</span><span class="lang en">Hover a tool</span></span>
     </div>
-    <div class="tools-grid">
-      <div class="tool-logo" data-name="Blender"        data-level="Advanced">    <span class="tool-logo-letter">Bl</span></div>
-      <div class="tool-logo" data-name="Rhino 8"        data-level="Advanced">    <span class="tool-logo-letter">Rh</span></div>
-      <div class="tool-logo" data-name="Photoshop"      data-level="Proficient">  <span class="tool-logo-letter">Ps</span></div>
-      <div class="tool-logo" data-name="Illustrator"    data-level="Proficient">  <span class="tool-logo-letter">Ai</span></div>
-      <div class="tool-logo" data-name="InDesign"       data-level="Proficient">  <span class="tool-logo-letter">Id</span></div>
-      <div class="tool-logo" data-name="Lightroom"      data-level="Intermediate"><span class="tool-logo-letter">Lr</span></div>
-      <div class="tool-logo" data-name="Premiere"       data-level="Intermediate"><span class="tool-logo-letter">Pr</span></div>
-      <div class="tool-logo" data-name="DaVinci Resolve" data-level="Intermediate"><span class="tool-logo-letter">Dv</span></div>
-      <div class="tool-logo" data-name="After Effects"  data-level="Intermediate"><span class="tool-logo-letter">Ae</span></div>
-      <div class="tool-logo" data-name="Affinity v3"    data-level="Proficient">  <span class="tool-logo-letter">Af</span></div>
-      <div class="tool-logo" data-name="Ableton Live"   data-level="Intermediate"><span class="tool-logo-letter">Ab</span></div>
-      <div class="tool-logo" data-name="Godot Engine"   data-level="Beginner">    <span class="tool-logo-letter">Go</span></div>
-      <div class="tool-logo" data-name="WordPress"      data-level="Proficient">  <span class="tool-logo-letter">Wp</span></div>
-    </div>
-  </section>
+  </div>
+</section>
 
   <!-- ══ 07 CTA ══ -->
-  <section class="about-section s-cta">
+  <section class="about-section s-cta" style="align-items: center;">
     <div class="s-label"><span class="lang it">Costruiamo</span><span class="lang en">Let's build</span></div>
-    <h2 class="s-intro-title"><span class="lang it">  Esiste sempre<br>qualcosa <span class="teal">per qualcuno.</span></span><span class="lang en">There's always<br>one <span class="teal">for all.</span></span></h2>
+    <h2 class="s-intro-title"><span class="lang it">Esiste sempre<br>qualcosa <span class="teal">per qualcuno.</span></span><span class="lang en">There's always<br>one <span class="teal">for all.</span></span></h2>
     <div class="s-cta-actions">
       <a href="/contact.html" class="btn-primary"><span class="lang it">Contattami →</span><span class="lang en">Get in touch →</span></a>
       <a href="/projects.html" class="btn-secondary"><span class="lang it">Sfoglia i lavori</span><span class="lang en">View work</span></a>
@@ -1476,6 +1482,85 @@ const PALETTE = [
   window.addEventListener('scroll', updateDotWave, { passive: true });
   window.addEventListener('resize', updateDotWave, { passive: true });
   updateDotWave();
+
+  /* ── Tools carousel ── */
+  /* ── Tools carousel autoplay ── */
+  const carousel = document.getElementById('tools-carousel');
+  const track = document.getElementById('tools-track');
+  const toolsBar = document.getElementById('tools-info-bar');
+  let activeToolSlide = null;
+  let paused = false;
+  let speed = 0.8;
+  let pos = 0;
+
+  // Duplica i loghi per il loop infinito
+  track.innerHTML += track.innerHTML;
+
+  function animateCarousel() {
+    if (!paused) {
+      pos += speed;
+      if (pos >= track.scrollWidth / 2) pos = 0;
+      track.style.transform = `translateX(${-pos}px)`;
+    }
+    requestAnimationFrame(animateCarousel);
+  }
+  requestAnimationFrame(animateCarousel);
+
+  carousel.addEventListener('mouseenter', () => paused = true);
+  carousel.addEventListener('mouseleave', () => {
+    if (!activeToolSlide) paused = false;
+  });
+
+  // Drag
+  let carouselDown = false, carouselX, startPos;
+  carousel.addEventListener('mousedown', e => {
+    carouselDown = true;
+    paused = true;
+    carouselX = e.pageX;
+    startPos = pos;
+  });
+  document.addEventListener('mouseup', () => {
+    carouselDown = false;
+    if (!activeToolSlide) paused = false;
+  });
+  carousel.addEventListener('mousemove', e => {
+    if (!carouselDown) return;
+    e.preventDefault();
+    pos = startPos - (e.pageX - carouselX);
+    if (pos < 0) pos = 0;
+    if (pos >= track.scrollWidth / 2) pos = track.scrollWidth / 2 - 1;
+    track.style.transform = `translateX(${-pos}px)`;
+  });
+
+  // Hover + click sui singoli tool
+  document.querySelectorAll('.tool-slide').forEach(slide => {
+    slide.addEventListener('click', () => {
+      if (activeToolSlide === slide) {
+        slide.classList.remove('active');
+        toolsBar.classList.add('empty');
+        toolsBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Passa il mouse su un tool</span><span class="lang en">Hover a tool</span></span>`;
+        activeToolSlide = null;
+        paused = false;
+        return;
+      }
+      if (activeToolSlide) activeToolSlide.classList.remove('active');
+      slide.classList.add('active');
+      toolsBar.classList.remove('empty');
+      toolsBar.innerHTML = `<span class="tools-info-name">${slide.dataset.name}</span><span class="tools-info-level">${slide.dataset.level}</span>`;
+      activeToolSlide = slide;
+      paused = true;
+    });
+    slide.addEventListener('mouseenter', () => {
+      if (activeToolSlide) return;
+      toolsBar.classList.remove('empty');
+      toolsBar.innerHTML = `<span class="tools-info-name">${slide.dataset.name}</span><span class="tools-info-level">${slide.dataset.level}</span>`;
+    });
+    slide.addEventListener('mouseleave', () => {
+      if (activeToolSlide) return;
+      toolsBar.classList.add('empty');
+      toolsBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Passa il mouse su un tool</span><span class="lang en">Hover a tool</span></span>`;
+    });
+  });
 </script>
 </body>
 </html>

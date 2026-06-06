@@ -542,13 +542,12 @@ permalink: /projects.html
   <!-- INDEX -->
   <div id="view-index">
     <div class="index-header">
-      <div class="index-header">
       <div class="idx-hcell">No.</div>
       <div class="idx-hcell"><span class="lang it">Progetto</span><span class="lang en">Project</span></div>
       <div class="idx-hcell sortable" data-sort="year">Year <span class="sort-ic">↕</span></div>
       <div class="idx-hcell sortable" data-sort="tags"><span class="lang it">Categoria</span><span class="lang en">Category</span> <span class="sort-ic">↕</span></div>
       <div class="idx-hcell"></div>
-</div>
+
     </div>
     <div id="index-body">
       {% assign sorted = site.projects | sort: 'year' | reverse %}

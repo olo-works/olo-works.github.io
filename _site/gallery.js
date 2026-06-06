@@ -1,21 +1,6 @@
 const allImages = [
   
     
-      { src: "/images/photoprojects/logosquare.svg", title: "My Personal Identity", tag: "Visual", href: "/projects/10personal-identity-copy/" },
-    
-    
-      
-        { src: "/images/photoprojects/logo-primary.png", title: "My Personal Identity", tag: "Visual", href: "/projects/10personal-identity-copy/" },
-      
-        { src: "/images/photoprojects/color-system.png", title: "My Personal Identity", tag: "Visual", href: "/projects/10personal-identity-copy/" },
-      
-        { src: "/images/photoprojects/type-specimen.png", title: "My Personal Identity", tag: "Visual", href: "/projects/10personal-identity-copy/" },
-      
-        { src: "/images/photoprojects/stationery.png", title: "My Personal Identity", tag: "Visual", href: "/projects/10personal-identity-copy/" },
-      
-    
-  
-    
       { src: "/images/photoprojects/ahok/POSTER.png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
     
     
@@ -125,21 +110,6 @@ const allImages = [
         { src: "/images/photoprojects/Sammontana/merchandise-bag.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
       
         { src: "/images/photoprojects/Sammontana/packaging-gruvi.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
-      
-    
-  
-    
-      { src: "/images/photoprojects/logosquare.svg", title: "Pattern", tag: "Visual", href: "/projects/8pattern/" },
-    
-    
-      
-        { src: "/images/photoprojects/logo-primary.png", title: "Pattern", tag: "Visual", href: "/projects/8pattern/" },
-      
-        { src: "/images/photoprojects/color-system.png", title: "Pattern", tag: "Visual", href: "/projects/8pattern/" },
-      
-        { src: "/images/photoprojects/type-specimen.png", title: "Pattern", tag: "Visual", href: "/projects/8pattern/" },
-      
-        { src: "/images/photoprojects/stationery.png", title: "Pattern", tag: "Visual", href: "/projects/8pattern/" },
       
     
   
