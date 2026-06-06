@@ -1,5 +1,7 @@
 console.log('main.js loaded, rail:', document.getElementById('rail'));
 
+console.log('main.js loaded, rail:', document.getElementById('rail'));
+
 // ── Custom cursor ──────────────────────────────────────────────────────────
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
@@ -9,34 +11,19 @@ const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').m
 if (cur && ring && !isTouchDevice) {
   const cursorStyle = document.createElement('style');
   cursorStyle.textContent = `
-    *, *::before, *::after { cursor: none !important; }
-    #cursor-wrap {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: difference;
-    }
     #cursor, #cursor-ring {
-      mix-blend-mode: normal;
+      pointer-events: none;
+      position: fixed;
+      z-index: 9999;
     }
   `;
   document.head.appendChild(cursorStyle);
-
-  const wrap = document.createElement('div');
-  wrap.id = 'cursor-wrap';
-  document.body.appendChild(wrap);
-  wrap.appendChild(cur);
-  wrap.appendChild(ring);
 
   cur.style.background    = '#A5332D';
   cur.style.width         = '10px';
   cur.style.height        = '10px';
   cur.style.borderRadius  = '50%';
-  cur.style.position      = 'fixed';
-  cur.style.pointerEvents = 'none';
   cur.style.transform     = 'translate(-50%,-50%)';
-  cur.style.zIndex        = '9999';
 
   ring.style.borderColor  = '#E8EEF1';
   ring.style.borderWidth  = '1.5px';
@@ -45,17 +32,13 @@ if (cur && ring && !isTouchDevice) {
   ring.style.width        = '36px';
   ring.style.height       = '36px';
   ring.style.borderRadius = '50%';
-  ring.style.position     = 'fixed';
-  ring.style.pointerEvents= 'none';
   ring.style.transform    = 'translate(-50%,-50%)';
-  ring.style.zIndex       = '9999';
 
   let mx = 0, my = 0, rx = 0, ry = 0;
 
   document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
   let clicking    = false;
-  let onClickable = false;
 
   document.addEventListener('mousedown', () => {
     clicking = true;
@@ -69,7 +52,6 @@ if (cur && ring && !isTouchDevice) {
   });
 
   function onEnter() {
-    onClickable = true;
     cur.style.borderRadius = '4px';
     cur.style.width        = '16px';
     cur.style.height       = '16px';
@@ -79,7 +61,6 @@ if (cur && ring && !isTouchDevice) {
   }
 
   function onLeave() {
-    onClickable = false;
     cur.style.borderRadius = '50%';
     cur.style.width        = '10px';
     cur.style.height       = '10px';
@@ -100,7 +81,7 @@ if (cur && ring && !isTouchDevice) {
   });
 
   cur.style.transition  = 'width .18s, height .18s, border-radius .18s, transform .12s';
-  ring.style.transition = 'width .22s, height .22s, border-radius .22s, left .0s, top .0s, transform .14s';
+  ring.style.transition = 'width .22s, height .22s, border-radius .22s, transform .14s';
 
   (function anim() {
     cur.style.left  = mx + 'px';
@@ -113,8 +94,6 @@ if (cur && ring && !isTouchDevice) {
   })();
 
 } else if (cur && ring) {
-  // Touch device — hide custom cursor and restore default
-  cur.style.display  = 'none';
   ring.style.display = 'none';
 }
 
