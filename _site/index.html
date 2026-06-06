@@ -58,6 +58,30 @@
       opacity: 0;
       animation: fadeUp .8s var(--ease) .55s forwards;
     }
+      .home-intro {
+        font-family: var(--mono);
+        font-size: .85rem;
+        line-height: 1.6;
+        color: var(--muted);
+        margin-bottom: 32px;
+        max-width: 380px;
+        min-height: 140px;
+        white-space: normal;
+        word-spacing: 0.15em;
+    }
+    
+    
+    .typed-word {
+      display: inline;
+      opacity: 0;
+      animation: fadeWord 0.1s ease forwards;
+      white-space: pre-wrap;
+    }
+    
+    @keyframes fadeWord {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* ── Right ── */
     .home-right {
@@ -277,10 +301,10 @@
     <div class="home-left">
       <div class="home-label">Simone Nicolò</div>
       <div class="lang it">
-        <h1 class="home-name">Benven<span style="color:var(--teal);display:inline">uto</span>!</h1>
+        <div class="home-intro" id="typed-intro-it"></div>
       </div>
       <div class="lang en">
-        <h1 class="home-name">W<span style="color:var(--teal);display:inline">elc</span>ome!</h1>
+        <div class="home-intro" id="typed-intro-en" style="display:none;"></div>
       </div>
       <div class="home-actions">
         <div class="lang it">
@@ -552,6 +576,41 @@
     loadBatch();
     animate();
   }
+</script>
+<script>
+  function typeIntro() {
+    const introIT = "Designer di prodotto e industriale, con una base nel visual. L'approccio parte sempre dal problema reale: ogni oggetto deve difendere la propria esistenza, ogni scelta progettuale deve guadagnarsi il posto. Tre discipline non per coprire più terreno, ma perché la natura del problema decide lo strumento. Design che non si mette in mezzo, che risolve più di una cosa alla volta, che tiene insieme funzione e forma senza che si veda lo sforzo. Curiosità per l'automotive, la mobilità, l'interfaccia tra il corpo e ciò che usa. Fotografia, musica, attenzione a come sono fatte le cose. Formazione in design del prodotto all'Università Mediterranea di Reggio Calabria, Master in corso all'ISIA di Firenze.";
+    const introEN = "Product and industrial designer, with a grounding in visual communication. The approach starts with the real problem: every object must earn its place, every design decision must justify its existence. Three disciplines, not to cover more ground, but because the nature of the problem decides the tool. Design that stays out of its own way, that solves more than one thing at a time, that holds function and form together without showing the effort. A draw towards automotive, mobility, the interface between the body and what it uses. Photography, music, attention to how things are made. Trained in product design at the Università Mediterranea in Reggio Calabria, Master's ongoing at ISIA in Florence.";
+
+    const containerIT = document.getElementById('typed-intro-it');
+    const containerEN = document.getElementById('typed-intro-en');
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'it';
+
+    const textToType = currentLang === 'it' ? introIT : introEN;
+    const activeContainer = currentLang === 'it' ? containerIT : containerEN;
+    const inactiveContainer = currentLang === 'it' ? containerEN : containerIT;
+
+    inactiveContainer.style.display = 'none';
+    activeContainer.style.display = 'block';
+    activeContainer.innerHTML = '';
+
+    const words = textToType.split(' ');
+
+    setTimeout(() => {
+      words.forEach((word, index) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'typed-word';
+        wordSpan.textContent = word + ' ';
+        wordSpan.style.animationDelay = `${index * 0.08}s`;
+        activeContainer.appendChild(wordSpan);
+      });
+    }, 500);
+  }
+
+  typeIntro();
+
+  const observer = new MutationObserver(() => typeIntro());
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
 </script>
 </body>
 </html>
