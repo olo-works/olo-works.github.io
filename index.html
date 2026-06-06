@@ -77,7 +77,8 @@
       display: inline;
       opacity: 0;
       animation: fadeWord 0.1s ease forwards;
-      white-space: pre-wrap;
+      white-space: pre-wrap
+;
     }
     
     @keyframes fadeWord {
@@ -218,6 +219,7 @@
       }
       .home-right { display: none; }
     }
+    
   </style>
 </head>
 <body>
@@ -269,16 +271,6 @@
       </div>
       <div class="lang en">
         <div class="home-intro" id="typed-intro-en" style="display:none;"></div>
-      </div>
-      <div class="home-actions">
-        <div class="lang it">
-          <a href="/projects.html" class="btn-primary">Visualizza i Progetti</a>
-          <a href="/about.html" class="btn-secondary">Chi sono</a>
-        </div>
-        <div class="lang en">
-          <a href="/projects.html" class="btn-primary">View Work</a>
-          <a href="/about.html" class="btn-secondary">About</a>
-        </div>
       </div>
     </div>
     <div class="home-right" id="home-right">
@@ -423,6 +415,8 @@
   }
 </script>
 <script>
+  let typeTimeout = null;
+
   function typeIntro() {
     const introIT = "Designer di prodotto e industriale, con una base nel visual. L'approccio parte sempre dal problema reale: ogni oggetto deve difendere la propria esistenza, ogni scelta progettuale deve guadagnarsi il posto. Tre discipline non per coprire più terreno, ma perché la natura del problema decide lo strumento. Design che non si mette in mezzo, che risolve più di una cosa alla volta, che tiene insieme funzione e forma senza che si veda lo sforzo. Curiosità per l'automotive, la mobilità, l'interfaccia tra il corpo e ciò che usa. Fotografia, musica, attenzione a come sono fatte le cose. Formazione in design del prodotto all'Università Mediterranea di Reggio Calabria, Master in corso all'ISIA di Firenze.";
     const introEN = "Product and industrial designer, with a grounding in visual communication. The approach starts with the real problem: every object must earn its place, every design decision must justify its existence. Three disciplines, not to cover more ground, but because the nature of the problem decides the tool. Design that stays out of its own way, that solves more than one thing at a time, that holds function and form together without showing the effort. A draw towards automotive, mobility, the interface between the body and what it uses. Photography, music, attention to how things are made. Trained in product design at the Università Mediterranea in Reggio Calabria, Master's ongoing at ISIA in Florence.";
@@ -438,10 +432,14 @@
     inactiveContainer.style.display = 'none';
     activeContainer.style.display = 'block';
     activeContainer.innerHTML = '';
+    inactiveContainer.innerHTML = '';
+
+    clearTimeout(typeTimeout);
 
     const words = textToType.split(' ');
 
-    setTimeout(() => {
+    typeTimeout = setTimeout(() => {
+      activeContainer.innerHTML = '';
       words.forEach((word, index) => {
         const wordSpan = document.createElement('span');
         wordSpan.className = 'typed-word';
