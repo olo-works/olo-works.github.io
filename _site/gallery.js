@@ -82,13 +82,13 @@ const allImages = [
     
     
       
-        { src: "/images/projects/sun-dial/render-collection.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
+        { src: "/images/photoprojects/sun dial/RENDER 4.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
       
-        { src: "/images/projects/sun-dial/render-whisky.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
+        { src: "/images/photoprojects/sun dial/RENDER 6.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
       
-        { src: "/images/projects/sun-dial/render-globe.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
+        { src: "/images/photoprojects/sun dial/RENDER 3.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
       
-        { src: "/images/projects/sun-dial/render-detail.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
+        { src: "/images/photoprojects/sun dial/RENDER 7.png", title: "Sun Dial", tag: "Product", href: "/projects/6sun-dial/" },
       
     
   
