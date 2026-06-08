@@ -16,23 +16,17 @@ accent_white: "#eeeee8"
 excerpt_text: "A complete product design system for Sammontana built around a single geometric idea: the cylinder. All from the same circular logic."
 gallery_cols: 2
 gallery:
-  - src: /images/photoprojects/Sammontana/verti-render.png
+  - src: /images/photoprojects/Sammontana/cover.png
     alt: "Verti vertical fridge"
     layout: wide
-  - src: /images/photoprojects/Sammontana/orzi-render.png
+  - src: /images/photoprojects/Sammontana/Untitled1.png
     alt: "Orzi horizontal fridge"
-  - src: /images/photoprojects/Sammontana/expo-render.png
+  - src: /images/photoprojects/Sammontana/2(1).png
     alt: "Expo display fridge"
-  - src: /images/photoprojects/Sammontana/context-store.png
+  - src: /images/photoprojects/Sammontana/KDJHSDLFV.png
     alt: "Point of sale context render"
     layout: wide
-  - src: /images/photoprojects/Sammontana/signage-totem.png
-    alt: "IoT totem signage"
-  - src: /images/photoprojects/Sammontana/merchandise-bag.png
-    alt: "Summer bag merchandise"
-  - src: /images/photoprojects/Sammontana/packaging-gruvi.png
-    alt: "Gruvi cylindrical packaging"
-    layout: wide
+
 ---
 
 A retail design system for Sammontana, the Italian ice cream brand founded in 1946. The project covers fridges, signage, merchandise and packaging, each piece designed to adapt to any point of sale without losing brand identity.
@@ -46,7 +40,7 @@ Every retailer receives the same fridge. A standard white chest freezer looks wr
 <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
     <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/Sammontana/verti-detail.png" alt="Verti detail" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
+      <img src="/images/photoprojects/Sammontana/17(3).png" alt="Verti detail" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
     </div>
     <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
       <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">An upright glass-door fridge with a circular base element that introduces the brand language at floor level. Clean enough for a premium supermarket, distinctive enough to hold its own in a gelateria. The interior shelf is cut from a single sheet and carries the Sammontana tongue motif as a functional guide rail.</p>
@@ -72,7 +66,7 @@ Every retailer receives the same fridge. A standard white chest freezer looks wr
       <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">A horizontal display fridge with a curved glass top that keeps product visible without requiring the buyer to open anything. Modular by design: a handful of component swaps convert it from a packaged ice cream fridge to an artisan gelato dispenser without touching the core assembly.</p>
     </div>
     <div>
-      <img src="/images/photoprojects/Sammontana/orzi-dispenser.png" alt="Orzi dispenser configuration" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
+      <img src="/images/photoprojects/Sammontana/3(2).png" alt="Orzi dispenser configuration" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;">
@@ -92,7 +86,7 @@ Every retailer receives the same fridge. A standard white chest freezer looks wr
 <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
   <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
     <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/Sammontana/verti-detail.png" alt="Verti detail" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
+      <img src="/images/photoprojects/Sammontana/qs.png" alt="Verti detail" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
     </div>
     <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
       <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">An upright glass-door fridge with a circular base element that introduces the brand language at floor level. Clean enough for a premium supermarket, distinctive enough to hold its own in a gelateria. The interior shelf is cut from a single sheet and carries the Sammontana tongue motif as a functional guide rail.</p>
@@ -157,20 +151,20 @@ Rather than a single colourway, each fridge ships with a finish logic tied to th
     <img src="YOUR_IMAGE_1A" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
   <div style="background:#F0F0F0;padding:3px 3px 0;">
-    <img src="YOUR_IMAGE_1B" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
+    <img src="/images/photoprojects/Sammontana/4(2).png" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
   <div style="background:#1A1A1A;padding:3px 3px 0;">
-    <img src="YOUR_IMAGE_1C" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
+    <img src="/images/photoprojects/Sammontana/9(3).png" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
 
   <div style="background:#FFFFFF;padding:3px 3px 0;">
     <img src="YOUR_IMAGE_2A" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
   <div style="background:#F0F0F0;padding:3px 3px 0;">
-    <img src="YOUR_IMAGE_2B" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
+    <img src="/images/photoprojects/Sammontana/6(1).png" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
   <div style="background:#1A1A1A;padding:3px 3px 0;">
-    <img src="YOUR_IMAGE_2C" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
+    <img src="/images/photoprojects/Sammontana/8(2).png" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
 
   <div style="background:#FFFFFF;padding:3px 3px 0;">
@@ -180,7 +174,7 @@ Rather than a single colourway, each fridge ships with a finish logic tied to th
     <img src="YOUR_IMAGE_3B" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
   <div style="background:#1A1A1A;padding:3px 3px 0;">
-    <img src="YOUR_IMAGE_3C" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
+    <img src="/images/photoprojects/Sammontana/7(3).png" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
   </div>
 
 </div>

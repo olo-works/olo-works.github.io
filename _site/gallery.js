@@ -97,19 +97,13 @@ const allImages = [
     
     
       
-        { src: "/images/photoprojects/Sammontana/verti-render.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
+        { src: "/images/photoprojects/Sammontana/cover.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
       
-        { src: "/images/photoprojects/Sammontana/orzi-render.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
+        { src: "/images/photoprojects/Sammontana/Untitled1.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
       
-        { src: "/images/photoprojects/Sammontana/expo-render.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
+        { src: "/images/photoprojects/Sammontana/2(1).png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
       
-        { src: "/images/photoprojects/Sammontana/context-store.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
-      
-        { src: "/images/photoprojects/Sammontana/signage-totem.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
-      
-        { src: "/images/photoprojects/Sammontana/merchandise-bag.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
-      
-        { src: "/images/photoprojects/Sammontana/packaging-gruvi.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
+        { src: "/images/photoprojects/Sammontana/KDJHSDLFV.png", title: "B2B for Sammontana", tag: "Product", href: "/projects/7sammontana/" },
       
     
   

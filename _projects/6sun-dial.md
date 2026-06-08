@@ -202,7 +202,7 @@ The collection is articulated across six pieces in two macro-categories: a more 
       <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The first piece in the experimental category. The tumbler form is pulled and carved at the sides — the wall is hollowed inward at two opposing points, creating an hourglass-like grip zone that also concentrates and intensifies the light refraction effect at those points. In the Cut 1 variant, the top is sheared diagonally, introducing a planar face that reflects light at a fixed angle.</p>
     </div>
     <div>
-      <img src="/images/projects/sun-dial/no4-pull.png" alt="No.4 Pull" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
+      <img src="/images/photoprojects/sun dial/4.png" alt="No.4 Pull" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;">
@@ -248,7 +248,7 @@ The collection is articulated across six pieces in two macro-categories: a more 
       <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">To intensify reflections and the prism effect, this model replaces the engraved lines with faceted cuts — a new mould-level intervention rather than a surface treatment. The cuts refract light with much greater intensity than wheel-engraving, and the base of the glass is redesigned from scratch to integrate the faceting into the structural form of the piece.</p>
     </div>
     <div>
-      <img src="/images/projects/sun-dial/no6-prism.png" alt="No.6 Prism" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
+      <img src="/images/photoprojects/sun dial/6.png" alt="No.6 Prism" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;"/>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;">
