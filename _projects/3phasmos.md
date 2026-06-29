@@ -8,7 +8,7 @@ role: "Product Design"
 materials: "Wood, Steel, Glass"
 duration: "6 Months Course"
 tags: [Product]
-cover: /images/photoprojects/phasmos/MATERIALE3.jpg
+cover: /images/photoprojects/phasmos/cover.png
 accent: "#B8860B"
 accent_dark: "#8B6508"
 accent_bg: "#E8E4D0"
@@ -16,16 +16,14 @@ accent_white: "#F4F2E8"
 excerpt_text: "An adaptable work table whose articulated legs translate the postures of the stick insect into a furniture system that reshapes itself around the user."
 gallery_cols: 2
 gallery:
-  - src: /images/projects/phasmos/render-riposo.png
+  - src: /images/photoprojects/phasmos/3 (3).png
     alt: "Posa a riposo"
     layout: wide
   - src: /images/photoprojects/phasmos/MATERIALE.jpg
     alt: "Detail 1"
-  - src: /images/projects/phasmos/render-mimesi.png
+  - src: /images/photoprojects/phasmos/4 (2).png
     alt: "Posa da mimesi"
-  - src: /images/projects/phasmos/tecnici.png
-    alt: "Technical drawings"
-    layout: wide
+
 ---
 
 A work table that changes posture. *Phasmos* takes its name and its logic from the stick insect: an organism whose entire survival strategy rests on the ability to adapt its form to its context without changing what it fundamentally is. The table does the same.
@@ -65,15 +63,6 @@ The specific species studied was *Ctenomorpha chronus*, chosen for the clarity o
 The top surface is a single dark glass panel running the full length of the frame. Below it, three pairs of articulated wooden legs connect to a central steel spine through ball-and-socket joints at two points each, top and base. Every joint can be locked at any angle within its range. The table has no fixed height, no fixed incline, and no fixed width between the leg pairs.
 
 <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="padding:28px 24px;border-right:1px solid var(--line);">
-      <img src="/images/projects/phasmos/sketch-poses.png" alt="Sketch delle pose" style="width:100%;display:block;border-radius:4px;"/>
-    </div>
-    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
-      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The design process moved from insect posture studies to schematic leg diagrams, then to joint mechanism sketches, and finally to the three named configurations. Each posture was derived from a real insect behaviour rather than invented as a product feature.</p>
-    </div>
-  </div>
 
   <div style="display:grid;grid-template-columns:repeat(4,1fr);">
     <div style="padding:20px 16px;border-right:1px solid var(--line);">
@@ -170,7 +159,7 @@ Each posture takes its name from a stick insect behaviour. Each one corresponds 
 </div>
 
 <div class="proj-gallery-grid" data-cols="2" style="margin:20px 0;">
-  <img src="/images/projects/phasmos/render-quattro.png" alt="Four configurations" class="gallery-img wide"/>
+  <img src="/images/photoprojects/phasmos/Tavola disegno 16.png" alt="Four configurations" class="gallery-img wide"/>
 </div>
 
 <h2>The process</h2>

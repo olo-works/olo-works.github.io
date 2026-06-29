@@ -31,17 +31,15 @@ const allImages = [
     
   
     
-      { src: "/images/photoprojects/phasmos/MATERIALE3.jpg", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
+      { src: "/images/photoprojects/phasmos/cover.png", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
     
     
       
-        { src: "/images/projects/phasmos/render-riposo.png", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
+        { src: "/images/photoprojects/phasmos/3 (3).png", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
       
         { src: "/images/photoprojects/phasmos/MATERIALE.jpg", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
       
-        { src: "/images/projects/phasmos/render-mimesi.png", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
-      
-        { src: "/images/projects/phasmos/tecnici.png", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
+        { src: "/images/photoprojects/phasmos/4 (2).png", title: "Phasmos", tag: "Product", href: "/projects/3phasmos/" },
       
     
   
