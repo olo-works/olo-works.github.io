@@ -5,7 +5,7 @@ order: 9
 year: 2025
 client: " Personal Project"
 role: "Car Design"
-tags: [Product]
+tags: [Industrial,Product,Transportation]
 cover: /images/photoprojects/no1concept/Untitled10.png
 excerpt_text: "A personal styling exercise integrating the functionality of a shooting brake into the architecture of an exotic sportscar, exploring what happens when utility takes higher priority than pure performance."
 gallery:

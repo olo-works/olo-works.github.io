@@ -91,17 +91,17 @@ const allImages = [
     
   
     
-      { src: "/images/photoprojects/no1concept/Untitled10.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
+      { src: "/images/photoprojects/no1concept/Untitled10.png", title: "No-ONE", tag: "Industrial", href: "/projects/9no1-conceptcar/" },
     
     
       
-        { src: "/images/photoprojects/no1concept/amb2.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/amb2.png", title: "No-ONE", tag: "Industrial", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/no1concept/Untitled4.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled4.png", title: "No-ONE", tag: "Industrial", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/no1concept/Untitled7.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled7.png", title: "No-ONE", tag: "Industrial", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/no1concept/Untitled3.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled3.png", title: "No-ONE", tag: "Industrial", href: "/projects/9no1-conceptcar/" },
       
     
   
