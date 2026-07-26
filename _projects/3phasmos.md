@@ -61,9 +61,7 @@ A concept work table that changes posture. Phasmos takes its name and its logic 
 
 ## The reference
 
-The Phasmatidae family, commonly known as stick insects, are masters of structural mimicry. Their elongated bodies, articulated limbs, and capacity to hold any posture for long periods without losing stability made them an ideal formal reference for a piece of furniture designed around adaptability. The specific species studied was Ctenomorpha chronus, chosen for the clarity of its joint structure and the range of positions its legs can assume while keeping the body level, elevated, or inclined.
-
-**Corpo.** Elongated and thin, designed to imitate twigs. The table's top surface inherits this linearity: a long, narrow plane that reads as a single element regardless of the leg configuration beneath it. **Zampe.** Long, thin, adapted for climbing. Each pair can be set at a different angle independently, enabling the insect to keep its body stable on uneven surfaces, and the table's articulated legs follow the same principle. **Giunti.** Spherical joints at the shoulder and knee of each leg allow multi-axis movement, and the table's ball-and-socket connection points at the top and base of each leg reproduce this range directly. **Mimetismo.** The insect blends into the environment not by changing colour but by changing shape, and the table's three named postures follow this logic, each a functional response to a different context of use, not a decorative variation.
+Stick insects, family Phasmatidae, are masters of structural mimicry. Their elongated bodies, jointed limbs, and ability to hold a posture for long stretches without losing balance made them a natural reference for a table built around adaptability. The species studied was Ctenomorpha chronus, chosen for its clear joint structure and the range of positions its legs can hold while keeping the body level, raised, or tilted.
 
 </div>
 
@@ -85,8 +83,7 @@ The Phasmatidae family, commonly known as stick insects, are masters of structur
 
 ## The table
 
-The table's dimensional system is built to accommodate all three postures within a single articulated structure, sized so the top surface, legs, and joints remain proportionally coherent whether the table sits low and horizontal or extended and inclined.
-
+Every leg is mounted on its own ball-and-socket joint, so it can be set to any angle without depending on the position of the legs around it. This is what makes the three postures possible on a single frame: nothing is swapped or added, the same six legs simply rotate into a new configuration. The tabletop stays fixed in proportion across all three, so it reads as one continuous plane whether the frame beneath it is low, tall, or tilted.
 </div>
 
 </div>
@@ -116,7 +113,13 @@ The table's dimensional system is built to accommodate all three postures within
 
 ## The three postures
 
-Each posture takes its name from a stick insect behaviour, and each corresponds to a specific use condition rather than a visual preference. **A riposo** is the standard configuration, all six legs at the same angle and the top surface horizontal at working height, used for writing, drawing, or computer work; the insect equivalent is the resting stance on a flat branch, stable, symmetrical, undemanding, and freely adaptable to the user's size and need for ergonomy. **Estesa** takes the legs to their maximum extension, raising the top surface and reducing the footprint so the table becomes a large, high platform suited to maximising room space or large-scale projects. **Mimesi** works as the insect poses to mimic itself, one side's legs raising while the other lowers, inclining the surface toward the user, so the table becomes an angled drawing board or reading stand, adapting its geometry to the posture of the person using it rather than asking them to adapt to it.
+Each posture takes its name from a stick insect behaviour, and each answers a specific use rather than a visual preference.
+
+A riposo is the standard configuration: all six legs at the same angle, top surface horizontal at working height, used for writing, drawing, or computer work. The insect equivalent is its resting stance on a flat branch, stable and symmetrical, adaptable to whatever size or task the user brings to it.
+
+Estesa extends the legs to their maximum length, raising the top surface and shrinking the footprint. The table becomes a tall, compact platform, suited to freeing up floor space or working on something large from above.
+
+Mimesi works like the insect's camouflage stance: one side's legs rise while the other lowers, tilting the surface toward the user. The table becomes an angled drawing board or reading stand, adapting its geometry to the person's posture instead of asking them to adapt to it.
 
 </div>
 

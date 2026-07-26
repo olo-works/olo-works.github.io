@@ -164,7 +164,7 @@ This reference was interpreted radically but within the limits of what's produci
 
 ## Daylight
 
-**No.1** is the founding piece: a classic whisky tumbler with a circular cross-section and the solar-arc engraving distributed symmetrically across both sides of the glass wall, sandblasted zones at the flanks, the engraved transparent zone cresting at centre top. **No.2** adjusts the pattern with tighter spacing and a subtly different rectangle distribution, producing a denser light effect while keeping No.1's silhouette; the two are meant to be read as a pair. **No.3** closes the group by making the arc asymmetric, distributed more heavily toward one side, giving the light effect a directional quality that shifts dramatically as the glass rotates in the hand.
+**No.1** is the founding piece: a classic whisky tumbler with a circular cross-section and the solar-arc engraving distributed symmetrically across both sides of the glass wall, sandblasted zones at the flanks, the engraved transparent zone cresting at centre top. <br> **No.2** adjusts the pattern with tighter spacing and a subtly different rectangle distribution, producing a denser light effect while keeping No.1's silhouette; the two are meant to be read as a pair. <br> **No.3** closes the group by making the arc asymmetric, distributed more heavily toward one side, giving the light effect a directional quality that shifts dramatically as the glass rotates in the hand.
 
 </div>
 
@@ -192,7 +192,7 @@ This reference was interpreted radically but within the limits of what's produci
 
 ## Pull/Cut, Globe, Prism
 
-**No.4**, Pull/Cut 1, pulls and carves the tumbler at the sides, the wall hollowed inward at two opposing points to create an hourglass-like grip zone that concentrates and intensifies the light refraction, while the top is sheared diagonally to add a planar face that reflects light at a fixed angle. **No.5**, Globe, is the most formally radical piece in the collection, its spherical body wrapping the engraving around a convex surface rather than a cylinder, so light bends around the curve instead of across it and the refraction becomes omnidirectional, with a Cut 2 variant retaining the diagonal shear of the opening. **No.6**, Prism, replaces engraved lines with faceted cuts at the mould level rather than as a surface treatment, refracting light with far greater intensity than wheel-engraving, and the base of the glass was redesigned from scratch to integrate the faceting into its structural form.
+**No.4 Pull/Cut**,  pulls and carves the tumbler at the sides, the wall hollowed inward at two opposing points to create an hourglass-like grip zone that concentrates and intensifies the light refraction, while the top is sheared diagonally to add a planar face that reflects light at a fixed angle. <br> **No.5 Globe**,  is the most formally radical piece in the collection, its spherical body wrapping the engraving around a convex surface rather than a cylinder, so light bends around the curve instead of across it and the refraction becomes omnidirectional, with a Cut 2 variant retaining the diagonal shear of the opening. <br> **No.6  Prism**,, replaces engraved lines with faceted cuts at the mould level rather than as a surface treatment, refracting light with far greater intensity than wheel-engraving, and the base of the glass was redesigned from scratch to integrate the faceting into its structural form.
 
 </div>
 

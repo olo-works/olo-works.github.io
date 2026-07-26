@@ -41,7 +41,7 @@ gallery:
 </div>
 
 <div class="proj-lead" markdown="1">
-Contemporary spaces demand furniture that can keep up with how people actually live, avoiding fixed objects for fixed behaviours and using instead elements that shift with the moment. Metis is a modular seating system designed to adapt naturally to any need, transform over time, and remain coherent across every context and style.
+Contemporary spaces demand furniture that can keep up with how people actually live, avoiding fixed objects for fixed behaviours and using instead elements that shift with the moment. 
 </div>
 
 </div>

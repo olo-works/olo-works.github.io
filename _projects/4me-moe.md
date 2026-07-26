@@ -45,7 +45,7 @@ gallery:
 </div>
 
 <div class="proj-lead" markdown="1">
-Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. The project addresses all three without reinventing the vehicle from scratch, working instead at the level of the cargo module, the tools inside it, and the service wrapped around it.
+Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. Me-moe addresses them all three without reinventing the vehicle from scratch.
 </div>
 
 </div>
@@ -211,28 +211,4 @@ The service around Me-Moe was designed as a complete UX flow: booking, confirmat
 
 </div>
 
-</div>
-
-<div class="split-section" markdown="1">
-
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/setting5.png" alt="Fleet variants" />
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="split-section-text" markdown="1">
-
-## The process
-
-The project moved from a SWOT analysis of the proximity logistics sector through vehicle sizing, cargo bay structure, technology integration, label design and digital service design, with each layer built in response to a specific failure identified in the research phase. Modelling and rendering were done in Blender, graphic and label design in Adobe Illustrator, layout in Adobe InDesign, and FLUX.1 for contextual reference imagery.
-
-Supervised by Consuelo Nava, with co-supervisors Carmine L. Quistelli and Domenico Lucanto.
-
-</div>
-
-</div>
+<

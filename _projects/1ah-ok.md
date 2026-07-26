@@ -63,7 +63,7 @@ The deconstruction of "ah, ok" gave each object its skeleton: lines and circles 
 
 ## One system, one day
 
-**a** is where the phrase starts, where the person sits and lives the space, closing around the seat the way the letter closes on itself, light enough to be lifted and carried toward wherever the morning light happens to fall. **h** takes over by evening, a reading lamp now carrying a shelf for phone and tablet, its light dropping low and close instead of falling from the ceiling. **o** gathers what the day has produced at midday, becoming the center of your devices, already settled where hands expect them. **k** collects everything on the way out, hooks and drawer together the way the letter holds its own uneven lines, keys and coat gathered in one motion before the door resets the room.
+
 
 Nothing here is fixed in place. A living room that reconfigures itself around whoever's using it, built to be kept and aged with rather than replaced.
 
@@ -92,6 +92,8 @@ Nothing here is fixed in place. A living room that reconfigures itself around wh
 <div class="split-section-text" markdown="1">
 
 ## Chair a
+
+**a** is where the phrase starts, where the person sits and lives the space, closing around the seat the way the letter closes on itself, light enough to be lifted and carried toward wherever the morning light happens to fall. 
 
 A minimal seat whose defining characteristic is its ability to emphasise the expression "ah ok" depending on how many chairs one owns. The shape of the letter a becomes the load-bearing structure: an aluminium circle embracing the wooden seat.
 
@@ -123,6 +125,8 @@ Materials: wood, aluminium. Dimensions: 586 × 421 × 572 mm.
 
 ## Lamp h
 
+**h** takes over by evening, a reading lamp now carrying a shelf for phone and tablet, its light dropping low and close instead of falling from the ceiling. 
+
 A floor lamp designed to be moved easily to any setting. It features a shelf intended for storing digital devices, the phone, the tablet, the things always kept within reach. The h is entirely in the aluminium arc that supports both the light and the shelf.
 
 Materials: wood, aluminium, glass. Dimensions: 583 × 543 × 1165 mm.
@@ -153,6 +157,8 @@ Materials: wood, aluminium, glass. Dimensions: 583 × 543 × 1165 mm.
 
 ## Coffee table o
 
+**o** gathers what the day has produced at midday, becoming the center of your devices, already settled where hands expect them. 
+
 A two-level coffee table that goes beyond its traditional function. The upper level is designed specifically to facilitate video calls and the use of digital devices. The circle of the o becomes the sliding base that allows the table to be oriented toward the user.
 
 Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 572 mm.
@@ -182,6 +188,7 @@ Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 572 mm.
 <div class="split-section-text" markdown="1">
 
 ## Coat rack k
+**k** collects everything on the way out, hooks and drawer together the way the letter holds its own uneven lines, keys and coat gathered in one motion before the door resets the room.
 
 A functional coat rack that allows all accessories to be organised upon returning home, from keys to clothing, including a mirror for a last look before heading out. The k is the asymmetric structure that holds together the mirror, hooks, and accessory drawer.
 
@@ -234,7 +241,7 @@ Type design usually starts with rules: a grid, a stroke width, a set of proporti
 <div style="border:1px solid var(--line);border-radius:8px;margin:20px 0;min-height:120px;display:flex;align-items:center;justify-content:center;overflow:visible;">
   <input
     type="text"
-    placeholder="Type something"
+    placeholder="Try it out!"
     maxlength="40"
     style="width:100%;border:none;outline:none;background:transparent;font-family:'AhOk', var(--mono), sans-serif;font-size:2.4rem;line-height:4;color:var(--ink);text-align:center;padding:0;overflow:visible;transform:translateY(15px);"
   />

@@ -96,13 +96,12 @@ Sammontana's circular logo became the generative form for the entire system. Cyl
 
 ## The fridge family
 
-**Verti** — vertical fridge, 2351 mm height, 1099 × 1033 mm footprint. An upright glass-door fridge with a circular base element that introduces the brand language at floor level: clean enough for a premium supermarket, distinctive enough to hold its own in a gelateria. The interior shelf is cut from a single sheet and carries the Sammontana tongue motif as a functional guide rail.
-
-**Orzi** — horizontal fridge, 1747 mm width, 1112 mm height. A curved glass top keeps product visible without requiring the buyer to open anything. Modular by design: a handful of component swaps convert it from a packaged ice cream fridge to an artisan gelato dispenser without touching the core assembly.
-
-**Orzino** — vertical fridge, 2351 mm height, 1099 × 1033 mm footprint. Shares Verti's upright glass-door format, circular floor-level base, and single-sheet interior shelf.
-
-**Expo** — horizontal fridge, 1747 mm width, 1112 mm height. Shares Orzi's curved-glass format and modular swap system between packaged and artisan gelato dispensing.
+<div class="sync-text">
+<p class="sync-text-item active"><strong>Verti</strong> — vertical fridge, 2351 mm height, 1099 × 1033 mm footprint. An upright glass-door fridge with a circular base element that introduces the brand language at floor level: clean enough for a premium supermarket, distinctive enough to hold its own in a gelateria. The interior shelf is cut from a single sheet and carries the Sammontana tongue motif as a functional guide rail.</p>
+<p class="sync-text-item"><strong>Orzi</strong> — horizontal fridge, 1747 mm width, 1112 mm height. A curved glass top keeps product visible without requiring the buyer to open anything. Modular by design: a handful of component swaps convert it from a packaged ice cream fridge to an artisan gelato dispenser without touching the core assembly.</p>
+<p class="sync-text-item"><strong>Orzino</strong> — vertical fridge, 2351 mm height, 1099 × 1033 mm footprint. Shares Verti's upright glass-door format, circular floor-level base, and single-sheet interior shelf.</p>
+<p class="sync-text-item"><strong>Expo</strong> — horizontal fridge, 1747 mm width, 1112 mm height. Shares Orzi's curved-glass format and modular swap system between packaged and artisan gelato dispensing.</p>
+</div>
 
 </div>
 

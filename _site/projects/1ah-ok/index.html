@@ -308,12 +308,18 @@
   /* ── SPLIT SECTIONS ── */
   .split-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.7fr;
     gap: 48px;
-    align-items: center;
+    align-items: start;
     margin: 24px 0;
     padding: 0 32px;
     position: relative;
+  }
+
+  /* Sections whose text column contains a .proj-lead paragraph fall back
+     to the standard equal split instead of the general ratio above. */
+  .split-section:has(.proj-lead) {
+    grid-template-columns: 1fr 1fr;
   }
 
   .split-section-media {
@@ -435,9 +441,11 @@
   .split-section-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     width: 100%;
+    max-width: var(--split-controls-width, 400px);
+    margin-inline: auto;
   }
 
   .split-section-text {
@@ -482,6 +490,25 @@
     margin-bottom: .4em;
     line-height: 1.7;
     color: var(--ink-m);
+  }
+
+  /* ── SYNCED TEXT (paragraph swaps in lockstep with the carousel) ──
+     Wrap the per-slide paragraphs in <div class="sync-text"> with one
+     <p class="sync-text-item"> per slide, in the same order as the
+     slides. JS toggles the "active" class to match the current index —
+     completely optional, sections without a .sync-text block behave
+     exactly as before. */
+  .split-section-text .sync-text {
+    position: relative;
+  }
+  .split-section-text .sync-text-item {
+    display: none;
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .split-section-text .sync-text-item.active {
+    display: block;
+    opacity: 1;
   }
 
   /* Image counter — plain text, sits inline in the controls row below the image */
@@ -1018,8 +1045,6 @@
 
     <h2 id="one-system-one-day">One system, one day</h2>
 
-    <p><strong>a</strong> is where the phrase starts, where the person sits and lives the space, closing around the seat the way the letter closes on itself, light enough to be lifted and carried toward wherever the morning light happens to fall. <strong>h</strong> takes over by evening, a reading lamp now carrying a shelf for phone and tablet, its light dropping low and close instead of falling from the ceiling. <strong>o</strong> gathers what the day has produced at midday, becoming the center of your devices, already settled where hands expect them. <strong>k</strong> collects everything on the way out, hooks and drawer together the way the letter holds its own uneven lines, keys and coat gathered in one motion before the door resets the room.</p>
-
     <p>Nothing here is fixed in place. A living room that reconfigures itself around whoever’s using it, built to be kept and aged with rather than replaced.</p>
 
   </div>
@@ -1047,6 +1072,8 @@
   <div class="split-section-text">
 
     <h2 id="chair-a">Chair a</h2>
+
+    <p><strong>a</strong> is where the phrase starts, where the person sits and lives the space, closing around the seat the way the letter closes on itself, light enough to be lifted and carried toward wherever the morning light happens to fall.</p>
 
     <p>A minimal seat whose defining characteristic is its ability to emphasise the expression “ah ok” depending on how many chairs one owns. The shape of the letter a becomes the load-bearing structure: an aluminium circle embracing the wooden seat.</p>
 
@@ -1078,6 +1105,8 @@
 
     <h2 id="lamp-h">Lamp h</h2>
 
+    <p><strong>h</strong> takes over by evening, a reading lamp now carrying a shelf for phone and tablet, its light dropping low and close instead of falling from the ceiling.</p>
+
     <p>A floor lamp designed to be moved easily to any setting. It features a shelf intended for storing digital devices, the phone, the tablet, the things always kept within reach. The h is entirely in the aluminium arc that supports both the light and the shelf.</p>
 
     <p>Materials: wood, aluminium, glass. Dimensions: 583 × 543 × 1165 mm.</p>
@@ -1108,6 +1137,8 @@
 
     <h2 id="coffee-table-o">Coffee table o</h2>
 
+    <p><strong>o</strong> gathers what the day has produced at midday, becoming the center of your devices, already settled where hands expect them.</p>
+
     <p>A two-level coffee table that goes beyond its traditional function. The upper level is designed specifically to facilitate video calls and the use of digital devices. The circle of the o becomes the sliding base that allows the table to be oriented toward the user.</p>
 
     <p>Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 572 mm.</p>
@@ -1137,6 +1168,7 @@
   <div class="split-section-text">
 
     <h2 id="coat-rack-k">Coat rack k</h2>
+    <p><strong>k</strong> collects everything on the way out, hooks and drawer together the way the letter holds its own uneven lines, keys and coat gathered in one motion before the door resets the room.</p>
 
     <p>A functional coat rack that allows all accessories to be organised upon returning home, from keys to clothing, including a mirror for a last look before heading out. The k is the asymmetric structure that holds together the mirror, hooks, and accessory drawer.</p>
 
@@ -1187,7 +1219,7 @@
     <p>Type design usually starts with rules: a grid, a stroke width, a set of proportions meant to hold up across every letter before a single glyph is drawn. Here the order is reversed. The product came first, built out of the shapes needed to make four pieces of furniture work, and the glyphs were drawn after, pulling their rules from what the objects had already decided, the curve of the chair’s frame, the arc of the lamp, the circle of the table’s base, the angles of the rack. A font built backwards, decorative rather than functional, a companion for titles rather than for reading.</p>
 
     <div style="border:1px solid var(--line);border-radius:8px;margin:20px 0;min-height:120px;display:flex;align-items:center;justify-content:center;overflow:visible;">
-  <input type="text" placeholder="Type something" maxlength="40" style="width:100%;border:none;outline:none;background:transparent;font-family:'AhOk', var(--mono), sans-serif;font-size:2.4rem;line-height:4;color:var(--ink);text-align:center;padding:0;overflow:visible;transform:translateY(15px);" />
+  <input type="text" placeholder="Try it out!" maxlength="40" style="width:100%;border:none;outline:none;background:transparent;font-family:'AhOk', var(--mono), sans-serif;font-size:2.4rem;line-height:4;color:var(--ink);text-align:center;padding:0;overflow:visible;transform:translateY(15px);" />
 </div>
 
   </div>
@@ -1397,6 +1429,74 @@
       }
     }
 
+    // ── CENTER MEDIA AGAINST PARAGRAPH TEXT ONLY (excluding the heading) ──
+    // .split-section now uses align-items: start, so we manually align the
+    // two columns:
+    //  - If there's enough body copy, push the media column down until its
+    //    vertical center matches the center of the body copy (ignoring the
+    //    h2/h3 heading above it).
+    //  - If the text is too short to fill the row (image taller than the
+    //    whole text block), that trick has nowhere to go — instead center
+    //    the text column vertically against the image.
+    function alignMediaToParagraph(section) {
+      const media = section.querySelector('.split-section-media');
+      const textCol = section.querySelector('.split-section-text');
+      if (!media || !textCol) return;
+
+      // Reset before measuring so repeated calls (e.g. on resize) don't
+      // compound previous offsets.
+      media.style.marginTop = '';
+      textCol.style.marginTop = '';
+
+      if (window.innerWidth <= 900) return;
+
+      const textHeight = textCol.offsetHeight;
+      const mediaHeight = media.offsetHeight;
+      const sectionHeight = section.offsetHeight;
+
+      if (textHeight <= mediaHeight) {
+        // Not enough text to fill the row — center the whole text block
+        // against the SECTION (not just the image) instead of pushing the
+        // image down. Swap `sectionHeight` for `mediaHeight` below if you
+        // want it centered on the image box instead.
+        const marginTop = (sectionHeight - textHeight) / 2;
+        textCol.style.marginTop = marginTop + 'px';
+        return;
+      }
+
+      // Find where the heading block ends (bottom of the last consecutive
+      // h1–h6 element at the top of the text column).
+      let headingBottom = 0;
+      for (const child of textCol.children) {
+        if (/^H[1-6]$/.test(child.tagName)) {
+          headingBottom = child.offsetTop + child.offsetHeight;
+        } else {
+          break;
+        }
+      }
+
+      const bodyHeight = textHeight - headingBottom;
+      if (bodyHeight <= 0) return;
+
+      const paragraphCenter = headingBottom + bodyHeight / 2;
+      let marginTop = paragraphCenter - mediaHeight / 2;
+      if (marginTop < 0) marginTop = 0;
+
+      media.style.marginTop = marginTop + 'px';
+    }
+
+    function alignAllSections() {
+      document.querySelectorAll('.split-section').forEach(alignMediaToParagraph);
+    }
+
+    alignAllSections();
+    window.addEventListener('load', alignAllSections);
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(alignAllSections, 150);
+    });
+
     // ── HORIZONTAL PAGE-STYLE IMAGE CAROUSEL (split-section galleries) ──
     const sections = document.querySelectorAll('.split-section');
 
@@ -1411,8 +1511,19 @@
       const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
       if (!slides.length) return;
 
+      // Optional: a .sync-text block in the text column, with one
+      // .sync-text-item per slide (same order). If present, its items
+      // are swapped in lockstep with the image index. Fully opt-in —
+      // sections without this block are unaffected.
+      const textCol = section.querySelector('.split-section-text');
+      const syncTextWrap = textCol ? textCol.querySelector('.sync-text') : null;
+      const syncItems = syncTextWrap
+        ? syncTextWrap.querySelectorAll('.sync-text-item')
+        : null;
+
       if (slides.length === 1) {
         slides[0].classList.add('active');
+        if (syncItems && syncItems.length) syncItems[0].classList.add('active');
         return;
       }
 
@@ -1457,6 +1568,12 @@
           slide.classList.toggle('active', idx === currentIndex);
         });
 
+        if (syncItems && syncItems.length) {
+          syncItems.forEach((item, idx) => {
+            item.classList.toggle('active', idx === currentIndex);
+          });
+        }
+
         counter.textContent = `${currentIndex + 1} / ${slides.length}`;
         prevBtn.classList.toggle('disabled', currentIndex === 0);
         nextBtn.classList.toggle('disabled', currentIndex === slides.length - 1);
@@ -1480,6 +1597,7 @@
       }, { passive: true });
 
       slides[0].classList.add('active');
+      if (syncItems && syncItems.length) syncItems[0].classList.add('active');
     });
   })();
 

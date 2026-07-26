@@ -308,12 +308,18 @@
   /* ── SPLIT SECTIONS ── */
   .split-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.7fr;
     gap: 48px;
-    align-items: center;
+    align-items: start;
     margin: 24px 0;
     padding: 0 32px;
     position: relative;
+  }
+
+  /* Sections whose text column contains a .proj-lead paragraph fall back
+     to the standard equal split instead of the general ratio above. */
+  .split-section:has(.proj-lead) {
+    grid-template-columns: 1fr 1fr;
   }
 
   .split-section-media {
@@ -435,9 +441,11 @@
   .split-section-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     width: 100%;
+    max-width: var(--split-controls-width, 400px);
+    margin-inline: auto;
   }
 
   .split-section-text {
@@ -482,6 +490,25 @@
     margin-bottom: .4em;
     line-height: 1.7;
     color: var(--ink-m);
+  }
+
+  /* ── SYNCED TEXT (paragraph swaps in lockstep with the carousel) ──
+     Wrap the per-slide paragraphs in <div class="sync-text"> with one
+     <p class="sync-text-item"> per slide, in the same order as the
+     slides. JS toggles the "active" class to match the current index —
+     completely optional, sections without a .sync-text block behave
+     exactly as before. */
+  .split-section-text .sync-text {
+    position: relative;
+  }
+  .split-section-text .sync-text-item {
+    display: none;
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .split-section-text .sync-text-item.active {
+    display: block;
+    opacity: 1;
   }
 
   /* Image counter — plain text, sits inline in the controls row below the image */
@@ -1002,7 +1029,7 @@
 </div>
 
   <div class="proj-lead">
-    <p>Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. The project addresses all three without reinventing the vehicle from scratch, working instead at the level of the cargo module, the tools inside it, and the service wrapped around it.</p>
+    <p>Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. Me-moe addresses them all three without reinventing the vehicle from scratch.</p>
   </div>
 
 </div>
@@ -1168,30 +1195,7 @@
 
   </div>
 
-</div>
-
-<div class="split-section">
-
-  <div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/setting5.png" alt="Fleet variants" />
-      </div>
-    </div>
-  </div>
-</div>
-
-  <div class="split-section-text">
-
-    <h2 id="the-process">The process</h2>
-
-    <p>The project moved from a SWOT analysis of the proximity logistics sector through vehicle sizing, cargo bay structure, technology integration, label design and digital service design, with each layer built in response to a specific failure identified in the research phase. Modelling and rendering were done in Blender, graphic and label design in Adobe Illustrator, layout in Adobe InDesign, and FLUX.1 for contextual reference imagery.</p>
-
-    <p>Supervised by Consuelo Nava, with co-supervisors Carmine L. Quistelli and Domenico Lucanto.</p>
-
-  </div>
-
+  <p>&lt;</p>
 </div>
 
 
@@ -1386,6 +1390,74 @@
       }
     }
 
+    // ── CENTER MEDIA AGAINST PARAGRAPH TEXT ONLY (excluding the heading) ──
+    // .split-section now uses align-items: start, so we manually align the
+    // two columns:
+    //  - If there's enough body copy, push the media column down until its
+    //    vertical center matches the center of the body copy (ignoring the
+    //    h2/h3 heading above it).
+    //  - If the text is too short to fill the row (image taller than the
+    //    whole text block), that trick has nowhere to go — instead center
+    //    the text column vertically against the image.
+    function alignMediaToParagraph(section) {
+      const media = section.querySelector('.split-section-media');
+      const textCol = section.querySelector('.split-section-text');
+      if (!media || !textCol) return;
+
+      // Reset before measuring so repeated calls (e.g. on resize) don't
+      // compound previous offsets.
+      media.style.marginTop = '';
+      textCol.style.marginTop = '';
+
+      if (window.innerWidth <= 900) return;
+
+      const textHeight = textCol.offsetHeight;
+      const mediaHeight = media.offsetHeight;
+      const sectionHeight = section.offsetHeight;
+
+      if (textHeight <= mediaHeight) {
+        // Not enough text to fill the row — center the whole text block
+        // against the SECTION (not just the image) instead of pushing the
+        // image down. Swap `sectionHeight` for `mediaHeight` below if you
+        // want it centered on the image box instead.
+        const marginTop = (sectionHeight - textHeight) / 2;
+        textCol.style.marginTop = marginTop + 'px';
+        return;
+      }
+
+      // Find where the heading block ends (bottom of the last consecutive
+      // h1–h6 element at the top of the text column).
+      let headingBottom = 0;
+      for (const child of textCol.children) {
+        if (/^H[1-6]$/.test(child.tagName)) {
+          headingBottom = child.offsetTop + child.offsetHeight;
+        } else {
+          break;
+        }
+      }
+
+      const bodyHeight = textHeight - headingBottom;
+      if (bodyHeight <= 0) return;
+
+      const paragraphCenter = headingBottom + bodyHeight / 2;
+      let marginTop = paragraphCenter - mediaHeight / 2;
+      if (marginTop < 0) marginTop = 0;
+
+      media.style.marginTop = marginTop + 'px';
+    }
+
+    function alignAllSections() {
+      document.querySelectorAll('.split-section').forEach(alignMediaToParagraph);
+    }
+
+    alignAllSections();
+    window.addEventListener('load', alignAllSections);
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(alignAllSections, 150);
+    });
+
     // ── HORIZONTAL PAGE-STYLE IMAGE CAROUSEL (split-section galleries) ──
     const sections = document.querySelectorAll('.split-section');
 
@@ -1400,8 +1472,19 @@
       const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
       if (!slides.length) return;
 
+      // Optional: a .sync-text block in the text column, with one
+      // .sync-text-item per slide (same order). If present, its items
+      // are swapped in lockstep with the image index. Fully opt-in —
+      // sections without this block are unaffected.
+      const textCol = section.querySelector('.split-section-text');
+      const syncTextWrap = textCol ? textCol.querySelector('.sync-text') : null;
+      const syncItems = syncTextWrap
+        ? syncTextWrap.querySelectorAll('.sync-text-item')
+        : null;
+
       if (slides.length === 1) {
         slides[0].classList.add('active');
+        if (syncItems && syncItems.length) syncItems[0].classList.add('active');
         return;
       }
 
@@ -1446,6 +1529,12 @@
           slide.classList.toggle('active', idx === currentIndex);
         });
 
+        if (syncItems && syncItems.length) {
+          syncItems.forEach((item, idx) => {
+            item.classList.toggle('active', idx === currentIndex);
+          });
+        }
+
         counter.textContent = `${currentIndex + 1} / ${slides.length}`;
         prevBtn.classList.toggle('disabled', currentIndex === 0);
         nextBtn.classList.toggle('disabled', currentIndex === slides.length - 1);
@@ -1469,6 +1558,7 @@
       }, { passive: true });
 
       slides[0].classList.add('active');
+      if (syncItems && syncItems.length) syncItems[0].classList.add('active');
     });
   })();
 

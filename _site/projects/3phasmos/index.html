@@ -308,12 +308,18 @@
   /* ── SPLIT SECTIONS ── */
   .split-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.7fr;
     gap: 48px;
-    align-items: center;
+    align-items: start;
     margin: 24px 0;
     padding: 0 32px;
     position: relative;
+  }
+
+  /* Sections whose text column contains a .proj-lead paragraph fall back
+     to the standard equal split instead of the general ratio above. */
+  .split-section:has(.proj-lead) {
+    grid-template-columns: 1fr 1fr;
   }
 
   .split-section-media {
@@ -435,9 +441,11 @@
   .split-section-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     width: 100%;
+    max-width: var(--split-controls-width, 400px);
+    margin-inline: auto;
   }
 
   .split-section-text {
@@ -482,6 +490,25 @@
     margin-bottom: .4em;
     line-height: 1.7;
     color: var(--ink-m);
+  }
+
+  /* ── SYNCED TEXT (paragraph swaps in lockstep with the carousel) ──
+     Wrap the per-slide paragraphs in <div class="sync-text"> with one
+     <p class="sync-text-item"> per slide, in the same order as the
+     slides. JS toggles the "active" class to match the current index —
+     completely optional, sections without a .sync-text block behave
+     exactly as before. */
+  .split-section-text .sync-text {
+    position: relative;
+  }
+  .split-section-text .sync-text-item {
+    display: none;
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .split-section-text .sync-text-item.active {
+    display: block;
+    opacity: 1;
   }
 
   /* Image counter — plain text, sits inline in the controls row below the image */
@@ -1013,9 +1040,7 @@
 
     <h2 id="the-reference">The reference</h2>
 
-    <p>The Phasmatidae family, commonly known as stick insects, are masters of structural mimicry. Their elongated bodies, articulated limbs, and capacity to hold any posture for long periods without losing stability made them an ideal formal reference for a piece of furniture designed around adaptability. The specific species studied was Ctenomorpha chronus, chosen for the clarity of its joint structure and the range of positions its legs can assume while keeping the body level, elevated, or inclined.</p>
-
-    <p><strong>Corpo.</strong> Elongated and thin, designed to imitate twigs. The table’s top surface inherits this linearity: a long, narrow plane that reads as a single element regardless of the leg configuration beneath it. <strong>Zampe.</strong> Long, thin, adapted for climbing. Each pair can be set at a different angle independently, enabling the insect to keep its body stable on uneven surfaces, and the table’s articulated legs follow the same principle. <strong>Giunti.</strong> Spherical joints at the shoulder and knee of each leg allow multi-axis movement, and the table’s ball-and-socket connection points at the top and base of each leg reproduce this range directly. <strong>Mimetismo.</strong> The insect blends into the environment not by changing colour but by changing shape, and the table’s three named postures follow this logic, each a functional response to a different context of use, not a decorative variation.</p>
+    <p>Stick insects, family Phasmatidae, are masters of structural mimicry. Their elongated bodies, jointed limbs, and ability to hold a posture for long stretches without losing balance made them a natural reference for a table built around adaptability. The species studied was Ctenomorpha chronus, chosen for its clear joint structure and the range of positions its legs can hold while keeping the body level, raised, or tilted.</p>
 
   </div>
 
@@ -1037,8 +1062,7 @@
 
     <h2 id="the-table">The table</h2>
 
-    <p>The table’s dimensional system is built to accommodate all three postures within a single articulated structure, sized so the top surface, legs, and joints remain proportionally coherent whether the table sits low and horizontal or extended and inclined.</p>
-
+    <p>Every leg is mounted on its own ball-and-socket joint, so it can be set to any angle without depending on the position of the legs around it. This is what makes the three postures possible on a single frame: nothing is swapped or added, the same six legs simply rotate into a new configuration. The tabletop stays fixed in proportion across all three, so it reads as one continuous plane whether the frame beneath it is low, tall, or tilted.</p>
   </div>
 
 </div>
@@ -1068,7 +1092,13 @@
 
     <h2 id="the-three-postures">The three postures</h2>
 
-    <p>Each posture takes its name from a stick insect behaviour, and each corresponds to a specific use condition rather than a visual preference. <strong>A riposo</strong> is the standard configuration, all six legs at the same angle and the top surface horizontal at working height, used for writing, drawing, or computer work; the insect equivalent is the resting stance on a flat branch, stable, symmetrical, undemanding, and freely adaptable to the user’s size and need for ergonomy. <strong>Estesa</strong> takes the legs to their maximum extension, raising the top surface and reducing the footprint so the table becomes a large, high platform suited to maximising room space or large-scale projects. <strong>Mimesi</strong> works as the insect poses to mimic itself, one side’s legs raising while the other lowers, inclining the surface toward the user, so the table becomes an angled drawing board or reading stand, adapting its geometry to the posture of the person using it rather than asking them to adapt to it.</p>
+    <p>Each posture takes its name from a stick insect behaviour, and each answers a specific use rather than a visual preference.</p>
+
+    <p>A riposo is the standard configuration: all six legs at the same angle, top surface horizontal at working height, used for writing, drawing, or computer work. The insect equivalent is its resting stance on a flat branch, stable and symmetrical, adaptable to whatever size or task the user brings to it.</p>
+
+    <p>Estesa extends the legs to their maximum length, raising the top surface and shrinking the footprint. The table becomes a tall, compact platform, suited to freeing up floor space or working on something large from above.</p>
+
+    <p>Mimesi works like the insect’s camouflage stance: one side’s legs rise while the other lowers, tilting the surface toward the user. The table becomes an angled drawing board or reading stand, adapting its geometry to the person’s posture instead of asking them to adapt to it.</p>
 
   </div>
 
@@ -1266,6 +1296,74 @@
       }
     }
 
+    // ── CENTER MEDIA AGAINST PARAGRAPH TEXT ONLY (excluding the heading) ──
+    // .split-section now uses align-items: start, so we manually align the
+    // two columns:
+    //  - If there's enough body copy, push the media column down until its
+    //    vertical center matches the center of the body copy (ignoring the
+    //    h2/h3 heading above it).
+    //  - If the text is too short to fill the row (image taller than the
+    //    whole text block), that trick has nowhere to go — instead center
+    //    the text column vertically against the image.
+    function alignMediaToParagraph(section) {
+      const media = section.querySelector('.split-section-media');
+      const textCol = section.querySelector('.split-section-text');
+      if (!media || !textCol) return;
+
+      // Reset before measuring so repeated calls (e.g. on resize) don't
+      // compound previous offsets.
+      media.style.marginTop = '';
+      textCol.style.marginTop = '';
+
+      if (window.innerWidth <= 900) return;
+
+      const textHeight = textCol.offsetHeight;
+      const mediaHeight = media.offsetHeight;
+      const sectionHeight = section.offsetHeight;
+
+      if (textHeight <= mediaHeight) {
+        // Not enough text to fill the row — center the whole text block
+        // against the SECTION (not just the image) instead of pushing the
+        // image down. Swap `sectionHeight` for `mediaHeight` below if you
+        // want it centered on the image box instead.
+        const marginTop = (sectionHeight - textHeight) / 2;
+        textCol.style.marginTop = marginTop + 'px';
+        return;
+      }
+
+      // Find where the heading block ends (bottom of the last consecutive
+      // h1–h6 element at the top of the text column).
+      let headingBottom = 0;
+      for (const child of textCol.children) {
+        if (/^H[1-6]$/.test(child.tagName)) {
+          headingBottom = child.offsetTop + child.offsetHeight;
+        } else {
+          break;
+        }
+      }
+
+      const bodyHeight = textHeight - headingBottom;
+      if (bodyHeight <= 0) return;
+
+      const paragraphCenter = headingBottom + bodyHeight / 2;
+      let marginTop = paragraphCenter - mediaHeight / 2;
+      if (marginTop < 0) marginTop = 0;
+
+      media.style.marginTop = marginTop + 'px';
+    }
+
+    function alignAllSections() {
+      document.querySelectorAll('.split-section').forEach(alignMediaToParagraph);
+    }
+
+    alignAllSections();
+    window.addEventListener('load', alignAllSections);
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(alignAllSections, 150);
+    });
+
     // ── HORIZONTAL PAGE-STYLE IMAGE CAROUSEL (split-section galleries) ──
     const sections = document.querySelectorAll('.split-section');
 
@@ -1280,8 +1378,19 @@
       const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
       if (!slides.length) return;
 
+      // Optional: a .sync-text block in the text column, with one
+      // .sync-text-item per slide (same order). If present, its items
+      // are swapped in lockstep with the image index. Fully opt-in —
+      // sections without this block are unaffected.
+      const textCol = section.querySelector('.split-section-text');
+      const syncTextWrap = textCol ? textCol.querySelector('.sync-text') : null;
+      const syncItems = syncTextWrap
+        ? syncTextWrap.querySelectorAll('.sync-text-item')
+        : null;
+
       if (slides.length === 1) {
         slides[0].classList.add('active');
+        if (syncItems && syncItems.length) syncItems[0].classList.add('active');
         return;
       }
 
@@ -1326,6 +1435,12 @@
           slide.classList.toggle('active', idx === currentIndex);
         });
 
+        if (syncItems && syncItems.length) {
+          syncItems.forEach((item, idx) => {
+            item.classList.toggle('active', idx === currentIndex);
+          });
+        }
+
         counter.textContent = `${currentIndex + 1} / ${slides.length}`;
         prevBtn.classList.toggle('disabled', currentIndex === 0);
         nextBtn.classList.toggle('disabled', currentIndex === slides.length - 1);
@@ -1349,6 +1464,7 @@
       }, { passive: true });
 
       slides[0].classList.add('active');
+      if (syncItems && syncItems.length) syncItems[0].classList.add('active');
     });
   })();
 
