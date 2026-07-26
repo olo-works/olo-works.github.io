@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Regal 3.0 — olo-works</title>
+  <link rel="stylesheet" href="/style.css"/>
+  
+</head>
+<body>
+
+
+
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="rail">
+  <div class="r-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:28px;height:28px;">
+      <defs><style>.cls-1{fill:currentColor}</style></defs>
+      <g><g>
+        <path class="cls-1" d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+        <path class="cls-1" d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+        <path class="cls-1" d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+        <path class="cls-1" d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+      </g></g>
+    </svg>
+  </div>
+  <div class="r-group">
+    <a href="/index.html" class="r-item "><div class="r-icon">H</div><span class="r-text">Home</span></a>
+    <a href="/projects.html" class="r-item "><div class="r-icon">W</div><span class="r-text">Work</span></a>
+    <a href="/about.html" class="r-item "><div class="r-icon">A</div><span class="r-text">About</span></a>
+  </div>
+  <div class="r-group bottom">
+    <a href="/contact.html" class="r-item "><div class="r-icon">C</div><span class="r-text">Contact</span></a>
+  </div>
+  <a class="r-item" id="btn-lang" onclick="toggleLang()" style="margin-top: auto;">
+  <div id="lang-flag" style="display:flex; flex-direction:column; gap:4px; align-items:center;">
+    <div style="width:10px; height:10px; border-radius:3px;"></div>
+    <div style="width:10px; height:10px; border-radius:3px;"></div>
+    <div style="width:10px; height:10px; border-radius:3px;"></div>
+  </div>
+  <span class="r-text" id="lang-text">IT</span>
+</a>
+
+<script>
+  const FLAGS = {
+    it: ['#009246', '#ffffff', '#ce2b37'],
+    en: ['#012169', '#c8102e', '#012169'],
+  };
+
+  function toggleLang() {
+    const current = localStorage.getItem('lang') || 'it';
+    setLang(current === 'it' ? 'en' : 'it');
+  }
+
+  function setLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('data-lang', lang);
+    document.getElementById('lang-text').textContent = lang.toUpperCase();
+    const colors = FLAGS[lang];
+    const squares = document.querySelectorAll('#lang-flag div');
+    squares.forEach((sq, i) => {
+      sq.style.background = colors[i];
+      sq.style.border = colors[i] === '#ffffff' ? '1px solid rgba(0,0,0,.15)' : 'none';
+    });
+    const bar = document.getElementById('lang-bar-btn');
+    if (bar) bar.textContent = lang.toUpperCase();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('lang') || 'it';
+  setLang(saved);
+});
+</script>
+</nav>
+
+<div id="mob">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
+    <defs><style>.cls-mob{fill:currentColor}</style></defs>
+    <g><g>
+      <path class="cls-mob" d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+      <path class="cls-mob" d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+      <path class="cls-mob" d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+      <path class="cls-mob" d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+    </g></g>
+  </svg>
+  <a href="/index.html" class="mob-item "><span class="mob-letter">H</span><span class="mob-word">Home</span></a>
+  <a href="/projects.html" class="mob-item "><span class="mob-letter">W</span><span class="mob-word">Work</span></a>
+  <a href="/about.html" class="mob-item "><span class="mob-letter">A</span><span class="mob-word">About</span></a>
+  <a href="/contact.html" class="mob-item "><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
+</div>
+
+<style>
+  :root {
+    --accent:   #C8920A;
+    --accent-d: #9E7008;
+    --accent-xl:#C8920A;
+    --teal:    var(--accent);
+    --teal-d:  var(--accent-d);
+    --teal-xl: var(--accent-xl);
+    --bg:      #EDE4CC;
+    --white:   #F6F2E6;
+    --line:    #C8920A;
+  }
+
+  body, #rail, #mob { background: var(--bg) !important; }
+  #rail, #rail * { border-color: var(--line) !important; }
+  .r-icon { border-color: var(--line) !important; }
+  .proj-right, .proj-cover { border-color: var(--line) !important; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .proj-cover       { animation: fadeUp .6s var(--ease) .05s both; }
+  .proj-meta-strip  { animation: fadeUp .6s var(--ease) .12s both; }
+  .proj-carousel    { animation: fadeUp .7s var(--ease) .18s both; }
+  .proj-scroll-indicator { animation: fadeUp .7s var(--ease) .22s both; }
+  .proj-description { animation: fadeUp .7s var(--ease) .24s both; }
+  .proj-right       { animation: fadeIn .6s var(--ease) .1s both; }
+
+  html, body { height: 100%; overflow-x: hidden; }
+
+  .proj-wrap {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    min-height: 100vh;
+    padding-left: 32px;
+    align-items: start;
+  }
+
+  .proj-left {
+    padding: 48px 32px 100px 56px;
+    overflow-x: hidden;
+  }
+
+  /* ── COVER ── */
+  .proj-cover {
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    margin-top: -48px;
+    margin-bottom: 0;
+    border-radius: 0;
+    border: none;
+    height: 680px;
+    overflow: hidden;
+    background: var(--teal-xl);
+    position: relative;
+  }
+
+  .proj-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── META STRIP ── */
+  .proj-meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 32px;
+    padding: 12px 32px;
+    border-top: none;
+    border-bottom: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .proj-meta-tag {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--mono);
+  }
+  .proj-meta-tag-label {
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .proj-meta-tag-value {
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── CAROUSEL (top gallery — auto-scrolling, untouched) ── */
+  .proj-carousel-outer {
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .proj-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    padding: 4px 32px 16px 32px;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 0;
+    transition: none;
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    min-width: 320px;
+    max-width: 320px;
+    height: 170px;
+    flex-shrink: 0;
+    border-radius: 0;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid var(--line);
+    position: relative;
+    transition: none;
+    box-shadow: none;
+  }
+  .carousel-slide.no-outline {
+    border: none;
+  }
+  .carousel-slide:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  .carousel-slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 8px;
+    background: linear-gradient(to top, rgba(13,31,34,.85), transparent);
+    color: rgba(255,255,255,.7);
+    font-size: .68rem;
+    line-height: 1.3;
+    font-family: var(--mono);
+    letter-spacing: .04em;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .proj-scroll-indicator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    padding: 8px 32px 24px;
+    opacity: 0.4;
+    box-sizing: border-box;
+  }
+  .proj-scroll-prompt {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .proj-scroll-arrow {
+    display: flex;
+    color: var(--ink);
+  }
+  .proj-scroll-arrow svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* ── SPLIT SECTIONS ── */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin: 24px 0;
+    padding: 0 32px;
+    position: relative;
+  }
+
+  .split-section-media {
+    position: sticky;
+    top: 40px;
+    width: 100%;
+    max-width: 680px;       /* bigger box */
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* ── Horizontal, page-style image carousel ──
+     Fixed-height box so the arrows/counter never move between images.
+     Inside it, each image is shown at its own natural aspect ratio
+     (scaled down to fit, never cropped) and centered. The border wraps
+     only the actual visible image — no visible frame around empty space. ── */
+  .split-section-media .mini-carousel-viewport {
+    width: 100%;
+    height: min(58vh, 540px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .split-section-media .mini-carousel-track,
+  .split-section-media .image-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .split-section-media .mini-carousel-slide,
+  .split-section-media .image-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .split-section-media .mini-carousel-slide.active,
+  .split-section-media .image-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  /* Image keeps its own aspect ratio — scaled to fit the fixed box, never
+     stretched or cropped. Border hugs the image itself, not the box. */
+  .split-section-media .mini-carousel-slide img,
+  .split-section-media .image-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 14px;
+    border: 2px solid var(--line);
+    cursor: default;
+    display: block;
+  }
+
+  /* Add class="no-outline" to any <img> (in the mini-carousel or the
+     .split-section-text) to drop the border/radius — useful for
+     transparent PNGs where a visible box around them looks wrong. */
+  .split-section-media .mini-carousel-slide img.no-outline,
+  .split-section-media .image-slide img.no-outline,
+  .split-section-text img.no-outline {
+    border: none;
+    border-radius: 0;
+  }
+
+  .proj-lead p {
+    font-family: var(--sans);       /* Syne — matches everything else */
+    font-size: clamp(1.65rem, 2.8vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    color: var(--teal);
+    margin: 0;
+  }
+
+  /* Catch any raw <img> tags dropped directly in markdown content,
+     outside the mini-carousel wrapper, and give them the same treatment. */
+  .split-section-text img {
+    border-radius: 14px;
+    border: 2px solid var(--line);
+    max-width: 100%;
+    display: block;
+  }
+
+  .split-section-media .image-slide .image-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    font-size: .75rem;
+    color: var(--ink-m);
+    background: var(--white);
+    font-family: var(--mono);
+    letter-spacing: .04em;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  /* Controls row: arrows + page indicator, sitting BELOW the image,
+     no circular buttons — plain, minimal. */
+  .split-section-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .split-section-text {
+    padding-top: 0;
+  }
+
+  .split-section-text h2 {
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 .5em;
+  }
+
+  .split-section-text h3 {
+    font-family: var(--mono);
+    font-size: var(--fs-caption);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 0 0 .5em;
+  }
+
+  .split-section-text p {
+    margin: 0 0 0.8em;
+    line-height: 1.65;
+    color: var(--ink-m);
+    font-size: 1.15rem;
+  }
+
+  .split-section-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .split-section-text ul,
+  .split-section-text ol {
+    margin: 0 0 1.3em 1.2em;
+    padding: 0;
+  }
+  .split-section-text li {
+    margin-bottom: .4em;
+    line-height: 1.7;
+    color: var(--ink-m);
+  }
+
+  /* Image counter — plain text, sits inline in the controls row below the image */
+  .split-section-image-counter {
+    font-family: var(--mono);
+    font-size: .75rem;
+    letter-spacing: .1em;
+    color: var(--ink);
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+
+  /* Prev / next arrows — plain, no circle, no background, sit below the image */
+  .split-section-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: var(--ink-m);
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: color .2s, opacity .2s, transform .2s;
+    user-select: none;
+  }
+  .split-section-nav svg {
+    width: 48px;
+    height: 48px;
+  }
+  .split-section-nav:hover {
+    color: var(--teal);
+    transform: scale(1.15);
+  }
+  .split-section-nav.disabled {
+    opacity: .25;
+    pointer-events: none;
+  }
+
+  /* ── RIGHT SIDEBAR ── */
+  .proj-right {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    border-left: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .proj-right::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -9999px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .proj-col-title {
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .proj-nav-arrow {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: var(--ink-m);
+    text-decoration: none;
+    transition: color .2s, transform .2s;
+    z-index: 3;
+  }
+  .proj-nav-arrow svg {
+    width: 44px;
+    height: 44px;
+  }
+  .proj-nav-arrow:hover {
+    color: var(--teal);
+    transform: scale(1.15);
+    background: none;
+  }
+  .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
+
+  .proj-title-wrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .proj-title-scroll {
+    animation: scrollTitle 8s linear infinite;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .proj-title {
+    writing-mode: vertical-rl;
+    transform: rotate(0deg);
+    font-size: clamp(2rem, 3.5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0;
+    white-space: nowrap;
+    padding: 10px 0;
+    margin-bottom: 100px;
+  }
+
+  .proj-title-wrapper::before,
+  .proj-title-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .proj-title-wrapper::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+  }
+  .proj-title-wrapper::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg), transparent);
+  }
+
+  @keyframes scrollTitle {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-20%); }
+  }
+
+  .desktop-only { display: flex; }
+  .mobile-only  { display: none; }
+
+  .proj-back-rail {
+    position: fixed;
+    left: 72px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    font-family: var(--mono);
+    font-size: var(--fs-micro);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.45;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+    transition: color .2s, opacity .2s;
+  }
+  .proj-back-rail:hover { color: var(--teal); opacity: 1; }
+  .proj-back-rail::after { content: '↑'; font-size: .7rem; }
+
+  .proj-back-mobile { display: none; }
+  .proj-mob-prev,
+  .proj-mob-next { display: none; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(13,31,34,.94);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 32px 80px rgba(0,0,0,.5);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: var(--mono);
+    font-size: var(--fs-micro);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 8px 16px;
+    border-radius: 3px;
+    background: none;
+    transition: color .2s, border-color .2s;
+  }
+  .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .proj-wrap {
+      grid-template-columns: 1fr;
+      padding-left: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .proj-right {
+      position: static;
+      height: auto;
+      border-left: none;
+      border-bottom: 1px solid var(--line);
+      order: -1;
+      flex-direction: column;
+      padding: 12px 24px;
+      overflow: visible;
+    }
+
+    .proj-right::before { display: none; }
+    .proj-col-title .proj-nav-arrow { display: none; }
+
+    .proj-col-title {
+      width: auto;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      height: auto;
+      gap: 16px;
+      overflow: hidden;
+    }
+
+    .proj-title-wrapper {
+      overflow: visible;
+      height: auto;
+    }
+
+    .proj-title-wrapper::before,
+    .proj-title-wrapper::after { display: none; }
+
+    .desktop-only {
+      display: none !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
+    .mobile-only { display: flex; }
+
+    .proj-title-scroll {
+      animation: none;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .proj-title {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: clamp(2rem, 10vw, 3rem);
+      white-space: normal;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .proj-left {
+      padding: 32px 0 100px;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    .proj-cover {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 0;
+      height: 320px;
+    }
+
+    .proj-meta-strip { 
+      padding: 10px 20px; 
+      gap: 6px 24px;
+    }
+    .proj-meta-tag {
+      gap: 4px;
+    }
+
+    .proj-carousel-outer {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .carousel-viewport {
+      padding: 2px 20px 12px 20px;
+    }
+
+    .carousel-slide {
+      min-width: 260px;
+      max-width: 260px;
+      height: 140px;
+      border-radius: 0;
+      border: 1px solid var(--line);
+    }
+
+    .proj-scroll-indicator {
+      padding: 6px 20px 16px;
+    }
+
+    .split-section {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 24px;
+      margin: 24px 0;
+      padding: 0 20px;
+    }
+
+    .split-section-media {
+      position: static;
+      margin-bottom: 0;
+    }
+
+    .split-section-media .mini-carousel-viewport {
+      height: min(42vh, 380px);
+    }
+
+    .split-section-media .mini-carousel-slide,
+    .split-section-media .image-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0;
+    }
+
+    .split-section-media .image-slide .image-caption {
+      position: static;
+      transform: none;
+      margin-top: 8px;
+      white-space: normal;
+    }
+
+    .split-section-controls {
+      display: flex;
+    }
+
+    .split-section-text {
+      padding-top: 0;
+    }
+
+    .proj-back-rail { display: none; }
+
+    .proj-back-mobile {
+      display: block;
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      transition: color .2s;
+    }
+    .proj-back-mobile:hover { color: var(--teal); }
+
+    .proj-mob-prev,
+    .proj-mob-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 16px;
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg);
+      color: var(--ink-m);
+      text-decoration: none;
+      transition: color .2s, border-color .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      z-index: 200;
+    }
+    .proj-mob-prev svg,
+    .proj-mob-next svg {
+      width: 36px;
+      height: 36px;
+    }
+    .proj-mob-prev { left: 12px; }
+    .proj-mob-next { right: 12px; }
+    .proj-mob-prev:hover,
+    .proj-mob-next:hover { color: var(--teal); border-color: var(--teal); }
+    .proj-mob-prev.disabled,
+    .proj-mob-next.disabled { opacity: .2; pointer-events: none; }
+  }
+
+  @media (max-width: 600px) {
+    .proj-cover { height: 260px; }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+<a href="/projects.html" class="proj-back-mobile">← All projects</a>
+
+<main class="page-main" style="padding:0;">
+  <div class="proj-wrap">
+
+    <div class="proj-left">
+
+      <div class="proj-cover">
+        
+          <img src="/images/photoprojects/Regal/POSTER 3.png" alt="Regal 3.0"/>
+        
+      </div>
+
+      
+      <div class="proj-meta-strip">
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Client</span><span class="proj-meta-tag-value">Università degli studi Mediterranea di Reggio Calabria</span></span>
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Role</span><span class="proj-meta-tag-value">Product Design, Prototyping</span></span>
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Materials</span><span class="proj-meta-tag-value">Plywood, 3D Printed PLA</span></span>
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Duration</span><span class="proj-meta-tag-value">12 Months Course</span></span>
+        
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Year</span><span class="proj-meta-tag-value">2024</span></span>
+      </div>
+      
+
+      
+      <div class="proj-carousel-outer">
+        <div class="proj-carousel" id="carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carousel-track">
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/Regal/render 1.png" data-alt="Regal as desk and bookcase" data-caption="">
+                <img src="/images/photoprojects/Regal/render 1.png" alt="Regal as desk and bookcase" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/Regal/RENDER 2.png" data-alt="Working position" data-caption="">
+                <img src="/images/photoprojects/Regal/RENDER 2.png" alt="Working position" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/Regal/RENDER 3.png" data-alt="Deep shelving configuration" data-caption="">
+                <img src="/images/photoprojects/Regal/RENDER 3.png" alt="Deep shelving configuration" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/Regal/RENDER 4.png" data-alt="Living room context" data-caption="">
+                <img src="/images/photoprojects/Regal/RENDER 4.png" alt="Living room context" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="proj-scroll-indicator">
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-prompt">Explore the details</span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+      </div>
+
+      <!-- SPLIT SECTIONS - Your content goes here -->
+      <p>A shelving system that reconfigures between three distinct states: upright bookcase, horizontal desk surface with integrated storage, and open shelving wall. The same set of panels, the same connectors, three completely different pieces of furniture. The project ran from system design through component engineering and into physical prototyping.</p>
+
+<h2>The system</h2>
+
+<p>Regal 3.0 is built from a standardised panel grid. Each panel carries the same slot and tab geometry on all four edges, so any panel can connect to any other in any orientation. The module dimensions were derived from an ergonomic analysis of reach zones: the tallest configuration puts its top shelf at the upper limit of comfortable standing reach; the lowest puts its working surface at seated desk height.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/abaco-panels.png" alt="Panel abaco" style="width:100%;display:block;border-radius:4px;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">Two panel types: the primary body panel with integrated slot rails, and the narrower side panel that sets the depth. Every drawer, shelf, and partition is a combination of these two. No unique components except the locking bracket.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Body panel</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">965 × 893 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Side panel</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">372 × 1499 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">System height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1499 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Full width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">2419 mm</div>
+    </div>
+  </div>
+
+</div>
+
+<h2>The variants</h2>
+
+<p>Three configurations were developed and drawn to full dimensions, each verified against ergonomic reach data for both standing and seated postures.</p>
+
+<h3>Posizione A — Libreria</h3>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/variante-a.png" alt="Variante A" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The upright bookcase. Panels stacked vertically with drawers in the lower section and open shelves above. Full height of 1499 mm keeps the top shelf within comfortable standing reach. Footprint stays narrow at 372 mm deep.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Footprint</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1499 × 372 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1317 mm</div>
+    </div>
+  </div>
+</div>
+
+<h3>Posizione B — Tavolo + Mensola</h3>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line);">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The desk configuration. The same panels rotate 90 degrees: the body becomes the working surface, drawer units sit beneath, and a narrow shelf rises behind. Seated ergonomic analysis confirmed the surface sits at correct typing height. This is the configuration the D1 locking bracket was designed to stabilise.</p>
+    </div>
+    <div>
+      <img src="/images/projects/regal/variante-b.png" alt="Variante B" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1190 mm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Desk height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">471 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Shelf height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1317 mm</div>
+    </div>
+  </div>
+</div>
+
+<h3>Posizione C — Parete</h3>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/variante-c.png" alt="Variante C" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The full wall configuration. Panels arranged horizontally across a 1674 mm span with mixed drawer and open-shelf sections. The widest of the three variants, suited to a living room or studio as a room-defining element.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1674 mm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1499 mm</div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-gallery-grid" data-cols="2" style="margin:20px 0;">
+  <img src="/images/projects/regal/ergonomia-standing.png" alt="Ergonomic analysis, standing" class="gallery-img" />
+  <img src="/images/projects/regal/ergonomia-seated.png" alt="Ergonomic analysis, seated" class="gallery-img" />
+</div>
+
+<h2>The locking component</h2>
+
+<p>Posizione B introduces a structural problem the slot-and-tab system alone cannot solve: when the main body tilts to become a desk surface, it needs a rigid bracket to hold the angle under load. The D1 component was designed specifically for this.</p>
+
+<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
+    <div style="border-right:1px solid var(--line);">
+      <img src="/images/projects/regal/d1-render.png" alt="D1 component render" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
+    </div>
+    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The D1 is a Y-shaped bracket that slides through the panel slot, rotates 90 degrees, and locks against the interior face. Two arms distribute the load across the panel thickness; the central stem acts as the pivot. No tools, no fasteners to install or remove.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Height</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">38.2 cm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Width</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">30.2 cm</div>
+    </div>
+    <div style="padding:20px 16px;border-right:1px solid var(--line);">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Stem depth</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">26 cm</div>
+    </div>
+    <div style="padding:20px 16px;">
+      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Material</div>
+      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">PLA · 3D printed</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="proj-gallery-grid" data-cols="3" style="margin:20px 0;">
+  <img src="/images/projects/regal/d1-technical-front.png" alt="D1 front view" class="gallery-img" />
+  <img src="/images/projects/regal/d1-technical-section.png" alt="D1 section" class="gallery-img" />
+  <img src="/images/projects/regal/d1-technical-3d.png" alt="D1 three-quarter" class="gallery-img" />
+</div>
+
+<p>&lt;/div&gt;</p>
+
+<h2>The process</h2>
+
+<p>The project ran across three deliverable steps: the functional component abaco and panel layout, the full technical drawing of the D1 locking bracket, and the slicer analysis and physical print. Each step fed directly into the next; the dimensions on the abaco set the slot tolerances the D1 technical drawing had to match, and the technical drawing set the geometry the slicer had to validate.</p>
+
+<p>Course: Sustainable Advanced Design, Corso Interdisciplinare di Product Design. Supervised by Prof. Consuelo Nava with Arch. Domenico Lucanto and PhD St. Eliana Catalano. Coordinatore Carmine Ludovico Quistelli. Università degli Studi Mediterranea di Reggio Calabria, Design per il Prodotto Industriale e Artigianale, a.a. 2023/24.</p>
+
+
+    </div>
+
+    <div class="proj-right">
+      <div class="proj-col-title">
+        
+        <a href="/projects/3phasmos/" class="proj-nav-arrow">
+          <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+            <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </a>
+        
+
+        <div class="proj-title-wrapper">
+          <div class="proj-title-scroll desktop-only">
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+            <h1 class="proj-title">Regal 3.0</h1>
+          </div>
+          <div class="proj-title-scroll mobile-only">
+            <h1 class="proj-title">Regal 3.0</h1>
+          </div>
+        </div>
+
+        
+        <span class="proj-nav-arrow disabled">
+          <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M240,80 L240,140" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+            <path d="M190,110 L240,160 L290,110" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </span>
+        
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<a href="/projects/3phasmos/" class="proj-mob-prev">
+  <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>
+</a>
+
+
+
+<span class="proj-mob-next disabled">
+  <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>
+</span>
+
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">Close ✕</button>
+  <img src="" alt="" id="lb-img"/>
+</div>
+
+<script>
+  (function() {
+    // Carousel functionality (top gallery — unchanged, still auto-scrolling)
+    const track = document.getElementById('carousel-track');
+    if (track) {
+      const viewport = track.parentElement;
+      const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+
+      if (originalSlides.length) {
+        const GAP = 0;
+        const SPEED = 0.4;
+        let position = 0;
+        let animationId = null;
+        let paused = false;
+
+        function getStep() {
+          const slide = track.querySelector('.carousel-slide');
+          if (!slide) return GAP;
+          return slide.offsetWidth + GAP;
+        }
+
+        const slideTemplates = originalSlides.map(slide => ({
+          src: slide.dataset.src,
+          alt: slide.dataset.alt,
+          caption: slide.dataset.caption,
+          noOutline: slide.classList.contains('no-outline')
+        }));
+
+        function createSlide(data) {
+          const div = document.createElement('div');
+          div.className = data.noOutline ? 'carousel-slide no-outline' : 'carousel-slide';
+          div.dataset.src = data.src;
+          div.dataset.alt = data.alt;
+          div.dataset.caption = data.caption;
+
+          const img = document.createElement('img');
+          img.src = data.src;
+          img.alt = data.alt;
+          img.loading = 'lazy';
+          img.draggable = false;
+          div.appendChild(img);
+
+          if (data.caption) {
+            const caption = document.createElement('div');
+            caption.className = 'carousel-slide-caption';
+            caption.textContent = data.caption;
+            div.appendChild(caption);
+          }
+
+          div.addEventListener('click', () => {
+            lbImg.src = data.src;
+            lbImg.alt = data.alt;
+            lb.classList.add('open');
+          });
+
+          return div;
+        }
+
+        let nextTemplateIndex = 0;
+
+        function getNextTemplate() {
+          const template = slideTemplates[nextTemplateIndex];
+          nextTemplateIndex = (nextTemplateIndex + 1) % slideTemplates.length;
+          return template;
+        }
+
+        function checkAndAppend() {
+          const viewportRect = viewport.getBoundingClientRect();
+          const lastSlide = track.lastElementChild;
+          if (!lastSlide) return;
+
+          const STEP = getStep();
+          const lastSlideRect = lastSlide.getBoundingClientRect();
+          const lastSlideRight = lastSlideRect.right + position;
+
+          if (lastSlideRight < viewportRect.width + STEP * 2) {
+            const newSlide = createSlide(getNextTemplate());
+            track.appendChild(newSlide);
+          }
+        }
+
+        function checkAndRemove() {
+          const firstSlide = track.firstElementChild;
+          if (!firstSlide) return;
+
+          const STEP = getStep();
+          const firstSlideRect = firstSlide.getBoundingClientRect();
+          const firstSlideRight = firstSlideRect.right + position;
+
+          if (firstSlideRight < -STEP) {
+            firstSlide.remove();
+            position += STEP;
+          }
+        }
+
+        function animate() {
+          if (paused) {
+            animationId = requestAnimationFrame(animate);
+            return;
+          }
+
+          position -= SPEED;
+
+          checkAndAppend();
+          checkAndRemove();
+
+          track.style.transform = `translateX(${position}px)`;
+          animationId = requestAnimationFrame(animate);
+        }
+
+        function initialFill() {
+          const viewportWidth = viewport.getBoundingClientRect().width;
+          const STEP = getStep();
+          const totalWidth = originalSlides.length * STEP;
+
+          while (totalWidth + (track.children.length - originalSlides.length) * STEP < viewportWidth + STEP * 2) {
+            const newSlide = createSlide(getNextTemplate());
+            track.appendChild(newSlide);
+          }
+        }
+
+        initialFill();
+        animationId = requestAnimationFrame(animate);
+
+        track.addEventListener('mouseenter', () => { paused = true; });
+        track.addEventListener('mouseleave', () => { paused = false; });
+        track.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+        track.addEventListener('touchend', () => { paused = false; });
+
+        document.addEventListener('visibilitychange', () => {
+          paused = document.hidden;
+        });
+      }
+    }
+
+    // ── HORIZONTAL PAGE-STYLE IMAGE CAROUSEL (split-section galleries) ──
+    const sections = document.querySelectorAll('.split-section');
+
+    sections.forEach((section) => {
+      const mediaDiv = section.querySelector('.split-section-media');
+      const imageTrack = mediaDiv
+        ? mediaDiv.querySelector('.mini-carousel-track, .image-track')
+        : null;
+
+      if (!imageTrack) return;
+
+      const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
+      if (!slides.length) return;
+
+      if (slides.length === 1) {
+        slides[0].classList.add('active');
+        return;
+      }
+
+      let currentIndex = 0;
+      let isTransitioning = false;
+
+      // Controls row: prev arrow — counter — next arrow, placed BELOW the image
+      const controls = document.createElement('div');
+      controls.className = 'split-section-controls';
+      mediaDiv.appendChild(controls);
+
+      const ARROW_LEFT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+      const ARROW_RIGHT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'split-section-nav split-section-prev disabled';
+      prevBtn.setAttribute('aria-label', 'Previous image');
+      prevBtn.innerHTML = ARROW_LEFT;
+      controls.appendChild(prevBtn);
+
+      const counter = document.createElement('div');
+      counter.className = 'split-section-image-counter';
+      counter.textContent = `1 / ${slides.length}`;
+      controls.appendChild(counter);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'split-section-nav split-section-next';
+      nextBtn.setAttribute('aria-label', 'Next image');
+      nextBtn.innerHTML = ARROW_RIGHT;
+      controls.appendChild(nextBtn);
+
+      function goTo(index) {
+        if (isTransitioning) return;
+        if (index < 0 || index > slides.length - 1) return;
+        isTransitioning = true;
+
+        currentIndex = index;
+
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === currentIndex);
+        });
+
+        counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+        prevBtn.classList.toggle('disabled', currentIndex === 0);
+        nextBtn.classList.toggle('disabled', currentIndex === slides.length - 1);
+
+        setTimeout(() => { isTransitioning = false; }, 500);
+      }
+
+      prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+      nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+      // Basic swipe support for touch
+      let touchStartX = 0;
+      imageTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      imageTrack.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0) goTo(currentIndex + 1);
+        else goTo(currentIndex - 1);
+      }, { passive: true });
+
+      slides[0].classList.add('active');
+    });
+  })();
+
+  // Lightbox functionality
+  const lb    = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  
+  document.querySelectorAll('#carousel-track .carousel-slide, .split-section-media .mini-carousel-slide img, .split-section-media .image-slide img').forEach(el => {
+    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+    if (!img) return;
+    el.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('open');
+    });
+  });
+  
+  document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+  // Color transition
+  const TARGET = {
+    teal:  '#C8920A',
+    bg:    '#EDE4CC',
+    white: '#F6F2E6',
+    line:  '#C8920A',
+  };
+  
+  function hexToRgb(hex) {
+    const h = hex.replace('#','');
+    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+  }
+  
+  function lerpColor(a, b, t) {
+    return [Math.round(a[0]+(b[0]-a[0])*t), Math.round(a[1]+(b[1]-a[1])*t), Math.round(a[2]+(b[2]-a[2])*t)];
+  }
+  
+  function rgbToHex(c) { return '#' + c.map(v => v.toString(16).padStart(2,'0')).join(''); }
+
+  const prev = JSON.parse(sessionStorage.getItem('projectColors') || 'null') || TARGET;
+  sessionStorage.setItem('projectColors', JSON.stringify(TARGET));
+
+  if (prev.bg !== TARGET.bg || prev.teal !== TARGET.teal) {
+    const DURATION = 600, start = performance.now();
+    const from = { teal: hexToRgb(prev.teal), bg: hexToRgb(prev.bg), white: hexToRgb(prev.white), line: hexToRgb(prev.line) };
+    const to   = { teal: hexToRgb(TARGET.teal), bg: hexToRgb(TARGET.bg), white: hexToRgb(TARGET.white), line: hexToRgb(TARGET.line) };
+    const ease = t => t < .5 ? 2*t*t : -1+(4-2*t)*t;
+    
+    function tick(now) {
+      const t = ease(Math.min((now-start)/DURATION, 1));
+      const r = document.documentElement;
+      r.style.setProperty('--teal',  rgbToHex(lerpColor(from.teal,  to.teal,  t)));
+      r.style.setProperty('--bg',    rgbToHex(lerpColor(from.bg,    to.bg,    t)));
+      r.style.setProperty('--white', rgbToHex(lerpColor(from.white, to.white, t)));
+      r.style.setProperty('--line',  rgbToHex(lerpColor(from.line,  to.line,  t)));
+      document.body.style.background = rgbToHex(lerpColor(from.bg, to.bg, t));
+      const rail = document.getElementById('rail'), mob = document.getElementById('mob');
+      if (rail) rail.style.background = rgbToHex(lerpColor(from.bg, to.bg, t));
+      if (mob)  mob.style.background  = rgbToHex(lerpColor(from.bg, to.bg, t));
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+</script>
+
+<footer class="site-footer">
+  <span>olo-works</span>
+  <span>Product &amp; industrial designer.</span>
+  <span>2026</span>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

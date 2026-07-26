@@ -1,16 +1,13 @@
 ---
 layout: project
-title: "OLO N°01"
+title: "No-ONE"
 order: 9
 year: 2025
-client: "Self-initiated"
+client: " Personal Project"
 role: "Car Design"
-materials: "Typography, Color, Print, Digital"
-duration: "12 months"
 tags: [Product]
 cover: /images/photoprojects/no1concept/Untitled10.png
-excerpt_text: "A personal brand built from a name fragment and the lightweight, playful futurism of Y2K interface design."
-gallery_cols: 2
+excerpt_text: "A personal styling exercise integrating the functionality of a shooting brake into the architecture of an exotic sportscar, exploring what happens when utility takes higher priority than pure performance."
 gallery:
   - src: /images/photoprojects/no1concept/amb2.png
     alt: "Primary logo lockup"
@@ -24,85 +21,106 @@ gallery:
     layout: wide
 ---
 
-Moving beyond the track-focused nature of most supercars, this personal styling exercise integrates the functionality of a shooting brake into the architecture of an exotic sportscar, exploring what happens when utility takes higher priority than pure performance.
 
+<div class="split-section" markdown="1">
 
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:24px 0;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;">
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/no1concept/Untitled6.png" style="width:100%;object-fit:cover;display:block;" />
+<div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled6.png" alt="Exterior front view" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled5.png" alt="Exterior rear view" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/2f95f0241435073.695a61539ad46.png" alt="Exterior concept" />
+      </div>
     </div>
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/no1concept/Untitled5.png" style="width:100%;object-fit:cover;display:block;" />
+  </div>
+</div>
+
+<div class="proj-lead" markdown="1">
+No-ONE reworks the shooting-brake format through the language of an exotic sportscar, testing how far the proportions of a two-seat performance car can stretch before they stop reading as "exotic" and start reading as "practical."
+</div>
+
+
+<div class="split-section-text" markdown="1">
+</div>
+
+</div>
+
+<div class="split-section" markdown="1">
+
+<div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled11bckf.png" alt="Interior overview" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled13bckf.png" alt="Interior detail 1" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled12bckf.png" alt="Interior detail 2" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled14bckf.png" alt="Interior detail 3" />
+      </div>
     </div>
   </div>
 </div>
 
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:24px 0;">
-  <div style="aspect-ratio:16/9;">
-    <img src="/images/photoprojects/no1concept/2f95f0241435073.695a61539ad46.png" alt="Exterior concept" style="width:100%;height:100%;object-fit:cover;display:block;" />
-  </div>
-</div>
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:24px 0;">
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/no1concept/amb5.png" style="width:100%;object-fit:cover;display:block;" />
-    </div>
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/no1concept/amb4.png" style="width:100%;object-fit:cover;display:block;" />
-    </div>
-    <div>
-      <img src="/images/photoprojects/no1concept/amb3.png" style="width:100%;object-fit:cover;display:block;" />
-    </div>
-  </div>
-</div>
+<div class="split-section-text" markdown="1">
 
 ## The interior
 
-The cabin maintains the aggressive character of a supercar while reimagining its approach to space and interaction. Drawing visual references from late 1990s and early 2000s commuter vehicles, organic sculptural forms flow throughout, producing shapes that feel unconventional yet familiar, and that merge with the practical requirements of a contemporary car.
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:24px 0;">
-  <div style="aspect-ratio:16/9;">
-    <img src="/images/photoprojects/no1concept/Untitled11bckf.png" style="width:100%;height:100%;object-fit:cover;display:block;" />
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);">
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/no1concept/Untitled13bckf.png" style="width:100%;object-fit:cover;display:block;" />
-    </div>
-    <div>
-      <img src="/images/photoprojects/no1concept/Untitled12bckf.png" style="width:100%;object-fit:cover;display:block;" />
-    </div>
-  </div>
-   <div style="aspect-ratio:16/9;">
-    <img src="/images/photoprojects/no1concept/Untitled14bckf.png" style="width:100%;height:100%;object-fit:cover;display:block;" />
-    </div>
+The cabin was meant as a reimagination of its approach to space and interaction. Drawing visual references early 2000s commuter vehicles, with organic sculptural forms flow throughout, producing shapes that feel unconventional yet merging with the practical requirements of a contemporary car, from added storage to improved sightlines, without losing the language of the exterior.
+</div>
 
 </div>
+
+<div class="split-section" markdown="1">
+
+<div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/no1concept/Tavola disegno 1.png" alt="Interface widget system" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-section-text" markdown="1">
 
 ## The interface
 
-Departing from the simplified interfaces of modern vehicles, the UI adopts a neo-skeuomorphic approach that balances playfulness with utility. Structured as a widget interface, each function is designed as a tactile, dimensional object that invites interaction, creating a visually engaging experience fully customisable to each user. Grey is strictly reserved for passive system elements, ensuring every interactive feature remains purposeful and chromatically distinct.
+Departing from the simplified interfaces of modern vehicles, the UI adopts a neo-skeuomorphic approach that balances playfulness with utility. Structured as a widget system, each function is designed as a tactile, dimensional object that invites interaction, creating a visually engaging experience that's fully customizable to each user. Grey is strictly reserved for passive system elements, so every interactive feature stays purposeful and chromatically distinct.
 
-<div style="overflow:hidden;margin:24px 0;">
-  <div style="display:grid;grid-template-columns:1fr;">
-    <div>
-      <img src="/images/photoprojects/no1concept/Tavola disegno 1.png" style="width:100%;object-fit:cover;display:block;" />
+</div>
+
+</div>
+
+<div class="split-section" markdown="1">
+
+<div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/context2.png" alt="Off-road context" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/context.png" alt="All-terrain scenario" />
+      </div>
     </div>
   </div>
 </div>
 
+<div class="split-section-text" markdown="1">
+
 ## An all-terrain vehicle
 
-Designed to handle varied terrain through an adjustable ride height, the car adapts from smooth road surfaces to off-road conditions without compromising its character.
+Ground clearance became the clearest test of the shooting-brake premise: could the car's proportions survive being lifted for rough terrain without losing the visual tension that makes it read as exotic? An adjustable ride height lets the silhouette shift between a low, road-focused stance and a raised all-terrain posture, while consistent surfacing and shared design cues keep the character intact across both conditions.
 
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:24px 0;">
-  <div style="aspect-ratio:16/9;">
-    <img src="/images/photoprojects/no1concept/context2.png" style="width:100%;height:100%;object-fit:cover;display:block;" />
-  </div>
 </div>
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:24px 0;">
-  <div style="aspect-ratio:16/9;">
-    <img src="/images/photoprojects/no1concept/context.png" style="width:100%;height:100%;object-fit:cover;display:block;" />
-  </div>

@@ -109,7 +109,7 @@
   body, #rail, #mob { background: var(--bg) !important; }
   #rail, #rail * { border-color: var(--line) !important; }
   .r-icon { border-color: var(--line) !important; }
-  .proj-right, .proj-cover, .proj-gallery-grid { border-color: var(--line) !important; }
+  .proj-right, .proj-cover { border-color: var(--line) !important; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -121,37 +121,37 @@
   }
 
   .proj-cover       { animation: fadeUp .6s var(--ease) .05s both; }
-  .proj-description { animation: fadeUp .7s var(--ease) .18s both; }
-  .proj-gallery     { animation: fadeUp .6s var(--ease) .3s both; }
+  .proj-meta-strip  { animation: fadeUp .6s var(--ease) .12s both; }
+  .proj-carousel    { animation: fadeUp .7s var(--ease) .18s both; }
+  .proj-scroll-indicator { animation: fadeUp .7s var(--ease) .22s both; }
+  .proj-description { animation: fadeUp .7s var(--ease) .24s both; }
   .proj-right       { animation: fadeIn .6s var(--ease) .1s both; }
 
   html, body { height: 100%; overflow-x: hidden; }
 
-  /* ── Main grid ── */
   .proj-wrap {
     display: grid;
-    grid-template-columns: 1fr 180px;
+    grid-template-columns: 1fr 140px;
     min-height: 100vh;
-    padding-left: 48px;
+    padding-left: 32px;
     align-items: start;
   }
 
-  /* ── Left column ── */
   .proj-left {
-    padding: 56px 48px 100px 72px;
+    padding: 48px 32px 100px 56px;
     overflow-x: hidden;
   }
 
-  /* ── Cover image ── */
+  /* ── COVER ── */
   .proj-cover {
-    width: calc(100% + 120px);
-    margin-left: -72px;
+    width: calc(100% + 88px);
+    margin-left: -56px;
     margin-right: 0;
-    margin-top: -56px;
-    margin-bottom: 56px;
+    margin-top: -48px;
+    margin-bottom: 0;
     border-radius: 0;
     border: none;
-    min-height: clamp(280px, 45vw, 560px);
+    height: 680px;
     overflow: hidden;
     background: var(--teal-xl);
     position: relative;
@@ -165,117 +165,362 @@
     object-fit: cover;
   }
 
-  .proj-cover-placeholder {
-    font-size: 3rem;
-    color: var(--accent);
-    opacity: .2;
+  /* ── META STRIP ── */
+  .proj-meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 32px;
+    padding: 12px 32px;
+    border-top: none;
+    border-bottom: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .proj-meta-tag {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--mono);
+  }
+  .proj-meta-tag-label {
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .proj-meta-tag-value {
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ── CAROUSEL (top gallery — auto-scrolling, untouched) ── */
+  .proj-carousel-outer {
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .proj-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    padding: 4px 32px 16px 32px;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 0;
+    transition: none;
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    min-width: 320px;
+    max-width: 320px;
+    height: 170px;
+    flex-shrink: 0;
+    border-radius: 0;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid var(--line);
+    position: relative;
+    transition: none;
+    box-shadow: none;
+  }
+  .carousel-slide.no-outline {
+    border: none;
+  }
+  .carousel-slide:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  .carousel-slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 8px;
+    background: linear-gradient(to top, rgba(13,31,34,.85), transparent);
+    color: rgba(255,255,255,.7);
+    font-size: .68rem;
+    line-height: 1.3;
+    font-family: var(--mono);
+    letter-spacing: .04em;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .proj-scroll-indicator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    padding: 8px 32px 24px;
+    opacity: 0.4;
+    box-sizing: border-box;
+  }
+  .proj-scroll-prompt {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .proj-scroll-arrow {
+    display: flex;
+    color: var(--ink);
+  }
+  .proj-scroll-arrow svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* ── SPLIT SECTIONS ── */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin: 24px 0;
+    padding: 0 32px;
+    position: relative;
+  }
+
+  .split-section-media {
+    position: sticky;
+    top: 40px;
+    width: 100%;
+    max-width: 680px;       /* bigger box */
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* ── Horizontal, page-style image carousel ──
+     Fixed-height box so the arrows/counter never move between images.
+     Inside it, each image is shown at its own natural aspect ratio
+     (scaled down to fit, never cropped) and centered. The border wraps
+     only the actual visible image — no visible frame around empty space. ── */
+  .split-section-media .mini-carousel-viewport {
+    width: 100%;
+    height: min(58vh, 540px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .split-section-media .mini-carousel-track,
+  .split-section-media .image-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .split-section-media .mini-carousel-slide,
+  .split-section-media .image-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .split-section-media .mini-carousel-slide.active,
+  .split-section-media .image-slide.active {
+    opacity: 1;
+    pointer-events: auto;
     z-index: 1;
   }
 
-  /* ── Description ── */
-  .proj-description {
-    font-size: 1.1rem;
-    line-height: 2;
-    color: var(--ink-m);
-    max-width: 1200px;
-    margin: 0 auto 72px auto;
-    padding: 0 24px;
+  /* Image keeps its own aspect ratio — scaled to fit the fixed box, never
+     stretched or cropped. Border hugs the image itself, not the box. */
+  .split-section-media .mini-carousel-slide img,
+  .split-section-media .image-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 14px;
+    border: 2px solid var(--line);
+    cursor: default;
+    display: block;
   }
 
-  .proj-description p { margin: 0 0 1.5em; }
-  .proj-description p:last-child { margin-bottom: 0; }
+  /* Add class="no-outline" to any <img> (in the mini-carousel or the
+     .split-section-text) to drop the border/radius — useful for
+     transparent PNGs where a visible box around them looks wrong. */
+  .split-section-media .mini-carousel-slide img.no-outline,
+  .split-section-media .image-slide img.no-outline,
+  .split-section-text img.no-outline {
+    border: none;
+    border-radius: 0;
+  }
 
-  .proj-description h2 {
-    font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  .proj-lead p {
+    font-family: var(--sans);       /* Syne — matches everything else */
+    font-size: clamp(1.65rem, 2.8vw, 2.5rem);
     font-weight: 800;
-    letter-spacing: -.05em;
-    line-height: 1.05;
-    color: var(--ink);
-    margin: 3.2em 0 .8em;
-    padding-bottom: .5em;
-    border-bottom: 1px solid var(--line);
-  }
-  .proj-description h2:first-child { margin-top: 0; }
-
-  .proj-description h3 {
-    font-family: var(--mono);
-    font-size: var(--fs-caption);
-    letter-spacing: .24em;
-    text-transform: uppercase;
+    letter-spacing: -.03em;
+    line-height: 1.1;
     color: var(--teal);
-    margin: 2.4em 0 .6em;
+    margin: 0;
+  }
+
+  /* Catch any raw <img> tags dropped directly in markdown content,
+     outside the mini-carousel wrapper, and give them the same treatment. */
+  .split-section-text img {
+    border-radius: 14px;
+    border: 2px solid var(--line);
+    max-width: 100%;
+    display: block;
+  }
+
+  .split-section-media .image-slide .image-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    font-size: .75rem;
+    color: var(--ink-m);
+    background: var(--white);
+    font-family: var(--mono);
+    letter-spacing: .04em;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  /* Controls row: arrows + page indicator, sitting BELOW the image,
+     no circular buttons — plain, minimal. */
+  .split-section-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-  .proj-description h3::before {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 1.5px;
-    background: var(--teal);
-    flex-shrink: 0;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
   }
 
-  .proj-description ul,
-  .proj-description ol {
-    margin: 0 0 1.5em 1.2em;
-    padding: 0;
-  }
-  .proj-description li {
-    margin-bottom: .5em;
-    line-height: 1.8;
+  .split-section-text {
+    padding-top: 0;
   }
 
-  /* ── Gallery ── */
-  .proj-gallery { margin-bottom: 100px; }
+  .split-section-text h2 {
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 .5em;
+  }
 
-  .proj-gallery-label {
+  .split-section-text h3 {
     font-family: var(--mono);
     font-size: var(--fs-caption);
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 24px;
+    margin: 0 0 .5em;
+  }
+
+  .split-section-text p {
+    margin: 0 0 0.8em;
+    line-height: 1.65;
+    color: var(--ink-m);
+    font-size: 1.15rem;
+  }
+
+  .split-section-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .split-section-text ul,
+  .split-section-text ol {
+    margin: 0 0 1.3em 1.2em;
+    padding: 0;
+  }
+  .split-section-text li {
+    margin-bottom: .4em;
+    line-height: 1.7;
+    color: var(--ink-m);
+  }
+
+  /* Image counter — plain text, sits inline in the controls row below the image */
+  .split-section-image-counter {
+    font-family: var(--mono);
+    font-size: .75rem;
+    letter-spacing: .1em;
+    color: var(--ink);
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+
+  /* Prev / next arrows — plain, no circle, no background, sit below the image */
+  .split-section-nav {
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-  .proj-gallery-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
-
-  .proj-gallery-grid {
-    display: grid;
-    gap: 16px;
-    border-radius: 0;
-    overflow: visible;
+    justify-content: center;
     border: none;
+    background: none;
+    color: var(--ink-m);
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: color .2s, opacity .2s, transform .2s;
+    user-select: none;
+  }
+  .split-section-nav svg {
+    width: 48px;
+    height: 48px;
+  }
+  .split-section-nav:hover {
+    color: var(--teal);
+    transform: scale(1.15);
+  }
+  .split-section-nav.disabled {
+    opacity: .25;
+    pointer-events: none;
   }
 
-  .proj-gallery-grid[data-cols="1"] { grid-template-columns: 1fr; }
-  .proj-gallery-grid[data-cols="2"] { grid-template-columns: 1fr 1fr; }
-  .proj-gallery-grid[data-cols="3"] { grid-template-columns: repeat(3,1fr); }
-  .proj-gallery-grid[data-cols="auto"] { grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
-
-  .gallery-img {
-    width: 100%;
-    aspect-ratio: unset;
-    object-fit: contain;
-    height: auto;
-    display: block;
-    background: transparent;
-    cursor: zoom-in;
-    border-radius: 8px;
-    border: 1px solid var(--line);
-    transition: transform .4s var(--ease);
-}
-  .gallery-img:hover { transform: scale(1.015); }
-  .gallery-img.wide   { grid-column: 1/-1; aspect-ratio: unset; }
-  .gallery-img.tall   { aspect-ratio: 4/5; }
-  .gallery-img.square { aspect-ratio: 1; }
-
-  /* ══════════════════════════════════════════════════════════
-     RIGHT SIDEBAR - DESKTOP
-  ══════════════════════════════════════════════════════════ */
+  /* ── RIGHT SIDEBAR ── */
   .proj-right {
     position: sticky;
     top: 0;
@@ -286,7 +531,6 @@
     overflow: hidden;
   }
 
-  /* Extend sidebar border infinitely upward for overscroll */
   .proj-right::before {
     content: '';
     position: absolute;
@@ -299,94 +543,8 @@
     z-index: 1;
   }
 
-  .proj-col-meta {
-    flex: 1;
-    border-right: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    min-width: 0;
-    position: relative;
-  }
-
-  /* Extend inner meta border infinitely upward for overscroll */
-  .proj-col-meta::before {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: -9999px;
-    bottom: 0;
-    width: 1px;
-    background: var(--line);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .proj-meta-line {
-    writing-mode: vertical-rl;
-    transform: rotate(0deg);
-    white-space: normal;
-    overflow: visible;
-    font-family: var(--mono);
-    font-size: var(--fs-caption);
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--ink-m);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 32px;
-    max-height: calc(100vh - 80px);
-    padding: 20px 0;
-  }
-
-  .proj-meta-item {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    max-width: 140px;
-    
-    word-break: keep-all;
-    white-space: normal;
-    justify-content: flex-start;
-    width: auto; 
-  }
-
-  .proj-meta-item-label {
-    color: var(--teal);
-    opacity: .65;
-    font-size: var(--fs-micro);
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    white-space: nowrap; 
-    width: 100%;
-    text-align: center;
-    display: inline-block;  /* aggiungi */
-    width: auto;  /* aggiungi */
-    margin: 0 auto;  /* aggiungi */
-  }
-
-  .proj-meta-item-value {
-    color: var(--ink);
-    font-size: var(--fs-caption);
-    letter-spacing: .14em;
-    font-weight: 500;
-    text-align: center;
-    line-height: 1.3;
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-    display: inline-block;  /* aggiungi */
-    width: auto;  /* aggiungi */
-    margin: 0 auto; 
-  }
-
-  /* ── Title column ── */
   .proj-col-title {
-    width: 88px;
+    width: 100%;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -398,26 +556,27 @@
   }
 
   .proj-nav-arrow {
-    width: 36px;
-    height: 36px;
+    width: 56px;
+    height: 56px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: transparent;
+    border: none;
+    background: none;
     color: var(--ink-m);
     text-decoration: none;
-    font-size: .9rem;
-    line-height: 1;
-    transition: color .2s, border-color .2s, background .2s;
+    transition: color .2s, transform .2s;
     z-index: 3;
+  }
+  .proj-nav-arrow svg {
+    width: 44px;
+    height: 44px;
   }
   .proj-nav-arrow:hover {
     color: var(--teal);
-    border-color: var(--teal);
-    background: rgba(43,173,184,.06);
+    transform: scale(1.15);
+    background: none;
   }
   .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
 
@@ -478,7 +637,6 @@
   .desktop-only { display: flex; }
   .mobile-only  { display: none; }
 
-  /* ── Back rail ── */
   .proj-back-rail {
     position: fixed;
     left: 72px;
@@ -502,11 +660,10 @@
   .proj-back-rail::after { content: '↑'; font-size: .7rem; }
 
   .proj-back-mobile { display: none; }
-
   .proj-mob-prev,
   .proj-mob-next { display: none; }
 
-  /* ── Lightbox ── */
+  /* ── LIGHTBOX ── */
   .lightbox {
     position: fixed;
     inset: 0;
@@ -518,7 +675,6 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s;
-    backdrop-filter: blur(8px);
   }
   .lightbox.open { opacity: 1; pointer-events: all; }
   .lightbox img {
@@ -545,11 +701,8 @@
   }
   .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
 
-  /* ════════════════════════════════════════
-     MOBILE
-  ════════════════════════════════════════ */
+  /* ── MOBILE ── */
   @media (max-width: 900px) {
-
     .proj-wrap {
       grid-template-columns: 1fr;
       padding-left: 0;
@@ -564,14 +717,11 @@
       border-bottom: 1px solid var(--line);
       order: -1;
       flex-direction: column;
-      padding: 20px 24px;
-      gap: 20px;
+      padding: 12px 24px;
       overflow: visible;
     }
 
-    .proj-right::before,
-    .proj-col-meta::before { display: none; }
-
+    .proj-right::before { display: none; }
     .proj-col-title .proj-nav-arrow { display: none; }
 
     .proj-col-title {
@@ -582,7 +732,6 @@
       padding: 0;
       height: auto;
       gap: 16px;
-      order: 1;
       overflow: hidden;
     }
 
@@ -619,49 +768,6 @@
       flex: 1;
     }
 
-    .proj-col-meta {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      border-right: none;
-      padding: 0;
-      margin: 0;
-      overflow: visible;
-      min-height: auto;
-      position: static;
-      order: 2;
-    }
-
-    .proj-meta-line {
-      writing-mode: horizontal-tb;
-      transform: none;
-      white-space: normal;
-      overflow: visible;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 0;
-      margin: 0;
-      max-height: none;
-    }
-
-    .proj-meta-item {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      max-width: none;
-      word-break: normal;
-      white-space: normal;
-    }
-
-    .proj-meta-item-label { font-size: var(--fs-micro); letter-spacing: .14em; }
-    .proj-meta-item-value { font-size: var(--fs-caption); letter-spacing: normal; text-align: left; }
-
     .proj-left {
       padding: 32px 0 100px;
       overflow-x: hidden;
@@ -673,21 +779,80 @@
       margin-left: 0;
       margin-right: 0;
       margin-top: 0;
-      margin-bottom: 40px;
+      height: 320px;
+    }
+
+    .proj-meta-strip { 
+      padding: 10px 20px; 
+      gap: 6px 24px;
+    }
+    .proj-meta-tag {
+      gap: 4px;
+    }
+
+    .proj-carousel-outer {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .carousel-viewport {
+      padding: 2px 20px 12px 20px;
+    }
+
+    .carousel-slide {
+      min-width: 260px;
+      max-width: 260px;
+      height: 140px;
       border-radius: 0;
-      min-height: clamp(200px, 55vw, 380px);
+      border: 1px solid var(--line);
     }
 
-    .proj-description {
-      font-size: 1.2rem;
-      max-width: 100%;
-      margin: 0 0 48px;
-      padding: 0 24px;
+    .proj-scroll-indicator {
+      padding: 6px 20px 16px;
     }
 
-    .proj-description h2 {
-      font-size: clamp(2rem, 3vw, 2.8rem);
-      margin-top: 2.4em;
+    .split-section {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 24px;
+      margin: 24px 0;
+      padding: 0 20px;
+    }
+
+    .split-section-media {
+      position: static;
+      margin-bottom: 0;
+    }
+
+    .split-section-media .mini-carousel-viewport {
+      height: min(42vh, 380px);
+    }
+
+    .split-section-media .mini-carousel-slide,
+    .split-section-media .image-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0;
+    }
+
+    .split-section-media .image-slide .image-caption {
+      position: static;
+      transform: none;
+      margin-top: 8px;
+      white-space: normal;
+    }
+
+    .split-section-controls {
+      display: flex;
+    }
+
+    .split-section-text {
+      padding-top: 0;
     }
 
     .proj-back-rail { display: none; }
@@ -706,8 +871,6 @@
     }
     .proj-back-mobile:hover { color: var(--teal); }
 
-    .proj-gallery-grid[data-cols="3"] { grid-template-columns: 1fr 1fr; }
-
     .proj-mob-prev,
     .proj-mob-next {
       display: flex;
@@ -715,18 +878,21 @@
       justify-content: center;
       position: fixed;
       bottom: 16px;
-      width: 44px;
-      height: 44px;
+      width: 60px;
+      height: 60px;
       border: 1px solid var(--line);
       border-radius: 4px;
       background: var(--bg);
       color: var(--ink-m);
       text-decoration: none;
-      font-size: 1.1rem;
-      line-height: 1;
       transition: color .2s, border-color .2s;
       box-shadow: 0 4px 16px rgba(0,0,0,.08);
       z-index: 200;
+    }
+    .proj-mob-prev svg,
+    .proj-mob-next svg {
+      width: 36px;
+      height: 36px;
     }
     .proj-mob-prev { left: 12px; }
     .proj-mob-next { right: 12px; }
@@ -737,12 +903,10 @@
   }
 
   @media (max-width: 600px) {
-    .proj-gallery-grid { grid-template-columns: 1fr !important; }
-    .proj-col-meta { gap: 16px; }
-    .proj-meta-item-value { font-size: .8rem; }
-    .proj-cover { min-height: 250px; }
+    .proj-cover { height: 260px; }
   }
 </style>
+
 
 
 
@@ -757,327 +921,291 @@
 <main class="page-main" style="padding:0;">
   <div class="proj-wrap">
 
-    <!-- LEFT COLUMN -->
     <div class="proj-left">
+
       <div class="proj-cover">
         
           <img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe"/>
         
       </div>
 
-      <div class="proj-description">
-        <p>A complete system for urban last-mile delivery. Not a single object but a set of things designed to work together: a compact vehicle, a modular cargo bay, an onboard collaborative robot, a wearable exoskeleton, a new parcel label language, and an app. The whole is called <em>Me-Moe</em>: <em>Mezzo Express Multifunzione Operativa Essenziale</em>.</p>
-
-<h2>The brief</h2>
-
-<p>Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. The project addresses all three without reinventing the vehicle from scratch, working instead at the level of the cargo module, the tools inside it, and the service wrapped around it.</p>
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-  <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
-    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Oversized vehicles</div>
-    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Standard vans obstruct urban mobility. The right format sits between a scooter and a light van: compact enough for restricted zones, large enough to carry a meaningful load.</div>
-  </div>
-  <div style="padding:18px 20px;border-bottom:1px solid var(--line);">
-    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Local restrictions</div>
-    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">ZTL zones, narrow delivery windows, and environmental regulations require a vehicle that complies by default, not by workaround.</div>
-  </div>
-  <div style="padding:18px 20px;">
-    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Recipient availability</div>
-    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Every failed delivery multiplies cost and emissions. The system needs to decouple the delivery from the moment the recipient happens to be home.</div>
-  </div>
-</div>
-
-<h2>The cargo module</h2>
-
-<p>The cargo bay is the structural core of the project. Designed as a standardised unit independent from any specific chassis, it can be retrofitted onto existing vehicles through a simple attachment system. Every component can be positioned in any order and repeated across a mixed fleet. The module is also stackable; a second unit can sit on top of the first where ceiling clearance allows.</p>
-
-<p>Access points were completely reorganised. Two rear doors open the full width of the bay. A lateral sliding door gives access mid-route without repositioning. A motorised floor rail moves packages toward the opening automatically. The result is a loading and unloading sequence that no longer requires the driver to climb inside.</p>
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="padding:28px 24px;border-right:1px solid var(--line);">
-      <img src="/images/photoprojects/me-moe/pezzini.png" alt="Exploded structure" style="width:100%;display:block;border-radius:4px;" />
-    </div>
-    <div style="padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;">
-      <p style="font-family:var(--mono);font-size:.72rem;line-height:1.8;color:var(--ink-m);margin:0;">The bay is built on a tubular steel frame with composite panel cladding. The base houses the battery pack in the electric configuration. Interior shelving runs on standardised rails shared with the cobot cart, making the robot and shelf units interchangeable in position.</p>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);">
-    <div style="padding:20px 16px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Bay width</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1530 mm</div>
-    </div>
-    <div style="padding:20px 16px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Bay height</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">1371 mm</div>
-    </div>
-    <div style="padding:20px 16px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Total length</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">2035 mm</div>
-    </div>
-    <div style="padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Track width</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">931 mm</div>
-    </div>
-  </div>
-
-</div>
-<div style="display:flex;flex-direction:column;align-items:center;margin:40px 0;gap:16px;">
-  <div style="display:flex;gap:16px;">
-    <img src="/images/photoprojects/me-moe/a.png" alt="Regular parcel" style="height:clamp(120px,38vw,240px);width:auto;object-fit:contain;" />
-    <img src="/images/photoprojects/me-moe/B.png" alt="Fragile parcel" style="height:clamp(120px,38vw,240px);width:auto;object-fit:contain;" />
-    <img src="/images/photoprojects/me-moe/C.png" alt="Urgent parcel" style="height:clamp(120px,38vw,240px);width:auto;object-fit:contain;" />
-  </div>
-  <div style="display:flex;gap:16px;">
-    <img src="/images/photoprojects/me-moe/D.png" alt="Regular parcel" style="height:clamp(120px,38vw,240px);width:auto;object-fit:contain;" />
-    <img src="/images/photoprojects/me-moe/E.png" alt="Fragile parcel" style="height:clamp(120px,38vw,240px);width:auto;object-fit:contain;" />
-  </div>
-</div>
-
-<h2>AGADEXO</h2>
-
-<p>Repetitive heavy lifting is the leading cause of long-term injury in delivery work. AGADEXO is a wearable exoskeleton designed as a structural component of the vehicle rather than a stored accessory. It replaces the passenger seat entirely.</p>
-
-<p>A single hydraulic arm activates the moment the cab door opens. The exoskeleton pivots outward and descends to standing height. The driver steps into it without bending down or reaching inside. Door closes. Mechanism resets. Under ten seconds.</p>
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/projects/memoe/agadexo-deploy-1.png" alt="Door closed" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
-    </div>
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/projects/memoe/agadexo-deploy-2.png" alt="Hydraulic extends" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;" />
-    </div>
-    <div>
-      <img src="/images/photoprojects/me-moe/side1.png" alt="Driver steps in" style="width:100%;display:block;aspect-ratio:1;object-fit:cover;object-position:20% 30%;" />
-    </div>
-  </div>
-
-</div>
-
-<p>Three quick-release buckles at the shoulder, torso and arm allow emergency removal at any point. The safety system is redundant by design; any single buckle is sufficient to disengage the unit completely. Integration was studied against the AGADEXO shoulder unit by Agade and the ABB SWIFTI CRB 1100 cobot.</p>
-
-<h2>The parcel label</h2>
-
-<p>Existing shipping labels were designed entirely for machine reading. Dense, visually undifferentiated, and difficult to parse at a glance; they work for sensors but not for people. A new label system was designed from scratch around a chromatic coding logic compliant with ISO 3864 and OSHA 1910.145.</p>
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--line);">
-    <div style="background:#89C273;padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Regular</div>
-      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#89C273</div>
-    </div>
-    <div style="background:#FCC046;padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Fragile</div>
-      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#FCC046</div>
-    </div>
-    <div style="background:#006FB9;padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Temp.</div>
-      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#006FB9</div>
-    </div>
-    <div style="background:#D70911;padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Urgent</div>
-      <div style="font-family:var(--mono);font-size:.6rem;color:#fff;font-weight:500;">#D70911</div>
-    </div>
-    <div style="background:#2D2926;padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:4px;">Hazard</div>
-      <div style="font-family:var(--mono);font-size:.6rem;color:#FCC046;font-weight:500;">#2D2926</div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="padding:28px 24px;border-right:1px solid var(--line);">
-      <img src="/images/projects/memoe/label-anatomy.png" alt="Label anatomy" style="width:100%;display:block;border-radius:4px;" />
-    </div>
-    <div style="padding:28px 24px;display:flex;flex-direction:column;gap:16px;justify-content:center;">
-      <div>
-        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Top</div>
-        <div style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-m);">Delivery type in large format. Readable from across the bay.</div>
+      
+      <div class="proj-meta-strip">
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Client</span><span class="proj-meta-tag-value">Bachelor's Degree Thesis</span></span>
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Role</span><span class="proj-meta-tag-value">Product Design, UX Design, Graphic Design</span></span>
+        
+        
+        
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Year</span><span class="proj-meta-tag-value">2024</span></span>
       </div>
-      <div style="border-top:1px solid var(--line);padding-top:16px;">
-        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Middle</div>
-        <div style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-m);">Company logo, order code, sender and recipient addresses.</div>
-      </div>
-      <div style="border-top:1px solid var(--line);padding-top:16px;">
-        <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Bottom</div>
-        <div style="font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-m);">ISO-compliant condition icons and barcode for automated reading.</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding:18px 20px;">
-    <div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Coordinated tape</div>
-    <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">A matching adhesive tape repeats the order code across all seams in the same colour. The parcel is identifiable even when stacked or partially covered.</div>
-  </div>
-
-</div>
-
-<style>
-  .label-gallery { display:flex; flex-wrap:nowrap; gap:16px; margin:80px 0; justify-content:center; align-items:flex-start; }
-  .label-gallery img { height:clamp(120px, 25vw, 250px); width:auto; object-fit:contain; flex-shrink:0; }
-  @media (max-width: 700px) {
-    .label-gallery { flex-wrap:wrap; }
-    .label-gallery img { height:clamp(120px, 28vw, 250px); flex-basis:30%; }
-  }
-</style>
-
-<div style="display:flex;flex-wrap:wrap;gap:16px;margin:80px 0;align-items:flex-start;justify-content:center;">
-  <img src="/images/photoprojects/me-moe/etichetta (1).png" alt="Regular parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
-  <img src="/images/photoprojects/me-moe/etichetta (2).png" alt="Fragile parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
-  <img src="/images/photoprojects/me-moe/etichetta (3).png" alt="Urgent parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
-  <img src="/images/photoprojects/me-moe/etichetta (4).png" alt="Regular parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
-  <img src="/images/photoprojects/me-moe/etichetta (5).png" alt="Fragile parcel" style="height:clamp(260px, 38vw, 420px);width:auto;object-fit:contain;" />
-</div>
-
-<h2>The app</h2>
-
-<p>The service around Me-Moe was designed as a complete UX flow: booking, confirmation and tracking. The mental model is ride-hailing applied to parcels. The user does not fill a shipping form; they book a vehicle.</p>
-
-<div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:28px 0;">
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="border-right:1px solid var(--line);">
-      <img src="/images/projects/memoe/app-login.png" alt="Login screen" style="width:100%;display:block;aspect-ratio:9/16;object-fit:cover;" />
-    </div>
-    <div>
-      <img src="/images/projects/memoe/app-home.png" alt="Home screen" style="width:100%;display:block;aspect-ratio:9/16;object-fit:cover;" />
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);">
-    <div style="padding:28px 24px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Booking</div>
-      <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Destination, parcel type, weight and dimensions go in first. The app shows available Me-Moe units filtered by proximity and time slot. One tap confirms.</div>
-    </div>
-    <div style="padding:28px 24px;">
-      <div style="font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Tracking</div>
-      <div style="font-family:var(--mono);font-size:.68rem;line-height:1.7;color:var(--ink-m);">Live vehicle position on a map with current route and estimated arrival. Standard hub-to-hub tracking tells you where the parcel has been. This tells you where it is right now.</div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
-    <div style="padding:20px 16px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Flows</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Book · Track · Return</div>
-    </div>
-    <div style="padding:20px 16px;border-right:1px solid var(--line);">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Login</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Google · Microsoft · Meta</div>
-    </div>
-    <div style="padding:20px 16px;">
-      <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;">Palette</div>
-      <div style="font-family:var(--mono);font-size:.65rem;color:var(--ink);font-weight:500;">Hot pink · Lime · Teal</div>
-    </div>
-  </div>
-
-</div>
-
-<h2>The process</h2>
-
-<p>The project moved from a SWOT analysis of the proximity logistics sector through vehicle sizing, cargo bay structure, technology integration, label design and digital service design. Each layer was built in response to a specific failure identified in the research phase.</p>
-
-<p>Modelling and rendering in Blender. Graphic and label design in Adobe Illustrator. Layout in Adobe InDesign. FLUX.1 for contextual reference imagery.</p>
-
-<p>Supervised by Consuelo Nava with co-supervisors Carmine L. Quistelli and Domenico Lucanto.</p>
-
-      </div>
+      
 
       
-      <div class="proj-gallery">
-        <div class="proj-gallery-label">Process &amp; images</div>
-        <div class="proj-gallery-grid" data-cols="2">
-          
-          <img
-            src="/images/photoprojects/me-moe/setting1.png"
-            alt="Me-Moe in context"
-            class="gallery-img wide"
-            loading="lazy"
-          />
-          
-          <img
-            src="/images/photoprojects/me-moe/setting6.png"
-            alt="Front three-quarter"
-            class="gallery-img "
-            loading="lazy"
-          />
-          
-          <img
-            src="/images/photoprojects/me-moe/setting3.png"
-            alt="Night render"
-            class="gallery-img "
-            loading="lazy"
-          />
-          
-          <img
-            src="/images/photoprojects/me-moe/setting5.png"
-            alt="Fleet variants: SDA, UPS, DHL"
-            class="gallery-img wide"
-            loading="lazy"
-          />
-          
-          <img
-            src="/images/photoprojects/me-moe/setting2.png"
-            alt="Me-Moe on a Run"
-            class="gallery-img wide"
-            loading="lazy"
-          />
-          
+      <div class="proj-carousel-outer">
+        <div class="proj-carousel" id="carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carousel-track">
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/me-moe/setting1.png" data-alt="Me-Moe in context" data-caption="">
+                <img src="/images/photoprojects/me-moe/setting1.png" alt="Me-Moe in context" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/me-moe/setting6.png" data-alt="Front three-quarter" data-caption="">
+                <img src="/images/photoprojects/me-moe/setting6.png" alt="Front three-quarter" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/me-moe/setting3.png" data-alt="Night render" data-caption="">
+                <img src="/images/photoprojects/me-moe/setting3.png" alt="Night render" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/me-moe/setting5.png" data-alt="Fleet variants: SDA, UPS, DHL" data-caption="">
+                <img src="/images/photoprojects/me-moe/setting5.png" alt="Fleet variants: SDA, UPS, DHL" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/me-moe/setting2.png" data-alt="Me-Moe on a run" data-caption="">
+                <img src="/images/photoprojects/me-moe/setting2.png" alt="Me-Moe on a run" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+            </div>
+          </div>
         </div>
       </div>
       
+
+      <div class="proj-scroll-indicator">
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-prompt">Explore the details</span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+      </div>
+
+      <!-- SPLIT SECTIONS - Your content goes here -->
+      <div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/setting1.png" alt="Me-Moe in context" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/setting3.png" alt="Night render" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="proj-lead">
+    <p>Urban proximity logistics fails in three predictable places: vehicles too large for city streets, local restrictions that fragment the working day, and deliveries that collapse when no one is home. The project addresses all three without reinventing the vehicle from scratch, working instead at the level of the cargo module, the tools inside it, and the service wrapped around it.</p>
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/setting6.png" alt="Front three-quarter" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-brief">The brief</h2>
+
+    <p>Standard vans obstruct urban mobility, so the right format sits between a scooter and a light van: compact enough for restricted zones, large enough to carry a meaningful load. ZTL zones, narrow delivery windows, and environmental regulations require a vehicle that complies by default, not by workaround. And every failed delivery multiplies cost and emissions, so the system needs to decouple the delivery from the moment the recipient happens to be home.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/pezzini.png" alt="Exploded structure" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-cargo-module">The cargo module</h2>
+
+    <p>The cargo bay is the structural core of the project. Designed as a standardised unit independent from any specific chassis, it can be retrofitted onto existing vehicles through a simple attachment system, with every component positionable in any order and repeated across a mixed fleet. The module is also stackable, with a second unit able to sit on top of the first where ceiling clearance allows.</p>
+
+    <p>Access points were completely reorganised: two rear doors open the full width of the bay, a lateral sliding door gives access mid-route without repositioning, and a motorised floor rail moves packages toward the opening automatically, so loading and unloading no longer requires the driver to climb inside. The bay itself is built on a tubular steel frame with composite panel cladding, with the base housing the battery pack in the electric configuration. Interior shelving runs on standardised rails shared with the cobot cart, making the robot and shelf units interchangeable in position.</p>
+
+    <p>The bay measures 1530 mm in width, 1371 mm in height, and 2035 mm in total length, on a track width of 931 mm.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/a.png" alt="Regular parcel" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/B.png" alt="Fragile parcel" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/C.png" alt="Urgent parcel" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/D.png" alt="Temperature-controlled parcel" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/E.png" alt="Hazardous parcel" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+    <p>The module accommodates five parcel configurations across the shelving system, each shaped to a specific handling need within the same standardised bay.</p>
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/side1.png" alt="AGADEXO exoskeleton deployed" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="agadexo">AGADEXO</h2>
+
+    <p>Repetitive heavy lifting is the leading cause of long-term injury in delivery work. AGADEXO is a wearable exoskeleton designed as a structural component of the vehicle rather than a stored accessory, replacing the passenger seat entirely. A single hydraulic arm activates the moment the cab door opens: the exoskeleton pivots outward and descends to standing height, the driver steps into it without bending down or reaching inside, the door closes, and the mechanism resets, all in under ten seconds.</p>
+
+    <p>Three quick-release buckles at the shoulder, torso and arm allow emergency removal at any point, with the safety system redundant by design so that any single buckle is sufficient to disengage the unit completely. Integration was studied against the AGADEXO shoulder unit by Agade and the ABB SWIFTI CRB 1100 cobot.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/etichetta (1).png" alt="Regular label" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/etichetta (2).png" alt="Fragile label" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/etichetta (3).png" alt="Urgent label" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/etichetta (4).png" alt="Temperature label" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/me-moe/etichetta (5).png" alt="Hazard label" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-parcel-label">The parcel label</h2>
+
+    <p>Existing shipping labels are designed entirely for machine reading: dense, visually undifferentiated, and difficult to parse at a glance, working for sensors but not for people. A new label system was designed from scratch around a chromatic coding logic compliant with ISO 3864 and OSHA 1910.145: <strong>Regular</strong> in green (#89C273), <strong>Fragile</strong> in yellow (#FCC046), <strong>Temp.</strong> in blue (#006FB9), <strong>Urgent</strong> in red (#D70911), and <strong>Hazard</strong> in black with a yellow accent (#2D2926).</p>
+
+    <p>Each label is organised in three zones. The top carries the delivery type in large format, readable from across the bay. The middle carries the company logo, order code, and sender and recipient addresses. The bottom carries ISO-compliant condition icons and a barcode for automated reading. A matching adhesive tape repeats the order code across all seams in the same colour, so the parcel stays identifiable even when stacked or partially covered.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/projects/memoe/app-login.png" alt="App login screen" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/projects/memoe/app-home.png" alt="App home screen" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-app">The app</h2>
+
+    <p>The service around Me-Moe was designed as a complete UX flow: booking, confirmation and tracking. The mental model is ride-hailing applied to parcels, so the user does not fill a shipping form, they book a vehicle. In booking, destination, parcel type, weight and dimensions go in first, the app shows available Me-Moe units filtered by proximity and time slot, and one tap confirms. In tracking, live vehicle position appears on a map with current route and estimated arrival, so instead of telling you where the parcel has been, the app tells you where it is right now. The app covers three flows, book, track and return, with login through Google, Microsoft or Meta, and a palette of hot pink, lime and teal.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/me-moe/setting5.png" alt="Fleet variants" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-process">The process</h2>
+
+    <p>The project moved from a SWOT analysis of the proximity logistics sector through vehicle sizing, cargo bay structure, technology integration, label design and digital service design, with each layer built in response to a specific failure identified in the research phase. Modelling and rendering were done in Blender, graphic and label design in Adobe Illustrator, layout in Adobe InDesign, and FLUX.1 for contextual reference imagery.</p>
+
+    <p>Supervised by Consuelo Nava, with co-supervisors Carmine L. Quistelli and Domenico Lucanto.</p>
+
+  </div>
+
+</div>
+
+
     </div>
 
-    <!-- RIGHT SIDEBAR -->
     <div class="proj-right">
-
-      <div class="proj-col-meta">
-        <div class="proj-meta-line">
-          
-          <span class="proj-meta-item">
-            <span class="proj-meta-item-label">client</span>
-            <span class="proj-meta-item-value">Università degli studi Mediterranea di Reggio Calabria</span>
-          </span>
-          
-
-          
-          <span class="proj-meta-item">
-            <span class="proj-meta-item-label">role</span>
-            <span class="proj-meta-item-value">Product Design, UX Design, Graphic Design</span>
-          </span>
-          
-
-          
-          <span class="proj-meta-item">
-            <span class="proj-meta-item-label">materials</span>
-            <span class="proj-meta-item-value">Steel, Composite Panels, Electronics</span>
-          </span>
-          
-
-          
-          <span class="proj-meta-item">
-            <span class="proj-meta-item-label">duration</span>
-            <span class="proj-meta-item-value">Thesis project</span>
-          </span>
-          
-
-          
-
-          
-          <span class="proj-meta-item">
-            <span class="proj-meta-item-label">year</span>
-            <span class="proj-meta-item-value">2024</span>
-          </span>
-          
-        </div>
-      </div>
-
       <div class="proj-col-title">
         
-        <a href="/projects/5metis/" class="proj-nav-arrow">↑</a>
+        <a href="/projects/5metis/" class="proj-nav-arrow">
+          <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+            <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </a>
         
 
         <div class="proj-title-wrapper">
@@ -1094,20 +1222,28 @@
         </div>
 
         
-        <a href="/projects/3phasmos/" class="proj-nav-arrow">↓</a>
+        <a href="/projects/3phasmos/" class="proj-nav-arrow">
+          <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M240,80 L240,140" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+            <path d="M190,110 L240,160 L290,110" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </a>
         
       </div>
-
     </div>
   </div>
 </main>
 
 
-<a href="/projects/5metis/" class="proj-mob-prev">←</a>
+<a href="/projects/5metis/" class="proj-mob-prev">
+  <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>
+</a>
 
 
 
-<a href="/projects/3phasmos/" class="proj-mob-next">→</a>
+<a href="/projects/3phasmos/" class="proj-mob-next">
+  <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>
+</a>
 
 
 <div class="lightbox" id="lightbox">
@@ -1116,32 +1252,261 @@
 </div>
 
 <script>
+  (function() {
+    // Carousel functionality (top gallery — unchanged, still auto-scrolling)
+    const track = document.getElementById('carousel-track');
+    if (track) {
+      const viewport = track.parentElement;
+      const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+
+      if (originalSlides.length) {
+        const GAP = 0;
+        const SPEED = 0.4;
+        let position = 0;
+        let animationId = null;
+        let paused = false;
+
+        function getStep() {
+          const slide = track.querySelector('.carousel-slide');
+          if (!slide) return GAP;
+          return slide.offsetWidth + GAP;
+        }
+
+        const slideTemplates = originalSlides.map(slide => ({
+          src: slide.dataset.src,
+          alt: slide.dataset.alt,
+          caption: slide.dataset.caption,
+          noOutline: slide.classList.contains('no-outline')
+        }));
+
+        function createSlide(data) {
+          const div = document.createElement('div');
+          div.className = data.noOutline ? 'carousel-slide no-outline' : 'carousel-slide';
+          div.dataset.src = data.src;
+          div.dataset.alt = data.alt;
+          div.dataset.caption = data.caption;
+
+          const img = document.createElement('img');
+          img.src = data.src;
+          img.alt = data.alt;
+          img.loading = 'lazy';
+          img.draggable = false;
+          div.appendChild(img);
+
+          if (data.caption) {
+            const caption = document.createElement('div');
+            caption.className = 'carousel-slide-caption';
+            caption.textContent = data.caption;
+            div.appendChild(caption);
+          }
+
+          div.addEventListener('click', () => {
+            lbImg.src = data.src;
+            lbImg.alt = data.alt;
+            lb.classList.add('open');
+          });
+
+          return div;
+        }
+
+        let nextTemplateIndex = 0;
+
+        function getNextTemplate() {
+          const template = slideTemplates[nextTemplateIndex];
+          nextTemplateIndex = (nextTemplateIndex + 1) % slideTemplates.length;
+          return template;
+        }
+
+        function checkAndAppend() {
+          const viewportRect = viewport.getBoundingClientRect();
+          const lastSlide = track.lastElementChild;
+          if (!lastSlide) return;
+
+          const STEP = getStep();
+          const lastSlideRect = lastSlide.getBoundingClientRect();
+          const lastSlideRight = lastSlideRect.right + position;
+
+          if (lastSlideRight < viewportRect.width + STEP * 2) {
+            const newSlide = createSlide(getNextTemplate());
+            track.appendChild(newSlide);
+          }
+        }
+
+        function checkAndRemove() {
+          const firstSlide = track.firstElementChild;
+          if (!firstSlide) return;
+
+          const STEP = getStep();
+          const firstSlideRect = firstSlide.getBoundingClientRect();
+          const firstSlideRight = firstSlideRect.right + position;
+
+          if (firstSlideRight < -STEP) {
+            firstSlide.remove();
+            position += STEP;
+          }
+        }
+
+        function animate() {
+          if (paused) {
+            animationId = requestAnimationFrame(animate);
+            return;
+          }
+
+          position -= SPEED;
+
+          checkAndAppend();
+          checkAndRemove();
+
+          track.style.transform = `translateX(${position}px)`;
+          animationId = requestAnimationFrame(animate);
+        }
+
+        function initialFill() {
+          const viewportWidth = viewport.getBoundingClientRect().width;
+          const STEP = getStep();
+          const totalWidth = originalSlides.length * STEP;
+
+          while (totalWidth + (track.children.length - originalSlides.length) * STEP < viewportWidth + STEP * 2) {
+            const newSlide = createSlide(getNextTemplate());
+            track.appendChild(newSlide);
+          }
+        }
+
+        initialFill();
+        animationId = requestAnimationFrame(animate);
+
+        track.addEventListener('mouseenter', () => { paused = true; });
+        track.addEventListener('mouseleave', () => { paused = false; });
+        track.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+        track.addEventListener('touchend', () => { paused = false; });
+
+        document.addEventListener('visibilitychange', () => {
+          paused = document.hidden;
+        });
+      }
+    }
+
+    // ── HORIZONTAL PAGE-STYLE IMAGE CAROUSEL (split-section galleries) ──
+    const sections = document.querySelectorAll('.split-section');
+
+    sections.forEach((section) => {
+      const mediaDiv = section.querySelector('.split-section-media');
+      const imageTrack = mediaDiv
+        ? mediaDiv.querySelector('.mini-carousel-track, .image-track')
+        : null;
+
+      if (!imageTrack) return;
+
+      const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
+      if (!slides.length) return;
+
+      if (slides.length === 1) {
+        slides[0].classList.add('active');
+        return;
+      }
+
+      let currentIndex = 0;
+      let isTransitioning = false;
+
+      // Controls row: prev arrow — counter — next arrow, placed BELOW the image
+      const controls = document.createElement('div');
+      controls.className = 'split-section-controls';
+      mediaDiv.appendChild(controls);
+
+      const ARROW_LEFT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+      const ARROW_RIGHT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'split-section-nav split-section-prev disabled';
+      prevBtn.setAttribute('aria-label', 'Previous image');
+      prevBtn.innerHTML = ARROW_LEFT;
+      controls.appendChild(prevBtn);
+
+      const counter = document.createElement('div');
+      counter.className = 'split-section-image-counter';
+      counter.textContent = `1 / ${slides.length}`;
+      controls.appendChild(counter);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'split-section-nav split-section-next';
+      nextBtn.setAttribute('aria-label', 'Next image');
+      nextBtn.innerHTML = ARROW_RIGHT;
+      controls.appendChild(nextBtn);
+
+      function goTo(index) {
+        if (isTransitioning) return;
+        if (index < 0 || index > slides.length - 1) return;
+        isTransitioning = true;
+
+        currentIndex = index;
+
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === currentIndex);
+        });
+
+        counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+        prevBtn.classList.toggle('disabled', currentIndex === 0);
+        nextBtn.classList.toggle('disabled', currentIndex === slides.length - 1);
+
+        setTimeout(() => { isTransitioning = false; }, 500);
+      }
+
+      prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+      nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+      // Basic swipe support for touch
+      let touchStartX = 0;
+      imageTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      imageTrack.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0) goTo(currentIndex + 1);
+        else goTo(currentIndex - 1);
+      }, { passive: true });
+
+      slides[0].classList.add('active');
+    });
+  })();
+
+  // Lightbox functionality
   const lb    = document.getElementById('lightbox');
   const lbImg = document.getElementById('lb-img');
-  document.querySelectorAll('.gallery-img').forEach(img => {
-    img.addEventListener('click', () => {
+  
+  document.querySelectorAll('#carousel-track .carousel-slide, .split-section-media .mini-carousel-slide img, .split-section-media .image-slide img').forEach(el => {
+    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+    if (!img) return;
+    el.addEventListener('click', () => {
       lbImg.src = img.src;
       lbImg.alt = img.alt;
       lb.classList.add('open');
     });
   });
+  
   document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
+  // Color transition
   const TARGET = {
     teal:  '#245db2',
     bg:    '#c9cfd9',
     white: '#e8eaed',
     line:  '#245db2',
   };
+  
   function hexToRgb(hex) {
     const h = hex.replace('#','');
     return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
   }
+  
   function lerpColor(a, b, t) {
     return [Math.round(a[0]+(b[0]-a[0])*t), Math.round(a[1]+(b[1]-a[1])*t), Math.round(a[2]+(b[2]-a[2])*t)];
   }
+  
   function rgbToHex(c) { return '#' + c.map(v => v.toString(16).padStart(2,'0')).join(''); }
 
   const prev = JSON.parse(sessionStorage.getItem('projectColors') || 'null') || TARGET;
@@ -1152,6 +1517,7 @@
     const from = { teal: hexToRgb(prev.teal), bg: hexToRgb(prev.bg), white: hexToRgb(prev.white), line: hexToRgb(prev.line) };
     const to   = { teal: hexToRgb(TARGET.teal), bg: hexToRgb(TARGET.bg), white: hexToRgb(TARGET.white), line: hexToRgb(TARGET.line) };
     const ease = t => t < .5 ? 2*t*t : -1+(4-2*t)*t;
+    
     function tick(now) {
       const t = ease(Math.min((now-start)/DURATION, 1));
       const r = document.documentElement;

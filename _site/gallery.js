@@ -5,28 +5,13 @@ const allImages = [
     
     
       
-        { src: "/images/projects/ahok/render-full.png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
-      
-        { src: "/images/projects/ahok/context-day.png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
+        { src: "/images/photoprojects/ahok/9.png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
       
         { src: "/images/photoprojects/ahok/091813192702515.65dfb743a6836.png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
       
         { src: "/images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
       
-    
-  
-    
-      { src: "/images/photoprojects/Regal/POSTER 3.png", title: "Regal 3.0", tag: "Product", href: "/projects/2regal-3-0/" },
-    
-    
-      
-        { src: "/images/photoprojects/Regal/render 1.png", title: "Regal 3.0", tag: "Product", href: "/projects/2regal-3-0/" },
-      
-        { src: "/images/photoprojects/Regal/RENDER 2.png", title: "Regal 3.0", tag: "Product", href: "/projects/2regal-3-0/" },
-      
-        { src: "/images/photoprojects/Regal/RENDER 3.png", title: "Regal 3.0", tag: "Product", href: "/projects/2regal-3-0/" },
-      
-        { src: "/images/photoprojects/Regal/RENDER 4.png", title: "Regal 3.0", tag: "Product", href: "/projects/2regal-3-0/" },
+        { src: "/images/photoprojects/ahok/7 (3).png", title: "ah ok Collection", tag: "Product", href: "/projects/1ah-ok/" },
       
     
   
@@ -106,17 +91,17 @@ const allImages = [
     
   
     
-      { src: "/images/photoprojects/no1concept/Untitled10.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
+      { src: "/images/photoprojects/no1concept/Untitled10.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
     
     
       
-        { src: "/images/photoprojects/no1concept/amb2.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/amb2.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/no1concept/Untitled4.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled4.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/no1concept/Untitled7.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled7.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
-        { src: "/images/photoprojects/no1concept/Untitled3.png", title: "OLO N°01", tag: "Product", href: "/projects/9no1-conceptcar/" },
+        { src: "/images/photoprojects/no1concept/Untitled3.png", title: "No-ONE", tag: "Product", href: "/projects/9no1-conceptcar/" },
       
     
   
