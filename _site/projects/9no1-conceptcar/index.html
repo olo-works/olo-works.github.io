@@ -165,13 +165,28 @@
     object-fit: cover;
   }
 
+  .proj-cover-title {
+    position: absolute;
+    left: 32px;
+    bottom: 32px;
+    z-index: 2;
+    font-family: var(--sans-wide);
+    font-weight: 500;
+    font-size: var(--fs-h1);
+    line-height: 0.95;
+    letter-spacing: -.02em;
+    color: var(--bg);
+    margin: 0;
+    pointer-events: none;
+  }
+
   /* ── META STRIP ── */
   .proj-meta-strip {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 8px 32px;
+    gap: 8px 80px;
     padding: 12px 32px;
     border-top: none;
     border-bottom: none;
@@ -181,22 +196,27 @@
   .proj-meta-tag {
     display: flex;
     align-items: baseline;
-    gap: 6px;
-    font-family: var(--mono);
+    gap: 10px;
+    font-family: var(--sans-wide);
   }
   .proj-meta-tag-label {
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
+    font-family: var(--sans-wide);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;        /* ← Active state is 19px */
     color: var(--teal);
-    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    
   }
   .proj-meta-tag-value {
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
+    font-size: 19px;
+    letter-spacing: 0;
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-left: 4px
+    
   }
 
   /* ── CAROUSEL (top gallery — auto-scrolling, untouched) ── */
@@ -226,15 +246,17 @@
 
   .carousel-track {
     display: flex;
-    gap: 0;
+    gap: 24px;
+    align-items: flex-start;
     transition: none;
     will-change: transform;
   }
 
   .carousel-slide {
-    min-width: 320px;
-    max-width: 320px;
-    height: 170px;
+    min-width: 213px;
+    max-width: 213px;
+    width: 213px;
+    height: 160px;   /* 213:160 ≈ 4:3 */
     flex-shrink: 0;
     border-radius: 0;
     overflow: hidden;
@@ -384,9 +406,9 @@
     max-height: 100%;
     width: auto;
     height: auto;
-    border-radius: 14px;
-    border: 2px solid var(--line);
-    cursor: default;
+    border-radius: 0;
+    border: 1px solid var(--line);
+    cursor: zoom-in;
     display: block;
   }
 
@@ -401,7 +423,7 @@
   }
 
   .proj-lead p {
-    font-family: var(--sans);       /* Syne — matches everything else */
+    font-family: var(--sans-wide);   /* Lunchtype Expanded — matches everything else */
     font-size: clamp(1.65rem, 2.8vw, 2.5rem);
     font-weight: 800;
     letter-spacing: -.03em;
@@ -413,8 +435,8 @@
   /* Catch any raw <img> tags dropped directly in markdown content,
      outside the mini-carousel wrapper, and give them the same treatment. */
   .split-section-text img {
-    border-radius: 14px;
-    border: 2px solid var(--line);
+    border-radius: 0;
+    border: var(--line);
     max-width: 100%;
     display: block;
   }
@@ -430,7 +452,7 @@
     background: var(--white);
     font-family: var(--mono);
     letter-spacing: .04em;
-    border-radius: 6px;
+    border-radius: 0;
     border: 1px solid var(--line);
     opacity: 0.8;
     white-space: nowrap;
@@ -513,7 +535,7 @@
 
   /* Image counter — plain text, sits inline in the controls row below the image */
   .split-section-image-counter {
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: .75rem;
     letter-spacing: .1em;
     color: var(--ink);
@@ -547,6 +569,410 @@
     pointer-events: none;
   }
 
+  /* ══════════════════════════════════════════════════════════
+     CONTENT MODULES — standardized blocks for use inside <div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled6.png" alt="Exterior front view" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled5.png" alt="Exterior rear view" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/2f95f0241435073.695a61539ad46.png" alt="Exterior concept" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="proj-lead">
+    <p>No-ONE reworks the shooting-brake format through the language of an exotic sportscar, testing how far the proportions of a two-seat performance car can stretch before they stop reading as “exotic” and start reading as “practical.”</p>
+  </div>
+
+  <div class="split-section-text"></div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled11bckf.png" alt="Interior overview" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled13bckf.png" alt="Interior detail 1" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled12bckf.png" alt="Interior detail 2" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/Untitled14bckf.png" alt="Interior detail 3" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-interior">The interior</h2>
+
+    <p>The cabin was meant as a reimagination of its approach to space and interaction. Drawing visual references early 2000s commuter vehicles, with organic sculptural forms flow throughout, producing shapes that feel unconventional yet merging with the practical requirements of a contemporary car, from added storage to improved sightlines, without losing the language of the exterior.</p>
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/no1concept/Tavola disegno 1.png" alt="Interface widget system" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-interface">The interface</h2>
+
+    <p>Departing from the simplified interfaces of modern vehicles, the UI adopts a neo-skeuomorphic approach that balances playfulness with utility. Structured as a widget system, each function is designed as a tactile, dimensional object that invites interaction, creating a visually engaging experience that’s fully customizable to each user. Grey is strictly reserved for passive system elements, so every interactive feature stays purposeful and chromatically distinct.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/context2.png" alt="Off-road context" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/no1concept/context.png" alt="All-terrain scenario" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="an-all-terrain-vehicle">An all-terrain vehicle</h2>
+
+    <p>Ground clearance became the clearest test of the shooting-brake premise: could the car’s proportions survive being lifted for rough terrain without losing the visual tension that makes it read as exotic? An adjustable ride height lets the silhouette shift between a low, road-focused stance and a raised all-terrain posture, while consistent surfacing and shared design cues keep the character intact across both conditions.</p>
+
+  </div>
+</div>
+
+     alongside .split-section. Each is self-contained: paste the
+     matching snippet from the module cheatsheet into your project's
+     .md file and swap images/text. All six reuse the same tokens as
+     everything above (--teal / --line / --ink / --ink-m / --mono /
+     --sans) so nothing needs new colors or fonts.
+     ══════════════════════════════════════════════════════════ */
+
+  /* ── 1. FULL-BLEED BREATHER — single edge-to-edge image, no text ── */
+  .module-bleed {
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    margin: 40px 0 40px -56px;
+    height: 480px;
+    overflow: hidden;
+  }
+  .module-bleed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+
+  /* ── 2. SPEC GRID — label/value facts, replaces a paragraph of specs ── */
+  .module-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 32px 0;
+    padding: 0 32px;
+    box-sizing: content-box;
+  }
+  .module-spec-item {
+    background: var(--white);
+    padding: 16px 18px;
+  }
+  .module-spec-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .module-spec-value {
+    display: block;
+    font-size: .95rem;
+    color: var(--ink);
+  }
+
+  /* ── 3. PROCESS STRIP — numbered steps, use only for real sequences ── */
+  .module-process {
+    display: flex;
+    gap: 14px;
+    margin: 32px 0;
+    padding: 0 32px;
+    flex-wrap: wrap;
+  }
+  .module-process-step {
+    flex: 1;
+    min-width: 140px;
+  }
+  .module-process-step img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 2px solid var(--line);
+    border-radius: 0;
+    display: block;
+    cursor: zoom-in;
+  }
+  .module-process-label {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-m);
+  }
+
+  /* ── 4. DETAIL GRID — tight close-up shots, texture/craft beat ── */
+  .module-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+    margin: 32px 0;
+    padding: 0 32px;
+  }
+  .module-detail-grid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: var(--line);
+    border-radius: 0;
+    display: block;
+    cursor: zoom-in;
+  }
+
+  /* ── 5. DIPTYCH — two full-bleed images side by side, compare/contrast ── */
+  .module-diptych {
+    width: calc(100% + 88px);
+    margin: 40px 0 40px -56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .module-diptych-item img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  .module-diptych-caption {
+    display: block;
+    text-align: center;
+    padding: 8px 12px 0;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-m);
+  }
+
+  /* ── 6. PRODUCT FAMILY GRID — variable image count + one heading ──
+     Use for projects that show a range/family of products under one
+     roof. Add as many .module-family-item blocks as you need — the
+     grid self-wraps, no layout math required per project. ── */
+  .module-family {
+    margin: 40px 0;
+    padding: 0 32px;
+  }
+  .module-family-head {
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .module-family-head h2 {
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 .4em;
+  }
+  .module-family-head p {
+    color: var(--ink-m);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .module-family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+  }
+  .module-family-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    display: block;
+    cursor: zoom-in;
+  }
+  .module-family-caption {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-m);
+    text-align: center;
+  }
+  .module-family-grid.no-crop img {
+    aspect-ratio: auto;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+  .module-family-grid.no-crop .module-family-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── FAMILY GRID WITH PER-ITEM CAROUSEL — matches split-section-media exactly ── */
+.module-family-carousel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-carousel-viewport {
+  width: 100%;
+  height: min(42vh, 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.item-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.item-carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+
+.item-carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.item-carousel-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  border:1px solid var(--line);
+  cursor: zoom-in;
+  display: block;
+}
+
+.item-carousel-slide img.no-outline {
+  border: none;
+  border-radius: 0;
+}
+
+/* Controls row: identical to .split-section-controls — arrow, counter, arrow, below the image */
+.item-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.item-carousel-counter {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .1em;
+  color: var(--ink);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.item-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--ink-m);
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: color .2s, opacity .2s, transform .2s;
+  user-select: none;
+}
+.item-carousel-nav svg {
+  width: 32px;
+  height: 32px;
+}
+.item-carousel-nav:hover {
+  color: var(--teal);
+  transform: scale(1.15);
+}
+.item-carousel-nav.disabled {
+  opacity: .25;
+  pointer-events: none;
+}
+
+.module-family-item-caption { margin-top: 8px; text-align: center; }
+.module-family-item-caption .module-family-caption { font-weight: 700; }
+.module-family-item-caption p {
+  font-size: .82rem; color: var(--ink-m); margin: 2px 0 0; line-height: 1.4;
+}
   /* ── RIGHT SIDEBAR ── */
   .proj-right {
     position: sticky;
@@ -577,14 +1003,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 0;
     overflow: hidden;
     position: relative;
   }
 
   .proj-nav-arrow {
-    width: 56px;
-    height: 56px;
+    width: 100%;
+    height: 88px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -593,18 +1019,22 @@
     background: none;
     color: var(--ink-m);
     text-decoration: none;
-    transition: color .2s, transform .2s;
+    transition: color .2s, background .2s, border-color .2s;
     z-index: 3;
+    
   }
+  .proj-col-title > .proj-nav-arrow:first-child { border-bottom: 1px solid var(--line); }
+  .proj-col-title > .proj-nav-arrow:last-child { border-top: 1px solid var(--line); }
   .proj-nav-arrow svg {
     width: 44px;
     height: 44px;
   }
   .proj-nav-arrow:hover {
     color: var(--teal);
-    transform: scale(1.15);
-    background: none;
+    background: color-mix(in srgb, var(--teal) 10%, transparent);
   }
+  .proj-col-title > .proj-nav-arrow:first-child:hover { border-bottom-color: var(--teal); }
+  .proj-col-title > .proj-nav-arrow:last-child:hover { border-top-color: var(--teal); }
   .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
 
   .proj-title-wrapper {
@@ -617,52 +1047,19 @@
     justify-content: center;
   }
 
-  .proj-title-scroll {
-    animation: scrollTitle 8s linear infinite;
-    display: flex;
-    flex-direction: column;
-  }
-
   .proj-title {
     writing-mode: vertical-rl;
     transform: rotate(0deg);
-    font-size: clamp(2rem, 3.5vw, 3.4rem);
-    font-weight: 800;
+    font-family: var(--sans-wide);
+    font-weight: 500;
+    font-size: var(--fs-h2);
     letter-spacing: -.04em;
     line-height: 1;
     color: var(--ink);
     margin: 0;
     white-space: nowrap;
     padding: 10px 0;
-    margin-bottom: 100px;
   }
-
-  .proj-title-wrapper::before,
-  .proj-title-wrapper::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 80px;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .proj-title-wrapper::before {
-    top: 0;
-    background: linear-gradient(to bottom, var(--bg), transparent);
-  }
-  .proj-title-wrapper::after {
-    bottom: 0;
-    background: linear-gradient(to top, var(--bg), transparent);
-  }
-
-  @keyframes scrollTitle {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-20%); }
-  }
-
-  .desktop-only { display: flex; }
-  .mobile-only  { display: none; }
 
   .proj-back-rail {
     position: fixed;
@@ -708,13 +1105,13 @@
     max-width: 90vw;
     max-height: 88vh;
     object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    border-radius: 0;
+    border: 1px solid var(--line);
   }
   .lightbox-close {
     position: absolute;
     top: 24px; right: 28px;
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: var(--fs-micro);
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -722,7 +1119,7 @@
     cursor: pointer;
     border: 1px solid rgba(255,255,255,.15);
     padding: 8px 16px;
-    border-radius: 3px;
+    border-radius: 0;
     background: none;
     transition: color .2s, border-color .2s;
   }
@@ -767,23 +1164,6 @@
       height: auto;
     }
 
-    .proj-title-wrapper::before,
-    .proj-title-wrapper::after { display: none; }
-
-    .desktop-only {
-      display: none !important;
-      height: 0 !important;
-      overflow: hidden !important;
-    }
-
-    .mobile-only { display: flex; }
-
-    .proj-title-scroll {
-      animation: none;
-      display: flex;
-      flex-direction: row;
-    }
-
     .proj-title {
       writing-mode: horizontal-tb;
       transform: none;
@@ -807,6 +1187,10 @@
       margin-right: 0;
       margin-top: 0;
       height: 320px;
+    }
+
+    .proj-cover-title {
+      display: none;
     }
 
     .proj-meta-strip { 
@@ -833,9 +1217,9 @@
     .carousel-slide {
       min-width: 260px;
       max-width: 260px;
-      height: 140px;
+      height: 160px;
       border-radius: 0;
-      border: 1px solid var(--line);
+      border: 1px solid var(--label);
     }
 
     .proj-scroll-indicator {
@@ -882,6 +1266,52 @@
       padding-top: 0;
     }
 
+    /* ── CONTENT MODULES — mobile ── */
+    .module-bleed {
+      width: 100%;
+      margin: 28px 0;
+      height: 260px;
+    }
+
+    .module-specs {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+    .module-spec-item { padding: 14px; }
+
+    .module-process {
+      grid-template-columns: repeat(2, 1fr);
+      display: grid;
+      gap: 10px;
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+    .module-process-step { min-width: 0; }
+
+    .module-detail-grid {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+
+    .module-diptych {
+      width: 100%;
+      margin: 28px 0;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .module-diptych-item img { height: 220px; }
+
+    .module-family {
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+    .module-family-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
     .proj-back-rail { display: none; }
 
     .proj-back-mobile {
@@ -908,12 +1338,11 @@
       width: 60px;
       height: 60px;
       border: 1px solid var(--line);
-      border-radius: 4px;
+      border-radius: 0;
       background: var(--bg);
       color: var(--ink-m);
       text-decoration: none;
       transition: color .2s, border-color .2s;
-      box-shadow: 0 4px 16px rgba(0,0,0,.08);
       z-index: 200;
     }
     .proj-mob-prev svg,
@@ -954,6 +1383,7 @@
         
           <img src="/images/photoprojects/no1concept/Untitled10.png" alt="No-ONE"/>
         
+        <h1 class="proj-cover-title">No-ONE</h1>
       </div>
 
       
@@ -1125,16 +1555,7 @@
         
 
         <div class="proj-title-wrapper">
-          <div class="proj-title-scroll desktop-only">
-            <h1 class="proj-title">No-ONE</h1>
-            <h1 class="proj-title">No-ONE</h1>
-            <h1 class="proj-title">No-ONE</h1>
-            <h1 class="proj-title">No-ONE</h1>
-            <h1 class="proj-title">No-ONE</h1>
-          </div>
-          <div class="proj-title-scroll mobile-only">
-            <h1 class="proj-title">No-ONE</h1>
-          </div>
+          <h1 class="proj-title">No-ONE</h1>
         </div>
 
         
@@ -1168,6 +1589,18 @@
 </div>
 
 <script>
+  // Shared lightbox refs/helper — hoisted to top-level scope so every
+  // carousel/module below (and the close/backdrop/Escape handlers at the
+  // bottom) can all use the same `lb` / `lbImg` / `openLightbox`.
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+
+  function openLightbox(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lb.classList.add('open');
+  }
+
   (function() {
     // Carousel functionality (top gallery — unchanged, still auto-scrolling)
     const track = document.getElementById('carousel-track');
@@ -1175,8 +1608,14 @@
       const viewport = track.parentElement;
       const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
 
+      originalSlides.forEach(slide => {
+        slide.addEventListener('click', () => {
+          openLightbox(slide.dataset.src, slide.dataset.alt);
+        });
+      });
+
       if (originalSlides.length) {
-        const GAP = 0;
+        const GAP = 24;
         const SPEED = 0.4;
         let position = 0;
         let animationId = null;
@@ -1217,9 +1656,7 @@
           }
 
           div.addEventListener('click', () => {
-            lbImg.src = data.src;
-            lbImg.alt = data.alt;
-            lb.classList.add('open');
+            openLightbox(data.src, data.alt);
           });
 
           return div;
@@ -1384,6 +1821,14 @@
       const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
       if (!slides.length) return;
 
+      // Wire each slide's image to open the lightbox on click.
+      slides.forEach((slide) => {
+        const img = slide.querySelector('img');
+        if (img) {
+          img.addEventListener('click', () => openLightbox(img.src, img.alt));
+        }
+      });
+
       // Optional: a .sync-text block in the text column, with one
       // .sync-text-item per slide (same order). If present, its items
       // are swapped in lockstep with the image index. Fully opt-in —
@@ -1474,20 +1919,82 @@
     });
   })();
 
-  // Lightbox functionality
-  const lb    = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  
-  document.querySelectorAll('#carousel-track .carousel-slide, .split-section-media .mini-carousel-slide img, .split-section-media .image-slide img').forEach(el => {
-    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
-    if (!img) return;
-    el.addEventListener('click', () => {
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
-      lb.classList.add('open');
+  document.querySelectorAll('.module-family-carousel-item').forEach((item) => {
+    const viewport = item.querySelector('.item-carousel-viewport');
+    const slides = item.querySelectorAll('.item-carousel-slide');
+    if (!slides.length) return;
+
+    // Wire each slide's image to open the lightbox on click.
+    slides.forEach((slide) => {
+      const img = slide.querySelector('img');
+      if (img) {
+        img.addEventListener('click', () => openLightbox(img.src, img.alt));
+      }
     });
+
+    if (slides.length === 1) {
+      slides[0].classList.add('active');
+      return;
+    }
+
+    let idx = 0;
+    let transitioning = false;
+
+    const controls = document.createElement('div');
+    controls.className = 'item-carousel-controls';
+
+    const ARROW_LEFT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+    const ARROW_RIGHT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'item-carousel-nav item-carousel-prev disabled';
+    prevBtn.setAttribute('aria-label', 'Previous image');
+    prevBtn.innerHTML = ARROW_LEFT;
+
+    const counter = document.createElement('div');
+    counter.className = 'item-carousel-counter';
+    counter.textContent = `1 / ${slides.length}`;
+
+    const nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'item-carousel-nav item-carousel-next';
+    nextBtn.setAttribute('aria-label', 'Next image');
+    nextBtn.innerHTML = ARROW_RIGHT;
+
+    controls.appendChild(prevBtn);
+    controls.appendChild(counter);
+    controls.appendChild(nextBtn);
+    item.insertBefore(controls, item.querySelector('.module-family-item-caption'));
+
+    function go(newIdx) {
+      if (transitioning) return;
+      if (newIdx < 0 || newIdx > slides.length - 1) return;
+      transitioning = true;
+      idx = newIdx;
+
+      slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+      counter.textContent = `${idx + 1} / ${slides.length}`;
+      prevBtn.classList.toggle('disabled', idx === 0);
+      nextBtn.classList.toggle('disabled', idx === slides.length - 1);
+
+      setTimeout(() => { transitioning = false; }, 500);
+    }
+
+    prevBtn.addEventListener('click', () => go(idx - 1));
+    nextBtn.addEventListener('click', () => go(idx + 1));
+
+    slides[0].classList.add('active');
   });
-  
+
+  // ── Wire up remaining static image modules that weren't bound above ──
+  document.querySelectorAll(
+    '.module-bleed img, .module-process-step img, .module-detail-grid img, ' +
+    '.module-diptych-item img, .module-family-item img'
+  ).forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
   document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
@@ -1543,6 +2050,6 @@
   <span>2026</span>
 </footer>
 
-<script src="/main.js"></script>
+<script src="/main.js?v=4"></script>
 </body>
 </html>

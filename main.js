@@ -1,99 +1,106 @@
 console.log('main.js loaded, rail:', document.getElementById('rail'));
 
-console.log('main.js loaded, rail:', document.getElementById('rail'));
-
 // ── Custom cursor ──────────────────────────────────────────────────────────
+// Total rewrite, period-first rather than a cleanup of the old design.
+// The old dot+halo pair is gone — a second element orbiting the cursor is
+// itself a modern (2010s+) web convention; no era-authentic UI paired a
+// cursor with a trailing ring. Real cursors from that period were a single
+// flat sprite with a fixed hotspot at the tip, not centered on the pointer.
+//
+// This is a single solid triangle, built with the classic CSS border-arrow
+// trick (a genuinely old technique — borders meeting at angles to fake a
+// shape, long since replaced by clip-path in modern practice). No easing,
+// no transitions anywhere — state changes cut instantly, the way menu
+// cursors of that era actually behaved.
 const cur  = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
 const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-if (cur && ring && !isTouchDevice) {
+if (cur && !isTouchDevice) {
+
+  // The old markup includes a #cursor-ring element from the shared page
+  // template — not used by this design, so it's just hidden rather than
+  // requiring every page's HTML to be edited.
+  if (ring) ring.style.display = 'none';
+
   const cursorStyle = document.createElement('style');
   cursorStyle.textContent = `
-    #cursor, #cursor-ring {
+    #cursor {
       pointer-events: none;
       position: fixed;
       z-index: 9999;
+      width: 0;
+      height: 0;
+      top: 0;
+      left: 0;
     }
   `;
   document.head.appendChild(cursorStyle);
 
-  cur.style.background    = '#A5332D';
-  cur.style.width         = '10px';
-  cur.style.height        = '10px';
-  cur.style.borderRadius  = '50%';
-  cur.style.transform     = 'translate(-50%,-50%)';
+  const HOVER_SELECTOR = 'a, button, [role="button"], .tool-logo, .map-city-pin, .discipline-col, .interest-card, .lang-item, .img-item';
 
-  ring.style.borderColor  = '#E8EEF1';
-  ring.style.borderWidth  = '1.5px';
-  ring.style.borderStyle  = 'solid';
-  ring.style.background   = 'transparent';
-  ring.style.width        = '36px';
-  ring.style.height       = '36px';
-  ring.style.borderRadius = '50%';
-  ring.style.transform    = 'translate(-50%,-50%)';
+  // Flat right-pointing triangle via border trick. Tip sits at the actual
+  // pointer position (translate(0,-50%) — hotspot at the point, not center).
+  function setDefaultShape() {
+    cur.style.borderTop    = '6px solid transparent';
+    cur.style.borderBottom = '6px solid transparent';
+    cur.style.borderLeft   = '11px solid var(--teal)';
+    cur.style.borderRight  = '0';
+    cur.style.transform    = 'translate(0,-50%)';
+    cur.style.background   = 'transparent';
+  }
 
-  let mx = 0, my = 0, rx = 0, ry = 0;
+  // Hover state: larger, filled solid — an instant cut, not a grown/eased
+  // version of the same shape. Reads as "this row is selected."
+  function setHoverShape() {
+    cur.style.borderTop    = '9px solid transparent';
+    cur.style.borderBottom = '9px solid transparent';
+    cur.style.borderLeft   = '16px solid var(--teal)';
+    cur.style.borderRight  = '0';
+    cur.style.transform    = 'translate(0,-50%)';
+    cur.style.background   = 'transparent';
+  }
 
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  let hovering = false;
+  setDefaultShape();
 
-  let clicking    = false;
+  // 1:1 tracking, no interpolation/lag of any kind.
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top  = e.clientY + 'px';
+  });
 
+  // Press feedback is an instant size drop, not an eased scale.
   document.addEventListener('mousedown', () => {
-    clicking = true;
-    cur.style.transform  = 'translate(-50%,-50%) scale(1.8)';
-    ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+    if (hovering) {
+      cur.style.borderTop    = '7px solid transparent';
+      cur.style.borderBottom = '7px solid transparent';
+      cur.style.borderLeft   = '13px solid var(--teal)';
+    } else {
+      cur.style.borderTop    = '5px solid transparent';
+      cur.style.borderBottom = '5px solid transparent';
+      cur.style.borderLeft   = '9px solid var(--teal)';
+    }
   });
   document.addEventListener('mouseup', () => {
-    clicking = false;
-    cur.style.transform  = 'translate(-50%,-50%) scale(1)';
-    ring.style.transform = 'translate(-50%,-50%) scale(1)';
+    hovering ? setHoverShape() : setDefaultShape();
   });
 
-  function onEnter() {
-    cur.style.borderRadius = '4px';
-    cur.style.width        = '16px';
-    cur.style.height       = '16px';
-    ring.style.borderRadius = '12px';
-    ring.style.width        = '40px';
-    ring.style.height       = '40px';
-  }
-
-  function onLeave() {
-    cur.style.borderRadius = '50%';
-    cur.style.width        = '10px';
-    cur.style.height       = '10px';
-    ring.style.borderRadius = '50%';
-    ring.style.width        = '36px';
-    ring.style.height       = '36px';
-  }
-
   document.addEventListener('mouseover', e => {
-    if (e.target.closest('a, button, [role="button"], .tool-logo, .map-city-pin, .discipline-col, .interest-card, .lang-item, .img-item')) {
-      onEnter();
+    if (e.target.closest(HOVER_SELECTOR)) {
+      hovering = true;
+      setHoverShape();
     }
   });
   document.addEventListener('mouseout', e => {
-    if (e.target.closest('a, button, [role="button"], .tool-logo, .map-city-pin, .discipline-col, .interest-card, .lang-item, .img-item')) {
-      onLeave();
+    if (e.target.closest(HOVER_SELECTOR)) {
+      hovering = false;
+      setDefaultShape();
     }
   });
 
-  cur.style.transition  = 'width .18s, height .18s, border-radius .18s, transform .12s';
-  ring.style.transition = 'width .22s, height .22s, border-radius .22s, transform .14s';
-
-  (function anim() {
-    cur.style.left  = mx + 'px';
-    cur.style.top   = my + 'px';
-    rx += (mx - rx) * .12;
-    ry += (my - ry) * .12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(anim);
-  })();
-
-} else if (cur && ring) {
+} else if (ring) {
   ring.style.display = 'none';
 }
 

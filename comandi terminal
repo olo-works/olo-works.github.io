@@ -4,3 +4,498 @@ bundle exec jekyll clean && export PATH="$HOME/bin:$PATH" && bundle exec jekyll 
 
 
 bundle exec jekyll serve --livereload --host 0.0.0.0
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — olo-works</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <script>document.documentElement.setAttribute('data-lang', localStorage.getItem('lang') || 'it');</script>
+  <style>
+    html, body { height: 100%; }
+    :root { --mono: var(--label); } /* this stylesheet doesn't define --mono; aliasing to --label ('Lunchtype'), the closest existing mono-style stack */
+
+    /* ══════════════════════════════════════════════════════════
+       HORIZONTAL SCROLL SHELL (desktop) — unchanged mechanism:
+       one outer scroller, panels left-to-right, wheel remapped
+       to horizontal scroll via JS below.
+       ══════════════════════════════════════════════════════════ */
+    .ab-wrap {
+      margin-left: 80px;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .ab-wrap::-webkit-scrollbar { display: none; }
+
+    .ab-track {
+      display: flex;
+      height: 100%;
+      width: max-content;
+    }
+
+    .ab-panel {
+      flex: 0 0 auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: 1px solid var(--line);
+      padding: 48px 56px;
+      overflow-y: auto;
+    }
+
+    /* Desktop: all panels share the same top padding and now start
+       from the top (flex-start) instead of being vertically centered.
+       That means the eyebrow/title of every panel sits at the exact
+       same height, so the whole row reads as one balanced strip
+       regardless of how much content each panel holds. */
+
+    /* ══════════════════════════════════════════════════════════
+       SHARED PANEL TEMPLATE — every panel: title, subtitle,
+       divider, data. All sections follow the Education/Languages
+       structure: .ab-title → .ab-body > .ab-cols > .ab-col
+       (code / value / meta).
+       ══════════════════════════════════════════════════════════ */
+    .ab-title {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+      line-height: 1.02;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .ab-subtitle {
+      font-family: var(--label);
+      font-style: italic;
+      font-size: var(--fs-prose);
+      letter-spacing: .01em;
+      line-height: 1.4;
+      color: var(--muted);
+      max-width: 36ch;
+      margin-bottom: 28px;
+    }
+
+    .ab-body {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    .ab-body p {
+      font-family: var(--sans);
+      font-size: var(--fs-prose);
+      line-height: 1.6;
+      color: var(--ink);
+      max-width: 46ch;
+    }
+
+    /* ── panel widths (desktop track) ── */
+    .ab-bio { width: 30vw; min-width: 340px; max-width: 480px; }
+    .ab-edu { width: 40vw; min-width: 420px; max-width: 620px; }
+    .ab-work { width: 42vw; min-width: 420px; max-width: 640px; }
+    .ab-langs { width: 46vw; min-width: 420px; max-width: 700px; }
+    .ab-tools { width: 50vw; min-width: 420px; max-width: 760px; }
+    .ab-interests { width: 60vw; min-width: 420px; max-width: 940px; }
+
+    /* ── data: education / languages column stamps ── */
+    .ab-cols { display: flex; flex-direction: column; gap: 26px; }
+    .ab-col { display: flex; flex-direction: column; gap: 6px; }
+    .ab-col-code {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      letter-spacing: -.03em;
+      line-height: .9;
+      color: var(--teal);
+    }
+    .ab-col-value {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      letter-spacing: -.01em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .ab-col-meta {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-m);
+      line-height: 1.4;
+    }
+
+    /* ── work experience: role/company leads, year is a small label ── */
+    .ab-work-item { display: flex; flex-direction: column; gap: 6px; }
+    .ab-work-year {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-m);
+    }
+    .ab-work-role {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    
+    .ab-work-meta {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-m);
+      line-height: 1.4;
+    }
+
+    /* ── tools: fixed 3-row grid on desktop, no scroll anywhere ── */
+    .ab-tools-cols {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: row;
+      gap: 22px 24px;
+    }
+
+    /* ── contact footer, attached to bio panel ── */
+    .ab-contact-footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .ab-contact-footer a {
+      font-family: var(--label);
+      font-style: italic;
+      font-size: var(--fs-prose);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color .2s, gap .2s;
+    }
+    .ab-contact-footer a:hover { color: var(--teal); gap: 12px; }
+
+    .ab-last { border-right: none; }
+
+    /* ── language toggle button (was inline style) ── */
+    .lang-toggle {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 200;
+      font-family: var(--label);
+      font-style: italic;
+      font-size: var(--fs-micro);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 4px 10px;
+      background: var(--bg);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       MOBILE — panels placed HORIZONTALLY (2-up grid), page
+       scrolls VERTICALLY (normal flow, no swipe-track capture).
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      #rail { display: none; }
+
+      .ab-wrap { margin-left: 0; height: auto; overflow: visible; }
+
+      .ab-track {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        height: auto;
+      }
+
+      .ab-panel {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 32px 20px;
+        overflow-y: visible;
+      }
+      .ab-panel:last-child { border-bottom: none; }
+
+      .ab-title { font-size: clamp(1.5rem, 5.5vw, 2rem); }
+      .ab-subtitle { max-width: none; margin-bottom: 20px; }
+
+      /* Each section stays full-width and stacked vertically, but the
+         data *inside* a section (education/language stamps, tools,
+         interests) reads left-to-right as a horizontal, swipeable
+         row rather than stacking into a tall vertical list. */
+      .ab-cols {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 32px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+      .ab-cols::-webkit-scrollbar { display: none; }
+      .ab-col { flex: 0 0 auto; min-width: 140px; }
+
+      /* Tools: no horizontal scroll — wraps into a fixed 2-column grid */
+      .ab-tools-cols {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 20px;
+        overflow-x: visible;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav id="rail">
+  <a href="/index.html" class="r-logo">
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:28px;height:28px;">
+      <g><g>
+        <path d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+        <path d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+        <path d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+        <path d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+      </g></g>
+    </svg>
+  </a>
+  <div class="r-group">
+    <a href="/index.html" class="r-item"><div class="r-icon">H</div><span class="r-text">Home</span></a>
+    <a href="/projects.html" class="r-item"><div class="r-icon">W</div><span class="r-text">Work</span></a>
+    <a href="/about.html" class="r-item active"><div class="r-icon">A</div><span class="r-text">About</span></a>
+    <a href="/contact.html" class="r-item"><div class="r-icon">C</div><span class="r-text">Contact</span></a>
+  </div>
+  {% include lang_switcher.html %}
+</nav>
+<div id="lang-bar-btn" class="lang-toggle" onclick="toggleLang()">IT</div>
+
+<div id="mob">
+  <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
+    <g><g>
+      <path d="M178.71,22.95v72.16c-10.9-6.77-27.21-5.55-40.54,4.05-1.49,1.07-2.89,2.22-4.19,3.42-3.79,3.46-6.81,7.38-8.99,11.51l-15.78,10.94c-2.31,1.59-5.49.52-6.35-2.14l-25.85-79.32c-.55-1.72-2.14-2.87-3.94-2.89l-14.95-.1c-2.87-.02-4.9,2.79-4,5.51l19.85,59.41-12.98,8.55-.25.15c-.38-4.55-1.87-8.87-4.57-12.62-1.45-2.01-3.16-3.73-5.07-5.18-.02-.02-.04-.02-.06-.04-10.84-8.15-28.28-7.38-42.39,2.79-1.49,1.07-2.89,2.22-4.19,3.42-1.64,1.51-3.14,3.1-4.47,4.76V22.95C0,10.33,10.33,0,22.95,0h132.82c12.62,0,22.95,10.33,22.95,22.95Z"/>
+      <path d="M178.71,142.57v13.19c0,3.52-.8,6.86-2.24,9.85-3.71,7.73-11.61,13.1-20.71,13.1H22.95c-12.62,0-22.95-10.33-22.95-22.95v-6.44c.4.36.84.71,1.28,1.05.04.02.06.04.1.06,10.86,7.94,28.13,7.09,42.11-2.98,1.45-1.05,2.81-2.14,4.07-3.31l1.53-.98,30.71-19.83,9.1,27.96c.86,2.6,3.94,3.71,6.25,2.22l26.43-17.06c.73,3.06,2.03,5.95,3.92,8.57,9.62,13.33,30.88,14.42,47.5,2.43,2.08-1.49,4-3.14,5.72-4.88Z"/>
+      <path d="M39.56,123.39c0,7.48-6.06,13.54-13.54,13.54h-.13c-7.48,0-13.54-6.06-13.54-13.54s6.06-13.52,13.54-13.52h.13c7.48,0,13.54,6.06,13.54,13.52Z"/>
+      <path d="M168.94,123.39c0,7.48-6.06,13.54-13.54,13.54s-13.52-6.06-13.52-13.54,6.04-13.52,13.52-13.52,13.54,6.06,13.54,13.52Z"/>
+    </g></g>
+  </svg>
+  <a href="/index.html" class="mob-item"><span class="mob-letter">H</span><span class="mob-word">Home</span></a>
+  <a href="/projects.html" class="mob-item"><span class="mob-letter">W</span><span class="mob-word">Work</span></a>
+  <a href="/about.html" class="mob-item active"><span class="mob-letter">A</span><span class="mob-word">About</span></a>
+  <a href="/contact.html" class="mob-item"><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
+</div>
+
+<div class="ab-wrap" id="abWrap">
+  <div class="ab-track" id="abTrack">
+
+    <!-- 1. BIO -->
+    <section class="ab-panel ab-bio">
+      <h2 class="ab-title"><span class="lang it">Design & Ingegneria</span><span class="lang en">Design & Engineering</span></h2>
+      <div class="ab-contact-footer">
+        <a href="/contact.html"><span class="lang it">Contattami</span><span class="lang en">Get in touch</span> →</a>
+      </div>
+    </section>
+
+    <!-- 2. EDUCATION -->
+    <section class="ab-panel ab-edu">
+      <h2 class="ab-title"><span class="lang it">Percorso<br>Accademico</span><span class="lang en">Academic<br>Path</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">UNIRC</div>
+            <div class="ab-col-value"><span class="lang it">Laurea Triennale</span><span class="lang en">Bachelor's Degree</span></div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2021 – 2024 · <span class="lang it">Università degli studi Mediterranea di Reggio Calabria</span><span class="lang en">University of Studies Mediterranea</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">ISIA</div>
+            <div class="ab-col-value"><span class="lang it">Laurea Magistrale</span><span class="lang en">Master's Degree</span></div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2025 – 2026 · <span class="lang it">ISIA Firenze</span><span class="lang en">ISIA Firenze</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. WORK EXPERIENCE -->
+    <section class="ab-panel ab-work">
+      <h2 class="ab-title"><span class="lang it">Esperienze<br>Lavorative</span><span class="lang en">Work<br>Experience</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-work-item">
+            <div class="ab-work-year" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2023</div>
+            <div class="ab-work-role">[Ruolo] · [Azienda]</div>
+            <div class="ab-work-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;"><span class="lang it">[Breve descrizione dell'attività svolta]</span><span class="lang en">[Short description of the role]</span></div>
+          </div>
+          <div class="ab-work-item">
+            <div class="ab-work-year" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2024</div>
+            <div class="ab-work-role">[Ruolo] · [Azienda]</div>
+            <div class="ab-work-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;"><span class="lang it">[Breve descrizione dell'attività svolta]</span><span class="lang en">[Short description of the role]</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. LANGUAGES -->
+    <section class="ab-panel ab-langs">
+      <h2 class="ab-title"><span class="lang it">Competenze <br> Linguistiche</span><span class="lang en">Language<br>Skills</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">ITA</div>
+            <div class="ab-col-value">Italiano</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;"><span class="lang it">Madrelingua</span><span class="lang en">Native speaker</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">ENG</div>
+            <div class="ab-col-value">English</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">B2 — Cambridge First</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">FRA</div>
+            <div class="ab-col-value">Français</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">B2 — ESABAC</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TOOLS -->
+    <section class="ab-panel ab-tools">
+      <h2 class="ab-title"><span class="lang it">Strumenti & Software</span><span class="lang en">Tools & Software</span></h2>
+      <div class="ab-body">
+        <div class="ab-tools-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">BL</div>
+            <div class="ab-col-value">Blender</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Advanced</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">RH</div>
+            <div class="ab-col-value">Rhino 8</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Advanced</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">PS</div>
+            <div class="ab-col-value">Photoshop</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Proficient</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">AI</div>
+            <div class="ab-col-value">Illustrator</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Proficient</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">ID</div>
+            <div class="ab-col-value">InDesign</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Proficient</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">WP</div>
+            <div class="ab-col-value">WordPress</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Proficient</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">LR</div>
+            <div class="ab-col-value">Lightroom</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Intermediate</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">PR</div>
+            <div class="ab-col-value">Premiere</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Intermediate</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">DR</div>
+            <div class="ab-col-value">DaVinci Resolve</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Intermediate</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">AE</div>
+            <div class="ab-col-value">After Effects</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Intermediate</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">AL</div>
+            <div class="ab-col-value">Ableton Live</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Intermediate</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">GD</div>
+            <div class="ab-col-value">Godot Engine</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">Beginner</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. INTERESTS -->
+    <section class="ab-panel ab-interests ab-last">
+      <h2 class="ab-title"><span class="lang it">Oltre il Lavoro</span><span class="lang en">Beyond Work</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">01</div>
+            <div class="ab-col-value">Design</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">02</div>
+            <div class="ab-col-value">Automotive</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">03</div>
+            <div class="ab-col-value"><span class="lang it">Mobilità</span><span class="lang en">Mobility</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">04</div>
+            <div class="ab-col-value"><span class="lang it">Fotografia</span><span class="lang en">Photography</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">05</div>
+            <div class="ab-col-value"><span class="lang it">Produzione Musicale</span><span class="lang en">Music Production</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">06</div>
+            <div class="ab-col-value">Tech</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  const abWrap = document.getElementById('abWrap');
+  const isMobile = () => window.innerWidth <= 900;
+
+  abWrap.addEventListener('wheel', (e) => {
+    if (isMobile()) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    abWrap.scrollLeft += e.deltaY;
+  }, { passive: false });
+})();
+</script>
+
+<script src="/main.js"></script>
+</body>
+</html>

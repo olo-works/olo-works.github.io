@@ -96,969 +96,465 @@
 <style>
 .page-main { padding: 0; overflow: hidden; }
 
-/* ── Controls bar ── */
+/* ══════════════════════════════════════════════════════════
+   CONTROLS BAR — filters only
+   ══════════════════════════════════════════════════════════ */
 .proj-controls {
   position: fixed;
   top: 0; left: var(--rail-w); right: 0;
-  height: 52px;
+  height: 96px;
   z-index: 90;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
+  padding: 0 48px;
   background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
-.ctrl-group { display: flex; align-items: center; gap: 4px; }
+.ctrl-group { display: flex; align-items: center; width: 100%; justify-content: space-between; }
 .ctrl-btn {
-  font-family: var(--mono);
-  font-size: .5rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-family: var(--sans-wide, var(--sans));
+  font-weight: 800;
+  letter-spacing: -.02em;
+  font-size: clamp(1rem, 2.4vw, 2rem);
+  color: var(--ink);
   background: none;
-  border: 1px solid transparent;
-  padding: 6px 12px;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 4px 0 8px;
+  border-radius: 0;
   cursor: none;
-  transition: all .2s var(--ease);
+  transition: color .2s, border-color .2s;
   white-space: nowrap;
 }
-.ctrl-btn:hover { color: var(--ink); border-color: var(--line); }
-.ctrl-btn.active { color: var(--white); background: var(--teal); border-color: var(--teal); }
+.ctrl-btn:hover { color: var(--teal); }
+.ctrl-btn.active { color: var(--teal);x  }
 
-/* ════════════════════════════════════════
-   TIMELINE VIEW
-════════════════════════════════════════ */
-#view-timeline {
+/* ══════════════════════════════════════════════════════════
+   GALLERY TRACK — desktop: horizontal scroll-jacked row of
+   large uniform 16:10 cards. Divider lines between cards like
+   the homepage's panel separators. Section sits slightly higher
+   in the viewport (smaller bottom inset now that the fixed info
+   bar is gone). Desc + year reveal per-card, below the square,
+   on hover — no fixed bar.
+   ══════════════════════════════════════════════════════════ */
+.proj-wrap {
   position: fixed;
-  inset: 52px 0 0 var(--rail-w);
-  display: flex;
-  flex-direction: column;
-}
-
-.timeline-viewport {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-
-.timeline-axis {
-  position: absolute;
-  left: 0; right: 0;
-  top: 50%;
-  height: 1px;
-  background: var(--line);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.timeline-scroll {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  padding: 0 80px;
+  inset: 96px 0 60px var(--rail-w);
   overflow-x: auto;
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   cursor: grab;
   user-select: none;
 }
-.timeline-scroll::-webkit-scrollbar { display: none; }
-.timeline-scroll.grabbing { cursor: grabbing; }
+.proj-wrap::-webkit-scrollbar { display: none; }
+.proj-wrap.grabbing { cursor: grabbing; }
 
-.timeline-inner {
+.proj-track {
   display: flex;
   align-items: center;
   height: 100%;
-  flex-shrink: 0;
-  gap: 0;
-}
-
-/* Year separator */
-.t-year-sep {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  width: 60px;
-  position: relative;
-}
-.t-year-tick {
-  width: 1px;
-  height: 30px;
-  background: var(--line);
-  opacity: .5;
-}
-.t-year-label {
-  position: absolute;
-  top: calc(50% + 18px);
-  font-family: var(--mono);
-  font-size: .46rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-  transform: translateX(-50%);
-  left: 50%;
-}
-
-/* Project node */
-.t-item {
-  position: relative;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  margin: 0 28px;
-  opacity: 0;
-}
-.t-item.above {
-  flex-direction: column;
-  transform: translateY(calc(-50% - 24px));
-  animation: tInAbove .5s var(--ease) forwards;
-}
-.t-item.below {
-  flex-direction: column-reverse;
-  transform: translateY(calc(50% + 24px));
-  animation: tInBelow .5s var(--ease) forwards;
-}
-
-@keyframes tInAbove {
-  from { opacity:0; transform: translateY(calc(-50% - 10px)); }
-  to   { opacity:1; transform: translateY(calc(-50% - 24px)); }
-}
-@keyframes tInBelow {
-  from { opacity:0; transform: translateY(calc(50% + 10px)); }
-  to   { opacity:1; transform: translateY(calc(50% + 24px)); }
-}
-
-.t-card {
-  display: block;
-  text-decoration: none;
-  flex-shrink: 0;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--white);
-  transition: border-color .3s, transform .35s var(--ease);
-}
-
-/* Larger card sizes on desktop */
-.t-item:nth-child(5n+1) .t-card { width: 340px; height: 213px; }
-.t-item:nth-child(5n+2) .t-card { width: 280px; height: 175px; }
-.t-item:nth-child(5n+3) .t-card { width: 390px; height: 244px; }
-.t-item:nth-child(5n+4) .t-card { width: 310px; height: 194px; }
-.t-item:nth-child(5n)   .t-card { width: 360px; height: 225px; }
-
-.t-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .4s var(--ease);
-}
-.t-item:hover .t-card {
-  border-color: var(--teal);
-  transform: scale(1.05);
-}
-.t-item:hover .t-card img { transform: scale(1.06); }
-
-/* ── Info bar ── */
-.timeline-info-bar {
-  height: 88px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
+  width: max-content;
+  gap: 56px;
   padding: 0 80px;
-  gap: 40px;
-  flex-shrink: 0;
-  position: relative;
 }
 
-.info-meta {
+.proj-card {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(560px, 48vw, 860px);
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  flex-shrink: 0;
   opacity: 0;
-  transition: opacity .25s;
-  min-width: 100px;
+  animation: pjIn .5s var(--ease) forwards;
+  container-type: inline-size;
+  container-name: projItem;
 }
-.info-meta.vis { opacity: 1; }
-.info-year {
-  font-family: var(--mono);
-  font-size: 1.1rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--teal);
-  font-weight: 700;
+@keyframes pjIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.info-tags { display: none; }
-.info-tag { display: none; }
 
-.info-title {
-  font-family: var(--sans);
-  font-size: clamp(1.6rem, 3vw, 2.8rem);
-  font-weight: 800;
-  letter-spacing: -.04em;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 1;
-  opacity: 0;
-  transition: opacity .25s;
-}
-.info-title.vis { opacity: 1; }
-
-.info-hint {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: .46rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: .45;
-  pointer-events: none;
-  animation: hintFade 4s ease 2s forwards;
-  white-space: nowrap;
-}
-@keyframes hintFade { to { opacity: 0; } }
-
-.info-link {
-  font-size: 1.4rem;
-  color: var(--muted);
-  text-decoration: none;
-  flex-shrink: 0;
-  opacity: 0;
-  transition: opacity .25s, color .2s, transform .2s;
-  line-height: 1;
-}
-.info-link.vis { opacity: 1; }
-.info-link:hover { color: var(--teal); transform: translate(2px, -2px); }
-
-/* ════════════════════════════════════════
-   INDEX VIEW
-════════════════════════════════════════ */
-#view-index {
-  display: none;
-  position: fixed;
-  inset: 52px 0 0 var(--rail-w);
-  overflow-y: auto;
-  padding: 0 40px 80px;
-}
-#view-index::-webkit-scrollbar { width: 3px; }
-#view-index::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
-
-.index-header {
-  display: grid;
-  grid-template-columns: 40px 1fr 70px 150px 28px;
-  gap: 20px;
-  padding: 16px 0 10px;
-  border-bottom: 1px solid var(--line);
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  z-index: 10;
-}
-.idx-hcell {
-  font-family: var(--mono);
-  font-size: .44rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--muted);
+/* The bordered unit — image + footer only. Desc/year live outside
+   this box, as their own row below it. No other lines. */
+.proj-box {
   display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: none;
-  transition: color .2s;
-  user-select: none;
-}
-.idx-hcell.sortable:hover { color: var(--teal); cursor: none; }
-.idx-hcell.sorted { color: var(--teal); }
-.sort-ic { font-size: .5rem; opacity: .5; }
-
-.index-row {
-  display: grid;
-  grid-template-columns: 40px 1fr 70px 150px 28px;
-  gap: 20px;
-  padding: 0;
-  border-bottom: 1px solid rgba(43,173,184,.15);
-  text-decoration: none;
-  color: var(--ink);
-  align-items: center;
-  transition: background .2s;
-  opacity: 0;
-  animation: rowIn .35s var(--ease) forwards;
-  border-radius: 4px;
-}
-@keyframes rowIn {
-  from { opacity:0; transform: translateX(-10px); }
-  to   { opacity:1; transform: translateX(0); }
-}
-.index-row:hover { background: rgba(43,173,184,.05); }
-
-.idx-num {
-  font-family: var(--mono);
-  font-size: .5rem;
-  letter-spacing: .14em;
-  color: var(--teal);
-  padding: 20px 0 20px 4px;
-}
-.idx-title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  min-width: 0;
-  padding: 14px 0;
-}
-.idx-thumb {
-  width: 90px; height: 56px;
-  border-radius: 4px;
-  overflow: hidden;
-  flex-shrink: 0;
+  flex-direction: column;
   border: 1px solid var(--line);
-  background: var(--white);
+  box-sizing: border-box;
+  overflow: hidden;
 }
-.idx-thumb img {
+
+.proj-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.proj-media img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform .3s var(--ease);
+  transition: transform .5s var(--ease);
 }
-.index-row:hover .idx-thumb img { transform: scale(1.06); }
-.idx-title {
-  font-family: var(--sans);
-  font-size: .95rem;
-  font-weight: 700;
+.proj-card:hover .proj-media img { transform: scale(1.035); }
+
+.proj-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+}
+.proj-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 26px 24px;
+  font-family: var(--sans-wide, var(--sans));
+  font-weight: 800;
   letter-spacing: -.02em;
-  transition: color .2s;
+  font-size: clamp(1rem, 3.4cqw, 1.6rem);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.index-row:hover .idx-title { color: var(--teal); }
-.idx-year {
-  font-family: var(--mono);
-  font-size: .58rem;
-  letter-spacing: .12em;
-  color: var(--muted);
+.proj-arrow {
+  width: 72px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-m, var(--muted));
+  transition: color .2s, background .2s;
 }
-.idx-tags { display: flex; gap: 4px; flex-wrap: wrap; }
-.idx-tag {
-  font-family: var(--mono);
-  font-size: .44rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--teal);
-  background: rgba(43,173,184,.1);
-  padding: 3px 7px;
-  border-radius: 2px;
-}
-.idx-arrow {
-  font-size: .75rem;
-  color: var(--muted);
-  transition: transform .2s, color .2s;
-}
-.index-row:hover .idx-arrow { transform: translate(2px,-2px); color: var(--teal); }
+.proj-arrow svg { width: 30px; height: 30px; }
+.proj-footer:hover .proj-arrow { color: var(--teal); background: rgba(43,173,184,.06); }
 
-/* ════════════════════════════════════════
-   MOBILE GRID
-════════════════════════════════════════ */
-#view-mobile-grid {
-  display: none;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 68px 16px 100px;
-}
-
-.m-card {
-  display: block;
-  text-decoration: none;
-  color: var(--ink);
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--white);
+/* Desc + year — sits outside the bordered box, below it, revealed
+   on hover of the card */
+.proj-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 100px;
+  padding: 14px 4px 0;
   opacity: 0;
-  animation: rowIn .4s var(--ease) forwards;
+  transform: translateY(-4px);
+  transition: opacity .25s, transform .25s;
 }
-.m-card-img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  display: block;
+.proj-card:hover .proj-meta { opacity: 1; transform: translateY(0); }
+.proj-desc {
+  font-family: var(--sans-wide, var(--sans));
+  font-weight: 400;
+  font-size: 19px;           /* was clamp(1.2rem, 2.4vw, 2rem) */
+  letter-spacing: 0;
+  line-height: 1.3;
+  color: var(--ink);          /* or var(--teal) if you want the "active" look exactly */
+  max-width: 50%;
 }
-.m-card-body { padding: 12px; }
-.m-card-num {
+.proj-year {
   font-family: var(--mono);
-  font-size: .44rem;
+  font-size: 1rem;
   letter-spacing: .16em;
   color: var(--teal);
-  margin-bottom: 4px;
-}
-.m-card-title {
-  font-family: var(--sans);
-  font-size: .82rem;
   font-weight: 700;
-  letter-spacing: -.02em;
-  line-height: 1.2;
-}
-.m-card-year {
-  font-family: var(--mono);
-  font-size: .46rem;
-  letter-spacing: .12em;
-  color: var(--muted);
-  margin-top: 4px;
+  flex-shrink: 0;
+  max-width: 20%;
+  white-space: normal;   /* was nowrap */
+  text-align: right;
 }
 
-/* ── Font size adjustments ── */
-.proj-controls { font-size: 1rem; }
-.ctrl-btn { font-size: .7em; }
-
-#view-index { font-size: 1rem; }
-.idx-hcell  { font-size: .65em; }
-.idx-num    { font-size: .65em; }
-.idx-title  { font-size: 1em; }
-.idx-year   { font-size: .7em; }
-.idx-tag    { font-size: .6em; }
-
-.t-year-label { font-size: .6em; }
-.info-hint    { font-size: .6em; }
-.m-card-num   { font-size: .6em; }
-.m-card-title { font-size: .9em; }
-.m-card-year  { font-size: .6em; }
-
-/* ════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   MOBILE — vertical stack, full-width 16:10 cards. No hover,
+   so meta is always visible; divider lines don't apply.
+   ══════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .page-main { overflow: auto; }
+
   .proj-controls {
-    padding: 0 8px;
-  }
-  .ctrl-group:last-child { display: none; }
-  .ctrl-group:first-child {
-    width: 100%;
+    position: sticky;
+    left: 0; right: 0;
+    padding: 0 16px;
     justify-content: space-around;
   }
 
-  #view-timeline { display: none !important; }
-  #view-index {
+  .proj-wrap {
     position: static;
-    padding: 68px 16px 100px;
+    inset: auto;
+    overflow: visible;
+    cursor: auto;
   }
-  .index-header {
-    grid-template-columns: 28px 1fr 44px 24px;
+  .proj-track {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    width: 100%;
+    gap: 32px;
+    padding: 20px 16px 60px;
   }
-  .index-header .idx-hcell:nth-child(4) { display: none; }
-  .index-row { grid-template-columns: 28px 1fr 44px 24px; }
-  .index-row > *:nth-child(4) { display: none; }
-  .idx-thumb { width: 56px; height: 36px; }
-  .idx-title { font-size: .82rem; }
-}
 
-@media (min-width: 901px) {
-  #view-mobile-grid { display: none !important; }
+  .proj-card { width: 100% !important; }
+  .proj-title { padding: 18px 16px; font-size: 1.05rem; }
+  .proj-arrow { width: 56px; }
+  .proj-arrow svg { width: 24px; height: 24px; }
+
+  .proj-meta { opacity: 1; transform: none; padding: 10px 4px 0; }
+  .proj-desc { max-width: 68%; }
 }
 </style>
 
 <div class="proj-controls">
   <div class="ctrl-group">
+    <button class="ctrl-btn" data-tag="transportation"><span class="lang it">Trasportation</span><span class="lang en">Transportation</span></button>
     <button class="ctrl-btn active" data-tag="all"><span class="lang it">Tutti</span><span class="lang en">All</span></button>
-    <button class="ctrl-btn" data-tag="Product"><span class="lang it">Prodotto</span><span class="lang en">Product</span></button>
-    <button class="ctrl-btn" data-tag="Visual"><span class="lang it">Visivo</span><span class="lang en">Visual</span></button>
-  </div>
-  <div class="ctrl-group">
-    <button class="ctrl-btn active" data-view="timeline">Timeline</button>
-    <button class="ctrl-btn" data-view="index"><span class="lang it">Indice</span><span class="lang en">Index</span></button>
+    <button class="ctrl-btn" data-tag="industrial"><span class="lang it">Industrial</span><span class="lang en">Industrial</span></button>
   </div>
 </div>
 
 <main class="page-main">
+  <div class="proj-wrap" id="pWrap">
+    <div class="proj-track" id="pTrack">
+      
+      
+      
+        
 
-  <!-- TIMELINE -->
-  <div id="view-timeline">
-    <div class="timeline-viewport">
-      <div class="timeline-axis"></div>
-      <div class="timeline-scroll" id="tscroll">
-        <div class="timeline-inner" id="tinner">
-
-          
-          
-          
-          
-            
-              <div class="t-year-sep">
-                <div class="t-year-tick"></div>
-                <div class="t-year-label">2025</div>
-              </div>
-              
-            
-
-            
-            
-
-            <div class="t-item above"
-                 data-tags="Industrial Product Transportation"
-                 data-title="No-ONE"
-                 data-year="2025"
-                 data-tagslist="Industrial,Product,Transportation"
-                 data-url="/projects/9no1-conceptcar/"
-                 style="animation-delay:0ms">
-              <a href="/projects/9no1-conceptcar/" class="t-card"><img src="/images/photoprojects/no1concept/Untitled10.png" alt="No-ONE" loading="lazy"/></a>
-            </div>
-
-            
-          
-            
-
-            
-            
-
-            <div class="t-item below"
-                 data-tags="Product Brand"
-                 data-title="B2B for Sammontana"
-                 data-year="2025"
-                 data-tagslist="Product,Brand"
-                 data-url="/projects/7sammontana/"
-                 style="animation-delay:70ms">
-              <a href="/projects/7sammontana/" class="t-card"><img src="/images/photoprojects/Sammontana/cover.png" alt="B2B for Sammontana" loading="lazy"/></a>
-            </div>
-
-            
-          
-            
-
-            
-            
-
-            <div class="t-item above"
-                 data-tags="Product"
-                 data-title="Sun Dial"
-                 data-year="2025"
-                 data-tagslist="Product"
-                 data-url="/projects/6sun-dial/"
-                 style="animation-delay:140ms">
-              <a href="/projects/6sun-dial/" class="t-card"><img src="/images/photoprojects/sun dial/RENDER 5.png" alt="Sun Dial" loading="lazy"/></a>
-            </div>
-
-            
-          
-            
-
-            
-            
-
-            <div class="t-item below"
-                 data-tags="Product"
-                 data-title="Metis"
-                 data-year="2025"
-                 data-tagslist="Product"
-                 data-url="/projects/5metis/"
-                 style="animation-delay:210ms">
-              <a href="/projects/5metis/" class="t-card"><img src="/images/photoprojects/metis/cover.png" alt="Metis" loading="lazy"/></a>
-            </div>
-
-            
-          
-            
-              <div class="t-year-sep">
-                <div class="t-year-tick"></div>
-                <div class="t-year-label">2024</div>
-              </div>
-              
-            
-
-            
-            
-
-            <div class="t-item above"
-                 data-tags="Product Industrial Visual"
-                 data-title="Me-Moe"
-                 data-year="2024"
-                 data-tagslist="Product,Industrial,Visual"
-                 data-url="/projects/4me-moe/"
-                 style="animation-delay:280ms">
-              <a href="/projects/4me-moe/" class="t-card"><img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe" loading="lazy"/></a>
-            </div>
-
-            
-          
-            
-
-            
-            
-
-            <div class="t-item below"
-                 data-tags="Product"
-                 data-title="Phasmos"
-                 data-year="2024"
-                 data-tagslist="Product"
-                 data-url="/projects/3phasmos/"
-                 style="animation-delay:350ms">
-              <a href="/projects/3phasmos/" class="t-card"><img src="/images/photoprojects/phasmos/cover.png" alt="Phasmos" loading="lazy"/></a>
-            </div>
-
-            
-          
-            
-              <div class="t-year-sep">
-                <div class="t-year-tick"></div>
-                <div class="t-year-label">2023</div>
-              </div>
-              
-            
-
-            
-            
-
-            <div class="t-item above"
-                 data-tags="Product"
-                 data-title="ah ok Collection"
-                 data-year="2023"
-                 data-tagslist="Product"
-                 data-url="/projects/1ah-ok/"
-                 style="animation-delay:420ms">
-              <a href="/projects/1ah-ok/" class="t-card"><img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection" loading="lazy"/></a>
-            </div>
-
-            
-          
-
+        <div class="proj-card" data-tags="Industrial Product Transportation" style="animation-delay:0ms">
+          <div class="proj-box">
+            <a href="/projects/9no1-conceptcar/" class="proj-media">
+              <img src="/images/photoprojects/no1concept/Untitled10.png" alt="No-ONE" loading="lazy"/>
+            </a>
+            <a href="/projects/9no1-conceptcar/" class="proj-footer">
+              <span class="proj-title">No-ONE</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">A personal styling exercise integrating the functionality of a shooting brake into the architecture of an exotic sportscar, exploring what happens when utility takes higher priority than pure performance.</span>
+            <span class="proj-year">2025</span>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="timeline-info-bar">
-      <div class="info-meta" id="imeta">
-        <div class="info-year" id="iyear"></div>
-        <div class="info-tags" id="itags"></div>
-      </div>
-      <div class="info-title" id="ititle"></div>
-      <div class="info-hint"><span class="lang it">← trascina per esplorare →</span><span class="lang en">← drag to explore →</span></div>
-      <a href="#" class="info-link" id="ilink">↗</a>
-    </div>
-  </div>
+        
+      
+        
 
-  <!-- INDEX -->
-  <div id="view-index">
-    <div class="index-header">
-      <div class="idx-hcell">No.</div>
-      <div class="idx-hcell"><span class="lang it">Progetto</span><span class="lang en">Project</span></div>
-      <div class="idx-hcell sortable" data-sort="year">Year <span class="sort-ic">↕</span></div>
-      <div class="idx-hcell sortable" data-sort="tags"><span class="lang it">Categoria</span><span class="lang en">Category</span> <span class="sort-ic">↕</span></div>
-      <div class="idx-hcell"></div>
+        <div class="proj-card" data-tags="Product Brand" style="animation-delay:60ms">
+          <div class="proj-box">
+            <a href="/projects/7sammontana/" class="proj-media">
+              <img src="/images/photoprojects/Sammontana/cover.png" alt="B2B for Sammontana" loading="lazy"/>
+            </a>
+            <a href="/projects/7sammontana/" class="proj-footer">
+              <span class="proj-title">B2B for Sammontana</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">A retail design system for Sammontana, the Italian ice cream brand founded in 1946, covering fridges, signage, merchandise and packaging designed to adapt to any point of sale without losing brand identity.</span>
+            <span class="proj-year">2025</span>
+          </div>
+        </div>
 
-    </div>
-    <div id="index-body">
-      
-      
+        
       
         
-        <a href="/projects/9no1-conceptcar/"
-           class="index-row"
-           data-tags="Industrial Product Transportation"
-           data-year="2025"
-           data-title="No-ONE"
-           data-order="9"
-           style="animation-delay:40ms">
-          <span class="idx-num">01</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/no1concept/Untitled10.png" alt="No-ONE" loading="lazy"/></span>
-            <span class="idx-title">No-ONE</span>
-          </span>
-          <span class="idx-year">2025</span>
-          <span class="idx-tags"><span class="idx-tag">Industrial</span><span class="idx-tag">Product</span><span class="idx-tag">Transportation</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
+
+        <div class="proj-card" data-tags="Product" style="animation-delay:120ms">
+          <div class="proj-box">
+            <a href="/projects/6sun-dial/" class="proj-media">
+              <img src="/images/photoprojects/sun dial/RENDER 5.png" alt="Sun Dial" loading="lazy"/>
+            </a>
+            <a href="/projects/6sun-dial/" class="proj-footer">
+              <span class="proj-title">Sun Dial</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">A glassware collection that transforms light refraction into sensory experience, translating the position of light into a readable pattern on a surface.</span>
+            <span class="proj-year">2025</span>
+          </div>
+        </div>
+
+        
       
         
-        <a href="/projects/7sammontana/"
-           class="index-row"
-           data-tags="Product Brand"
-           data-year="2025"
-           data-title="B2B for Sammontana"
-           data-order="7"
-           style="animation-delay:80ms">
-          <span class="idx-num">02</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/Sammontana/cover.png" alt="B2B for Sammontana" loading="lazy"/></span>
-            <span class="idx-title">B2B for Sammontana</span>
-          </span>
-          <span class="idx-year">2025</span>
-          <span class="idx-tags"><span class="idx-tag">Product</span><span class="idx-tag">Brand</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
+
+        <div class="proj-card" data-tags="Product" style="animation-delay:180ms">
+          <div class="proj-box">
+            <a href="/projects/5metis/" class="proj-media">
+              <img src="/images/photoprojects/metis/cover.png" alt="Metis" loading="lazy"/>
+            </a>
+            <a href="/projects/5metis/" class="proj-footer">
+              <span class="proj-title">Metis</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">A modular furniture system whose lounge chair, footrest, and table configurations, along with a sculptural room divider, reshape themselves around the rhythms of any space.</span>
+            <span class="proj-year">2025</span>
+          </div>
+        </div>
+
+        
       
         
-        <a href="/projects/6sun-dial/"
-           class="index-row"
-           data-tags="Product"
-           data-year="2025"
-           data-title="Sun Dial"
-           data-order="5"
-           style="animation-delay:120ms">
-          <span class="idx-num">03</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/sun dial/RENDER 5.png" alt="Sun Dial" loading="lazy"/></span>
-            <span class="idx-title">Sun Dial</span>
-          </span>
-          <span class="idx-year">2025</span>
-          <span class="idx-tags"><span class="idx-tag">Product</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
+
+        <div class="proj-card" data-tags="Product Industrial Visual" style="animation-delay:240ms">
+          <div class="proj-box">
+            <a href="/projects/4me-moe/" class="proj-media">
+              <img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe" loading="lazy"/>
+            </a>
+            <a href="/projects/4me-moe/" class="proj-footer">
+              <span class="proj-title">Me-Moe</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">An integrated ecosystem for urban last-mile delivery, rethinking the entire delivery chain around a small vehicle into a single, fluid system.</span>
+            <span class="proj-year">2024</span>
+          </div>
+        </div>
+
+        
       
         
-        <a href="/projects/5metis/"
-           class="index-row"
-           data-tags="Product"
-           data-year="2025"
-           data-title="Metis"
-           data-order="4"
-           style="animation-delay:160ms">
-          <span class="idx-num">04</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/metis/cover.png" alt="Metis" loading="lazy"/></span>
-            <span class="idx-title">Metis</span>
-          </span>
-          <span class="idx-year">2025</span>
-          <span class="idx-tags"><span class="idx-tag">Product</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
+
+        <div class="proj-card" data-tags="Product" style="animation-delay:300ms">
+          <div class="proj-box">
+            <a href="/projects/3phasmos/" class="proj-media">
+              <img src="/images/photoprojects/phasmos/cover.png" alt="Phasmos" loading="lazy"/>
+            </a>
+            <a href="/projects/3phasmos/" class="proj-footer">
+              <span class="proj-title">Phasmos</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">An adaptable work table whose articulated legs translate the postures of the stick insect into a furniture system that reshapes itself around the user.</span>
+            <span class="proj-year">2024</span>
+          </div>
+        </div>
+
+        
       
         
-        <a href="/projects/4me-moe/"
-           class="index-row"
-           data-tags="Product Industrial Visual"
-           data-year="2024"
-           data-title="Me-Moe"
-           data-order="4"
-           style="animation-delay:200ms">
-          <span class="idx-num">05</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe" loading="lazy"/></span>
-            <span class="idx-title">Me-Moe</span>
-          </span>
-          <span class="idx-year">2024</span>
-          <span class="idx-tags"><span class="idx-tag">Product</span><span class="idx-tag">Industrial</span><span class="idx-tag">Visual</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
-      
+
+        <div class="proj-card" data-tags="Product" style="animation-delay:360ms">
+          <div class="proj-box">
+            <a href="/projects/1ah-ok/" class="proj-media">
+              <img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection" loading="lazy"/>
+            </a>
+            <a href="/projects/1ah-ok/" class="proj-footer">
+              <span class="proj-title">ah ok Collection</span>
+              <span class="proj-arrow">
+                <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g transform="rotate(90 240 120)">
+                    <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+                    <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="proj-meta">
+            <span class="proj-desc">A</span>
+            <span class="proj-year">2023</span>
+          </div>
+        </div>
+
         
-        <a href="/projects/3phasmos/"
-           class="index-row"
-           data-tags="Product"
-           data-year="2024"
-           data-title="Phasmos"
-           data-order="3"
-           style="animation-delay:240ms">
-          <span class="idx-num">06</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/phasmos/cover.png" alt="Phasmos" loading="lazy"/></span>
-            <span class="idx-title">Phasmos</span>
-          </span>
-          <span class="idx-year">2024</span>
-          <span class="idx-tags"><span class="idx-tag">Product</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
-      
-        
-        <a href="/projects/1ah-ok/"
-           class="index-row"
-           data-tags="Product"
-           data-year="2023"
-           data-title="ah ok Collection"
-           data-order="1"
-           style="animation-delay:280ms">
-          <span class="idx-num">07</span>
-          <span class="idx-title-wrap">
-            <span class="idx-thumb"><img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection" loading="lazy"/></span>
-            <span class="idx-title">ah ok Collection</span>
-          </span>
-          <span class="idx-year">2023</span>
-          <span class="idx-tags"><span class="idx-tag">Product</span></span>
-          <span class="idx-arrow">↗</span>
-        </a>
       
     </div>
   </div>
-
-  <!-- MOBILE GRID -->
-  <div id="view-mobile-grid">
-    
-    
-    
-      
-      <a href="/projects/9no1-conceptcar/" class="m-card" data-tags="Industrial Product Transportation" style="animation-delay:60ms">
-        <img src="/images/photoprojects/no1concept/Untitled10.png" alt="No-ONE" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">01</div>
-          <div class="m-card-title">No-ONE</div>
-          <div class="m-card-year">2025</div>
-        </div>
-      </a>
-    
-      
-      <a href="/projects/7sammontana/" class="m-card" data-tags="Product Brand" style="animation-delay:120ms">
-        <img src="/images/photoprojects/Sammontana/cover.png" alt="B2B for Sammontana" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">02</div>
-          <div class="m-card-title">B2B for Sammontana</div>
-          <div class="m-card-year">2025</div>
-        </div>
-      </a>
-    
-      
-      <a href="/projects/6sun-dial/" class="m-card" data-tags="Product" style="animation-delay:180ms">
-        <img src="/images/photoprojects/sun dial/RENDER 5.png" alt="Sun Dial" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">03</div>
-          <div class="m-card-title">Sun Dial</div>
-          <div class="m-card-year">2025</div>
-        </div>
-      </a>
-    
-      
-      <a href="/projects/5metis/" class="m-card" data-tags="Product" style="animation-delay:240ms">
-        <img src="/images/photoprojects/metis/cover.png" alt="Metis" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">04</div>
-          <div class="m-card-title">Metis</div>
-          <div class="m-card-year">2025</div>
-        </div>
-      </a>
-    
-      
-      <a href="/projects/4me-moe/" class="m-card" data-tags="Product Industrial Visual" style="animation-delay:300ms">
-        <img src="/images/photoprojects/me-moe/setting7.png" alt="Me-Moe" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">05</div>
-          <div class="m-card-title">Me-Moe</div>
-          <div class="m-card-year">2024</div>
-        </div>
-      </a>
-    
-      
-      <a href="/projects/3phasmos/" class="m-card" data-tags="Product" style="animation-delay:360ms">
-        <img src="/images/photoprojects/phasmos/cover.png" alt="Phasmos" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">06</div>
-          <div class="m-card-title">Phasmos</div>
-          <div class="m-card-year">2024</div>
-        </div>
-      </a>
-    
-      
-      <a href="/projects/1ah-ok/" class="m-card" data-tags="Product" style="animation-delay:420ms">
-        <img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection" class="m-card-img" loading="lazy"/>
-        <div class="m-card-body">
-          <div class="m-card-num">07</div>
-          <div class="m-card-title">ah ok Collection</div>
-          <div class="m-card-year">2023</div>
-        </div>
-      </a>
-    
-  </div>
-
 </main>
 
 <script>
-const isMobile = () => window.innerWidth <= 900;
-let currentView = 'timeline';
+(function() {
+  const isMobile = () => window.innerWidth <= 900;
+  const wrap  = document.getElementById('pWrap');
 
-function setView(v) {
-  const mob = isMobile();
-  document.getElementById('view-timeline').style.display  = (!mob && v === 'timeline') ? 'flex'  : 'none';
-  document.getElementById('view-index').style.display     = v === 'index'              ? 'block' : 'none';
-  document.getElementById('view-mobile-grid').style.display = (mob && v !== 'index')  ? 'grid'  : 'none';
-  document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === v));
-  currentView = v;
-}
-document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
-setView('timeline');
-window.addEventListener('resize', () => setView(currentView));
+  /* Wheel → horizontal remap, desktop only */
+  wrap.addEventListener('wheel', (e) => {
+    if (isMobile()) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    wrap.scrollLeft += e.deltaY;
+  }, { passive: false });
 
-/* Filter */
-function applyFilter(tag) {
-  document.querySelectorAll('[data-tag]').forEach(b => b.classList.toggle('active', b.dataset.tag === tag));
-  document.querySelectorAll('.t-item').forEach(el => {
-    el.style.display = (tag === 'all' || el.dataset.tags.includes(tag)) ? 'flex' : 'none';
+  /* Click-drag scroll, desktop only */
+  let dragging = false, startX = 0, startLeft = 0;
+  wrap.addEventListener('mousedown', e => {
+    if (isMobile()) return;
+    dragging = true;
+    wrap.classList.add('grabbing');
+    startX = e.pageX;
+    startLeft = wrap.scrollLeft;
   });
-  document.querySelectorAll('.index-row').forEach(el => {
-    el.style.display = (tag === 'all' || el.dataset.tags.includes(tag)) ? 'grid' : 'none';
+  document.addEventListener('mouseup', () => { dragging = false; wrap.classList.remove('grabbing'); });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    wrap.scrollLeft = startLeft - (e.pageX - startX) * 1.15;
   });
-  document.querySelectorAll('.m-card').forEach(el => {
-    el.style.display = (tag === 'all' || el.dataset.tags.includes(tag)) ? 'block' : 'none';
-  });
-  renumber();
-}
-document.querySelectorAll('[data-tag]').forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.tag)));
 
-function renumber() {
-  let i = 1;
-  document.querySelectorAll('.index-row').forEach(r => {
-    if (r.style.display !== 'none') {
-      const n = r.querySelector('.idx-num');
-      if (n) n.textContent = String(i++).padStart(2,'0');
-    }
-  });
-}
+  /* Filter */
+  function applyFilter(tag) {
+    document.querySelectorAll('[data-tag]').forEach(b => b.classList.toggle('active', b.dataset.tag === tag));
+    document.querySelectorAll('.proj-card').forEach(el => {
+      el.style.display = (tag === 'all' || el.dataset.tags.includes(tag)) ? 'flex' : 'none';
+    });
+  }
+  document.querySelectorAll('[data-tag]').forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.tag)));
 
-/* Drag scroll */
-const tscroll = document.getElementById('tscroll');
-if (tscroll) {
-  let drag = false, sx, sl;
-  tscroll.addEventListener('mousedown', e => { drag=true; tscroll.classList.add('grabbing'); sx=e.pageX-tscroll.offsetLeft; sl=tscroll.scrollLeft; });
-  document.addEventListener('mouseup', () => { drag=false; tscroll.classList.remove('grabbing'); });
-  tscroll.addEventListener('mousemove', e => { if(!drag)return; e.preventDefault(); tscroll.scrollLeft = sl-(e.pageX-tscroll.offsetLeft-sx)*1.2; });
-  tscroll.addEventListener('wheel', e => { if(Math.abs(e.deltaX)>Math.abs(e.deltaY))return; e.preventDefault(); tscroll.scrollLeft+=e.deltaY; }, {passive:false});
-}
-
-/* Info bar */
-const ititle = document.getElementById('ititle');
-const iyear  = document.getElementById('iyear');
-const itags  = document.getElementById('itags');
-const imeta  = document.getElementById('imeta');
-const ilink  = document.getElementById('ilink');
-
-document.querySelectorAll('.t-item').forEach(item => {
-  item.addEventListener('mouseenter', () => {
-    ititle.textContent = item.dataset.title || '';
-    ititle.classList.add('vis');
-    iyear.textContent = item.dataset.year || '';
-    itags.innerHTML = (item.dataset.tagslist||'').split(',').filter(Boolean).map(t=>`<span class="info-tag">${t.trim()}</span>`).join('');
-    imeta.classList.add('vis');
-    ilink.href = item.dataset.url || '#';
-    ilink.classList.add('vis');
-  });
-  item.addEventListener('mouseleave', () => {
-    ititle.classList.remove('vis');
-    imeta.classList.remove('vis');
-    ilink.classList.remove('vis');
-  });
-});
-
-/* Index sort */
-let sortKey = null, sortDir = 1;
-document.querySelectorAll('.idx-hcell.sortable').forEach(cell => {
-  cell.addEventListener('click', () => {
-    const key = cell.dataset.sort;
-    if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
-    document.querySelectorAll('.idx-hcell.sortable').forEach(c => { c.classList.remove('sorted'); c.querySelector('.sort-ic').textContent='↕'; });
-    cell.classList.add('sorted');
-    cell.querySelector('.sort-ic').textContent = sortDir===1?'↑':'↓';
-    const body = document.getElementById('index-body');
-    [...body.querySelectorAll('.index-row')].sort((a,b)=>{
-      let av=a.dataset[key]||'', bv=b.dataset[key]||'';
-      if(key==='year'){av=+av;bv=+bv;}
-      return av<bv?-sortDir:av>bv?sortDir:0;
-    }).forEach((r,i)=>{ r.style.animationDelay=i*25+'ms'; r.style.animation='none'; r.offsetHeight; r.style.animation=''; body.appendChild(r); });
-    renumber();
-  });
-});
+  /* Land pre-filtered if arriving via ?tag=transportation / ?tag=industrial */
+  const urlTag = new URLSearchParams(window.location.search).get('tag');
+  if (urlTag) applyFilter(urlTag);
+})();
 </script>
 
 <footer class="site-footer">
@@ -1067,6 +563,6 @@ document.querySelectorAll('.idx-hcell.sortable').forEach(cell => {
   <span>2026</span>
 </footer>
 
-<script src="/main.js"></script>
+<script src="/main.js?v=4"></script>
 </body>
 </html>

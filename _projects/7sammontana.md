@@ -25,37 +25,39 @@ gallery:
     layout: wide
 ---
 
+<!-- 1. HOOK -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/cover.png" alt="Verti vertical fridge" />
+        <img src="/images/photoprojects/Sammontana/cover.png" alt="Verti vertical fridge" />
       </div>
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/KDJHSDLFV.png" alt="Point of sale context render" />
+        <img src="/images/photoprojects/Sammontana/KDJHSDLFV.png" alt="Point of sale context render" />
       </div>
     </div>
   </div>
 </div>
 
 <div class="proj-lead" markdown="1">
-Every retailer receives the same fridge, a standard white chest freezer looks wrong in a premium shop, a heavily branded totem disappears in a traditional gelateria. Could one system read as premium and grassroots at once, without diluting the brand either way?
+Every retailer gets the same fridge but a white chest freezer looks wrong in a premium shop, and a branded totem disappears in a gelateria. Could one system read as both, without diluting the brand?
 </div>
 
 </div>
 
+<!-- 2. THE INSIGHT -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="PLACEHOLDER" alt="Logo geometry study" />
+        <img src="PLACEHOLDER" alt="Logo geometry study" />
       </div>
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="PLACEHOLDER" alt="Cylindrical form derivation" />
+        <img src="PLACEHOLDER" alt="Cylindrical form derivation" />
       </div>
     </div>
   </div>
@@ -65,28 +67,71 @@ Every retailer receives the same fridge, a standard white chest freezer looks wr
 
 ## The logic
 
-Sammontana's circular logo became the generative form for the entire system. Cylindrical geometry drives every decision, from shelf profile to packaging cross-section — a single formal idea disciplined enough to hold across four different fridge types and every point of sale.
+The circular logo becomes the generative form — cylindrical geometry drives shelf, fridge, and packaging alike.
 
 </div>
 
 </div>
 
+<!-- 3. THE SYSTEM — a family of four, so this is a family grid, not a split-section -->
+<div class="module-family">
+  <div class="module-family-head">
+    <h2>The system</h2>
+    <p>Upright or horizontal — one circular logic, four products.</p>
+  </div>
+  <div class="module-family-grid">
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/17(3).png" alt="Verti detail" class="lb-img no-outline" />
+      <span class="module-family-caption">Verti</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/qs.png" alt="Orzino detail" class="lb-img no-outline" />
+      <span class="module-family-caption">Orzino</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/3(2).png" alt="Orzi dispenser configuration" class="lb-img no-outline" />
+      <span class="module-family-caption">Orzi</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/1(5).png" alt="Expo dispenser configuration" class="lb-img no-outline" />
+      <span class="module-family-caption">Expo</span>
+    </div>
+  </div>
+</div>
+
+<!-- 4. CONTEXTUAL FINISH — three named variants, same reasoning as above -->
+<div class="module-family">
+  <div class="module-family-head">
+    <h2>Contextual finish</h2>
+    <p>One system, three ways to land — informal, formal, or dark.</p>
+  </div>
+  <div class="module-family-grid">
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/1(6).png" alt="Informal finish" class="lb-img" />
+      <span class="module-family-caption">Informal</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/4(2).png" alt="Formal finish" class="lb-img" />
+      <span class="module-family-caption">Formal</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/Sammontana/7(3).png" alt="Dark finish" class="lb-img" />
+      <span class="module-family-caption">Dark</span>
+    </div>
+  </div>
+</div>
+
+<!-- 5. TECHNICAL FOLLOW-THROUGH -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/17(3).png" alt="Verti detail" />
+        <img src="/images/photoprojects/Sammontana/20.png" alt="Adaptive lighting, unit 1" />
       </div>
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/3(2).png" alt="Orzi dispenser configuration" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/qs.png" alt="Orzino detail" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/1(5).png" alt="Expo dispenser configuration" />
+        <img src="/images/photoprojects/Sammontana/23.png" alt="Adaptive lighting, unit 2" />
       </div>
     </div>
   </div>
@@ -94,66 +139,9 @@ Sammontana's circular logo became the generative form for the entire system. Cyl
 
 <div class="split-section-text" markdown="1">
 
-## The fridge family
+## Custom lighting
 
-<div class="sync-text">
-<p class="sync-text-item active"><strong>Verti</strong> — vertical fridge, 2351 mm height, 1099 × 1033 mm footprint. An upright glass-door fridge with a circular base element that introduces the brand language at floor level: clean enough for a premium supermarket, distinctive enough to hold its own in a gelateria. The interior shelf is cut from a single sheet and carries the Sammontana tongue motif as a functional guide rail.</p>
-<p class="sync-text-item"><strong>Orzi</strong> — horizontal fridge, 1747 mm width, 1112 mm height. A curved glass top keeps product visible without requiring the buyer to open anything. Modular by design: a handful of component swaps convert it from a packaged ice cream fridge to an artisan gelato dispenser without touching the core assembly.</p>
-<p class="sync-text-item"><strong>Orzino</strong> — vertical fridge, 2351 mm height, 1099 × 1033 mm footprint. Shares Verti's upright glass-door format, circular floor-level base, and single-sheet interior shelf.</p>
-<p class="sync-text-item"><strong>Expo</strong> — horizontal fridge, 1747 mm width, 1112 mm height. Shares Orzi's curved-glass format and modular swap system between packaged and artisan gelato dispensing.</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="split-section" markdown="1">
-
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/1(6).png" alt="Informal finish, unit 1" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/2(3).png" alt="Informal finish, unit 2" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/3(3).png" alt="Informal finish, unit 3" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/4(2).png" alt="Formal finish, unit 1" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/5(1).png" alt="Formal finish, unit 2" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/6(1).png" alt="Formal finish, unit 3" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/7(3).png" alt="Dark finish, unit 1" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/8(2).png" alt="Dark finish, unit 2" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/Sammontana/9(3).png" alt="Dark finish, unit 3" />
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="split-section-text" markdown="1">
-
-## Contextual finish system
-
-Rather than a single colourway, each fridge ships with a finish logic tied to the environment it enters. The carousel above runs in triads — each group of three images shows one preset across different units:
-
-- **Informal / Playful** — white base with the full brand colour
-- **Formal / Premium** — white base with a desaturated accent
-- **Dark / Underground** — black base with a contrast brand colour
-
-Every unit integrates programmable LED lighting, adjustable per product type and time of day, so the same fridge shifts register between settings without a physical redesign.
+LEDs shift across a Kelvin scale, warming or cooling automatically to match the packaging in front of them — so the product always reads true to brand, whatever the fixture.
 
 </div>
 

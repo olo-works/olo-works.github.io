@@ -23,6 +23,7 @@ gallery:
     alt: "Posa da mimesi"
 ---
 
+<!-- 1. HOOK -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
@@ -38,35 +39,13 @@ gallery:
   </div>
 </div>
 
-
 <div class="proj-lead" markdown="1">
-A concept work table that changes posture. Phasmos takes its name and its logic from the stick insect, an organism whose entire survival strategy rests on the ability to adapt its form to its context without changing what it fundamentally is. The table does the same.
+A work table that changes posture — named after the stick insect, an organism that survives by adapting its form without changing what it fundamentally is.
 </div>
 
 </div>
 
-<div class="split-section" markdown="1">
-
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/phasmos/MATERIALE.jpg" alt="Reference detail" />
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="split-section-text" markdown="1">
-
-## The reference
-
-Stick insects, family Phasmatidae, are masters of structural mimicry. Their elongated bodies, jointed limbs, and ability to hold a posture for long stretches without losing balance made them a natural reference for a table built around adaptability. The species studied was Ctenomorpha chronus, chosen for its clear joint structure and the range of positions its legs can hold while keeping the body level, raised, or tilted.
-
-</div>
-
-</div>
-
+<!-- 3. THE TABLE -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
@@ -83,44 +62,35 @@ Stick insects, family Phasmatidae, are masters of structural mimicry. Their elon
 
 ## The table
 
-Every leg is mounted on its own ball-and-socket joint, so it can be set to any angle without depending on the position of the legs around it. This is what makes the three postures possible on a single frame: nothing is swapped or added, the same six legs simply rotate into a new configuration. The tabletop stays fixed in proportion across all three, so it reads as one continuous plane whether the frame beneath it is low, tall, or tilted.
-</div>
+Each leg mounts on its own ball-and-socket joint, rotating independently to any angle. The same six legs reconfigure into three postures — nothing swapped, nothing added.
 
 </div>
 
-<div class="split-section" markdown="1">
+</div>
 
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/phasmos/assonometria2.png" alt="Posa a riposo" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/phasmos/assonometria1.png" alt="Posa estesa" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/phasmos/assonometria.png" alt="Posa da mimesi" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/phasmos/Tavola disegno 16.png" alt="Four configurations" />
-      </div>
+<!-- 4. BREATHER -->
+<div class="module-bleed">
+  <img src="/images/photoprojects/phasmos/Tavola disegno 16.png" alt="Four configurations" />
+</div>
+
+<!-- 5. THE THREE POSTURES — family grid, caption-only -->
+<div class="module-family">
+  <div class="module-family-head">
+    <h2>Three postures</h2>
+    <p>Each takes its name from a stick-insect behaviour, and each answers a specific use rather than a visual preference.</p>
+  </div>
+  <div class="module-family-grid">
+    <div class="module-family-item">
+      <img src="/images/photoprojects/phasmos/assonometria2.png" alt="Posa a riposo" class="lb-img" />
+      <span class="module-family-caption">Riposo — working height</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/phasmos/assonometria1.png" alt="Posa estesa" class="lb-img" />
+      <span class="module-family-caption">Estesa — raised, compact</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/phasmos/assonometria.png" alt="Posa da mimesi" class="lb-img" />
+      <span class="module-family-caption">Mimesi — tilted toward the user</span>
     </div>
   </div>
-</div>
-
-<div class="split-section-text" markdown="1">
-
-## The three postures
-
-Each posture takes its name from a stick insect behaviour, and each answers a specific use rather than a visual preference.
-
-A riposo is the standard configuration: all six legs at the same angle, top surface horizontal at working height, used for writing, drawing, or computer work. The insect equivalent is its resting stance on a flat branch, stable and symmetrical, adaptable to whatever size or task the user brings to it.
-
-Estesa extends the legs to their maximum length, raising the top surface and shrinking the footprint. The table becomes a tall, compact platform, suited to freeing up floor space or working on something large from above.
-
-Mimesi works like the insect's camouflage stance: one side's legs rise while the other lowers, tilting the surface toward the user. The table becomes an angled drawing board or reading stand, adapting its geometry to the person's posture instead of asking them to adapt to it.
-
-</div>
-
 </div>

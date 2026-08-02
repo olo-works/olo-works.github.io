@@ -165,13 +165,28 @@
     object-fit: cover;
   }
 
+  .proj-cover-title {
+    position: absolute;
+    left: 32px;
+    bottom: 32px;
+    z-index: 2;
+    font-family: var(--sans-wide);
+    font-weight: 500;
+    font-size: var(--fs-h1);
+    line-height: 0.95;
+    letter-spacing: -.02em;
+    color: var(--bg);
+    margin: 0;
+    pointer-events: none;
+  }
+
   /* ── META STRIP ── */
   .proj-meta-strip {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 8px 32px;
+    gap: 8px 80px;
     padding: 12px 32px;
     border-top: none;
     border-bottom: none;
@@ -181,22 +196,27 @@
   .proj-meta-tag {
     display: flex;
     align-items: baseline;
-    gap: 6px;
-    font-family: var(--mono);
+    gap: 10px;
+    font-family: var(--sans-wide);
   }
   .proj-meta-tag-label {
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
+    font-family: var(--sans-wide);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;        /* ← Active state is 19px */
     color: var(--teal);
-    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    
   }
   .proj-meta-tag-value {
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
+    font-size: 19px;
+    letter-spacing: 0;
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-left: 4px
+    
   }
 
   /* ── CAROUSEL (top gallery — auto-scrolling, untouched) ── */
@@ -226,15 +246,17 @@
 
   .carousel-track {
     display: flex;
-    gap: 0;
+    gap: 24px;
+    align-items: flex-start;
     transition: none;
     will-change: transform;
   }
 
   .carousel-slide {
-    min-width: 320px;
-    max-width: 320px;
-    height: 170px;
+    min-width: 213px;
+    max-width: 213px;
+    width: 213px;
+    height: 160px;   /* 213:160 ≈ 4:3 */
     flex-shrink: 0;
     border-radius: 0;
     overflow: hidden;
@@ -384,9 +406,9 @@
     max-height: 100%;
     width: auto;
     height: auto;
-    border-radius: 14px;
-    border: 2px solid var(--line);
-    cursor: default;
+    border-radius: 0;
+    border: 1px solid var(--line);
+    cursor: zoom-in;
     display: block;
   }
 
@@ -401,7 +423,7 @@
   }
 
   .proj-lead p {
-    font-family: var(--sans);       /* Syne — matches everything else */
+    font-family: var(--sans-wide);   /* Lunchtype Expanded — matches everything else */
     font-size: clamp(1.65rem, 2.8vw, 2.5rem);
     font-weight: 800;
     letter-spacing: -.03em;
@@ -413,8 +435,8 @@
   /* Catch any raw <img> tags dropped directly in markdown content,
      outside the mini-carousel wrapper, and give them the same treatment. */
   .split-section-text img {
-    border-radius: 14px;
-    border: 2px solid var(--line);
+    border-radius: 0;
+    border: var(--line);
     max-width: 100%;
     display: block;
   }
@@ -430,7 +452,7 @@
     background: var(--white);
     font-family: var(--mono);
     letter-spacing: .04em;
-    border-radius: 6px;
+    border-radius: 0;
     border: 1px solid var(--line);
     opacity: 0.8;
     white-space: nowrap;
@@ -513,7 +535,7 @@
 
   /* Image counter — plain text, sits inline in the controls row below the image */
   .split-section-image-counter {
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: .75rem;
     letter-spacing: .1em;
     color: var(--ink);
@@ -547,468 +569,8 @@
     pointer-events: none;
   }
 
-  /* ── RIGHT SIDEBAR ── */
-  .proj-right {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    border-left: 1px solid var(--line);
-    overflow: hidden;
-  }
-
-  .proj-right::before {
-    content: '';
-    position: absolute;
-    left: -1px;
-    top: -9999px;
-    bottom: 0;
-    width: 1px;
-    background: var(--line);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .proj-col-title {
-    width: 100%;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .proj-nav-arrow {
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: none;
-    color: var(--ink-m);
-    text-decoration: none;
-    transition: color .2s, transform .2s;
-    z-index: 3;
-  }
-  .proj-nav-arrow svg {
-    width: 44px;
-    height: 44px;
-  }
-  .proj-nav-arrow:hover {
-    color: var(--teal);
-    transform: scale(1.15);
-    background: none;
-  }
-  .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
-
-  .proj-title-wrapper {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .proj-title-scroll {
-    animation: scrollTitle 8s linear infinite;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .proj-title {
-    writing-mode: vertical-rl;
-    transform: rotate(0deg);
-    font-size: clamp(2rem, 3.5vw, 3.4rem);
-    font-weight: 800;
-    letter-spacing: -.04em;
-    line-height: 1;
-    color: var(--ink);
-    margin: 0;
-    white-space: nowrap;
-    padding: 10px 0;
-    margin-bottom: 100px;
-  }
-
-  .proj-title-wrapper::before,
-  .proj-title-wrapper::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 80px;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .proj-title-wrapper::before {
-    top: 0;
-    background: linear-gradient(to bottom, var(--bg), transparent);
-  }
-  .proj-title-wrapper::after {
-    bottom: 0;
-    background: linear-gradient(to top, var(--bg), transparent);
-  }
-
-  @keyframes scrollTitle {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-20%); }
-  }
-
-  .desktop-only { display: flex; }
-  .mobile-only  { display: none; }
-
-  .proj-back-rail {
-    position: fixed;
-    left: 72px;
-    top: 50%;
-    transform: translateY(-50%) rotate(180deg);
-    writing-mode: vertical-rl;
-    font-family: var(--mono);
-    font-size: var(--fs-micro);
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--ink);
-    opacity: 0.45;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 5;
-    transition: color .2s, opacity .2s;
-  }
-  .proj-back-rail:hover { color: var(--teal); opacity: 1; }
-  .proj-back-rail::after { content: '↑'; font-size: .7rem; }
-
-  .proj-back-mobile { display: none; }
-  .proj-mob-prev,
-  .proj-mob-next { display: none; }
-
-  /* ── LIGHTBOX ── */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(13,31,34,.94);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .3s;
-  }
-  .lightbox.open { opacity: 1; pointer-events: all; }
-  .lightbox img {
-    max-width: 90vw;
-    max-height: 88vh;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 32px 80px rgba(0,0,0,.5);
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 24px; right: 28px;
-    font-family: var(--mono);
-    font-size: var(--fs-micro);
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.6);
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,.15);
-    padding: 8px 16px;
-    border-radius: 3px;
-    background: none;
-    transition: color .2s, border-color .2s;
-  }
-  .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
-
-  /* ── MOBILE ── */
-  @media (max-width: 900px) {
-    .proj-wrap {
-      grid-template-columns: 1fr;
-      padding-left: 0;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-
-    .proj-right {
-      position: static;
-      height: auto;
-      border-left: none;
-      border-bottom: 1px solid var(--line);
-      order: -1;
-      flex-direction: column;
-      padding: 12px 24px;
-      overflow: visible;
-    }
-
-    .proj-right::before { display: none; }
-    .proj-col-title .proj-nav-arrow { display: none; }
-
-    .proj-col-title {
-      width: auto;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-      height: auto;
-      gap: 16px;
-      overflow: hidden;
-    }
-
-    .proj-title-wrapper {
-      overflow: visible;
-      height: auto;
-    }
-
-    .proj-title-wrapper::before,
-    .proj-title-wrapper::after { display: none; }
-
-    .desktop-only {
-      display: none !important;
-      height: 0 !important;
-      overflow: hidden !important;
-    }
-
-    .mobile-only { display: flex; }
-
-    .proj-title-scroll {
-      animation: none;
-      display: flex;
-      flex-direction: row;
-    }
-
-    .proj-title {
-      writing-mode: horizontal-tb;
-      transform: none;
-      font-size: clamp(2rem, 10vw, 3rem);
-      white-space: normal;
-      text-align: center;
-      padding: 0;
-      margin: 0;
-      flex: 1;
-    }
-
-    .proj-left {
-      padding: 32px 0 100px;
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-
-    .proj-cover {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      margin-top: 0;
-      height: 320px;
-    }
-
-    .proj-meta-strip { 
-      padding: 10px 20px; 
-      gap: 6px 24px;
-    }
-    .proj-meta-tag {
-      gap: 4px;
-    }
-
-    .proj-carousel-outer {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 0;
-      margin-bottom: 0;
-      border-top: none;
-      border-bottom: none;
-    }
-
-    .carousel-viewport {
-      padding: 2px 20px 12px 20px;
-    }
-
-    .carousel-slide {
-      min-width: 260px;
-      max-width: 260px;
-      height: 140px;
-      border-radius: 0;
-      border: 1px solid var(--line);
-    }
-
-    .proj-scroll-indicator {
-      padding: 6px 20px 16px;
-    }
-
-    .split-section {
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 24px;
-      margin: 24px 0;
-      padding: 0 20px;
-    }
-
-    .split-section-media {
-      position: static;
-      margin-bottom: 0;
-    }
-
-    .split-section-media .mini-carousel-viewport {
-      height: min(42vh, 380px);
-    }
-
-    .split-section-media .mini-carousel-slide,
-    .split-section-media .image-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      height: 100%;
-      margin-bottom: 0;
-    }
-
-    .split-section-media .image-slide .image-caption {
-      position: static;
-      transform: none;
-      margin-top: 8px;
-      white-space: normal;
-    }
-
-    .split-section-controls {
-      display: flex;
-    }
-
-    .split-section-text {
-      padding-top: 0;
-    }
-
-    .proj-back-rail { display: none; }
-
-    .proj-back-mobile {
-      display: block;
-      font-family: var(--mono);
-      font-size: var(--fs-micro);
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--line);
-      transition: color .2s;
-    }
-    .proj-back-mobile:hover { color: var(--teal); }
-
-    .proj-mob-prev,
-    .proj-mob-next {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      bottom: 16px;
-      width: 60px;
-      height: 60px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--bg);
-      color: var(--ink-m);
-      text-decoration: none;
-      transition: color .2s, border-color .2s;
-      box-shadow: 0 4px 16px rgba(0,0,0,.08);
-      z-index: 200;
-    }
-    .proj-mob-prev svg,
-    .proj-mob-next svg {
-      width: 36px;
-      height: 36px;
-    }
-    .proj-mob-prev { left: 12px; }
-    .proj-mob-next { right: 12px; }
-    .proj-mob-prev:hover,
-    .proj-mob-next:hover { color: var(--teal); border-color: var(--teal); }
-    .proj-mob-prev.disabled,
-    .proj-mob-next.disabled { opacity: .2; pointer-events: none; }
-  }
-
-  @media (max-width: 600px) {
-    .proj-cover { height: 260px; }
-  }
-</style>
-
-
-
-
-
-
-
-
-
-
-<a href="/projects.html" class="proj-back-mobile">← All projects</a>
-
-<main class="page-main" style="padding:0;">
-  <div class="proj-wrap">
-
-    <div class="proj-left">
-
-      <div class="proj-cover">
-        
-          <img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection"/>
-        
-      </div>
-
-      
-      <div class="proj-meta-strip">
-        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Client</span><span class="proj-meta-tag-value">Università degli studi Mediterranea for Orografie</span></span>
-        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Role</span><span class="proj-meta-tag-value">Product Design, Font Design</span></span>
-        
-        
-        
-        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Year</span><span class="proj-meta-tag-value">2023</span></span>
-      </div>
-      
-
-      
-      <div class="proj-carousel-outer">
-        <div class="proj-carousel" id="carousel">
-          <div class="carousel-viewport">
-            <div class="carousel-track" id="carousel-track">
-              
-              <div class="carousel-slide" data-src="/images/photoprojects/ahok/9.png" data-alt="Complete system" data-caption="">
-                <img src="/images/photoprojects/ahok/9.png" alt="Complete system" loading="lazy" draggable="false"/>
-                
-              </div>
-              
-              <div class="carousel-slide" data-src="/images/photoprojects/ahok/091813192702515.65dfb743a6836.png" data-alt="Setting, night light" data-caption="">
-                <img src="/images/photoprojects/ahok/091813192702515.65dfb743a6836.png" alt="Setting, night light" loading="lazy" draggable="false"/>
-                
-              </div>
-              
-              <div class="carousel-slide" data-src="/images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png" data-alt="Detail K" data-caption="">
-                <img src="/images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png" alt="Detail K" loading="lazy" draggable="false"/>
-                
-              </div>
-              
-              <div class="carousel-slide" data-src="/images/photoprojects/ahok/7 (3).png" data-alt="Nighttime, with h" data-caption="">
-                <img src="/images/photoprojects/ahok/7 (3).png" alt="Nighttime, with h" loading="lazy" draggable="false"/>
-                
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      
-
-      <div class="proj-scroll-indicator">
-        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
-        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
-        <span class="proj-scroll-prompt">Explore the details</span>
-        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
-        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
-      </div>
-
-      <!-- SPLIT SECTIONS - Your content goes here -->
-      <div class="split-section">
+  /* ══════════════════════════════════════════════════════════
+     CONTENT MODULES — standardized blocks for use inside <div class="split-section">
 
   <div class="split-section-media">
   <div class="mini-carousel-viewport">
@@ -1024,7 +586,8 @@
 </div>
 
   <div class="proj-lead">
-    <p>The deconstruction of “ah, ok” gave each object its skeleton: lines and circles pulled from the letterforms, put on a scheme of standardized components then bent toward use. The system makes most sense followed across a day, rather than as four separate items on a page.</p>
+    <p>Named for the expression you use when something simply works without further explanation.
+After being divided into lines and circles, its letterforms were reconstructed into a cohesive living room system.</p>
   </div>
 
 </div>
@@ -1109,7 +672,990 @@
 
     <p>A floor lamp designed to be moved easily to any setting. It features a shelf intended for storing digital devices, the phone, the tablet, the things always kept within reach. The h is entirely in the aluminium arc that supports both the light and the shelf.</p>
 
-    <p>Materials: wood, aluminium, glass. Dimensions: 583 × 543 × 1165 mm.</p>
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/o.png" alt="Coffee table o" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/o sid.png" alt="Coffee table o, detail" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/rbfgn 3.png" alt="Coffee table o, in context" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="coffee-table-o">Coffee table o</h2>
+
+    <p><strong>o</strong> gathers what the day has produced at midday, becoming the center of your devices, already settled where hands expect them.</p>
+
+    <p>A two-level coffee table that goes beyond its traditional function. The upper level is designed specifically to facilitate video calls and the use of digital devices. The circle of the o becomes the sliding base that allows the table to be oriented toward the user.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/rbfgn 7.png" alt="Coat rack k" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/rbfgn 6.png" alt="Coat rack k, detail" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/k.png" alt="Coat rack k, in context" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="coat-rack-k">Coat rack k</h2>
+    <p><strong>k</strong> collects everything on the way out, hooks and drawer together the way the letter holds its own uneven lines, keys and coat gathered in one motion before the door resets the room.</p>
+
+    <p>A functional coat rack that allows all accessories to be organised upon returning home, from keys to clothing, including a mirror for a last look before heading out. The k is the asymmetric structure that holds together the mirror, hooks, and accessory drawer.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/sizing.png" alt="System sizing overview" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="sizing">Sizing</h2>
+
+    <p>The four pieces share a coordinated dimensional system, so that chair, lamp, table, and coat rack read as one family rather than four separate objects, each sized to sit and interact with the others at consistent heights and footprints.</p>
+
+  </div>
+
+</div>
+
+<!-- 4. BREATHER — pure visual beat, no text, breaks the split-section rhythm -->
+<div class="module-bleed">
+  <img src="/images/photoprojects/ahok/fc0ce0192702515.65dfb743a8e23.png" alt="Whisky glass detail" />
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/font.png" alt="ah ok font family specimen" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="the-font">The font</h2>
+
+    <p>Type design usually starts with rules: a grid, a stroke width, a set of proportions meant to hold up across every letter before a single glyph is drawn. Here the order is reversed. The product came first, built out of the shapes needed to make four pieces of furniture work, and the glyphs were drawn after, pulling their rules from what the objects had already decided, the curve of the chair’s frame, the arc of the lamp, the circle of the table’s base, the angles of the rack. A font built backwards, decorative rather than functional, a companion for titles rather than for reading.</p>
+
+    <div style="border:1px solid var(--line);border-radius:8px;margin:20px 0;min-height:120px;display:flex;align-items:center;justify-content:center;overflow:visible;">
+  <input type="text" placeholder="Try it out!" maxlength="40" style="width:100%;border:none;outline:none;background:transparent;font-family:'AhOk', var(--mono), sans-serif;font-size:2.4rem;line-height:4;color:var(--ink);text-align:center;padding:0;overflow:visible;transform:translateY(15px);" />
+</div>
+
+  </div>
+
+</div>
+
+
+     alongside .split-section. Each is self-contained: paste the
+     matching snippet from the module cheatsheet into your project's
+     .md file and swap images/text. All six reuse the same tokens as
+     everything above (--teal / --line / --ink / --ink-m / --mono /
+     --sans) so nothing needs new colors or fonts.
+     ══════════════════════════════════════════════════════════ */
+
+  /* ── 1. FULL-BLEED BREATHER — single edge-to-edge image, no text ── */
+  .module-bleed {
+    width: calc(100% + 88px);
+    margin-left: -56px;
+    margin-right: 0;
+    margin: 40px 0 40px -56px;
+    height: 480px;
+    overflow: hidden;
+  }
+  .module-bleed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+
+  /* ── 2. SPEC GRID — label/value facts, replaces a paragraph of specs ── */
+  .module-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 32px 0;
+    padding: 0 32px;
+    box-sizing: content-box;
+  }
+  .module-spec-item {
+    background: var(--white);
+    padding: 16px 18px;
+  }
+  .module-spec-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .module-spec-value {
+    display: block;
+    font-size: .95rem;
+    color: var(--ink);
+  }
+
+  /* ── 3. PROCESS STRIP — numbered steps, use only for real sequences ── */
+  .module-process {
+    display: flex;
+    gap: 14px;
+    margin: 32px 0;
+    padding: 0 32px;
+    flex-wrap: wrap;
+  }
+  .module-process-step {
+    flex: 1;
+    min-width: 140px;
+  }
+  .module-process-step img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 2px solid var(--line);
+    border-radius: 0;
+    display: block;
+    cursor: zoom-in;
+  }
+  .module-process-label {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-m);
+  }
+
+  /* ── 4. DETAIL GRID — tight close-up shots, texture/craft beat ── */
+  .module-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+    margin: 32px 0;
+    padding: 0 32px;
+  }
+  .module-detail-grid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: var(--line);
+    border-radius: 0;
+    display: block;
+    cursor: zoom-in;
+  }
+
+  /* ── 5. DIPTYCH — two full-bleed images side by side, compare/contrast ── */
+  .module-diptych {
+    width: calc(100% + 88px);
+    margin: 40px 0 40px -56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .module-diptych-item img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  .module-diptych-caption {
+    display: block;
+    text-align: center;
+    padding: 8px 12px 0;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-m);
+  }
+
+  /* ── 6. PRODUCT FAMILY GRID — variable image count + one heading ──
+     Use for projects that show a range/family of products under one
+     roof. Add as many .module-family-item blocks as you need — the
+     grid self-wraps, no layout math required per project. ── */
+  .module-family {
+    margin: 40px 0;
+    padding: 0 32px;
+  }
+  .module-family-head {
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .module-family-head h2 {
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 .4em;
+  }
+  .module-family-head p {
+    color: var(--ink-m);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .module-family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+  }
+  .module-family-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    display: block;
+    cursor: zoom-in;
+  }
+  .module-family-caption {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-m);
+    text-align: center;
+  }
+  .module-family-grid.no-crop img {
+    aspect-ratio: auto;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+  .module-family-grid.no-crop .module-family-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── FAMILY GRID WITH PER-ITEM CAROUSEL — matches split-section-media exactly ── */
+.module-family-carousel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-carousel-viewport {
+  width: 100%;
+  height: min(42vh, 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.item-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.item-carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+
+.item-carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.item-carousel-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  border:1px solid var(--line);
+  cursor: zoom-in;
+  display: block;
+}
+
+.item-carousel-slide img.no-outline {
+  border: none;
+  border-radius: 0;
+}
+
+/* Controls row: identical to .split-section-controls — arrow, counter, arrow, below the image */
+.item-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.item-carousel-counter {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .1em;
+  color: var(--ink);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.item-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--ink-m);
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: color .2s, opacity .2s, transform .2s;
+  user-select: none;
+}
+.item-carousel-nav svg {
+  width: 32px;
+  height: 32px;
+}
+.item-carousel-nav:hover {
+  color: var(--teal);
+  transform: scale(1.15);
+}
+.item-carousel-nav.disabled {
+  opacity: .25;
+  pointer-events: none;
+}
+
+.module-family-item-caption { margin-top: 8px; text-align: center; }
+.module-family-item-caption .module-family-caption { font-weight: 700; }
+.module-family-item-caption p {
+  font-size: .82rem; color: var(--ink-m); margin: 2px 0 0; line-height: 1.4;
+}
+  /* ── RIGHT SIDEBAR ── */
+  .proj-right {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    border-left: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .proj-right::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: -9999px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .proj-col-title {
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .proj-nav-arrow {
+    width: 100%;
+    height: 88px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: var(--ink-m);
+    text-decoration: none;
+    transition: color .2s, background .2s, border-color .2s;
+    z-index: 3;
+    
+  }
+  .proj-col-title > .proj-nav-arrow:first-child { border-bottom: 1px solid var(--line); }
+  .proj-col-title > .proj-nav-arrow:last-child { border-top: 1px solid var(--line); }
+  .proj-nav-arrow svg {
+    width: 44px;
+    height: 44px;
+  }
+  .proj-nav-arrow:hover {
+    color: var(--teal);
+    background: color-mix(in srgb, var(--teal) 10%, transparent);
+  }
+  .proj-col-title > .proj-nav-arrow:first-child:hover { border-bottom-color: var(--teal); }
+  .proj-col-title > .proj-nav-arrow:last-child:hover { border-top-color: var(--teal); }
+  .proj-nav-arrow.disabled { opacity: .2; pointer-events: none; }
+
+  .proj-title-wrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .proj-title {
+    writing-mode: vertical-rl;
+    transform: rotate(0deg);
+    font-family: var(--sans-wide);
+    font-weight: 500;
+    font-size: var(--fs-h2);
+    letter-spacing: -.04em;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0;
+    white-space: nowrap;
+    padding: 10px 0;
+  }
+
+  .proj-back-rail {
+    position: fixed;
+    left: 72px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    font-family: var(--mono);
+    font-size: var(--fs-micro);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.45;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+    transition: color .2s, opacity .2s;
+  }
+  .proj-back-rail:hover { color: var(--teal); opacity: 1; }
+  .proj-back-rail::after { content: '↑'; font-size: .7rem; }
+
+  .proj-back-mobile { display: none; }
+  .proj-mob-prev,
+  .proj-mob-next { display: none; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(13,31,34,.94);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 0;
+    border: 1px solid var(--line);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: var(--sans);
+    font-size: var(--fs-micro);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 8px 16px;
+    border-radius: 0;
+    background: none;
+    transition: color .2s, border-color .2s;
+  }
+  .lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,.4); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .proj-wrap {
+      grid-template-columns: 1fr;
+      padding-left: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .proj-right {
+      position: static;
+      height: auto;
+      border-left: none;
+      border-bottom: 1px solid var(--line);
+      order: -1;
+      flex-direction: column;
+      padding: 12px 24px;
+      overflow: visible;
+    }
+
+    .proj-right::before { display: none; }
+    .proj-col-title .proj-nav-arrow { display: none; }
+
+    .proj-col-title {
+      width: auto;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      height: auto;
+      gap: 16px;
+      overflow: hidden;
+    }
+
+    .proj-title-wrapper {
+      overflow: visible;
+      height: auto;
+    }
+
+    .proj-title {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: clamp(2rem, 10vw, 3rem);
+      white-space: normal;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+
+    .proj-left {
+      padding: 32px 0 100px;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    .proj-cover {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 0;
+      height: 320px;
+    }
+
+    .proj-cover-title {
+      display: none;
+    }
+
+    .proj-meta-strip { 
+      padding: 10px 20px; 
+      gap: 6px 24px;
+    }
+    .proj-meta-tag {
+      gap: 4px;
+    }
+
+    .proj-carousel-outer {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .carousel-viewport {
+      padding: 2px 20px 12px 20px;
+    }
+
+    .carousel-slide {
+      min-width: 260px;
+      max-width: 260px;
+      height: 160px;
+      border-radius: 0;
+      border: 1px solid var(--label);
+    }
+
+    .proj-scroll-indicator {
+      padding: 6px 20px 16px;
+    }
+
+    .split-section {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 24px;
+      margin: 24px 0;
+      padding: 0 20px;
+    }
+
+    .split-section-media {
+      position: static;
+      margin-bottom: 0;
+    }
+
+    .split-section-media .mini-carousel-viewport {
+      height: min(42vh, 380px);
+    }
+
+    .split-section-media .mini-carousel-slide,
+    .split-section-media .image-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0;
+    }
+
+    .split-section-media .image-slide .image-caption {
+      position: static;
+      transform: none;
+      margin-top: 8px;
+      white-space: normal;
+    }
+
+    .split-section-controls {
+      display: flex;
+    }
+
+    .split-section-text {
+      padding-top: 0;
+    }
+
+    /* ── CONTENT MODULES — mobile ── */
+    .module-bleed {
+      width: 100%;
+      margin: 28px 0;
+      height: 260px;
+    }
+
+    .module-specs {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+    .module-spec-item { padding: 14px; }
+
+    .module-process {
+      grid-template-columns: repeat(2, 1fr);
+      display: grid;
+      gap: 10px;
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+    .module-process-step { min-width: 0; }
+
+    .module-detail-grid {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+
+    .module-diptych {
+      width: 100%;
+      margin: 28px 0;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .module-diptych-item img { height: 220px; }
+
+    .module-family {
+      padding: 0 20px;
+      margin: 28px 0;
+    }
+    .module-family-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .proj-back-rail { display: none; }
+
+    .proj-back-mobile {
+      display: block;
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      transition: color .2s;
+    }
+    .proj-back-mobile:hover { color: var(--teal); }
+
+    .proj-mob-prev,
+    .proj-mob-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 16px;
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      background: var(--bg);
+      color: var(--ink-m);
+      text-decoration: none;
+      transition: color .2s, border-color .2s;
+      z-index: 200;
+    }
+    .proj-mob-prev svg,
+    .proj-mob-next svg {
+      width: 36px;
+      height: 36px;
+    }
+    .proj-mob-prev { left: 12px; }
+    .proj-mob-next { right: 12px; }
+    .proj-mob-prev:hover,
+    .proj-mob-next:hover { color: var(--teal); border-color: var(--teal); }
+    .proj-mob-prev.disabled,
+    .proj-mob-next.disabled { opacity: .2; pointer-events: none; }
+  }
+
+  @media (max-width: 600px) {
+    .proj-cover { height: 260px; }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+<a href="/projects.html" class="proj-back-mobile">← All projects</a>
+
+<main class="page-main" style="padding:0;">
+  <div class="proj-wrap">
+
+    <div class="proj-left">
+
+      <div class="proj-cover">
+        
+          <img src="/images/photoprojects/ahok/POSTER.png" alt="ah ok Collection"/>
+        
+        <h1 class="proj-cover-title">ah ok Collection</h1>
+      </div>
+
+      
+      <div class="proj-meta-strip">
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Client</span><span class="proj-meta-tag-value">Università degli studi Mediterranea for Orografie</span></span>
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Role</span><span class="proj-meta-tag-value">Product Design, Font Design</span></span>
+        
+        
+        
+        <span class="proj-meta-tag"><span class="proj-meta-tag-label">Year</span><span class="proj-meta-tag-value">2023</span></span>
+      </div>
+      
+
+      
+      <div class="proj-carousel-outer">
+        <div class="proj-carousel" id="carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carousel-track">
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/ahok/9.png" data-alt="Complete system" data-caption="">
+                <img src="/images/photoprojects/ahok/9.png" alt="Complete system" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/ahok/091813192702515.65dfb743a6836.png" data-alt="Setting, night light" data-caption="">
+                <img src="/images/photoprojects/ahok/091813192702515.65dfb743a6836.png" alt="Setting, night light" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png" data-alt="Detail K" data-caption="">
+                <img src="/images/photoprojects/ahok/8cfd7f192702515.65dfb54619cca.png" alt="Detail K" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+              <div class="carousel-slide" data-src="/images/photoprojects/ahok/7 (3).png" data-alt="Nighttime, with h" data-caption="">
+                <img src="/images/photoprojects/ahok/7 (3).png" alt="Nighttime, with h" loading="lazy" draggable="false"/>
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="proj-scroll-indicator">
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-prompt">Explore the details</span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+        <span class="proj-scroll-arrow"><svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(180 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg></span>
+      </div>
+
+      <!-- SPLIT SECTIONS - Your content goes here -->
+      <div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/ahok/9.png" alt="Complete system" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/ahok/7 (3).png" alt="Nighttime, with h" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="proj-lead">
+    <p>Named for the expression you use when something simply works without further explanation.
+After being divided into lines and circles, its letterforms were reconstructed into a cohesive living room system.</p>
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger" src="/images/photoprojects/ahok/091813192702515.65dfb743a6836.png" alt="Setting, night light" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="one-system-one-day">One system, one day</h2>
+
+    <p>Nothing here is fixed in place. A living room that reconfigures itself around whoever’s using it, built to be kept and aged with rather than replaced.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/A.png" alt="Chair a" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/rbfgn .png" alt="Chair a, detail" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/a sid.png" alt="Chair a, context" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="chair-a">Chair a</h2>
+
+    <p><strong>a</strong> is where the phrase starts, where the person sits and lives the space, closing around the seat the way the letter closes on itself, light enough to be lifted and carried toward wherever the morning light happens to fall.</p>
+
+    <p>A minimal seat whose defining characteristic is its ability to emphasise the expression “ah ok” depending on how many chairs one owns. The shape of the letter a becomes the load-bearing structure: an aluminium circle embracing the wooden seat.</p>
+
+    <p>Materials: wood, aluminium. Dimensions: 586 × 421 × 572 mm.</p>
+
+  </div>
+
+</div>
+
+<div class="split-section">
+
+  <div class="split-section-media">
+  <div class="mini-carousel-viewport">
+    <div class="mini-carousel-track">
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/h.png" alt="Lamp h" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/rbfgn 4.png" alt="Lamp h, detail" />
+      </div>
+      <div class="mini-carousel-slide">
+        <img class="lightbox-trigger no-outline" src="/images/photoprojects/ahok/rbfgn 5.png" alt="Lamp h, in context" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="split-section-text">
+
+    <h2 id="lamp-h">Lamp h</h2>
+
+    <p><strong>h</strong> takes over by evening, a reading lamp now carrying a shelf for phone and tablet, its light dropping low and close instead of falling from the ceiling.</p>
+
+    <p>A floor lamp designed to be moved easily to any setting. It features a shelf intended for storing digital devices, the phone, the tablet, the things always kept within reach. The h is entirely in the aluminium arc that supports both the light and the shelf.</p>
 
   </div>
 
@@ -1141,8 +1687,6 @@
 
     <p>A two-level coffee table that goes beyond its traditional function. The upper level is designed specifically to facilitate video calls and the use of digital devices. The circle of the o becomes the sliding base that allows the table to be oriented toward the user.</p>
 
-    <p>Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 572 mm.</p>
-
   </div>
 
 </div>
@@ -1172,8 +1716,6 @@
 
     <p>A functional coat rack that allows all accessories to be organised upon returning home, from keys to clothing, including a mirror for a last look before heading out. The k is the asymmetric structure that holds together the mirror, hooks, and accessory drawer.</p>
 
-    <p>Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 1165 mm.</p>
-
   </div>
 
 </div>
@@ -1198,6 +1740,11 @@
 
   </div>
 
+</div>
+
+<!-- 4. BREATHER — pure visual beat, no text, breaks the split-section rhythm -->
+<div class="module-bleed">
+  <img src="/images/photoprojects/ahok/fc0ce0192702515.65dfb743a8e23.png" alt="Whisky glass detail" />
 </div>
 
 <div class="split-section">
@@ -1226,16 +1773,6 @@
 
 </div>
 
-<style>
-@font-face {
-  font-family: 'AhOk';
-  src: url('/custom fonts/AhOkBold.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-</style>
-
 
 
     </div>
@@ -1252,16 +1789,7 @@
         
 
         <div class="proj-title-wrapper">
-          <div class="proj-title-scroll desktop-only">
-            <h1 class="proj-title">ah ok Collection</h1>
-            <h1 class="proj-title">ah ok Collection</h1>
-            <h1 class="proj-title">ah ok Collection</h1>
-            <h1 class="proj-title">ah ok Collection</h1>
-            <h1 class="proj-title">ah ok Collection</h1>
-          </div>
-          <div class="proj-title-scroll mobile-only">
-            <h1 class="proj-title">ah ok Collection</h1>
-          </div>
+          <h1 class="proj-title">ah ok Collection</h1>
         </div>
 
         
@@ -1295,6 +1823,18 @@
 </div>
 
 <script>
+  // Shared lightbox refs/helper — hoisted to top-level scope so every
+  // carousel/module below (and the close/backdrop/Escape handlers at the
+  // bottom) can all use the same `lb` / `lbImg` / `openLightbox`.
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+
+  function openLightbox(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lb.classList.add('open');
+  }
+
   (function() {
     // Carousel functionality (top gallery — unchanged, still auto-scrolling)
     const track = document.getElementById('carousel-track');
@@ -1302,8 +1842,14 @@
       const viewport = track.parentElement;
       const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
 
+      originalSlides.forEach(slide => {
+        slide.addEventListener('click', () => {
+          openLightbox(slide.dataset.src, slide.dataset.alt);
+        });
+      });
+
       if (originalSlides.length) {
-        const GAP = 0;
+        const GAP = 24;
         const SPEED = 0.4;
         let position = 0;
         let animationId = null;
@@ -1344,9 +1890,7 @@
           }
 
           div.addEventListener('click', () => {
-            lbImg.src = data.src;
-            lbImg.alt = data.alt;
-            lb.classList.add('open');
+            openLightbox(data.src, data.alt);
           });
 
           return div;
@@ -1511,6 +2055,14 @@
       const slides = imageTrack.querySelectorAll('.mini-carousel-slide, .image-slide');
       if (!slides.length) return;
 
+      // Wire each slide's image to open the lightbox on click.
+      slides.forEach((slide) => {
+        const img = slide.querySelector('img');
+        if (img) {
+          img.addEventListener('click', () => openLightbox(img.src, img.alt));
+        }
+      });
+
       // Optional: a .sync-text block in the text column, with one
       // .sync-text-item per slide (same order). If present, its items
       // are swapped in lockstep with the image index. Fully opt-in —
@@ -1601,20 +2153,82 @@
     });
   })();
 
-  // Lightbox functionality
-  const lb    = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  
-  document.querySelectorAll('#carousel-track .carousel-slide, .split-section-media .mini-carousel-slide img, .split-section-media .image-slide img').forEach(el => {
-    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
-    if (!img) return;
-    el.addEventListener('click', () => {
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
-      lb.classList.add('open');
+  document.querySelectorAll('.module-family-carousel-item').forEach((item) => {
+    const viewport = item.querySelector('.item-carousel-viewport');
+    const slides = item.querySelectorAll('.item-carousel-slide');
+    if (!slides.length) return;
+
+    // Wire each slide's image to open the lightbox on click.
+    slides.forEach((slide) => {
+      const img = slide.querySelector('img');
+      if (img) {
+        img.addEventListener('click', () => openLightbox(img.src, img.alt));
+      }
     });
+
+    if (slides.length === 1) {
+      slides[0].classList.add('active');
+      return;
+    }
+
+    let idx = 0;
+    let transitioning = false;
+
+    const controls = document.createElement('div');
+    controls.className = 'item-carousel-controls';
+
+    const ARROW_LEFT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(-90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+    const ARROW_RIGHT = '<svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(90 240 120)"><path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/><path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/></g></svg>';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'item-carousel-nav item-carousel-prev disabled';
+    prevBtn.setAttribute('aria-label', 'Previous image');
+    prevBtn.innerHTML = ARROW_LEFT;
+
+    const counter = document.createElement('div');
+    counter.className = 'item-carousel-counter';
+    counter.textContent = `1 / ${slides.length}`;
+
+    const nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'item-carousel-nav item-carousel-next';
+    nextBtn.setAttribute('aria-label', 'Next image');
+    nextBtn.innerHTML = ARROW_RIGHT;
+
+    controls.appendChild(prevBtn);
+    controls.appendChild(counter);
+    controls.appendChild(nextBtn);
+    item.insertBefore(controls, item.querySelector('.module-family-item-caption'));
+
+    function go(newIdx) {
+      if (transitioning) return;
+      if (newIdx < 0 || newIdx > slides.length - 1) return;
+      transitioning = true;
+      idx = newIdx;
+
+      slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+      counter.textContent = `${idx + 1} / ${slides.length}`;
+      prevBtn.classList.toggle('disabled', idx === 0);
+      nextBtn.classList.toggle('disabled', idx === slides.length - 1);
+
+      setTimeout(() => { transitioning = false; }, 500);
+    }
+
+    prevBtn.addEventListener('click', () => go(idx - 1));
+    nextBtn.addEventListener('click', () => go(idx + 1));
+
+    slides[0].classList.add('active');
   });
-  
+
+  // ── Wire up remaining static image modules that weren't bound above ──
+  document.querySelectorAll(
+    '.module-bleed img, .module-process-step img, .module-detail-grid img, ' +
+    '.module-diptych-item img, .module-family-item img'
+  ).forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
   document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
   lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
@@ -1670,6 +2284,6 @@
   <span>2026</span>
 </footer>
 
-<script src="/main.js"></script>
+<script src="/main.js?v=4"></script>
 </body>
 </html>

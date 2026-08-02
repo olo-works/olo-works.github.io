@@ -7,225 +7,273 @@
   <link rel="stylesheet" href="/style.css"/>
   <script>document.documentElement.setAttribute('data-lang', localStorage.getItem('lang') || 'it');</script>
   <style>
-    html, body { height: 100%; overflow: hidden; }
+    html, body { height: 100%; }
 
-    .home-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      height: 100vh;
-      padding-left: 48px;
+    /* ══════════════════════════════════════════════════════════
+       RAIL — force permanently open on the homepage.
+       Not relying on the "rail-open" class alone: something (likely
+       main.js) toggles width/label visibility on hover/mouseleave,
+       which fights a class-only approach. This scopes to the
+       homepage body class and wins regardless of what JS does.
+       ══════════════════════════════════════════════════════════ */
+    body.home-page #rail { width: 72px !important; }
+    body.home-page #rail .r-text {
+      opacity: 1 !important;
+      max-height: 120px !important;
+      margin-top: 2px !important;
     }
 
-    /* ── Left ── */
-    .home-left {
+    /* ══════════════════════════════════════════════════════════
+       PERIOD-ACCURATE PASS — flat, sharp, no blur.
+       Scoped to the homepage. Rail ICONS (.r-icon) are deliberately
+       untouched — those keep their existing radius, per instruction.
+       Everything else on this page goes to 0.
+       Cursor: shape only (square dot, square ring, no soft opacity
+       fade) — the actual pointer motion/easing lives in main.js,
+       outside this file, so it isn't touched here.
+       ══════════════════════════════════════════════════════════ */
+    body.home-page #rail { backdrop-filter: none !important; }
+    body.home-page #cursor { border-radius: 0 !important; }
+    body.home-page #cursor-ring { border-radius: 0 !important; opacity: .6 !important; }
+    body.home-page #lang-bar-btn { border-radius: 0 !important; }
+
+    /* ══════════════════════════════════════════════════════════
+       HORIZONTAL PAGE SCROLL (desktop only)
+       One outer scroller, panels laid out left-to-right, free-scroll
+       (no snapping). Vertical wheel input is remapped to horizontal
+       scroll via JS below, since that's not native browser behavior.
+       ══════════════════════════════════════════════════════════ */
+    .hz-wrap {
+      margin-left: 72px; /* clears the rail, forced open above */
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .hz-wrap::-webkit-scrollbar { display: none; }
+
+    .hz-track {
+      display: flex;
+      height: 100%;
+      width: max-content;
+    }
+
+    .hz-panel {
+      flex: 0 0 auto;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 64px 56px;
-      border-right: 1px solid var(--line);
-      height: 100vh;
-      overflow: hidden;
-      font-size: 1rem;
-    }
-    .home-label {
-      font-family: var(--mono);
-      font-size: .58em;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      animation: fadeUp .7s var(--ease) .1s forwards;
-    }
-    .home-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
-    .home-name {
-      font-size: clamp(2.6em, 4vw, 4em);
-      font-weight: 800;
-      letter-spacing: -.04em;
-      line-height: .92;
-      color: var(--ink);
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp .8s var(--ease) .2s forwards;
-
-    }
-    .home-actions {
-      display: flex;
-      gap: 10px;
-      opacity: 0;
-      animation: fadeUp .8s var(--ease) .55s forwards;
-    }
-      .home-intro {
-        font-family: var(--mono);
-        font-size: .85rem;
-        line-height: 1.6;
-        color: var(--muted);
-        margin-bottom: 32px;
-        max-width: 380px;
-        min-height: 140px;
-        white-space: normal;
-        word-spacing: 0.15em;
-    }
-    
-    
-    .typed-word {
-      display: inline;
-      opacity: 0;
-      animation: fadeWord 0.1s ease forwards;
-      white-space: pre-wrap
-;
-    }
-    
-    @keyframes fadeWord {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Right ── */
-    .home-right {
-      height: 100vh;
-      overflow: hidden;
       position: relative;
     }
 
-    .scroll-track {
+    /* ── Intro panel: bilingual scrolling marquee text only ── */
+    .hz-intro {
+      width: 22vw;
+      min-width: 260px;
+      max-width: 380px;
+      padding: 0;
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+      position: relative; /* anchors the rotated/centered marquee below */
+      container-type: inline-size; /* ties marquee text size to THIS panel, not the viewport */
+      container-name: introMarquee;
+    }
+    .hz-marquee-area {
+      /* Rotated 90deg. Sized oversize (100vh x 100vw) and centered so it
+         always more than covers the panel regardless of the panel's exact
+         width — the panel's own overflow:hidden crops it to a clean fit,
+         so no fiddly exact-size math is needed. */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vh;
+      height: 100vw;
+      transform: translate(-50%, -50%) rotate(-90deg);
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding: 32px 0 32px 28px;
-      width: fit-content;
+      justify-content: center;
+      gap: 0;
+    }
+    .hz-marquee-row {
+      display: flex;
+      align-items: baseline;
+      overflow: hidden;
+      padding: 8px 0;
+    }
+    .hz-marquee-track {
+      display: flex;
+      align-items: baseline;
+      white-space: nowrap;
       will-change: transform;
     }
-
-    /* ── Image card ── */
-    .img-item {
-      display: block;
-      width: fit-content;
-      text-decoration: none;
-      position: relative;
+    .hz-phrase-item {
+      display: inline-flex;
+      align-items: baseline;
+      gap: .3em;
+      padding: 0 20px;
+      border-right: 1px solid var(--line);
       flex-shrink: 0;
     }
+    .hz-phrase-main {
+      font-family: var(--sans-wide);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      font-size: var(--fs-h3);
+      color: var(--ink);
+    }
+    .hz-phrase-main.teal { color: var(--teal); }
 
-    .img-item-photo {
-      border-radius: 8px;
-      overflow: hidden;
+    /* ── Discipline panel: image fills the panel (5px padding, 5px
+       radius — not literally full-bleed edge-to-edge), a bottom bar
+       below it holds the title and a bordered arrow-link box. No
+       description copy, no separate CTA text. ── */
+    .hz-discipline {
+      width: 48vw;
+      min-width: 200px;
+      max-width: 800px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      container-type: inline-size; /* ties the title's font-size to THIS box's width, not the viewport */
+      container-name: discipline;
+    }
+    .hz-discipline-media {
+      flex: 1;
+      min-height: 0;
+      box-sizing: border-box;
+    }
+    .hz-discipline-media img {
       width: 100%;
-      border: 1.5px solid var(--line);
-      transition: border-color .25s;
-      position: relative;
-      display: inline-block;
-      /* No fixed height — images dictate their own height */
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .img-item:hover .img-item-photo {
-      border-color: var(--teal);
+    .hz-discipline-footer {
+      flex-shrink: 0;
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid var(--line);
+      text-decoration: none;
+      color: var(--ink);
     }
-      .img-item-photo img {
-        width: auto;
-        height: auto;
-        max-width: 360px;
-        max-height: 420px;
-        display: block;
-        object-fit: contain;
-        transition: transform .5s var(--ease);
-        position: relative;
-        z-index: 1;
+    .hz-discipline-title {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 40px 28px;
+      font-size: clamp(1rem, 4.8cqw, 2.75rem); /* scales to panel width via container-type above */
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin: 0;
     }
-    
-    .img-item:hover .img-item-photo img { transform: scale(1.04); }
-
-    .img-placeholder {
-      position: absolute;
-      inset: 0;
+    .hz-discipline-arrow {
+      width: 88px;
+      flex-shrink: 0;
+      border-left: 1px solid var(--line);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2em;
+      color: var(--ink-m);
+      transition: color .2s, background .2s;
+    }
+    .hz-discipline-arrow svg { width: 34px; height: 34px; }
+    .hz-discipline-footer:hover .hz-discipline-arrow {
       color: var(--teal);
-      opacity: .3;
-      background: var(--teal-xl);
-      z-index: 0;
-      min-height: 120px;
+      background: rgba(43,173,184,.06);
     }
 
-    /* ── Side info panel ── */
-    .img-side-info {
-      position: absolute;
-      left: calc(100% + 16px);
-      top: 0;
-      width: 150px;
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity .25s var(--ease), transform .25s var(--ease);
-      pointer-events: none;
-      font-size: 1rem;
+    /* ── Discovery panel: 4 columns, alternating vertical auto-scroll ── */
+    .hz-discovery {
+      width: 44vw;
+      min-width: 480px;
+      padding: 40px 32px;
+      overflow: hidden;
     }
-    .img-item:hover .img-side-info {
-      opacity: 1;
-      transform: translateX(0);
+    .hz-discovery-grid {
+      display: flex;
+      gap: 10px;
+      height: 100%;
     }
-    .img-side-num {
-      font-family: var(--mono);
-      font-size: .52em;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 6px;
+    .hz-col {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
     }
-    .img-side-title {
-      font-size: .95em;
-      font-weight: 700;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      line-height: 1.2;
-      margin-bottom: 6px;
+    .hz-col-track {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      will-change: transform;
     }
-    .img-side-meta {
-      font-family: var(--mono);
-      font-size: .55em;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .img-side-link {
-      font-family: var(--mono);
-      font-size: .55em;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--teal);
-      border-bottom: 1px solid rgba(43,173,184,.3);
-      padding-bottom: 2px;
+    .hz-col-track img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0;
+      border: 1px solid var(--line);
     }
 
-    /* ── Responsive ── */
-    @media(max-width:900px) {
-      html, body { height: auto; overflow: auto; }
-      .home-wrap {
-        grid-template-columns: 1fr;
+    /* ══════════════════════════════════════════════════════════
+       MOBILE — everything becomes a normal vertical stack.
+       Intro is OMITTED entirely (not shortened). Rail reverts to
+       whatever its default mobile behavior already is (#mob bar).
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      #rail { display: none; }
+
+      .hz-wrap {
+        margin-left: 0;
         height: auto;
-        padding-left: 0;
-      }
-      .home-left {
-        height: 100svh;
         overflow: visible;
-        padding: 48px 24px 40px;
-        border-right: none;
-        border-bottom: none;
       }
-      .home-right { display: none; }
+      .hz-track {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .hz-panel { height: auto; }
+
+      .hz-intro { display: none; }
+
+      .hz-discipline {
+        width: 100%;
+        min-width: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        height: auto;
+        /* Short on mobile: aspect-ratio kept within the 4:5–16:9 range,
+           landing near the 16:9 end so the panel reads as a strip, not
+           a full-height hero. Adjust this ratio alone to taste. */
+        aspect-ratio: 16 / 9;
+        min-height: 0;
+      }
+      .hz-discipline-media { padding: 5px; }
+      .hz-discipline-title { padding: 16px 20px; font-size: var(--fs-h4); }
+      .hz-discipline-arrow { width: 76px; }
+      .hz-discipline-arrow svg { width: 30px; height: 30px; }
+
+      .hz-discovery {
+        width: 100%;
+        min-width: 0;
+        padding: 24px 20px;
+        height: 60vh;
+      }
     }
-    
   </style>
 </head>
-<body>
+<body class="home-page">
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<nav id="rail">
+<nav id="rail" class="rail-open">
   <a href="/index.html" class="r-logo">
     <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:28px;height:28px;">
       <g><g>
@@ -281,8 +329,8 @@
   setLang(saved);
 });
 </script>
-  </nav>
-<div id="lang-bar-btn" onclick="toggleLang()" style="position:fixed;top:12px;right:16px;z-index:200;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:4px 10px;background:var(--bg);">IT</div>
+</nav>
+<div id="lang-bar-btn" onclick="toggleLang()" style="position:fixed;top:12px;right:16px;z-index:200;font-family:var(--label);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:0;padding:4px 10px;background:var(--bg);">IT</div>
 
 <div id="mob">
   <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
@@ -299,24 +347,8 @@
   <a href="/contact.html" class="mob-item"><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
 </div>
 
-<div class="home-wrap">
-    <div class="home-left">
-      <div class="home-label">Simone Nicolò</div>
-      <div class="lang it">
-        <div class="home-intro" id="typed-intro-it"></div>
-      </div>
-      <div class="lang en">
-        <div class="home-intro" id="typed-intro-en" style="display:none;"></div>
-      </div>
-    </div>
-    <div class="home-right" id="home-right">
-      <div class="scroll-track" id="scroll-track"></div>
-    </div>
-</div>
-
-<!-- Collect ALL images from every project (cover + gallery) -->
+<!-- Build the flat image pool once, same source as before: every project's cover + gallery -->
 <script>
-  // Build a flat array of { src, title, tag, year, url } from all projects
   const ALL_IMAGES = [
     
     
@@ -426,27 +458,95 @@
       
     
   ];
+
+  // First project per discipline — used only as the fallback hero image
+  // if a page doesn't set one manually below.
+  
+  
 </script>
+<script src="/main.js?v=4"></script>
 
-<script src="/main.js"></script>
+<div class="hz-wrap" id="hzWrap">
+  <div class="hz-track" id="hzTrack">
+
+    <!-- 1. INTRO — name + one line, nothing else. Hidden entirely on mobile. -->
+    <section class="hz-panel hz-intro">
+      <div class="hz-marquee-area" id="hzMarqueeArea"></div>
+    </section>
+
+    <!-- 2. TRANSPORTATION DESIGN — full-bleed hero, title, short copy, CTA -->
+    <section class="hz-panel hz-discipline" data-tag="transportation">
+      <div class="hz-discipline-media">
+        <img src="images/photoprojects/no1concept/amb2.png" alt="Transportation Design"/>
+      </div>
+      <a href="/projects.html?tag=transportation" class="hz-discipline-footer">
+        <h2 class="hz-discipline-title">Transportation Design</h2>
+        <span class="hz-discipline-arrow">
+          <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="rotate(90 240 120)">
+              <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+              <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+            </g>
+          </svg>
+        </span>
+      </a>
+    </section>
+
+    <!-- 3. INDUSTRIAL DESIGN — same pattern -->
+    <section class="hz-panel hz-discipline" data-tag="industrial">
+      <div class="hz-discipline-media">
+        <img src="" alt="Industrial Design"/>
+      </div>
+      <a href="/projects.html?tag=industrial" class="hz-discipline-footer">
+        <h2 class="hz-discipline-title">Industrial Design</h2>
+        <span class="hz-discipline-arrow">
+          <svg viewBox="170 55 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="rotate(90 240 120)">
+              <path d="M240,160 L240,100" stroke="currentColor" stroke-width="24" stroke-linecap="square"/>
+              <path d="M190,130 L240,80 L290,130" stroke="currentColor" stroke-width="24" stroke-linecap="square" stroke-linejoin="miter"/>
+            </g>
+          </svg>
+        </span>
+      </a>
+    </section>
+
+    <!-- 4. DISCOVERY CAROUSEL — 4 columns, alternating direction, full pool, no relation to sections above -->
+    <section class="hz-panel hz-discovery">
+      <div class="hz-discovery-grid" id="discoveryGrid"></div>
+    </section>
+
+  </div>
+</div>
+
 <script>
-  const track      = document.getElementById('scroll-track');
-  const rightPanel = document.getElementById('home-right');
-  const isMobile   = () => window.innerWidth <= 900;
+(function() {
 
-  // ── Animation state ──────────────────────────────────────────────────────
-  let offset    = 0;       // current translateY in px
-  let speed     = 0;       // current speed (px/frame), eases toward targetSpeed
-  let targetSpeed = 0;     // what speed we want to be at
-  const AUTO_SPEED = 1.4;  // normal scrolling speed
+  // ═══════════════════════════════════════════════════════════════
+  // OUTER HORIZONTAL SCROLL — remap vertical wheel input to horizontal
+  // scroll. Free-scroll, no snapping. Desktop only (mobile uses normal
+  // vertical document flow, this listener is skipped there via width check).
+  // ═══════════════════════════════════════════════════════════════
+  const hzWrap = document.getElementById('hzWrap');
+  const isMobile = () => window.innerWidth <= 900;
 
-  // ── Hover state ───────────────────────────────────────────────────────────
-  let hovered = false;
+  hzWrap.addEventListener('wheel', (e) => {
+    if (isMobile()) return; // let native vertical scroll happen
+    // If the dominant gesture is already horizontal (trackpad), don't fight it.
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    hzWrap.scrollLeft += e.deltaY;
+  }, { passive: false });
 
-  // ── Wheel manual scroll ───────────────────────────────────────────────────
-  let wheelTarget = null;
+  // ═══════════════════════════════════════════════════════════════
+  // DISCOVERY CAROUSEL — 4 independent columns, alternating direction,
+  // same shuffle/reload logic as the old single-column feed, just run
+  // 4× in parallel with alternating sign on speed.
+  // ═══════════════════════════════════════════════════════════════
+  const grid = document.getElementById('discoveryGrid');
+  const COL_COUNT = 4;
+  const SPEED = 0.6;
+  const IMAGES_PER_COL = 6;
 
-  // ── Shuffle helper ────────────────────────────────────────────────────────
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -456,136 +556,217 @@
     return a;
   }
 
-  // ── Build a card from an image object ─────────────────────────────────────
-  function makeCard(img, index) {
-    const a = document.createElement('a');
-    a.href = img.url;
-    a.className = 'img-item';
-    a.innerHTML = `
-      <div class="img-item-photo">
-        <img src="${img.src}" alt="${img.title}" loading="lazy"/>
-        <div class="img-placeholder">◈</div>
-      </div>
-      <div class="img-side-info">
-        <div class="img-side-num">0${index + 1}</div>
-        <div class="img-side-title">${img.title}</div>
-        <div class="img-side-meta">${img.tag} · ${img.year}</div>
-        <div class="img-side-link">View →</div>
-      </div>`;
-    return a;
-  }
+  function buildColumn(index) {
+    const col = document.createElement('div');
+    col.className = 'hz-col';
 
-  // ── Load a fresh batch of cards ───────────────────────────────────────────
-  function loadBatch() {
-    track.innerHTML = '';
+    const track = document.createElement('div');
+    track.className = 'hz-col-track';
+    col.appendChild(track);
 
-    const batch = shuffle(ALL_IMAGES).slice(0, 5);
-    batch.forEach((img, i) => track.appendChild(makeCard(img, i)));
+    const direction = index % 2 === 0 ? -1 : 1; // alternate up/down
+    let offset = direction === -1 ? 0 : -9999; // set properly after first render
+    let speed = SPEED * direction;
 
-    // Start below viewport, then ease into scrolling
-    offset = window.innerHeight;
-    track.style.transform = `translateY(${offset}px)`;
-    speed = 0;
-    wheelTarget = null;
-
-    // Small delay before starting to scroll
-    setTimeout(() => { targetSpeed = AUTO_SPEED; }, 600);
-  }
-
-  // ── Main animation loop ───────────────────────────────────────────────────
-  let reloading = false;
-
-  function animate() {
-    if (!isMobile()) {
-
-      if (hovered) {
-        // Ease speed toward 0 — smooth stop
-        speed += (0 - speed) * 0.08;
-
-        if (wheelTarget !== null) {
-          offset += (wheelTarget - offset) * 0.1;
-          if (Math.abs(wheelTarget - offset) < 0.5) wheelTarget = null;
-        } else {
-          offset -= speed;
-        }
-
-      } else {
-        // Ease speed back to AUTO_SPEED — smooth resume
-        speed += (AUTO_SPEED - speed) * 0.06;
-        wheelTarget = null;
-        offset -= speed;
-
-        // Reload when fully past viewport — never break the rAF loop
-        if (!reloading && offset <= -(track.scrollHeight)) {
-          reloading = true;
-          speed = 0;
-          setTimeout(() => { loadBatch(); reloading = false; }, 400);
-        }
-      }
-
-      track.style.transform = `translateY(${offset}px)`;
+    function fillBatch() {
+      track.innerHTML = '';
+      const batch = shuffle(ALL_IMAGES).slice(0, IMAGES_PER_COL);
+      batch.forEach(imgData => {
+        const img = document.createElement('img');
+        img.src = imgData.src;
+        img.alt = imgData.title;
+        img.loading = 'lazy';
+        track.appendChild(img);
+      });
     }
 
-    requestAnimationFrame(animate); // always keep the loop alive
+    fillBatch();
+
+    function animate() {
+      // Read current transform position
+      const style = window.getComputedStyle(track);
+      const matrix = new DOMMatrixReadOnly(style.transform);
+      let y = matrix.m42 + speed;
+
+      const trackHeight = track.scrollHeight;
+      const colHeight = col.clientHeight;
+
+      if (direction === -1 && y <= -trackHeight) {
+        y = colHeight;
+        fillBatch();
+      } else if (direction === 1 && y >= colHeight) {
+        y = -trackHeight;
+        fillBatch();
+      }
+
+      track.style.transform = `translateY(${y}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    // Stagger the start position so columns don't look synced
+    track.style.transform = direction === -1
+      ? `translateY(0px)`
+      : `translateY(-${track.scrollHeight}px)`;
+
+    requestAnimationFrame(animate);
+    return col;
   }
 
-  // ── Events ────────────────────────────────────────────────────────────────
-  rightPanel.addEventListener('mouseenter', () => { hovered = true; });
-  rightPanel.addEventListener('mouseleave', () => { hovered = false; wheelTarget = null; });
-
-  rightPanel.addEventListener('wheel', (e) => {
-    if (!hovered) return;
-    e.preventDefault();
-    if (wheelTarget === null) wheelTarget = offset;
-    wheelTarget -= e.deltaY * 0.5;
-  }, { passive: false });
-
-  // ── Init ──────────────────────────────────────────────────────────────────
-  if (!isMobile()) {
-    loadBatch();
-    animate();
+  for (let i = 0; i < COL_COUNT; i++) {
+    grid.appendChild(buildColumn(i));
   }
+
+})();
 </script>
+
 <script>
-  let typeTimeout = null;
+  // ═══════════════════════════════════════════════════════════════
+  // INTRO PANEL — bilingual scrolling marquee, ported from the About
+  // page's ticker. Same phrase pool, same alternating-row logic, just
+  // scoped to this panel's own width/height instead of the full page.
+  // ═══════════════════════════════════════════════════════════════
+  const PHRASES = [
+    { it: "Un oggetto.", en: "One object." },
+    { it: "Ogni vincolo.", en: "Every constraint." },
+    { it: "Sempre la soluzione giusta.", en: "Always the right fit." },
+    { it: "Nato al sud.", en: "Born south." },
+    { it: "Cresciuto ovunque.", en: "Grown everywhere." },
+    { it: "Una soluzione che non si mette in mezzo", en: "Delivering a solution that stays out of its own way" },
+    { it: "Fotografo luce e tempismo con una Nikon D7000", en: "Recording light and timing with a Nikon D7000" },
+    { it: "Prototipo mobili e beni di consumo", en: "Prototyping furniture and consumer goods" },
+    { it: "Esploro l'impatto culturale del car styling", en: "Exploring the cultural impact of car styling" },
+    { it: "Oltre cinque anni di lavoro documentati in tre discipline", en: "Documenting more than five years of work across three disciplines" },
+    { it: "Studio l'interfaccia tra il corpo e il veicolo", en: "Studying the interface between the body and the vehicle" },
+    { it: "Fisicamente in Toscana, mentalmente in un brochure giapponese di una Fiat Panda del 2005", en: "Physically in Tuscany, but mentally in a 2005 Fiat Panda Japanese brochure" },
+    { it: "Il Gelato di Cesare", en: "Il Gelato di Cesare" },
+    { it: "Il mio HEX preferito del momento: #2BADB8", en: "Current favorite HEX code: #2BADB8" },
+    { it: "Steam ID: ceramicsmelter", en: "Steam ID: ceramicsmelter" },
+    { it: "Oggetti che risolvono più di un problema alla volta.", en: "Objects that solve more than one problem at a time." },
+    { it: "Il caldo di agosto è il test definitivo per qualsiasi oggetto funzionale.", en: "High heat in August is the ultimate stress test for any functional object." },
+    { it: "Mentalità dell'arrangiarsi in uno spazio CAD pulito.", en: "\"Arrangiarsi\" mindset into a clean CAD workspace." },
+    { it: "Dicono che sono nato nel km più bello d'Italia", en: "Some say im born in the most beautiful km of Italy" },
+    { it: "Una Nikon D7000 per documentare un mondo che va troppo veloce", en: "Using a Nikon D7000 to document a world that is moving too fast" },
+    { it: "Una carriera costruita all'intersezione tra una costa rocciosa e uno schermo", en: "A career built on the intersection of a rocky coastline and a computer screen" },
+    { it: "Oggetti che sembrano usciti da un film di fantascienza ad alto budget del 2001", en: "Designing objects that look like they belong in a high budget sci-fi from 2001" },
+    { it: "Un futuro dove ogni superficie è cromata e ogni pulsante è fisico", en: "A future where every surface is chrome and every button is a physical click" },
+    { it: "Passo i weekend a guardare pezzi di macchine che non posso ancora permettermi", en: "I spend my weekends looking at car parts I cannot afford to install yet" },
+    { it: "Lavoro con strumenti come Rhino 8 e Blender", en: "Operating with tools like Rhino 8 and Blender" },
+    { it: "Comunico in italiano, inglese e francese", en: "Communicating in Italian, English and French" },
+    { it: "Modernismo italiano del dopoguerra", en: "Mid-century Italian modernism" },
+    { it: "Specializzato nello sviluppo di scocche per elettronica di consumo", en: "Specializing in the development of enclosures for consumer electronics" },
+    { it: "Mixo audio e campioni in Ableton Live", en: "Mixing audio and samples within Ableton Live" },
+    { it: "Ho bisogno delle forbici! 61!", en: "I need scissors! 61!" },
+    { it: "Eliminare il non essenziale", en: "Eliminating the non-essential" },
+    { it: "rcaronn era un'era bellissima", en: "rcaronn was such a cool era" },
+    { it: "Blender Render", en: "Blender Render" },
+    { it: "Quanto mi piacciono le macchine", en: "Man i love cars" },
+    { it: "Quanto mi piacciono i veicoli", en: "Man i love vehicles" },
+    { it: "Quella volta che", en: "Quella volta che" },
+    { it: "Ogni scelta di design deve difendere la propria esistenza", en: "Every design decision must defend its existence" },
+    { it: "Gran Turismo 4 ha ancora la mia UI preferita di sempre", en: "Gran Turismo 4 still has my favourite UI of all time" },
+  ];
+  const NUM_ROWS        = 4;
+  const SLOW_FACTOR     = 0.08;
+  const BASE_SEQ_LENGTH = 12;
 
-  function typeIntro() {
-    const introIT = "Designer di prodotto e industriale, con una base nel visual. L'approccio parte sempre dal problema reale: ogni oggetto deve difendere la propria esistenza, ogni scelta progettuale deve guadagnarsi il posto. Tre discipline non per coprire più terreno, ma perché la natura del problema decide lo strumento. Design che non si mette in mezzo, che risolve più di una cosa alla volta, che tiene insieme funzione e forma senza che si veda lo sforzo. Curiosità per l'automotive, la mobilità, l'interfaccia tra il corpo e ciò che usa. Fotografia, musica, attenzione a come sono fatte le cose. Formazione in design del prodotto all'Università Mediterranea di Reggio Calabria, Master in corso all'ISIA di Firenze.";
-    const introEN = "Product and industrial designer, with a grounding in visual communication. The approach starts with the real problem: every object must earn its place, every design decision must justify its existence. Three disciplines, not to cover more ground, but because the nature of the problem decides the tool. Design that stays out of its own way, that solves more than one thing at a time, that holds function and form together without showing the effort. A draw towards automotive, mobility, the interface between the body and what it uses. Photography, music, attention to how things are made. Trained in product design at the Università Mediterranea in Reggio Calabria, Master's ongoing at ISIA in Florence.";
+  const PALETTE = [
+    'var(--ink)',
+    'var(--teal)',
+    'var(--muted)',
+  ];
 
-    const containerIT = document.getElementById('typed-intro-it');
-    const containerEN = document.getElementById('typed-intro-en');
-    const currentLang = document.documentElement.getAttribute('data-lang') || 'it';
+  (function initHomeMarquee(){
+    const area = document.getElementById('hzMarqueeArea');
+    if (!area) return;
 
-    const textToType = currentLang === 'it' ? introIT : introEN;
-    const activeContainer = currentLang === 'it' ? containerIT : containerEN;
-    const inactiveContainer = currentLang === 'it' ? containerEN : containerIT;
+    const buckets = Array.from({length: NUM_ROWS}, () => {
+      const seq = [];
+      for (let i = 0; i < BASE_SEQ_LENGTH; i++) {
+        const phrase = PHRASES[Math.floor(Math.random() * PHRASES.length)];
+        const color = PALETTE[i % PALETTE.length];
+        seq.push({ phrase, color });
+      }
+      return seq;
+    });
 
-    inactiveContainer.style.display = 'none';
-    activeContainer.style.display = 'block';
-    activeContainer.innerHTML = '';
-    inactiveContainer.innerHTML = '';
+    const rows = [];
 
-    clearTimeout(typeTimeout);
+    buckets.forEach((phrases, ri) => {
+      const baseSpeed = 18 + Math.random() * 40;
+      const dir       = ri % 2 === 0 ? 1 : -1;
 
-    const words = textToType.split(' ');
+      const rowEl = document.createElement('div');
+      rowEl.className = 'hz-marquee-row';
+      const track = document.createElement('div');
+      track.className = 'hz-marquee-track';
 
-    typeTimeout = setTimeout(() => {
-      activeContainer.innerHTML = '';
-      words.forEach((word, index) => {
-        const wordSpan = document.createElement('span');
-        wordSpan.className = 'typed-word';
-        wordSpan.textContent = word + ' ';
-        wordSpan.style.animationDelay = `${index * 0.08}s`;
-        activeContainer.appendChild(wordSpan);
+      function makeItems() {
+        const frag = document.createDocumentFragment();
+        phrases.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'hz-phrase-item';
+
+          const main = document.createElement('span');
+          main.className = 'hz-phrase-main';
+          main.style.color = p.color;
+          main.innerHTML = `<span class="lang it">${p.phrase.it}</span><span class="lang en">${p.phrase.en}</span>`;
+          item.appendChild(main);
+          frag.appendChild(item);
+        });
+        return frag;
+      }
+
+      for (let k = 0; k < 30; k++) {
+        track.appendChild(makeItems());
+      }
+
+      rowEl.appendChild(track);
+      area.appendChild(rowEl);
+
+      rows.push({ rowEl, track, baseSpeed, dir, pos: 0, hovered: false, currentSpeed: baseSpeed, singleW: 0 });
+      rowEl.addEventListener('mouseenter', () => rows[ri].hovered = true);
+      rowEl.addEventListener('mouseleave', () => rows[ri].hovered = false);
+    });
+
+    function updateWidths() {
+      rows.forEach(row => {
+        const children = Array.from(row.track.children);
+        row.singleW = children.slice(0, BASE_SEQ_LENGTH).reduce((s, c) => s + c.offsetWidth, 0);
+        if (row.pos >= row.singleW) {
+          row.pos = row.pos % row.singleW || 0;
+        }
       });
-    }, 500);
-  }
+    }
 
-  typeIntro();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      updateWidths();
 
-  const observer = new MutationObserver(() => typeIntro());
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+      rows.forEach(row => { row.pos = Math.random() * row.singleW; });
+      window.addEventListener('resize', updateWidths);
+
+      let last = null;
+      function tick(ts) {
+        if (!last) last = ts;
+        const dt = Math.min((ts - last) / 1000, 0.05);
+        last = ts;
+
+        rows.forEach(row => {
+          const target = row.hovered ? row.baseSpeed * SLOW_FACTOR : row.baseSpeed;
+          row.currentSpeed += (target - row.currentSpeed) * 0.06;
+          row.pos += row.dir * row.currentSpeed * dt;
+
+          if (row.pos >= row.singleW) row.pos -= row.singleW;
+          if (row.pos < 0) row.pos += row.singleW;
+
+          row.track.style.transform = `translateX(${-row.pos}px)`;
+        });
+
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }));
+  })();
 </script>
+
 </body>
 </html>

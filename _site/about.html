@@ -7,500 +7,278 @@
   <link rel="stylesheet" href="/style.css"/>
   <script>document.documentElement.setAttribute('data-lang', localStorage.getItem('lang') || 'it');</script>
   <style>
-    /* ── Small text scale (3 tiers only) ──────────────────────────────────
-       --fs-micro  : .52rem  → labels, eyebrows, codes, status, hints
-       --fs-caption: .62rem  → descriptions, body mono, sub-items
-       --fs-prose  : .72rem  → longer mono prose blocks
-    ──────────────────────────────────────────────────────────────────────── */
-    :root {
-      --fs-micro:   .62rem;
-      --fs-caption: .72rem;
-      --fs-prose:   .82rem;
+    html, body { height: 100%; }
+    :root { --mono: var(--label); } /* this stylesheet doesn't define --mono; aliasing to --label ('Lunchtype'), the closest existing mono-style stack */
+
+    /* ══════════════════════════════════════════════════════════
+       HORIZONTAL SCROLL SHELL (desktop) — unchanged mechanism:
+       one outer scroller, panels left-to-right, wheel remapped
+       to horizontal scroll via JS below.
+       ══════════════════════════════════════════════════════════ */
+    .ab-wrap {
+      margin-left: 80px;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .ab-wrap::-webkit-scrollbar { display: none; }
 
-    body { overflow-x: hidden; }
-
-    /* ── Shared ── */
-    .about-section {
-      min-height: 100vh;
+    .ab-track {
       display: flex;
-      align-items: center;
-      padding: 80px 80px 80px 120px;
-      position: relative;
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-    }
-    .s-label {
-      font-family: var(--mono);
-      font-size: var(--fs-micro);
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .s-label::before { content:''; display:block; width:24px; height:2px; background:var(--teal); }
-
-    /* ════════════════ 01 INTRO ════════════════ */
-    .s-intro { flex-direction: column; justify-content: space-between; padding-bottom: 64px; }
-    .intro-tagline { font-family: var(--mono); font-size: var(--fs-caption); letter-spacing: .14em; color: var(--muted); }
-    .s-intro-title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); }
-    .s-intro-title .teal { color: var(--teal); }
-    .intro-bottom { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; padding: 0 80px 0 120px; }
-    .intro-left-cluster { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-    .intro-stats { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-    .intro-dot { color: var(--teal); }
-    .intro-scroll-hint { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 500; font-size: 1.1rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
-    .scroll-line { width: 28px; height: 1px; background: var(--teal); opacity: .4; position: relative; overflow: hidden; }
-    .scroll-line::after { content:''; position: absolute; left: -100%; top: 0; width: 100%; height: 100%; background: var(--teal); animation: scan 1.6s ease-in-out infinite; }
-    @keyframes scan { 0%{left:-100%} 100%{left:100%} }
-    .intro-right-cluster { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-    .intro-clock { font-family: var(--mono); font-size: 1.1rem; font-weight: 500; letter-spacing: .08em; color: var(--ink); }
-    .intro-status { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(74,222,128,.5)} 70%{box-shadow:0 0 0 7px rgba(74,222,128,0)} 100%{box-shadow:0 0 0 0 rgba(74,222,128,0)} }
-
-    /* Geometric decorative lines */
-    .intro-desc { display: flex; flex-direction: column; gap: 10px; margin-top: 36px; max-width: 420px; }
-    .intro-geo-line { display: flex; align-items: center; gap: 8px; }
-    .igl-full  { flex: 1;    height: 1px; background: var(--line); }
-    .igl-mid   { flex: 0.45; height: 1px; background: var(--line); }
-    .igl-short { flex: 0.18; height: 1px; background: var(--line); }
-    .igl-dot   { width: 4px; height: 4px; border-radius: 1px; background: var(--teal); flex-shrink: 0; }
-
-    /* ── Entrance animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      height: 100%;
+      width: max-content;
     }
 
-    .intro-tagline    { animation: fadeUp .6s ease both; animation-delay: .05s; }
-    .s-intro-title    { animation: fadeUp .7s ease both; animation-delay: .18s; }
-    .intro-desc       { animation: fadeUp .6s ease both; animation-delay: .45s; }
-    .intro-bottom     { animation: fadeIn .7s ease both; animation-delay: .7s; }
-    /* ════ 01 INTRO — marquee rows ════ */
-  .marquee-row {
-    display: flex;
-    align-items: baseline;
-    overflow: hidden;
-    padding: 10px 0;
-    cursor: default;
-  }
-
-  .marquee-track {
-    display: flex;
-    align-items: baseline;
-    white-space: nowrap;
-    will-change: transform;
-  }
-  .phrase-item {
-    display: inline-flex;
-    align-items: baseline;
-    gap: .3em;
-    padding: 0 36px;
-    border-right: 1px solid var(--line);
-    flex-shrink: 0;
-  }
-  .phrase-main {
-    font-size: clamp(3.5rem, 5.5vw, 5rem);   
-    font-weight: 800;
-    letter-spacing: -.04em;
-    line-height: 1.1;
-    color: var(--ink);
-  }
-  .phrase-main.teal { color: var(--teal); }
-  .phrase-sub {
-    font-family: var(--mono);
-    font-size: clamp(2.2rem, 4.5vw, 4.8rem);
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    align-self: center;
-    margin-left: 6px;
-}
-    
-    /* ════════════════ 03 MAP ════════════════ */
-    .s-map {
-      gap: 48px;
-      align-items: center;
-      min-height: auto;
-      padding-top: 48px;
-      padding-bottom: 48px;
-      flex-wrap: nowrap;
-    }
-
-    /* ── Left: text panel ── */
-    .s-map-left {
-      flex: 1;
-      min-width: 220px;
-      position: relative;
-      min-height: 360px;
+    .ab-panel {
+      flex: 0 0 auto;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
+      border-right: 1px solid var(--line);
+      padding: 48px 56px;
+      overflow-y: auto;
     }
 
-    .map-default-text {
-      transition: opacity .4s, transform .4s;
-      transform: translateY(0);
-    }
-    .map-default-text.faded {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(8px);
-    }
+    /* Desktop: all panels share the same top padding and now start
+       from the top (flex-start) instead of being vertically centered.
+       That means the eyebrow/title of every panel sits at the exact
+       same height, so the whole row reads as one balanced strip
+       regardless of how much content each panel holds. */
 
-    .s-map-eyebrow {
-      font-family: var(--mono);
-      font-size: var(--fs-micro);
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .s-map-eyebrow::before { content:''; display:block; width:18px; height:1.5px; background:var(--teal); }
-
-    .s-map-statement {
-      font-size: clamp(2.2rem, 3.5vw, 3.4rem);
-      font-weight: 800;
-      letter-spacing: -.05em;
-      line-height: .95;
+    /* ══════════════════════════════════════════════════════════
+       SHARED PANEL TEMPLATE — every panel: title, subtitle,
+       divider, data. All sections follow the Education/Languages
+       structure: .ab-title → .ab-body > .ab-cols > .ab-col
+       (code / value / meta).
+       ══════════════════════════════════════════════════════════ */
+    .ab-title {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+      line-height: 1.02;
+      letter-spacing: -.03em;
       color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .ab-subtitle {
+      font-family: var(--label);
+      font-style: italic;
+      font-size: var(--fs-prose);
+      letter-spacing: .01em;
+      line-height: 1.4;
+      color: var(--muted);
+      max-width: 36ch;
       margin-bottom: 28px;
     }
-    .s-map-statement .teal { color: var(--teal); }
 
-    .s-map-hint {
-      font-family: var(--mono);
-      font-size: var(--fs-caption);
-      letter-spacing: .1em;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .ab-body {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
     }
-    .s-map-hint-line {
-      width: 20px; height: 1px;
-      background: var(--teal);
-      opacity: .5;
+    .ab-body p {
+      font-family: var(--sans);
+      font-size: var(--fs-prose);
+      line-height: 1.6;
+      color: var(--ink);
+      max-width: 46ch;
     }
 
-    /* City info cards */
-    .map-city-info {
-      position: absolute;
-      top: 50%; left: 0;
-      transform: translateY(calc(-50% + 12px));
-      width: 100%;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .4s var(--ease), transform .4s var(--ease);
-    }
-    .map-city-info.visible {
-      opacity: 1;
-      pointer-events: all;
-      transform: translateY(-50%);
-    }
+    /* ── panel widths (desktop track) ── */
+    .ab-bio { width: 30vw; min-width: 620px; max-width: 800px; }
+    .ab-edu { width: 40vw; min-width: 420px; max-width: 620px; }
+    .ab-work { width: 42vw; min-width: 420px; max-width: 640px; }
+    .ab-langs { width: 46vw; min-width: 420px; max-width: 700px; }
+    .ab-tools { width: 50vw; min-width: 420px; max-width: 760px; }
+    .ab-interests { width: 60vw; min-width: 420px; max-width: 940px; }
 
-    .map-city-tag {
-      font-family: var(--mono);
-      font-size: var(--fs-micro);
-      letter-spacing: .22em;
-      text-transform: uppercase;
+    /* ── data: education / languages column stamps ── */
+    .ab-cols { display: flex; flex-direction: column; gap: 26px; }
+    .ab-col { display: flex; flex-direction: column; gap: 6px; }
+    .ab-col-code {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      letter-spacing: -.03em;
+      line-height: .9;
       color: var(--teal);
-      margin-bottom: 6px;
-      display: flex;
+    }
+    .ab-col-value {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      letter-spacing: -.01em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .ab-col-meta {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-m);
+      line-height: 1.4;
+    }
+
+    /* ── work experience: role/company leads, year is a small label ── */
+    .ab-work-item { display: flex; flex-direction: column; gap: 6px; }
+    .ab-work-year {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-m);
+    }
+    .ab-work-role {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    
+    .ab-work-meta {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-m);
+      line-height: 1.4;
+    }
+
+    /* ── bio copy: same treatment as a Work Experience company
+       name (.ab-work-role) — not the big page title — just
+       allowed to wrap across a full paragraph. ── */
+    .ab-bio-text {
+      font-family: var(--sans-wide);
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      letter-spacing: -.02em;
+      line-height: 1.35;
+      color: var(--ink);
+      max-width: 52ch;
+      margin-top: 16px;
+    }
+
+    /* ── tools: fixed 3-row grid on desktop, no scroll anywhere ── */
+    .ab-tools-cols {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: row;
+      gap: 22px 24px;
+    }
+
+    /* ── contact footer, attached to bio panel ── */
+    .ab-contact-footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .ab-contact-footer a {
+      font-family: var(--label);
+      font-style: italic;
+      font-size: var(--fs-prose);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: color .2s, gap .2s;
     }
-    .map-city-tag::before { content:''; display:block; width:18px; height:1.5px; background:var(--teal); }
+    .ab-contact-footer a:hover { color: var(--teal); gap: 12px; }
 
-    .map-city-name {
-      font-size: clamp(2.2rem, 3.5vw, 3.4rem);
-      font-weight: 800;
-      letter-spacing: -.05em;
-      line-height: .95;
-      color: var(--ink);
-      margin-bottom: 20px;
-    }
+    .ab-last { border-right: none; }
 
-    .map-city-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .map-city-year {
-      font-family: var(--mono);
+    /* ── language toggle button (was inline style) ── */
+    .lang-toggle {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 200;
+      font-family: var(--label);
+      font-style: italic;
       font-size: var(--fs-micro);
-      letter-spacing: .16em;
+      letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--muted);
-      background: var(--teal-xl);
+      border: 1px solid var(--line);
+      border-radius: 0;
       padding: 4px 10px;
-      border-radius: 3px;
-      border: 1px solid var(--line);
-    }
-    .map-city-role {
-      font-family: var(--mono);
-      font-size: var(--fs-micro);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--teal);
+      background: var(--bg);
     }
 
-    .map-city-desc {
-      font-family: var(--mono);
-      font-size: var(--fs-caption);
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 380px;
-      border-left: 2px solid var(--teal);
-      padding-left: 16px;
-    }
+    /* ══════════════════════════════════════════════════════════
+       MOBILE — panels placed HORIZONTALLY (2-up grid), page
+       scrolls VERTICALLY (normal flow, no swipe-track capture).
+       ══════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      #rail { display: none; }
 
-    /* ── Right: the map ── */
-    .s-map-right {
-      width: 780px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-    }
+      .ab-wrap { margin-left: 0; height: auto; overflow: visible; }
 
-    .map-wrap { position: relative; display: inline-block; }
-    .italy-dotmap { width: 780px; height: auto; display: block; }
-
-    .italy-dotmap rect {
-      fill: var(--teal);
-      opacity: .25;
-    }
-
-    /* ── Interactive pins ── */
-    .map-pin-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-    }
-
-    .map-city-pin {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      pointer-events: all;
-      cursor: none;
-      opacity: 0;
-      transition: opacity .4s var(--ease);
-    }
-    .map-city-pin.pin-visible { opacity: 1; }
-
-    .map-city-pin-dot {
-      width: 18px; height: 18px;
-      border-radius: 5px;
-      background: var(--teal);
-      opacity: .9;
-      transition: transform .22s;
-    }
-    .map-city-pin:hover .map-city-pin-dot,
-    .map-city-pin.active .map-city-pin-dot {
-      transform: scale(1.55);
-    }
-
-    /* ════════════════ 04 INTERESTS ════════════════ */
-    .s-interests { flex-direction: column; align-items: flex-start; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
-    .interests-header { display: flex; align-items: baseline; justify-content: space-between; width: 100%; margin-bottom: 32px; }
-    .interests-drag-hint { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-    .interests-drag-hint::before { content: '←'; color: var(--teal); }
-    .interests-drag-hint::after { content: '→'; color: var(--teal); }
-    .interests-scroll { width: 100%; overflow-x: auto; scrollbar-width: none; cursor: grab; }
-    .interests-scroll::-webkit-scrollbar { display: none; }
-    .interests-scroll:active { cursor: grabbing; }
-    .interests-track { display: flex; gap: 2px; width: max-content; }
-    .interest-card { display: flex; align-items: center; height: 280px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex-shrink: 0; cursor: none; transition: border-color .25s; }
-    .interest-card:hover { border-color: var(--teal); }
-    .interest-card-text { padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; width: 280px; flex-shrink: 0; }
-    .interest-card-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
-    .interest-card-desc { font-family: var(--mono); font-size: var(--fs-caption); line-height: 1.65; color: var(--muted); }
-    .interest-card-img { width: 280px; height: 100%; flex-shrink: 0; background: var(--teal-xl); border-left: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: background .25s; }
-    .interest-card:hover .interest-card-img { background: rgba(43,173,184,.15); }
-    .interest-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .interest-card-img-placeholder { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--teal); opacity: .5; text-align: center; padding: 16px; }
-
-    /* ════════════════ 05 LANGUAGES ════════════════ */
-    .s-lang { flex-direction: column; align-items: center; text-align: center; min-height: auto; padding-top: 80px; padding-bottom: 80px; }
-    .hello-word { font-size: clamp(5rem, 14vw, 11rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); margin-bottom: 56px; transition: color .4s; cursor: default; user-select: none; }
-    .hello-word.teal { color: var(--teal); }
-    .lang-row { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-    .lang-item { padding: 40px 32px; border-right: 1px solid var(--line); cursor: none; transition: background .5s; text-align: left; display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; }
-    .lang-item:last-child { border-right: none; }
-    .lang-item:hover { background: var(--teal-xl); }
-    .lang-item-code { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
-    .lang-item-name { font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 4px; }
-    .lang-item-level { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .lang-item-desc { font-family: var(--mono); font-size: var(--fs-caption); line-height: 1.65; color: var(--muted); }
-
-    /* ════════════════ 06 TOOLS ════════════════ */
-    .s-tools { flex-direction: column; }
-    .tools-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -.04em; line-height: .9; color: var(--ink); margin-bottom: 16px; }
-    .tools-title .teal { color: var(--teal); }
-    .tools-sub { font-family: var(--mono); font-size: var(--fs-prose); line-height: 1.8; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
-    .tools-info-bar { width: 100%; min-height: 48px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 16px; transition: opacity .2s; }
-    .tools-info-name { font-size: .95rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
-    .tools-info-level { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
-    .tools-info-bar.empty .tools-info-name { color: var(--muted); font-weight: 400; font-size: var(--fs-prose); font-family: var(--mono); letter-spacing: .06em; }
-    .tools-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px; width: 100%; }
-    .tool-logo {
-      aspect-ratio: 1;
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: border-color .15s, background .15s, transform .15s;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    .tool-logo:hover,
-    .tool-logo.active { border-color: var(--teal); background: var(--teal-xl); transform: scale(1.06); }
-    .tool-logo img { width: 55%; height: 55%; object-fit: contain; pointer-events: none; }
-    .tool-logo-letter { font-family: var(--mono); font-size: clamp(.7rem, 1.2vw, .9rem); font-weight: 700; letter-spacing: .04em; color: var(--teal); text-align: center; pointer-events: none; }
-
-    /* ════════════════ 07 CTA ════════════════ */
-    .s-cta { flex-direction: column; border-bottom: none; }
-    .s-cta-title { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 800; letter-spacing: -.05em; line-height: .85; color: var(--ink); margin-bottom: 48px; }
-    .s-cta-title .teal { color: var(--teal); }
-    .s-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .s-cta .s-intro-title {
-      margin-bottom: 48px;
-    }
-    /* ── Responsive ── */
-    @media(max-width:900px) {
-      .about-section { padding: 64px 24px; }
-      .s-intro { padding-bottom: 48px; }
-      .intro-bottom { flex-direction: column; gap: 36px; align-items: center; padding: 0; }
-      .intro-left-cluster, 
-      .intro-right-cluster { 
-        align-items: center;
-      }
-      .disciplines-wrap { display: flex; flex-direction: column; }
-      .discipline-col { border-right: none; border-bottom: 1px solid var(--line); padding: 20px 16px; cursor: pointer; align-items: flex-start; text-align: left; }
-      .discipline-col:last-child { border-bottom: none; }
-      .discipline-title { margin-bottom: 0; }
-      .discipline-subs { opacity: 0; max-height: 0; overflow: hidden; transform: none; transition: opacity .3s, max-height .4s var(--ease), margin-top .3s; margin-top: 0; align-items: flex-start; }
-      .discipline-col.open .discipline-subs { opacity: 1; max-height: 300px; margin-top: 14px; }
-      .discipline-col.open .discipline-title { color: var(--teal); }
-
-      .s-map {
-        flex-direction: column;
-        gap: 24px;
-        align-items: flex-start;
-        padding-top: 40px;
-        padding-bottom: 40px;
-      }
-      .s-map-left {
-        order: 1;
+      .ab-track {
+        display: grid;
+        grid-template-columns: 1fr;
         width: 100%;
-        min-height: auto;
-        justify-content: flex-start;
+        height: auto;
       }
-      .s-map-right {
-        order: 2;
-        width: 100%;
-        display: flex;
-        justify-content: center;
+
+      .ab-panel {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 32px 20px;
+        overflow-y: visible;
+      }
+      .ab-panel:last-child { border-bottom: none; }
+
+      .ab-title { font-size: clamp(1.5rem, 5.5vw, 2rem); }
+      .ab-subtitle { max-width: none; margin-bottom: 20px; }
+
+      .ab-bio-text { max-width: none; font-size: 1.2rem; }
+
+      /* Each section stays full-width and stacked vertically, but the
+         data *inside* a section (education/language stamps, tools,
+         interests) reads left-to-right as a horizontal, swipeable
+         row rather than stacking into a tall vertical list. */
+      .ab-cols {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 32px;
         overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
       }
-      .italy-dotmap { width: min(92vw, 520px); }
+      .ab-cols::-webkit-scrollbar { display: none; }
+      .ab-col { flex: 0 0 auto; min-width: 140px; }
 
-      .map-city-info {
-        position: relative;
-        top: auto; left: auto;
-        transform: none !important;
-        width: 100%;
-        order: 3;
-        opacity: 0;
-        max-height: 0;
-        overflow: hidden;
-        pointer-events: none;
-        transition: opacity .35s, max-height .4s var(--ease);
+      /* Tools: no horizontal scroll — wraps into a fixed 2-column grid */
+      .ab-tools-cols {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 20px;
+        overflow-x: visible;
       }
-      .map-city-info.visible {
-        opacity: 1;
-        max-height: 500px;
-        pointer-events: all;
+
+      .ab-col-meta,
+      .ab-work-year,
+      .ab-work-meta {
+        font-size: 1.15rem;
+        line-height: 1.65;
+        color: var(--ink-m);
+        margin-bottom: 0.8em;
       }
-      .map-default-text { position: relative; transition: opacity .3s, max-height .3s; }
-      .map-default-text.faded { opacity: 0; max-height: 0; overflow: hidden; margin: 0; pointer-events: none; }
-
-      .interest-card { height: auto; flex-direction: column; width: 85vw; max-width: 340px; }
-      .interest-card-text { width: 100%; padding: 20px; order: 1; }
-      .interest-card-img { width: 100%; height: 140px; border-left: none; border-top: 1px solid var(--line); order: 2; flex-shrink: 0; margin-top: auto; }
-
-      .s-lang { align-items: flex-start; text-align: left; }
-      .hello-word { margin-bottom: 32px; }
-      .lang-row { display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; width: 100%; }
-      .lang-item { border-right: none; border-bottom: 1px solid var(--line); min-height: auto; padding: 28px 24px; justify-content: flex-start; }
-      .lang-item:last-child { border-bottom: none; }
-      .lang-item.lang-active { background: var(--teal-xl); }
-
-      .tools-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
     }
-
-    /* ══ TOOLS CAROUSEL ══ */
-  .tools-carousel-wrap {
-    width: 100%;
-    position: relative;
-    margin-top: 24px;
-    overflow: visible;
-   }
-      .tools-carousel {
-      width: 100%;
-      overflow-x: auto;
-      scrollbar-width: none;
-      cursor: grab;
-      padding-bottom: 8px;
-    }
-    .tools-carousel::-webkit-scrollbar { display: none; }
-    .tools-carousel:active { cursor: grabbing; }
-
-    .tools-track {
-      display: flex;
-      gap: 12px;
-      width: max-content;
-      transition: transform 0.1s linear;
-    }
-
-    .tool-slide {
-      width: 100px;
-      height: 100px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform .2s, opacity .2s;
-    }
-    .tool-slide:hover,
-    .tool-slide.active {
-      transform: scale(1.06);
-      opacity: 0.7;
-    }
-    .tool-slide img {
-      width: 58%;
-      height: 58%;
-      object-fit: contain;
-      pointer-events: none;
-    }
-    </style>
+  </style>
 </head>
 <body>
 
@@ -563,9 +341,8 @@
   setLang(saved);
 });
 </script>
-  </nav>
-<div id="lang-bar-btn" onclick="toggleLang()" style="position:fixed;top:12px;right:16px;z-index:200;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:4px 10px;background:var(--bg);">IT</div>
-
+</nav>
+<div id="lang-bar-btn" class="lang-toggle" onclick="toggleLang()">IT</div>
 
 <div id="mob">
   <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.71 178.71" style="width:32px;height:34px;flex-shrink:0;margin:0 4px 0 6px;color:var(--teal);">
@@ -582,1021 +359,190 @@
   <a href="/contact.html" class="mob-item"><span class="mob-letter">C</span><span class="mob-word">Contact</span></a>
 </div>
 
+<div class="ab-wrap" id="abWrap">
+  <div class="ab-track" id="abTrack">
 
-<main class="page-main" style="padding:0;">
-
-<!-- ══ 01 INTRO ══ -->
-
-<div id="intro-rows-area" style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;overflow:hidden;margin:24px 0;"></div>
-
-  <div class="intro-bottom">
-    <div class="intro-left-cluster">
-      <div class="intro-stats">
-        <span class="lang it">5+ anni</span><span class="lang en">5+ years</span>
-        <span class="intro-dot">·</span>
-        <span class="lang it">3 discipline</span><span class="lang en">3 disciplines</span>
-        <span class="intro-dot">·</span>
-        <span class="lang it">Basato in Italia</span><span class="lang en">Italy-based</span>
-        </div>
-      <div class="intro-scroll-hint">
-        <span class="lang it">Scorri per esplorare</span><span class="lang en">Scroll to explore</span>
+    <!-- 1. BIO -->
+    <section class="ab-panel ab-bio">
+      <h2 class="ab-title"><span class="lang it">Design & Ingegneria</span><span class="lang en">Design & Engineering</span></h2>
+      <div class="ab-bio-text">
+        <span class="lang it">Simone, designer calabrese nato nel 2002, si è formato in Design all'Università Mediterranea di Reggio Calabria e attualmente frequenta la magistrale in Design del Prodotto e dei Sistemi all'ISIA di Firenze. Il suo lavoro si concentra sulla progettazione di prodotti su piccola scala, accessori ed elettronica, con un approccio funzionalista orientato all'essenzialità e all'equilibrio formale. La passione per l'automotive e il settore dei trasporti alimenta la sua ricerca, ispirando soluzioni tecnicamente rigorose e formalmente coerenti.</span>
+        <span class="lang en">Simone, a Calabrian designer born in 2002, studied Design at the Università Mediterranea di Reggio Calabria and is currently pursuing a master's degree in Product and Systems Design at ISIA Firenze. His work focuses on small-scale product design, accessories, and electronics, with a functionalist approach geared toward essentiality and formal balance. A passion for automotive and transportation fuels his research, inspiring solutions that are technically rigorous and formally coherent.</span>
       </div>
-    </div>
-    <div class="intro-right-cluster">
-      <div class="intro-clock" id="intro-clock">00:00:00</div>
-      <div class="intro-status">
-        <span class="status-dot" id="status-dot"></span>
-        <span id="status-text">Online</span> · Italy
+      <div class="ab-contact-footer">
+        <a href="/contact.html"><span class="lang it">Contattami</span><span class="lang en">Get in touch</span> →</a>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- ══ 03 MAP ══ -->
-  <section class="about-section s-map" id="map-section">
-
-    <!-- LEFT: text panel -->
-    <div class="s-map-left">
-
-      <!-- Default state: big headline -->
-      <div class="map-default-text" id="map-default">
-        <div class="s-map-eyebrow"><span class="lang it">Da dove vengo</span><span class="lang en">Where I'm from</span></div>
-        <h2 class="s-map-statement">
-          <span class="lang it">Operativo<br>in giro per<br>l'<span class="teal">Italia.</span></span>
-          <span class="lang en">Operating<br>across<br><span class="teal">Italy.</span></span>
-        </h2>
-        <p class="s-map-hint">
-          <span class="s-map-hint-line"></span>
-          <span class="lang it">Passa il mouse sui pin</span>
-          <span class="lang en">Hover the pins</span>
-        </p>
-      </div>
-
-      <!-- City 1: Reggio Calabria -->
-      <div class="map-city-info" id="map-info-1">
-        <h2 class="map-city-name">Reggio<br>Calabria</h2>
-        <div class="map-city-meta">
-          <span class="map-city-year">Calabria, IT</span>
-          <span class="map-city-role"><span class="lang it">Nato e cresciuto</span><span class="lang en">Born &amp; raised</span></span>
-        </div>
-        <div class="map-city-tag">2002 — birthplace</div>
-        <div class="lang it">
-        <p class="map-city-desc">La punta dello stivale. Dove ho ottenuto la maggior parte della mia formazione e crescita.</p>
-        <span class="map-city-role">2021-2024 - Laurea Triennale</span>
-        <p class="map-city-desc">Ho conseguito la laurea in design del prodotto all'Università degli Studi Mediterranea di Reggio Calabria.<br><br> Qui ho appreso un'intensa adattabilità nella mia filosofia progettuale.</p>
-      </div>
-      <div class="lang en">
-        <p class="map-city-desc">The Tip of the boot. Where i got most of my Learning and growth.</p>
-        <span class="map-city-role">2021-2024 - Bachelor's Degree</span>
-        <p class="map-city-desc">Acquired my bachelor's degree in product design at Università degli studi mediterranea di Reggio Calabria.<br><br> Here i learnt the intense adaptability in my design philosophy.</p>
-      </div>
-      </div>
-
-    
-      <!-- City 2: Florence -->
-      <div class="map-city-info" id="map-info-2">
-        <h2 class="map-city-name">Florence</h2>
-        <div class="map-city-meta">
-          <span class="map-city-year">Tuscany, IT</span>
-          <span class="map-city-role"><span class="lang it">Studio Magistrale</span><span class="lang en">Master's Study</span></span>
-        </div>        
-        <div class="map-city-tag">2025-2026 - Masters Degree</div>
-        <div class="lang it"><p class="map-city-desc">La città del Rinascimento, dove ho imparato a guardare gli oggetti e il mio metodo in modo diverso.<br><br>Attualmente sto studiando per il mio Master all'ISIA.</p></div>
-        <div class="lang en"><p class="map-city-desc">The Renaissance city, where I learned to look at objects and my method differently.<br><br>Currently studying for my Masters degree in ISIA.</p></div> 
-     </div>
-    </div>
-    <!-- RIGHT: the map -->
-    <div class="s-map-right">
-      <div class="map-wrap" id="map-wrap">
-        <svg id="italy-dotmap" class="italy-dotmap" viewBox="-4.5 -4.320508075688774 39 44.64101615137754" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(0, -0.18653347947321208)">
-            <rect x="11.84" y="0.7060254037844386" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="0.7060254037844386" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="0.7060254037844386" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="1.5720508075688773" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="2.438076211353316" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="3.3041016151377542" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="4.170127018922193" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="0.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="5.036152422706632" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="0.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="5.90217782649107" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="6.768203230275509" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="0.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="7.634228634059947" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="0.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="8.500254037844385" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="0.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="9.366279441628825" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="3.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="10.232304845413264" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="1.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="8.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="11.098330249197701" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="2.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="11.96435565298214" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="12.830381056766578" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="13.696406460551017" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="9.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.84" y="14.562431864335457" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.34" y="15.428457268119894" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="10.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="11.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.84" y="16.294482671904333" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.34" y="17.16050807568877" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="12.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="18.026533479473212" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="13.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="18.89255888325765" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.84" y="19.758584287042087" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.34" y="20.624609690826528" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.84" y="21.490635094610965" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="26.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="27.34" y="22.356660498395403" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="26.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="27.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="28.84" y="23.22268590217984" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="28.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="29.34" y="24.08871130596428" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="22.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.84" y="24.95473670974872" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="7.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.34" y="25.820762113533156" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="6.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.84" y="26.686787517317597" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="4.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="5.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="26.34" y="27.552812921102035" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.84" y="28.418838324886472" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.84" y="28.418838324886472" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="25.84" y="28.418838324886472" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="29.284863728670913" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="24.34" y="29.284863728670913" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.84" y="30.15088913245535" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.34" y="31.01691453623979" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="31.01691453623979" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="23.34" y="31.01691453623979" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="14.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="31.882939940024226" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="15.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="32.74896534380867" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="16.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="17.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="18.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="33.61499074759311" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="19.34" y="34.481016151377545" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.34" y="34.481016151377545" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="21.34" y="34.481016151377545" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-            <rect x="20.84" y="35.34704155516199" width="0.32" height="0.32" rx="0.08" ry="0.08"></rect>
-          </g>
-        </svg>
-
-        <div class="map-pin-overlay">
-          <div class="map-city-pin" id="pin-1" style="left:71.4%;top:79.2%;" data-target="map-info-1">
-            <div class="map-city-pin-dot"></div>
+    <!-- 2. EDUCATION -->
+    <section class="ab-panel ab-edu">
+      <h2 class="ab-title"><span class="lang it">Percorso<br>Accademico</span><span class="lang en">Academic<br>Path</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">UNIRC</div>
+            <div class="ab-col-value"><span class="lang it">Laurea Triennale</span><span class="lang en">Bachelor's Degree</span></div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2021 – 2024 · <span class="lang it">Università degli studi Mediterranea di Reggio Calabria</span><span class="lang en">University of Studies Mediterranea</span></div>
           </div>
-          <div class="map-city-pin" id="pin-2" style="left:40.6%;top:36.5%;" data-target="map-info-2">
-            <div class="map-city-pin-dot"></div>
+          <div class="ab-col">
+            <div class="ab-col-code">ISIA</div>
+            <div class="ab-col-value"><span class="lang it">Laurea Magistrale</span><span class="lang en">Master's Degree</span></div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2025 – 2026 · <span class="lang it">ISIA Firenze</span><span class="lang en">ISIA Firenze</span></div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-  </section>
-
-  <!-- ══ 04 INTERESTS ══ -->
-  <section class="about-section s-interests">
-    <div class="interests-header">
-      <div class="s-label" style="margin-bottom:0;"><span class="lang it">Interessi</span><span class="lang en">Interests</span></div>
-      <div class="interests-drag-hint"><span class="lang it">trascina per esplorare</span><span class="lang en">drag to explore</span></div>
-    </div>
-    <div class="interests-scroll" id="interests-scroll">
-      <div class="interests-track">
-        <div class="interest-card">
-        <div class="interest-card-text">
-        <div class="interest-card-title">Design</div>
-        <div class="interest-card-desc"><span class="lang it">Oggetti, sistemi, lo spazio tra funzione e forma. L'arte di costruire le cose.</span><span class="lang en">Objects, systems, the space between function and form. The art of building things.</span></div>
-        </div>
-        <div class="interest-card-img">
-  <img src="/images/About/ABOUT-0.png" alt="Description of interest" class="interest-image">
-</div>
-        </div>
-        <div class="interest-card">
-        <div class="interest-card-text">
-        <div class="interest-card-title">Automotive</div>
-        <div class="interest-card-desc"><span class="lang it">Motorsport, cultura dell'auto, car styling. Gran Turismo 4. L'auto come l'oggetto culturalmente più carico mai prodotto.</span><span class="lang en">Motorsport, car culture, car styling. Gran Turismo 4. The car as the most culturally loaded object ever made.</span></div>
-        </div>
-        <div class="interest-card-img">
-  <img src="images/About/ABOUT-1.jpg" alt="Description of interest" class="interest-image">
-</div>
-        </div>
-        <div class="interest-card">
-        <div class="interest-card-text">
-        <div class="interest-card-title">Mobilità</div>
-        <div class="interest-card-desc"><span class="lang it">Come si muovono le persone, come si usa un treno, come funziona un aereo, come parla una cabina di pilotaggio. L'interfaccia tra corpo e veicolo.</span><span class="lang en">How people move, how a train is used, how a plane works, how a cockpit talks back. The interface between body and vehicle.</span></div>
-        </div>
-        <div class="interest-card-img">
-  <img src="images/About/ABOUT-2.jpg" alt="Description of interest" class="interest-image">
-</div>
-        </div>
-        <div class="interest-card">
-        <div class="interest-card-text">
-        <div class="interest-card-title"><span class="lang it">Fotografia</span><span class="lang en">Photography</span></div>
-        <div class="interest-card-desc"><span class="lang it">Con una Nikon D7000, niente di sofisticato. Composizione, luce, tempismo. Fotografa tutto. Amatoriale di titolo ma sempre con l'occhio aperto.</span><span class="lang en">On a Nikon D7000, nothing fancy. Composition, light, timing. Photographs everything. Amateur by title but always filming.</span></div>
-        </div>
-        <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
-        </div>
-        <div class="interest-card">
-        <div class="interest-card-text">
-        <div class="interest-card-title"><span class="lang it">Produzione Musicale</span><span class="lang en">Music Production</span></div>
-        <div class="interest-card-desc"><span class="lang it">Ableton, mixing, sampling, notti tarde. Fare musica come faccio gli oggetti — prima di istinto, poi capire perché funziona.</span><span class="lang en">Ableton, mixing, sampling, late nights. Making music the same way I make objects — by feel first, then figure out why it works.</span></div>
-        </div>
-        <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
-        </div>
-        <div class="interest-card">
-        <div class="interest-card-text">
-        <div class="interest-card-title">Tech</div>
-        <div class="interest-card-desc"><span class="lang it">Tech di consumo, principalmente. Il tipo che finisce in tasca o sulla scrivania. Più interessato a come è progettato che a come funziona.</span><span class="lang en">Consumer tech, mostly. The kind that ends up in your pocket or on your desk. Interested in how it's designed before how it works.</span></div>
-        </div>
-        <div class="interest-card-img"><div class="interest-card-img-placeholder">Add image</div></div>
+    <!-- 3. WORK EXPERIENCE -->
+    <section class="ab-panel ab-work">
+      <h2 class="ab-title"><span class="lang it">Esperienze<br>Lavorative</span><span class="lang en">Work<br>Experience</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-work-item">
+            <div class="ab-work-role">Nicolò dal 1920</div>
+            <div class="ab-work-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;"><span class="lang it">Web design, Branding, Brand Identity Guidelines</span><span class="lang en">Web design, Branding, Brand Identity Guidelines</span></div>
+            <div class="ab-work-year" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">2020 - 2025 <br> Reggio Calabria, Italy</div>
+          </div>
+          <div class="ab-work-item">
+            <div class="ab-work-role">Laboratorio MeTA</div>
+            <div class="ab-work-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;"><span class="lang it">Design Editoriale, Grafica vettoriale</span><span class="lang en">Editorial Design, Graphic Design</span></div>
+            <div class="ab-work-year" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">06/2024 - 07/2024 <br> Reggio Calabria, Italy</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ══ 05 LANGUAGES ══ -->
-  <section class="about-section s-lang">
-    <div class="s-label" style="margin:0 auto 32px;">Languages</div>
-    <div class="hello-word" id="hello-word">Ciao.</div>
-    <div class="lang-row">
-      <div class="lang-item" data-hello="Ciao.">
-        <div class="lang-item-code">IT</div>
-        <div class="lang-item-name">Italiano</div>
-        <div class="lang-item-level">Madrelingua</div>
-        <div class="lang-item-desc">La lingua con cui penso, progetto e discuto. Nessun filtro.</div>
+    <!-- 4. LANGUAGES -->
+    <section class="ab-panel ab-langs">
+      <h2 class="ab-title"><span class="lang it">Competenze <br> Linguistiche</span><span class="lang en">Language<br>Skills</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">ITA</div>
+            <div class="ab-col-value">Italiano</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;"><span class="lang it">Madrelingua</span><span class="lang en">Native speaker</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">ENG</div>
+            <div class="ab-col-value">English</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">B2 — Cambridge First</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">FRA</div>
+            <div class="ab-col-value">Français</div>
+            <div class="ab-col-meta" style="color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.6; cursor: none;">B2 — ESABAC</div>
+          </div>
+        </div>
       </div>
-      <div class="lang-item" data-hello="Hello.">
-        <div class="lang-item-code">EN</div>
-        <div class="lang-item-name">English</div>
-        <div class="lang-item-level">B2 — Cambridge First</div>
-        <div class="lang-item-desc">Used daily. Clients, briefs, research. Comfortable enough to argue in it.</div>
-      </div>
-      <div class="lang-item" data-hello="Bonjour.">
-        <div class="lang-item-code">FR</div>
-        <div class="lang-item-name">Français</div>
-        <div class="lang-item-level">B2 — ESABAC</div>
-        <div class="lang-item-desc">Certified but rarely practiced. Gets the job done when needed.</div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ══ 06 TOOLS ══ -->
-<section class="about-section s-tools">
-  <div class="s-label">Tools</div>
-  <h2 class="tools-title">
-    <span class="lang it">Lo strumento giusto<br>per il problema <span class="teal">giusto.</span></span>
-    <span class="lang en">The right tool<br>for the right <span class="teal">problem.</span></span>
-  </h2>
-  <p class="tools-sub">
-    <span class="lang it">Il software è un mezzo, non un fine.</span>
-    <span class="lang en">Software is a means, not an end.</span>
-  </p>
-
-  <div class="tools-carousel-wrap">
-    <div class="tools-carousel" id="tools-carousel">
-      <div class="tools-track" id="tools-track">
-        <div class="tool-slide" data-name="Blender" data-level="Advanced"><img src="/images/About/softwares/blender.svg" alt="Blender"></div>
-        <div class="tool-slide" data-name="Rhino 8" data-level="Advanced"><img src="/images/About/softwares/rhinoceros.svg" alt="Rhino 8"></div>
-        <div class="tool-slide" data-name="Photoshop" data-level="Proficient"><img src="/images/About/softwares/adobe-photoshop-svgrepo-com.svg" alt="Photoshop"></div>
-        <div class="tool-slide" data-name="Illustrator" data-level="Proficient"><img src="/images/About/softwares/adobe-illustrator-svgrepo-com.svg" alt="Illustrator"></div>
-        <div class="tool-slide" data-name="InDesign" data-level="Proficient"><img src="/images/About/softwares/adobe-indesign-svgrepo-com.svg" alt="InDesign"></div>
-        <div class="tool-slide" data-name="Lightroom" data-level="Intermediate"><img src="/images/About/softwares/adobe-lightroom-svgrepo-com.svg" alt="Lightroom"></div>
-        <div class="tool-slide" data-name="Premiere" data-level="Intermediate"><img src="/images/About/softwares/adobe-premierpro-svgrepo-com.svg" alt="Premiere"></div>
-        <div class="tool-slide" data-name="DaVinci Resolve" data-level="Intermediate"><img src="/images/About/softwares/davinciresolve.svg" alt="DaVinci Resolve"></div>
-        <div class="tool-slide" data-name="After Effects" data-level="Intermediate"><img src="/images/About/softwares/adobe-aftereffects-svgrepo-com.svg" alt="After Effects"></div>
-        <div class="tool-slide" data-name="Ableton Live" data-level="Intermediate"><img src="/images/tools/ableton.png" alt="Ableton Live"></div>
-        <div class="tool-slide" data-name="Godot Engine" data-level="Beginner"><img src="/images/About/softwares/godotengine.svg" alt="Godot Engine"></div>
-        <div class="tool-slide" data-name="WordPress" data-level="Proficient"><img src="/images/About/softwares/wordpress.svg" alt="WordPress"></div>
+    <!-- 5. TOOLS -->
+    <section class="ab-panel ab-tools">
+      <h2 class="ab-title"><span class="lang it">Strumenti <br> & Software</span><span class="lang en">Tools <br> & Software</span></h2>
+      <div class="ab-body">
+        <div class="ab-tools-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">BL</div>
+            <div class="ab-col-value">Blender</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">RH</div>
+            <div class="ab-col-value">Rhino 8</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">PS</div>
+            <div class="ab-col-value">Photoshop</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">AI</div>
+            <div class="ab-col-value">Illustrator</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">ID</div>
+            <div class="ab-col-value">InDesign</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">WP</div>
+            <div class="ab-col-value">WordPress</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">LR</div>
+            <div class="ab-col-value">Lightroom</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">PR</div>
+            <div class="ab-col-value">Premiere</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">DR</div>
+            <div class="ab-col-value">DaVinci Resolve</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">AE</div>
+            <div class="ab-col-value">After Effects</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">AL</div>
+            <div class="ab-col-value">Ableton Live</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">GD</div>
+            <div class="ab-col-value">Godot Engine</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="tools-info-bar empty" id="tools-info-bar">
-      <span class="tools-info-name"><span class="lang it">Passa il mouse su un tool</span><span class="lang en">Hover a tool</span></span>
-    </div>
+    </section>
+
+    <!-- 6. INTERESTS -->
+    <section class="ab-panel ab-interests ab-last">
+      <h2 class="ab-title"><span class="lang it">Oltre <br>il Lavoro</span><span class="lang en">Beyond <br> Work</span></h2>
+      <div class="ab-body">
+        <div class="ab-cols">
+          <div class="ab-col">
+            <div class="ab-col-code">01</div>
+            <div class="ab-col-value">Design</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">02</div>
+            <div class="ab-col-value">Automotive</div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">03</div>
+            <div class="ab-col-value"><span class="lang it">Mobilità</span><span class="lang en">Mobility</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">04</div>
+            <div class="ab-col-value"><span class="lang it">Fotografia</span><span class="lang en">Photography</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">05</div>
+            <div class="ab-col-value"><span class="lang it">Produzione Musicale</span><span class="lang en">Music Production</span></div>
+          </div>
+          <div class="ab-col">
+            <div class="ab-col-code">06</div>
+            <div class="ab-col-value">Tech</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
-</section>
+</div>
 
-  <!-- ══ 07 CTA ══ -->
-  <section class="about-section s-cta" style="align-items: center;">
-    <div class="s-label"><span class="lang it">Costruiamo</span><span class="lang en">Let's build</span></div>
-    <h2 class="s-intro-title"><span class="lang it">Esiste sempre<br>qualcosa <span class="teal">per qualcuno.</span></span><span class="lang en">There's always<br>one <span class="teal">for all.</span></span></h2>
-    <div class="s-cta-actions">
-      <a href="/contact.html" class="btn-primary"><span class="lang it">Contattami →</span><span class="lang en">Get in touch →</span></a>
-      <a href="/projects.html" class="btn-secondary"><span class="lang it">Sfoglia i lavori</span><span class="lang en">View work</span></a>
-    </div>
-  </section>
-
-</main>
-
-<script src="/main.js"></script>
 <script>
-  // ── Live clock ──
-  function updateClock(){
-  const el = document.getElementById('intro-clock');
-  const st = document.getElementById('status-text');
-  const sd = document.getElementById('status-dot');
-  if (!el) return;
-  const italy = new Date(new Date().toLocaleString('en-US', {timeZone:'Europe/Rome'}));
-  const h = italy.getHours();
-  el.textContent = `${String(h).padStart(2,'0')}:${String(italy.getMinutes()).padStart(2,'0')}:${String(italy.getSeconds()).padStart(2,'0')}`;
-  const online = h >= 8 && h < 23;
-  sd.style.background = online ? '#4ade80' : '#94a3b8';
-  st.textContent = online ? 'Online' : 'Offline';
-}
-updateClock();
-setInterval(updateClock, 1000);
-// ══════════════════════════════════════════
-//  INTRO MARQUEE : edit PHRASES to customise
-// ══════════════════════════════════════════
-// ══════════════════════════════════════════
-//  INTRO MARQUEE : edit PHRASES to customise
-// ══════════════════════════════════════════
-const PHRASES = [
-  { it: "Un oggetto.", en: "One object." },
-  { it: "Ogni vincolo.", en: "Every constraint." },
-  { it: "Sempre la soluzione giusta.", en: "Always the right fit." },
-  { it: "Nato al sud.", en: "Born south." },
-  { it: "Cresciuto ovunque.", en: "Grown everywhere." },
-  { it: "Una soluzione che non si mette in mezzo", en: "Delivering a solution that stays out of its own way" },
-  { it: "Fotografo luce e tempismo con una Nikon D7000", en: "Recording light and timing with a Nikon D7000" },
-  { it: "Prototipo mobili e beni di consumo", en: "Prototyping furniture and consumer goods" },
-  { it: "Esploro l'impatto culturale del car styling", en: "Exploring the cultural impact of car styling" },
-  { it: "Oltre cinque anni di lavoro documentati in tre discipline", en: "Documenting more than five years of work across three disciplines" },
-  { it: "Studio l'interfaccia tra il corpo e il veicolo", en: "Studying the interface between the body and the vehicle" },
-  { it: "Fisicamente in Toscana, mentalmente in un brochure giapponese di una Fiat Panda del 2005", en: "Physically in Tuscany, but mentally in a 2005 Fiat Panda Japanese brochure" },
-  { it: "Il Gelato di Cesare", en: "Il Gelato di Cesare" },
-  { it: "Il mio HEX preferito del momento: #2BADB8", en: "Current favorite HEX code: #2BADB8" },
-  { it: "Steam ID: ceramicsmelter", en: "Steam ID: ceramicsmelter" },
-  { it: "Oggetti che risolvono più di un problema alla volta.", en: "Objects that solve more than one problem at a time." },
-  { it: "Il caldo di agosto è il test definitivo per qualsiasi oggetto funzionale.", en: "High heat in August is the ultimate stress test for any functional object." },
-  { it: "Mentalità dell'arrangiarsi in uno spazio CAD pulito.", en: "\"Arrangiarsi\" mindset into a clean CAD workspace." },
-  { it: "Dicono che sono nato nel km più bello d'Italia", en: "Some say im born in the most beautiful km of Italy" },
-  { it: "Una Nikon D7000 per documentare un mondo che va troppo veloce", en: "Using a Nikon D7000 to document a world that is moving too fast" },
-  { it: "Una carriera costruita all'intersezione tra una costa rocciosa e uno schermo", en: "A career built on the intersection of a rocky coastline and a computer screen" },
-  { it: "Oggetti che sembrano usciti da un film di fantascienza ad alto budget del 2001", en: "Designing objects that look like they belong in a high budget sci-fi from 2001" },
-  { it: "Un futuro dove ogni superficie è cromata e ogni pulsante è fisico", en: "A future where every surface is chrome and every button is a physical click" },
-  { it: "Passo i weekend a guardare pezzi di macchine che non posso ancora permettermi", en: "I spend my weekends looking at car parts I cannot afford to install yet" },
-  { it: "Lavoro con strumenti come Rhino 8 e Blender", en: "Operating with tools like Rhino 8 and Blender" },
-  { it: "Comunico in italiano, inglese e francese", en: "Communicating in Italian, English and French" },
-  { it: "Modernismo italiano del dopoguerra", en: "Mid-century Italian modernism" },
-  { it: "Specializzato nello sviluppo di scocche per elettronica di consumo", en: "Specializing in the development of enclosures for consumer electronics" },
-  { it: "Mixo audio e campioni in Ableton Live", en: "Mixing audio and samples within Ableton Live" },
-  { it: "Ho bisogno delle forbici! 61!", en: "I need scissors! 61!" },
-  { it: "Eliminare il non essenziale", en: "Eliminating the non-essential" },
-  { it: "rcaronn era un'era bellissima", en: "rcaronn was such a cool era" },
-  { it: "Blender Render", en: "Blender Render" },
-  { it: "Quanto mi piacciono le macchine", en: "Man i love cars" },
-  { it: "Quanto mi piacciono i veicoli", en: "Man i love vehicles" },
-  { it: "Quella volta che", en: "Quella volta che" },
-  { it: "Ogni scelta di design deve difendere la propria esistenza", en: "Every design decision must defend its existence" },
-  { it: "Gran Turismo 4 ha ancora la mia UI preferita di sempre", en: "Gran Turismo 4 still has my favourite UI of all time" },
-];
-const NUM_ROWS        = 7;
-const SLOW_FACTOR     = 0.08;
-const BASE_SEQ_LENGTH = 12; // How many phrases before the loop repeats
+(function() {
+  const abWrap = document.getElementById('abWrap');
+  const isMobile = () => window.innerWidth <= 900;
 
-// ── COLOR PALETTE ──
-// The script will alternate through these colors sequentially
-const PALETTE = [
-  'var(--ink)',    // Default dark text
-  'var(--teal)',   // Your primary accent
-  'var(--muted)',  // Subtle grey
-];
-
-(function initMarquee(){
-  const area = document.getElementById('intro-rows-area');
-  if (!area) return;
-
-  const buckets = Array.from({length: NUM_ROWS}, () => {
-    const seq = [];
-    for (let i = 0; i < BASE_SEQ_LENGTH; i++) {
-      // 1. Grab a random phrase
-      const phrase = PHRASES[Math.floor(Math.random() * PHRASES.length)];      // 2. Assign a color from the palette in a strict alternating cycle
-      const color = PALETTE[i % PALETTE.length]; 
-      seq.push({ phrase, color });
-    }
-    return seq;
-  });
-  
-  const rows = [];
-
-  buckets.forEach((phrases, ri) => {
-    const baseSpeed = 28 + Math.random() * 62;
-    const dir       = ri % 2 === 0 ? 1 : -1;
-
-    const rowEl = document.createElement('div');
-    rowEl.className = 'marquee-row';
-    const track = document.createElement('div');
-    track.className = 'marquee-track';
-
-    function makeItems() {
-      const frag = document.createDocumentFragment();
-      phrases.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'phrase-item';
-      
-        const main = document.createElement('span');
-        main.className = 'phrase-main';
-        main.style.color = p.color; // Apply the alternating color here
-        main.innerHTML = `<span class="lang it">${p.phrase.it}</span><span class="lang en">${p.phrase.en}</span>`;        
-        item.appendChild(main);
-        frag.appendChild(item);
-      });
-      return frag;
-    }
-
-    for (let k = 0; k < 30; k++) {
-      track.appendChild(makeItems());
-    }
-    
-    rowEl.appendChild(track);
-    area.appendChild(rowEl);
-
-    rows.push({ rowEl, track, baseSpeed, dir, pos: 0, hovered: false, currentSpeed: baseSpeed, singleW: 0 });
-    rowEl.addEventListener('mouseenter', () => rows[ri].hovered = true);
-    rowEl.addEventListener('mouseleave', () => rows[ri].hovered = false);
-  });
-
-  function updateWidths() {
-    rows.forEach(row => {
-      const children = Array.from(row.track.children);
-      row.singleW = children.slice(0, BASE_SEQ_LENGTH).reduce((s, c) => s + c.getBoundingClientRect().width, 0);
-      if (row.pos >= row.singleW) {
-        row.pos = row.pos % row.singleW || 0; 
-      }
-    });
-  }
-
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    updateWidths();
-    
-    rows.forEach(row => { row.pos = Math.random() * row.singleW; });
-    window.addEventListener('resize', updateWidths);
-
-    let last = null;
-    function tick(ts) {
-      if (!last) last = ts;
-      const dt = Math.min((ts - last) / 1000, 0.05);
-      last = ts;
-
-      rows.forEach(row => {
-        const target = row.hovered ? row.baseSpeed * SLOW_FACTOR : row.baseSpeed;
-        row.currentSpeed += (target - row.currentSpeed) * 0.06;
-        row.pos += row.dir * row.currentSpeed * dt;
-        
-        if (row.pos >= row.singleW) row.pos -= row.singleW;
-        if (row.pos < 0) row.pos += row.singleW;
-        
-        row.track.style.transform = `translateX(${-row.pos}px)`;
-      });
-
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }));
+  abWrap.addEventListener('wheel', (e) => {
+    if (isMobile()) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    abWrap.scrollLeft += e.deltaY;
+  }, { passive: false });
 })();
 </script>
 
-<script>
-  // ── Map ──
-  const mapDefaultEl = document.getElementById('map-default');
-  const pins = document.querySelectorAll('.map-city-pin');
-  let activePin = null;
-  let mobileResetTimer = null;
-
-  function activatePin(pin) {
-    if (activePin && activePin !== pin) {
-      document.getElementById(activePin.dataset.target).classList.remove('visible');
-      activePin.classList.remove('active');
-    }
-    if (activePin === pin) {
-      pin.classList.remove('active');
-      document.getElementById(pin.dataset.target).classList.remove('visible');
-      mapDefaultEl.classList.remove('faded');
-      activePin = null;
-      return;
-    }
-    pin.classList.add('active');
-    document.getElementById(pin.dataset.target).classList.add('visible');
-    mapDefaultEl.classList.add('faded');
-    activePin = pin;
-  }
-
-  function resetMap() {
-    if (activePin) {
-      document.getElementById(activePin.dataset.target).classList.remove('visible');
-      activePin.classList.remove('active');
-      activePin = null;
-    }
-    mapDefaultEl.classList.remove('faded');
-  }
-
-  pins.forEach(pin => {
-    pin.addEventListener('mouseenter', () => { if (window.innerWidth > 900) activatePin(pin); });
-    pin.addEventListener('mouseleave', () => { if (window.innerWidth > 900) resetMap(); });
-    pin.addEventListener('click', (e) => {
-      e.stopPropagation();
-      clearTimeout(mobileResetTimer);
-      activatePin(pin);
-      if (activePin && window.innerWidth <= 900) mobileResetTimer = setTimeout(resetMap, 30000);
-    });
-  });
-
-  document.addEventListener('click', () => { if (window.innerWidth <= 900) { clearTimeout(mobileResetTimer); resetMap(); } });
-
-  const mapSection = document.getElementById('map-section');
-  new IntersectionObserver((entries) => {
-    if (!entries[0].isIntersecting) { clearTimeout(mobileResetTimer); resetMap(); }
-  }, { threshold: 0 }).observe(mapSection);
-
-  new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      setTimeout(() => {
-        pins.forEach((pin, i) => setTimeout(() => pin.classList.add('pin-visible'), i * 300));
-      }, 200);
-    }
-  }, { threshold: 0.3 }).observe(mapSection);
-
-  // ── Languages ──
-  const helloWord = document.getElementById('hello-word');
-  const langItems = Array.from(document.querySelectorAll('.lang-item'));
-  let langIndex = 0;
-  let langTimer = null;
-
-  langItems.forEach(item => {
-    item.addEventListener('mouseenter', () => { if (window.innerWidth > 900) { helloWord.textContent = item.dataset.hello; helloWord.classList.add('teal'); } });
-    item.addEventListener('mouseleave', () => { if (window.innerWidth > 900) helloWord.classList.remove('teal'); });
-  });
-
-  function cycleLang() {
-    langIndex = (langIndex + 1) % langItems.length;
-    langItems.forEach((item, i) => item.classList.toggle('lang-active', i === langIndex));
-    helloWord.textContent = langItems[langIndex].dataset.hello;
-    helloWord.classList.add('teal');
-    setTimeout(() => helloWord.classList.remove('teal'), 600);
-  }
-
-  if (window.innerWidth <= 900) { langItems[0].classList.add('lang-active'); langTimer = setInterval(cycleLang, 2800); }
-  window.addEventListener('resize', () => {
-    if (window.innerWidth <= 900 && !langTimer) { langItems[langIndex].classList.add('lang-active'); langTimer = setInterval(cycleLang, 2800); }
-    if (window.innerWidth > 900 && langTimer) { clearInterval(langTimer); langTimer = null; langItems.forEach(i => i.classList.remove('lang-active')); }
-  });
-
-  // ── Tools ──
-  const infoBar = document.getElementById('tools-info-bar');
-  let activeTool = null;
-
-  function selectTool(logo) {
-    if (activeTool === logo) {
-      logo.classList.remove('active');
-      infoBar.classList.add('empty');
-      infoBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Seleziona uno strumento</span><span class="lang en">Select a tool</span></span>`;;
-      activeTool = null;
-      return;
-    }
-    if (activeTool) activeTool.classList.remove('active');
-    logo.classList.add('active');
-    infoBar.classList.remove('empty');
-    infoBar.innerHTML = `<span class="tools-info-name">${logo.dataset.name}</span><span class="tools-info-level">${logo.dataset.level}</span>`;
-    activeTool = logo;
-  }
-
-  document.querySelectorAll('.tool-logo').forEach(logo => {
-    logo.addEventListener('click', () => selectTool(logo));
-    logo.addEventListener('mouseenter', () => {
-      if (activeTool) return;
-      infoBar.classList.remove('empty');
-      infoBar.innerHTML = `<span class="tools-info-name">${logo.dataset.name}</span><span class="tools-info-level">${logo.dataset.level}</span>`;
-    });
-    logo.addEventListener('mouseleave', () => {
-      if (activeTool) return;
-      infoBar.classList.add('empty');
-      infoBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Seleziona uno strumento</span><span class="lang en">Select a tool</span></span>`;    });
-  });
-
-  // ── Interests drag ──
-  const scroll = document.getElementById('interests-scroll');
-  let isDown = false, startX, scrollLeft;
-  scroll.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - scroll.offsetLeft; scrollLeft = scroll.scrollLeft; });
-  scroll.addEventListener('mouseleave', () => isDown = false);
-  scroll.addEventListener('mouseup', () => isDown = false);
-  scroll.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    e.preventDefault();
-    scroll.scrollLeft = scrollLeft - (e.pageX - scroll.offsetLeft - startX);
-  });
-
-  // ── Mobile accordion ──
-  document.querySelectorAll('.discipline-col').forEach(col => {
-    col.addEventListener('click', () => { if (window.innerWidth <= 900) col.classList.toggle('open'); });
-  });
-
-  // ── Map dot wave ──
-  const SVG_CX = (-4.5 + 34.5) / 2;
-  const SVG_CY = (-4.32 + 40.32) / 2;
-  const DOT_BASE = 0.44;
-  const DOT_MIN  = 0.20;
-  const mapDots = Array.from(document.querySelectorAll('#italy-dotmap rect'));
-
-  const dotData = mapDots.map(r => {
-    const cx = parseFloat(r.getAttribute('x')) + 0.16;
-    const cy = parseFloat(r.getAttribute('y')) + 0.16;
-    const dx = cx - SVG_CX;
-    const dy = cy - SVG_CY;
-    return { r, dist: Math.sqrt(dx * dx + dy * dy) };
-  });
-
-  const maxDist = Math.max(...dotData.map(d => d.dist));
-  dotData.forEach(d => { d.normDist = d.dist / maxDist; });
-
-  mapDots.forEach(r => {
-    r.setAttribute('width', String(DOT_BASE));
-    r.setAttribute('height', String(DOT_BASE));
-    r.setAttribute('rx', '0.11');
-    r.setAttribute('ry', '0.11');
-  });
-
-  function updateDotWave() {
-    if (window.innerWidth <= 900) return;
-    const sec = document.getElementById('map-section');
-    if (!sec) return;
-    const rect = sec.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const secCY = rect.top + rect.height / 2;
-    const raw = Math.abs(secCY - vh / 2) / (vh / 2);
-    const global = Math.min(raw, 1);
-    dotData.forEach(({ r, normDist }) => {
-      const wave = Math.max(0, global - normDist * 0.45) / (1 - normDist * 0.45);
-      const size = DOT_BASE - Math.min(wave, 1) * (DOT_BASE - DOT_MIN);
-      const s = Math.round(size * 1000) / 1000;
-      r.setAttribute('width', s);
-      r.setAttribute('height', s);
-    });
-  }
-
-  window.addEventListener('scroll', updateDotWave, { passive: true });
-  window.addEventListener('resize', updateDotWave, { passive: true });
-  updateDotWave();
-
-  /* ── Tools carousel ── */
-  /* ── Tools carousel autoplay ── */
-  const carousel = document.getElementById('tools-carousel');
-  const track = document.getElementById('tools-track');
-  const toolsBar = document.getElementById('tools-info-bar');
-  let activeToolSlide = null;
-  let paused = false;
-  let speed = 0.8;
-  let pos = 0;
-
-  // Duplica i loghi per il loop infinito
-  track.innerHTML += track.innerHTML;
-
-  function animateCarousel() {
-    if (!paused) {
-      pos += speed;
-      if (pos >= track.scrollWidth / 2) pos = 0;
-      track.style.transform = `translateX(${-pos}px)`;
-    }
-    requestAnimationFrame(animateCarousel);
-  }
-  requestAnimationFrame(animateCarousel);
-
-  carousel.addEventListener('mouseenter', () => paused = true);
-  carousel.addEventListener('mouseleave', () => {
-    if (!activeToolSlide) paused = false;
-  });
-
-  // Drag
-  let carouselDown = false, carouselX, startPos;
-  carousel.addEventListener('mousedown', e => {
-    carouselDown = true;
-    paused = true;
-    carouselX = e.pageX;
-    startPos = pos;
-  });
-  document.addEventListener('mouseup', () => {
-    carouselDown = false;
-    if (!activeToolSlide) paused = false;
-  });
-  carousel.addEventListener('mousemove', e => {
-    if (!carouselDown) return;
-    e.preventDefault();
-    pos = startPos - (e.pageX - carouselX);
-    if (pos < 0) pos = 0;
-    if (pos >= track.scrollWidth / 2) pos = track.scrollWidth / 2 - 1;
-    track.style.transform = `translateX(${-pos}px)`;
-  });
-
-  // Hover + click sui singoli tool
-  document.querySelectorAll('.tool-slide').forEach(slide => {
-    slide.addEventListener('click', () => {
-      if (activeToolSlide === slide) {
-        slide.classList.remove('active');
-        toolsBar.classList.add('empty');
-        toolsBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Passa il mouse su un tool</span><span class="lang en">Hover a tool</span></span>`;
-        activeToolSlide = null;
-        paused = false;
-        return;
-      }
-      if (activeToolSlide) activeToolSlide.classList.remove('active');
-      slide.classList.add('active');
-      toolsBar.classList.remove('empty');
-      toolsBar.innerHTML = `<span class="tools-info-name">${slide.dataset.name}</span><span class="tools-info-level">${slide.dataset.level}</span>`;
-      activeToolSlide = slide;
-      paused = true;
-    });
-    slide.addEventListener('mouseenter', () => {
-      if (activeToolSlide) return;
-      toolsBar.classList.remove('empty');
-      toolsBar.innerHTML = `<span class="tools-info-name">${slide.dataset.name}</span><span class="tools-info-level">${slide.dataset.level}</span>`;
-    });
-    slide.addEventListener('mouseleave', () => {
-      if (activeToolSlide) return;
-      toolsBar.classList.add('empty');
-      toolsBar.innerHTML = `<span class="tools-info-name"><span class="lang it">Passa il mouse su un tool</span><span class="lang en">Hover a tool</span></span>`;
-    });
-  });
-</script>
+<script src="/main.js"></script>
 </body>
 </html>

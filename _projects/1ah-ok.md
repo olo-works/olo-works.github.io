@@ -11,7 +11,7 @@ accent_dark: "#9a0b09"
 accent_bg: "#dcc7c7"
 accent_white: "#eee8e8"
 cover: /images/photoprojects/ahok/POSTER.png
-excerpt_text: "A coordinated living room system. Its naming derives from what you say when something works without needing an explanation."
+excerpt_text: "A"
 gallery:
   - src: /images/photoprojects/ahok/9.png
     alt: "Complete system"
@@ -42,7 +42,8 @@ gallery:
 
 
 <div class="proj-lead" markdown="1">
-The deconstruction of "ah, ok" gave each object its skeleton: lines and circles pulled from the letterforms, put on a scheme of standardized components then bent toward use. The system makes most sense followed across a day, rather than as four separate items on a page.
+Named for the expression you use when something simply works without further explanation.
+After being divided into lines and circles, its letterforms were reconstructed into a cohesive living room system.
 </div>
 
 </div>
@@ -129,7 +130,6 @@ Materials: wood, aluminium. Dimensions: 586 × 421 × 572 mm.
 
 A floor lamp designed to be moved easily to any setting. It features a shelf intended for storing digital devices, the phone, the tablet, the things always kept within reach. The h is entirely in the aluminium arc that supports both the light and the shelf.
 
-Materials: wood, aluminium, glass. Dimensions: 583 × 543 × 1165 mm.
 
 </div>
 
@@ -161,8 +161,6 @@ Materials: wood, aluminium, glass. Dimensions: 583 × 543 × 1165 mm.
 
 A two-level coffee table that goes beyond its traditional function. The upper level is designed specifically to facilitate video calls and the use of digital devices. The circle of the o becomes the sliding base that allows the table to be oriented toward the user.
 
-Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 572 mm.
-
 </div>
 
 </div>
@@ -192,8 +190,6 @@ Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 572 mm.
 
 A functional coat rack that allows all accessories to be organised upon returning home, from keys to clothing, including a mirror for a last look before heading out. The k is the asymmetric structure that holds together the mirror, hooks, and accessory drawer.
 
-Materials: wood, aluminium, glass. Dimensions: 586 × 586 × 1165 mm.
-
 </div>
 
 </div>
@@ -220,6 +216,11 @@ The four pieces share a coordinated dimensional system, so that chair, lamp, tab
 
 </div>
 
+<!-- 4. BREATHER — pure visual beat, no text, breaks the split-section rhythm -->
+<div class="module-bleed">
+  <img src="/images/photoprojects/ahok/fc0ce0192702515.65dfb743a8e23.png" alt="Whisky glass detail" />
+</div>
+
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
@@ -231,6 +232,7 @@ The four pieces share a coordinated dimensional system, so that chair, lamp, tab
     </div>
   </div>
 </div>
+
 
 <div class="split-section-text" markdown="1">
 
@@ -251,12 +253,3 @@ Type design usually starts with rules: a grid, a stroke width, a set of proporti
 
 </div>
 
-<style>
-@font-face {
-  font-family: 'AhOk';
-  src: url('/custom fonts/AhOkBold.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-</style>

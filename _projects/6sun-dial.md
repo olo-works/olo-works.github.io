@@ -5,7 +5,6 @@ order: 5
 year: 2025
 client: "RCR Cristalleria Italiana"
 role: "Product Design"
-duration: "Design Project"
 tags: [Product]
 accent: "#00B4D8"
 accent_dark: "#0077A8"
@@ -27,34 +26,36 @@ gallery:
     layout: wide
 ---
 
+<!-- 1. HOOK -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/RENDER 4.png" alt="Full collection render" />
+        <img src="/images/photoprojects/sun dial/RENDER 4.png" alt="Full collection render" />
       </div>
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/RENDER 6.png" alt="Glasses with whisky" />
+        <img src="/images/photoprojects/sun dial/RENDER 6.png" alt="Glasses with whisky" />
       </div>
     </div>
   </div>
 </div>
 
 <div class="proj-lead" markdown="1">
-Sun Dial started with a question about light refraction, not as a decorative effect applied to glass, but as the generative principle behind the form itself. Could the position of the sun be made legible on a surface, the way a physical sundial marks time?
+Could the position of the sun be made legible on a glass, the way a sundial marks time on a surface?
 </div>
 
 </div>
 
+<!-- 2. LIGHT REFRACTION (merged with old "form and function") -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/RENDER 3.png" alt="Globe and tall glasses" />
+        <img src="/images/photoprojects/sun dial/RENDER 3.png" alt="Globe and tall glasses" />
       </div>
     </div>
   </div>
@@ -64,45 +65,53 @@ Sun Dial started with a question about light refraction, not as a decorative eff
 
 ## Light refraction
 
-The process moved from a simple prism, simulating increasingly complex patterns, until surfaces emerged that could fragment, reflect, and modulate light in unexpected ways. Each variation pushed the engraving logic further, producing effects that change continuously as the user handles the glass.
-
-Engraved rectangular elements act as micro-prisms, bending light into spectral colour along their edges, while sandblasted zones diffuse it into soft, directional shadow. The engraved, transparent zone corresponds to the sunlit hemisphere of a planisphere, and the sandblasted, matte zone corresponds to the night side, with the boundary between them tracing a curve across the glass that modulates with the level of the liquid inside. The geometry favours fluid curves wherever possible, but also exploits "false curves," broken surfaces and gentle angles that, while sharper in underlying structure, return a continuous, homogeneous image in reflection.
+Engraved facets act as micro-prisms, splitting light into colour at their edges; sandblasted zones diffuse it into soft shadow. The boundary between the two traces a planisphere's day/night line across the glass — shifting as the liquid inside rises and falls.
 
 </div>
 
 </div>
 
-<div class="split-section" markdown="1">
-
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/RENDER 6.png" alt="Whisky glass detail" />
-      </div>
-    </div>
+<!-- 3. SPECS -->
+<div class="module-specs">
+  <div class="module-spec-item">
+    <span class="module-spec-label">Outer diameter</span>
+    <span class="module-spec-value">Ø 82 mm</span>
+  </div>
+  <div class="module-spec-item">
+    <span class="module-spec-label">Inner diameter</span>
+    <span class="module-spec-value">Ø 78.8 mm</span>
+  </div>
+  <div class="module-spec-item">
+    <span class="module-spec-label">Height</span>
+    <span class="module-spec-value">92.5 mm</span>
+  </div>
+  <div class="module-spec-item">
+    <span class="module-spec-label">Line thickness</span>
+    <span class="module-spec-value">1 mm</span>
+  </div>
+  <div class="module-spec-item">
+    <span class="module-spec-label">Line spacing</span>
+    <span class="module-spec-value">9 mm</span>
+  </div>
+  <div class="module-spec-item">
+    <span class="module-spec-label">Rectangle module</span>
+    <span class="module-spec-value">4 x 28 mm</span>
   </div>
 </div>
 
-<div class="split-section-text" markdown="1">
-
-## Form and function
-
-The engraving distribution takes its cue from solar projection maps, where light gradients spread across conical surfaces, marking the passage between day and night with a visual drama that shifts with the observer's position. Translated into the whisky glass, the cylinder becomes a surface that modulates light the same way, turning the act of drinking into an evolving play of reflections and shadows.
-
-The base glass measures Ø 82 mm outer diameter, Ø 78.8 mm inner reference diameter, and 92.5 mm in height, with an engraving module of 1 mm line thickness, 9 mm line spacing, and 4 x 28 mm rectangles.
-
+<!-- 4. BREATHER — pure visual beat, no text, breaks the split-section rhythm -->
+<div class="module-bleed">
+  <img src="/images/photoprojects/sun dial/RENDER 6.png" alt="Whisky glass detail" />
 </div>
 
-</div>
-
+<!-- 5. THE PATTERN SYSTEM -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger no-outline" src="/images/photoprojects/sun dial/1.png" alt="Pattern system reference" />
+        <img class="no-outline" src="/images/photoprojects/sun dial/1.png" alt="Pattern system reference" />
       </div>
     </div>
   </div>
@@ -112,19 +121,20 @@ The base glass measures Ø 82 mm outer diameter, Ø 78.8 mm inner reference diam
 
 ## The pattern system
 
-A generative engraving system built from four base marks, the infinite line, the long line, the rectangle, and the short line, that combine into patterns following a guiding curve. Each element's position can vary randomly within a defined range, so the system could, in principle, generate an unlimited series of unique combinations from an algorithm. The rectangle is the core mark: grouped and distributed along the curve, it produces the collection's characteristic solar-arc pattern.
+Four marks — infinite line, long line, rectangle, short line — combine along a guiding curve, each placed with random variance. Grouped and repeated, the rectangle produces the collection's signature solar arc.
 
 </div>
 
 </div>
 
+<!-- 6. Y2K FUTURISM -->
 <div class="split-section" markdown="1">
 
 <div class="split-section-media">
   <div class="mini-carousel-viewport">
     <div class="mini-carousel-track">
       <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/RENDER 7.png" alt="Globe" />
+        <img src="/images/photoprojects/sun dial/RENDER 7.png" alt="Globe" />
       </div>
     </div>
   </div>
@@ -134,66 +144,50 @@ A generative engraving system built from four base marks, the infinite line, the
 
 ## Y2K Futurism
 
-To give the family a broader, more autonomous identity, the research moved beyond the solar map concept toward more expressive formal languages. The reference point was Y2K Futurism, the aesthetic current born between the late 1990s and early 2000s that fused optimistic visions of the future with fluid forms, iridescent colours, and pop references, mixing glamour and space with a hyper stylistic sensibility.
-
-This reference was interpreted radically but within the limits of what's producible in crystal. Increasingly complex geometries were tested, and the glass's base structure was varied up to the edge of manufacturing feasibility, generating new refractions and giving the collection an entirely new formal identity.
+Beyond the solar map, the family pulls from Y2K Futurism — fluid, iridescent, hyper-glamorous forms from the late '90s and early 2000s — pushed to the edge of what crystal can produce.
 
 </div>
 
 </div>
 
-<div class="split-section" markdown="1">
-
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/1.png" alt="No.1 Daylight 1" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/2.png" alt="No.2 Daylight 2" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/projects/sun-dial/no3-daylight3.png" alt="No.3 Daylight 3" />
-      </div>
+<!-- 7. DAYLIGHT — caption-only, matching the Sammontana family convention -->
+<div class="module-family">
+  <div class="module-family-head">
+    <h2>Daylight</h2>
+  </div>
+  <div class="module-family-grid">
+    <div class="module-family-item">
+      <img src="/images/photoprojects/sun dial/1.png" alt="No.1 Daylight" class="lb-img" />
+      <span class="module-family-caption">No.1 — symmetric arc</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/sun dial/2.png" alt="No.2 Daylight" class="lb-img" />
+      <span class="module-family-caption">No.2 — denser arc</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/projects/sun-dial/no3-daylight3.png" alt="No.3 Daylight" class="lb-img" />
+      <span class="module-family-caption">No.3 — asymmetric arc</span>
     </div>
   </div>
 </div>
 
-<div class="split-section-text" markdown="1">
-
-## Daylight
-
-**No.1** is the founding piece: a classic whisky tumbler with a circular cross-section and the solar-arc engraving distributed symmetrically across both sides of the glass wall, sandblasted zones at the flanks, the engraved transparent zone cresting at centre top. <br> **No.2** adjusts the pattern with tighter spacing and a subtly different rectangle distribution, producing a denser light effect while keeping No.1's silhouette; the two are meant to be read as a pair. <br> **No.3** closes the group by making the arc asymmetric, distributed more heavily toward one side, giving the light effect a directional quality that shifts dramatically as the glass rotates in the hand.
-
-</div>
-
-</div>
-
-<div class="split-section" markdown="1">
-
-<div class="split-section-media">
-  <div class="mini-carousel-viewport">
-    <div class="mini-carousel-track">
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/4.png" alt="No.4 Pull / Cut 1" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/5.png" alt="No.5 Globe" />
-      </div>
-      <div class="mini-carousel-slide">
-        <img class="lightbox-trigger" src="/images/photoprojects/sun dial/6.png" alt="No.6 Prism" />
-      </div>
+<!-- 8. PULL/CUT, GLOBE, PRISM — caption-only -->
+<div class="module-family">
+  <div class="module-family-head">
+    <h2>Pull/Cut, Globe, Prism</h2>
+  </div>
+  <div class="module-family-grid">
+    <div class="module-family-item">
+      <img src="/images/photoprojects/sun dial/4.png" alt="No.4 Pull/Cut" class="lb-img" />
+      <span class="module-family-caption">No.4 — hourglass grip</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/sun dial/5.png" alt="No.5 Globe" class="lb-img" />
+      <span class="module-family-caption">No.5 — omnidirectional</span>
+    </div>
+    <div class="module-family-item">
+      <img src="/images/photoprojects/sun dial/6.png" alt="No.6 Prism" class="lb-img" />
+      <span class="module-family-caption">No.6 — faceted at the mould</span>
     </div>
   </div>
-</div>
-
-<div class="split-section-text" markdown="1">
-
-## Pull/Cut, Globe, Prism
-
-**No.4 Pull/Cut**,  pulls and carves the tumbler at the sides, the wall hollowed inward at two opposing points to create an hourglass-like grip zone that concentrates and intensifies the light refraction, while the top is sheared diagonally to add a planar face that reflects light at a fixed angle. <br> **No.5 Globe**,  is the most formally radical piece in the collection, its spherical body wrapping the engraving around a convex surface rather than a cylinder, so light bends around the curve instead of across it and the refraction becomes omnidirectional, with a Cut 2 variant retaining the diagonal shear of the opening. <br> **No.6  Prism**,, replaces engraved lines with faceted cuts at the mould level rather than as a surface treatment, refracting light with far greater intensity than wheel-engraving, and the base of the glass was redesigned from scratch to integrate the faceting into its structural form.
-
-</div>
-
 </div>
